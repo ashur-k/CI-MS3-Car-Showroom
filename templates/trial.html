@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="container">
+<div class="row">
+  {% for car in cars %}
+  <div class="col-md-4">
+  <ul>
+ <li><p>{{car.car_make}}</p></li> 
+ <li> <p>{{car.car_model}}</p></li> 
+  <li>  <p>{{car.body_type}}</p></li> 
+   <li>   <p>{{car.gearbox}}</p></li> 
+   <li>     <p>{{car.registration_number}}</p></li> 
+      <li>    <p>{{car.number_of_keys}}</p></li> 
+       <li>     <p>{{car.ULEZ_compliant}}</p></li> 
+        <li>      <p>{{car.exterior_colour}}</p></li> 
+         <li>       <p>{{car.previous_owners}}</p></li> 
+           <li>     <p>{{car.emisssions}}</p></li> 
+           <li>    <p>{{car.last_MOT}}</p></li> 
+  </ul>
+  
+              
+    </div>        
+ {% endfor %}
+</div>
+</div>    
+{%endblock%}
