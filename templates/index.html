@@ -1,36 +1,38 @@
 {% extends 'base.html' %} 
 {% block content %}
 
-<div class="container">
+<div class="container m-3 text-center">
+<h3>Index Page</h3>
+<form method="POST" action="{{ url_for('index') }}">
 <div class="row">
-  {% for car in cars %}
-  
-  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-4 col-xl-4 p-0 m-0 p-2">
-<div class="card" style="width: 16rem;">
-  <img src="{{car.car_image}}" class="card-img-top img-fluid" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{car.car_make}} {{car.car_model}}</h5>
-    <p class="card-text">{{car.engine}}</p>
-    <div class="row">
-    <span class="ml-2">{{car.mileage}} </span>
-     <span class="ml-3">{{car.reg_year}}</span>
-    </div>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-    <div class="row">
-        <div class="col-md-4 text-left"> <strong>{{car.car_price}}</strong></div>
-        <div class="col-md-8 text-right"> <span> {{car.installment_plan}}</span></div>
-    </div>
-    </li>
-   </ul>
-  <div class="card-body col text-center">
-    <a href="{{url_for('view_car', car_registration=car.registration_number)}}" class="card-link btn btn-primary btn-lg text-center">View this car</a>
-  </div>
-</div>
-</div>
+<div class="col-md-3 p-2 m-2">
+      
+<form method="POST">
+<select name="car" id="main_menu" class="custom-select">
+    {% for car in cars_make %}
+    <option value="{{ car.car_make }}">{{ car.car_make }}</option>
+    {% endfor %}        
+</select>
 
-  {% endfor %}
+  
+   
+</form>
+{% for feature in car_features %}
+<h1>
+    {{ feature.Exterior[0] }}
+</h1>
+    {% endfor %}    
+
+       
+
 </div>
+<div class="col-md-3 p-2 m-2">
+
+</div>
+<div class="col-md-3">
+
+</div>
+</div>
+</form>
 </div>
 {%endblock%}

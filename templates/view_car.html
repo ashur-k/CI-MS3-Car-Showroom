@@ -2,49 +2,4 @@
 {% block content %}
 
 
- 
-
-
-<div class="container">
-<div class="row">
-  {% for car in cars %}
-  <div class="col-md-4">
-  <ul>
- <li><p>{{car.car_make}}</p></li> 
- <li> <p>{{car.car_model}}</p></li> 
-   <li>     <p>{{car.registration_number}}</p></li> 
-  </ul>
-  
-              
-    </div>        
- {% endfor %}
-</div>
-<div class="container">
-
- {% for sum in summary %}
-  <div class="col-md-4">
-  <ul>
- <li><p>{{sum.car_make}}</p></li> 
- <li> <p>{{sum.car_model}}</p></li> 
-  <li>  <p>{{sum.body_type}}</p></li> 
-   <li>   <p>{{sum.gearbox}}</p></li> 
-   <li>     <p>{{sum.registration_number}}</p></li> 
-      <li>    <p>{{sum.number_of_keys}}</p></li> 
-       <li>     <p>{{sum.ULEZ_compliant}}</p></li> 
-        <li>      <p>{{sum.exterior_colour}}</p></li> 
-         <li>       <p>{{sum.previous_owners}}</p></li> 
-           <li>     <p>{{sum.emisssions}}</p></li> 
-           <li>    <p>{{sum.last_MOT}}</p></li> 
-  </ul>
-  
-              
-    </div>        
- {% endfor %}
-
-
-</div>
-</div> 
-
-
-
 {%endblock%}
