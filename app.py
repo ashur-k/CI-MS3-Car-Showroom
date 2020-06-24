@@ -1,7 +1,7 @@
 import os
 if os.path.exists('env.py'):
     import env
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -33,7 +33,50 @@ def index():
 @app.route('/add_new_car')
 def add_new_car():
     car_makers = cars_make.find()
-    return render_template('add_new_car.html', car_makers=car_makers)
+    car_models = cars_model.find()
+    return render_template('add_new_car.html', car_makers=car_makers, car_models=car_models)
+
+
+@app.route('/add_car', methods=['POST'])
+def add_car():
+    add_car = mongo.db.basic_car_information
+    add_car.insert_one(request.form.to_dict())
+    flash("Thanks, new car added to registration number {}.".format(
+        request.form["reg_num"]))
+
+    return redirect(url_for("add_new_car"))
+
+
+@app.route('/add_car_company')
+def add_car_company():
+    car_makers = cars_make.find()
+    return render_template('add_new_car_company.html', car_makers=car_makers)
+
+
+@app.route('/add_company', methods=['POST', 'GET'])
+def add_company():
+    if request.method == 'POST':
+        existing_company = cars_make.find_one({'car_make': request.form['car_make']})
+
+        if existing_company is None:
+            cars_make.insert_one(request.form.to_dict())
+            flash(u"Thanks, {} car make is successfully added to cars sales showroom database.".format(request.form["car_make"]), 'make_error')
+            return redirect(url_for("add_car_company"))
+        flash(u'We already have dealership in database', 'make_error')
+    return redirect(url_for('add_car_company'))
+
+
+@app.route('/add_model', methods=['POST', 'GET'])
+def add_model():
+    if request.method == 'POST':
+        existing_model = cars_model.find_one({'car_model': request.form['car_model']})
+
+        if existing_model is None:
+            cars_model.insert_one(request.form.to_dict())
+            flash(u"Thanks, {} car model is successfully added to cars sales showroom database.".format(request.form["car_model"]), 'model_error')
+            return redirect(url_for("add_car_company"))
+        flash(u'We already have model in database', 'model_error')
+    return redirect(url_for('add_car_company'))
 
 
 @app.route('/view_car/<car_registration>')

@@ -2,167 +2,123 @@
 {% block content %}
 <!--Car Basic information-->
 <div class="container">
-<h3>Basic car informaiton</h3>
-<form>
+<h3 class="mt-3"><i class="far fa-caret-square-right"></i> Basic car informaiton </h3><hr>
+<form action="{{ url_for('add_car') }}" name="add_new_car" id="add_new_car" method="POST">
   <div class="row mt-2">
     <div class="col-sm-4">
-       <label for="car-make">Car Make</label>
-      <select class="custom-select" id="car_make" required>
+       <label for="car-make"><i class="fas fa-marker"></i> Car make</label>
+      <select class="custom-select" id="car_make" name="car_make" required>
         <option selected disabled value="">Car make</option>
         {% for makers in car_makers %}
-        <option>{{ makers.car_make }}</option>
+        <option value="{{ makers.car_make }}">{{ makers.car_make }}</option>
         {%  endfor %}
       </select>
     </div>
     <div class="col-sm-4">
     <label for="car-model">Car model</label>
-      <input type="text" class="form-control" placeholder="car-model">
+      <input type="text" id="car_model" name="car_model" class="form-control" placeholder="car-model">
     </div>
       <div class="col-sm-4">
-      <label for="validationCustom04">Car Registration number</label>
-      <input type="text" class="form-control" placeholder="registration no">
+      <label for="reg_num">Car registration number</label>
+      <input type="text" id="reg_num" name="reg_num" class="form-control" placeholder="registration no">
     </div>
   </div>
+
   <div class="row mt-2">
   <div class="col-sm-4">
-    <label for="car-model">Body type</label>
-      <input type="text" class="form-control" placeholder="5 door hatchback">
+    <label for="body_type">Body type</label>
+      <input type="text" id="body_type" name="body_type" class="form-control" placeholder="5 door hatchback">
   </div>
   <div class="col-sm-4">
-    <label for="car-model">Exterior colour</label>
-      <input type="text" class="form-control" placeholder="black">
+    <label for="exterior_colour">Exterior colour</label>
+      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control" placeholder="black">
   </div>
   <div class="col-sm-4">
-    <label for="car-model">Gear box</label>
-      <input type="text" class="form-control" placeholder="automatic, 7 speed">
+    <label for="gear_box">Gear box</label>
+      <input type="text" id="gear_box" name="gear_box" class="form-control" placeholder="automatic, 7 speed">
   </div>
   </div>
+
   <div class="row mt-2">
   <div class="col-sm-4">
-  <label for="car-model">Fuel type</label>
-       <select class="custom-select" id="fuel_type" required>
+  <label for="fuel_type">Fuel type</label>
+       <select class="custom-select" id="fuel_type" name="fuel_type" required>
         <option selected disabled value="">Fuel type</option>
-        <option>Petrol</option>
-        <option>Deisel</option>
-       <option>Gas</option>
-        <option>Electric</option>
-        <option>Hybird</option>
+        <option value="petrol">Petrol</option>
+        <option value="deisel">Deisel</option>
+        <option value="gas">Gas</option>
+        <option value="electric">Electric</option>
+        <option value="hybird">Hybird</option>
       </select>
    
   </div>
   <div class="col-sm-4">
-    <label for="car-model">ULEZ compliant</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-  <label class="custom-control-label" for="customSwitch1"></label>
-</div>
+    <label>ULEZ compliant</label>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" name="is_ULEZ_compliant" id="is_ULEZ_compliant">
+        <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
+    </div>
   </div>
   <div class="col-sm-4">
-     <label for="car-model">Warranty expires</label><br>
-      <input type="date" id="expiry_date" name="expiry_date">
+     <label for="warranty_expire_date">Warranty expires</label><br>
+      <input type="date" id="warranty_expire_date" name="warranty_expire_date">
   </div>
   </div>
+  
   <div class="row mt-2">
   <div class="col-sm-4">
-  <label for="car-model">Registration year</label>
-      <input type="text" class="form-control" placeholder="2016">
+  <label for="registration_year">Registration year</label>
+      <input type="text" id="registration_year" name="registration_year" class="form-control" placeholder="2016">
    
   </div>
   <div class="col-sm-4">
-    <label for="car-model">Mileage</label>
-      <input type="text" class="form-control" placeholder="3576">
+    <label for="mileage">Mileage</label>
+      <input type="text" id="mileage" name="mileage" class="form-control" placeholder="3576">
   </div>
   <div class="col-sm-4">
-     <label for="car-model">Transmission</label><br>
-        <select class="custom-select" id="transmisson" required>
+     <label for="transmisson">Transmission</label><br>
+        <select class="custom-select" id="transmisson" name="transmisson" required>
         <option selected disabled value="">Transmission</option>
-        <option>manual</option>
-        <option>automatic</option>
+        <option value="manual">manual</option>
+        <option value="automatic">automatic</option>
        
       </select>
   </div>
   </div>
+ 
   <div class="row mt-2">
   <div class="col-sm-4">
-  <label for="car-model">Seats</label>
-      <input type="text" class="form-control" placeholder="5 seats">
+  <label for="seats">Seats</label>
+      <input type="text" id="seats" name="seats" class="form-control" placeholder="5 seats">
    
   </div>
   <div class="col-sm-4">
-    <label for="car-model">Engine</label>
-      <input type="text" class="form-control" placeholder="1L">
+    <label for="engine_power">Engine Power</label>
+      <input type="text" id="engine_power" name="engine_power" class="form-control" placeholder="1L">
   </div>
   <div class="col-sm-4">
-     <label for="car-model">Drive Type</label><br>
-       <input type="text" class="form-control" placeholder="Front wheel drive">
+     <label for="drive_type">Drive Type</label><br>
+       <input type="text" id="drive_type" name="drive_type" class="form-control" placeholder="Front wheel drive">
   </div>
   </div>
-  <h3>Interior informaiton</h3>
-  <div class="row">
-  <div class="col-sm-3">
-    <label for="car-model">Bluetooth</label>
-       <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="bluetooth">
-            <label class="custom-control-label" for="bluetooth"></label>
-        </div>
+   <hr>
+  <div class="row mt-5">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-primary" type="submit">
+      Add New Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
+        </button>
   </div>
-  <div class="col-sm-3">
-  <label for="car-model">Climat Control</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="climate_control">
-  <label class="custom-control-label" for="climate_control"></label>
+
   </div>
-  </div>
-   <div class="col-sm-3">
-  <label for="car-model">Cruise control</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="cruise_control">
-  <label class="custom-control-label" for="cruise_control"></label>
-  </div>
-  </div>
-  <div class="col-sm-3">
-  <label for="car-model">DAB</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="dab">
-  <label class="custom-control-label" for="dab"></label>
-  </div>
-  </div>
-  </div>
-  <div class="row">
-  <div class="col-sm-3">
-    <label for="car-model">ISOFIX fittings</label>
-       <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="isofix">
-            <label class="custom-control-label" for="isofix"></label>
-        </div>
-  </div>
-  <div class="col-sm-3">
-  <label for="car-model">Rear Parking Sensors</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="rear_parking_sensors">
-  <label class="custom-control-label" for="climate_control"></label>
-  </div>
-  </div>
-   <div class="col-sm-3">
-  <label for="car-model">Start/Stop techonolgy</label>
-       <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="start_stop_technology">
-  <label class="custom-control-label" for="start_stop_technology"></label>
-  </div>
-  </div>
-  <div class="col-sm-3">
-  <label for="car-model">Seats</label><br>
-       <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-  <label class="custom-control-label" for="customRadioInline1">Leather</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-  <label class="custom-control-label" for="customRadioInline2">Cloth</label>
-</div>
-  </div>
-  </div>
+ 
 </form>
+ {% with messages = get_flashed_messages() %} 
+    {% if messages %}
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %} 
+{% endwith %}
 </div>
 
 {%endblock%}
