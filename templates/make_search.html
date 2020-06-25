@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block content %}
+<h1>make_search.html</h1>
+<h1>Some Car Makes are searched</h1>
+<div class="container p-2">
+<div class="row">
+<div class="col-md-4">
+<h6>Car Make</h6>
+</div>
+<div class="col-md-4">
+<h6>Car Model</h6>
+</div>
+<div class="col-md-4">
+<h6>Car Registration Number</h6>
+</div>
+
+{% for result in results %}
+<div class="col-md-4">
+<p>{{result.car_make}}</p>
+</div>
+<div class="col-md-4">
+<p>{{result.car_model}}</p>
+</div>  
+<div class="col-md-4">
+ <p>{{result.reg_num}}</p>
+</div>
+  
+{% endfor %}
+</div>
+</div>
+{%endblock%}

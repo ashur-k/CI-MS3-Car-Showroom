@@ -3,36 +3,6 @@
 
 <div class="container m-3 text-center">
 <h3>Index Page</h3>
-<form method="POST" action="{{ url_for('index') }}">
-<div class="row">
-<div class="col-md-3 p-2 m-2">
-      
-<form method="POST">
-<select name="car" id="main_menu" class="custom-select">
-    {% for car in cars_make %}
-    <option value="{{ car.car_make }}">{{ car.car_make }}</option>
-    {% endfor %}        
-</select>
 
-  
-   
-</form>
-{% for feature in car_features %}
-<h1>
-    {{ feature.Exterior[0] }}
-</h1>
-    {% endfor %}    
-
-       
-
-</div>
-<div class="col-md-3 p-2 m-2">
-
-</div>
-<div class="col-md-3">
-
-</div>
-</div>
-</form>
 </div>
 {%endblock%}

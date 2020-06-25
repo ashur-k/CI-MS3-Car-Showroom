@@ -81,8 +81,25 @@ def add_model():
 
 @app.route('/view_car/<car_registration>')
 def view_car(car_registration):
-    
-    return render_template('view_car.html', )
+    return render_template('view_car.html')
+
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    registration_num_search = mongo.db.basic_car_information.find_one({'reg_num': request.form['search']})
+    car_make_search = mongo.db.basic_car_information.find_one({'car_make': request.form['search']})
+    car_model_search = mongo.db.basic_car_information.find_one({'car_model': request.form['search']})
+
+    if registration_num_search:
+        return render_template('search.html', results=registration_num_search)
+    elif car_make_search:
+        results = mongo.db.basic_car_information.find({'car_make': request.form['search']})
+        return render_template('make_search.html', results=results)
+    elif car_model_search:
+        results = mongo.db.basic_car_information.find({'car_model': request.form['search']})
+        return render_template('model_search.html', results=results)
+
+    return '<h1>No reults found</h1>'
 
 
 def helper_function():
