@@ -1,7 +1,7 @@
 import os
 if os.path.exists('env.py'):
     import env
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -22,6 +22,7 @@ cars_summary = mongo.db.car_summary
 cars_info = mongo.db.cars
 cars_running_cost = mongo.db.running_cost
 cars_features = mongo.db.car_features
+basic_car_info = mongo.db.basic_car_information
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -83,30 +84,46 @@ def add_model():
 def view_car(car_registration):
     return render_template('view_car.html')
 
+# This is code I am working on
+
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    registration_num_search = mongo.db.basic_car_information.find_one({'reg_num': request.form['search']})
-    car_make_search = mongo.db.basic_car_information.find_one({'car_make': request.form['search']})
-    car_model_search = mongo.db.basic_car_information.find_one({'car_model': request.form['search']})
+    registration_num_search = \
+        basic_car_info.find_one({'reg_num': request.form['search']})
+    car_make_search = \
+        mongo.db.car_make.find_one({'car_make': request.form['search']})
+    car_model_search = \
+        mongo.db.car_model.find_one({'car_model': request.form['search']})
 
     if registration_num_search:
-        return render_template('search.html', results=registration_num_search)
+        return render_template('search.html',
+                               results=registration_num_search)
     elif car_make_search:
-        results = mongo.db.basic_car_information.find({'car_make': request.form['search']})
-        return render_template('make_search.html', results=results)
+        available_car_makes = \
+            basic_car_info.find({'car_make': request.form['search']})
+        print(available_car_makes.count())
+        if available_car_makes.count() > 0:
+            return render_template('make_search.html',
+                                   car_make_search=car_make_search,
+                                   results=available_car_makes)
+        else:
+            flash('No cars aviliable in car make.')
+            return render_template('make_search.html',
+                                   car_make_search=car_make_search,
+                                   results=car_make_search)
     elif car_model_search:
-        results = mongo.db.basic_car_information.find({'car_model': request.form['search']})
-        return render_template('model_search.html', results=results)
+        available_car_models = \
+            basic_car_info.find({'car_model': request.form['search']})
+
+        if available_car_models.count() > 0:
+            flash('{} Results found in {}.'.format(available_car_models.count(), request.form['search']))
+            return render_template('model_search.html', results=available_car_models)
+        else:
+            flash('{} Results found in {}.'.format(available_car_models.count(), request.form['search']))
+            return render_template('model_search.html', results=available_car_models)
 
     return '<h1>No reults found</h1>'
-
-
-def helper_function():
-    car_makers = cars_make.find()
-    for makers in car_makers:
-        print(makers.car_make)
-
 
 
 if __name__ == '__main__':

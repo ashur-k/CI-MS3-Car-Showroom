@@ -14,17 +14,26 @@
 </div>
 
 {% for result in results %}
+
 <div class="col-md-4">
 <p>{{result.car_make}}</p>
-</div>
+</div>  
 <div class="col-md-4">
 <p>{{result.car_model}}</p>
 </div>  
 <div class="col-md-4">
- <p>{{result.reg_num}}</p>
-</div>
+<p>{{result.reg_num}}</p>
+</div>  
   
 {% endfor %}
+
 </div>
 </div>
+ {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
 {%endblock%}

@@ -1,7 +1,8 @@
 {% extends 'base.html' %} 
 {% block content %}
+
 <h1>make_search.html</h1>
-<h1>Some Car Makes are searched</h1>
+<h1>{{ car_make_search.car_make }}</h1>
 <div class="container p-2">
 <div class="row">
 <div class="col-md-4">
@@ -26,6 +27,14 @@
 </div>
   
 {% endfor %}
+
 </div>
 </div>
+ {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
 {%endblock%}
