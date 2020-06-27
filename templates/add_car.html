@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <h1>Add Car Page</h1>
+  <h2>Car make</h2>
+  <div class="row">
+    {% for result in make_results %}
+    <div class="col-md-12">
+      <div class="row m-2">
+        <div class="col-md-8 align-self-center">
+          <p style="font-size: 26px;">{{ result.car_make }}</p>
+        </div>
+        <div class="col-md-4">
+          <a href="{{url_for('add_car_details', car_make_id=result._id, car_make=result.car_make)}}" class="btn btn-sm btn-primary">Add car</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4"></div>
+    {% endfor %}
+  </div>
+</div>
+{%endblock%}

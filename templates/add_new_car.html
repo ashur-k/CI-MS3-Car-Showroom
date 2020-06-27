@@ -3,20 +3,21 @@
 <!--Car Basic information-->
 <div class="container">
 <h3 class="mt-3"><i class="far fa-caret-square-right"></i> Basic car informaiton </h3><hr>
+<h4>{{ car_makers.car_make }}</h4>
 <form action="{{ url_for('add_car') }}" name="add_new_car" id="add_new_car" method="POST">
   <div class="row mt-2">
     <div class="col-sm-4">
-       <label for="car-make"><i class="fas fa-marker"></i> Car make</label>
+       <label for="car-make"><i class="fas fa-marker"></i> Car Model</label>
       <select class="custom-select" id="car_make" name="car_make" required>
-        <option selected disabled value="">Car make</option>
-        {% for makers in car_makers %}
-        <option value="{{ makers.car_make }}">{{ makers.car_make }}</option>
+        <option selected disabled value="">Car Model</option>
+        {% for models in car_models %}
+        <option value="{{ models.car_make }}">{{ models.car_model }}</option>
         {%  endfor %}
       </select>
     </div>
     <div class="col-sm-4">
-    <label for="car-model">Car model</label>
-      <input type="text" id="car_model" name="car_model" class="form-control" placeholder="car-model">
+    <label for="">Car model</label>
+      <input type="text" id="car_model" name="" class="form-control" placeholder="">
     </div>
       <div class="col-sm-4">
       <label for="reg_num">Car registration number</label>

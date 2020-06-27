@@ -31,10 +31,16 @@ def index():
     return render_template('index.html',  cars_make=cars_make.find(), car_features = car_features)
 
 
-@app.route('/add_new_car')
+@app.route('/add_car', methods=['Get', 'POST'])
 def add_new_car():
-    car_makers = cars_make.find()
-    car_models = cars_model.find()
+    make_results = cars_make.find()
+    return render_template('add_car.html', make_results=make_results)
+
+
+@app.route('/add_car_details/<car_make_id>/<car_make>')
+def add_car_details(car_make_id, car_make):
+    car_makers = cars_make.find_one({"_id": ObjectId(car_make_id)})
+    car_models = cars_model.find({'car_make': car_make})
     return render_template('add_new_car.html', car_makers=car_makers, car_models=car_models)
 
 
@@ -102,7 +108,6 @@ def search():
     elif car_make_search:
         available_car_makes = \
             basic_car_info.find({'car_make': request.form['search']})
-        print(available_car_makes.count())
         if available_car_makes.count() > 0:
             return render_template('make_search.html',
                                    car_make_search=car_make_search,
