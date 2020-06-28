@@ -1,5 +1,45 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
+<div class="container m-3">
+<form action="{{ url_for('temp_route') }}" method="POST">
+  <div class="row">
+    <div class="col-md-4">
+    <label for="car-make">Car Make</label>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="car_make" data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"> Car Make</button>    
+        <div class="dropdown-menu" aria-labelledby="car_make">
+          {% for results in car_make_results %}
+            <a class="dropdown-item" href="{{url_for('trial', car_make=results.car_make)}}">{{results.car_make}}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="car-make">Car Model</label>
+      <select class="custom-select" id="car_model" name="car_model" required>
+        <option selected disabled value="">Car Model</option>
+        {% for results in car_model_results %}
+        <option value="{{ results.car_model }}">{{ results.car_model }}</option>
+        {%  endfor %}
+      </select>
+    
+    </div>
+    <div class="col-md-4">
+    <label for="form_submit">Please Submit form</label><br>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
+</div>
 
-{%endblock%}
+{% with messages = get_flashed_messages() %} {% if messages %} {% for message in
+messages %}
+<h3>{{ message }}</h3>
+{% endfor %} {% endif %} {% endwith %} {%endblock%}
+ if existing_registration:
+        car_make = session['car_make']
+        flash('Sorry, registation num already existed {}.'.format(
+            request.form['reg_num']))
+        return redirect(url_for('add_car_details', car_make=car_make))

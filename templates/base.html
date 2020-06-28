@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>Hello, world!</title>
+    <title>Cars Sales Showroom</title>
   </head>
   <body>
     <header>
@@ -32,7 +32,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add New Car Company</a>
-          <a class="dropdown-item" href="{{url_for('add_car')}}">Add New Car</a>
+         
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
@@ -47,6 +47,8 @@
 </nav>
     </header>
     {% block content %}
+
+    
 
     {%endblock%}
 

@@ -1,27 +1,75 @@
 {% extends 'base.html' %} 
 {% block content %}
 <!--Car Basic information-->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark custom_nav">
+  <a class="navbar-brand" href="#">Admin Loged-In</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">   
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add New Car Company</a>
+        <div class="dropdown-divider"></div>
+        </div>
+      </li>
+    </ul>
+      <ul class="navbar-nav mr-auto">   
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="add_new_car" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add new car
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% for results in cars_make %}
+        <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+        <div class="dropdown-divider"></div>
+       {% endfor %}
+
+        </div>
+      </li>
+    </ul>
+    
+  </div>
+
+  
+</nav>
+    </header>
+<h3><i class="far fa-caret-square-right"></i> {{ car_makers.car_make }} </h3>
 <div class="container">
-<h3 class="mt-3"><i class="far fa-caret-square-right"></i> Basic car informaiton </h3><hr>
-<h4>{{ car_makers.car_make }}</h4>
-<form action="{{ url_for('add_car') }}" name="add_new_car" id="add_new_car" method="POST">
+ 
+<form action="{{ url_for('add_car') }}" name="add_new_car"  method="POST">
+
+<div class="container_basic_information m-2">
+<h3 class="mt-3">Basic car informaiton</h3><hr>
+{% with messages = get_flashed_messages() %} {% if messages %}
+   
+            {% for message in messages %}
+            <p class="lead para-custom-style p-2 m-2">{{ message }}</p>
+            {% endfor %}
+       
+        {% endif %} {% endwith %}
   <div class="row mt-2">
     <div class="col-sm-4">
-       <label for="car-make"><i class="fas fa-marker"></i> Car Model</label>
-      <select class="custom-select" id="car_make" name="car_make" required>
-        <option selected disabled value="">Car Model</option>
-        {% for models in car_models %}
-        <option value="{{ models.car_make }}">{{ models.car_model }}</option>
-        {%  endfor %}
-      </select>
+       <label for="car-make">Car Make</label>
+    <select class="custom-select" id="car_make" name="car_make" required>
+        <option value="{{ car_makers.car_make }}">{{ car_makers.car_make }}</option>
+    </select>
     </div>
     <div class="col-sm-4">
-    <label for="">Car model</label>
-      <input type="text" id="car_model" name="" class="form-control" placeholder="">
+       <label for="car-make">Car Model</label>
+      <select class="custom-select" id="car_model" name="car_model" required>     
+        <option value="{{ car_model}}">{{ car_model }}</option>
+      </select>
     </div>
       <div class="col-sm-4">
-      <label for="reg_num">Car registration number</label>
-      <input type="text" id="reg_num" name="reg_num" class="form-control" placeholder="registration no">
+       <label for="car-make">Registration number</label>
+    <select class="custom-select" id="reg_num" name="reg_num" required>
+        <option value="{{ reg_num }}">{{ reg_num }}</option>
+    </select>
     </div>
   </div>
 
@@ -93,17 +141,168 @@
       <input type="text" id="seats" name="seats" class="form-control" placeholder="5 seats">
    
   </div>
-  <div class="col-sm-4">
-    <label for="engine_power">Engine Power</label>
-      <input type="text" id="engine_power" name="engine_power" class="form-control" placeholder="1L">
-  </div>
-  <div class="col-sm-4">
+   <div class="col-sm-4">
      <label for="drive_type">Drive Type</label><br>
        <input type="text" id="drive_type" name="drive_type" class="form-control" placeholder="Front wheel drive">
   </div>
   </div>
    <hr>
-  <div class="row mt-5">
+   </div>
+
+<div class="container_car_features m-2">
+    <h3 class="mt-3">Car Features:</h3><hr>
+  <h5>Exterior</h5><hr>
+  <div class="row mt-2">
+   <div class="col-sm-6">
+       <label for="alloy wheels">16 inch alloy wheels</label>
+      <select class="custom-select" id="alloy wheels" name="alloy wheels" required>
+        <option selected disabled value="">16 inch alloy wheels</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+       <label for="metallic_paint">Metallic paints</label>
+      <select class="custom-select" id="metallic_paint" name="metallic_paint" required>
+        <option selected disabled value="">Metallic paint</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+  </div><hr>
+   
+   
+    <h5>Interior</h5><hr>
+  <div class="row mt-2">
+   <div class="col-sm-6">
+       <label for="bluetooth">Bluetooth</label>
+      <select class="custom-select" id="bluetooth" name="bluetooth" required>
+        <option selected disabled value="">Bluetooth</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+       <label for="climate_control">Climate control</label>
+      <select class="custom-select" id="climate_control" name="climate_control" required>
+        <option selected disabled value="">Climate control</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+  </div>
+ <div class="row mt-2">
+   <div class="col-sm-6">
+       <label for="seats_material">Seats material</label>
+      <select class="custom-select" id="seats_material" name="seats_material" required>
+        <option selected disabled value="">Seats material</option>
+        <option value="availiable">Leather</option>
+      <option value="not-availiable">Cloth</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+       <label for="cruise_control">Cruise control</label>
+      <select class="custom-select" id="cruise_control" name="cruise_control" required>
+        <option selected disabled value="">Cruise control</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+  </div>
+ <div class="row mt-2">
+   <div class="col-sm-6">
+       <label for="DAB">DAB</label>
+      <select class="custom-select" id="DAB" name="DAB" required>
+        <option selected disabled value="">DAB</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+       <label for="ISOFIX_fittings">ISOFIX fittings</label>
+      <select class="custom-select" id="ISOFIX_fittings" name="ISOFIX_fittings" required>
+        <option selected disabled value="">ISOFIX fittings</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+  </div>
+<div class="row mt-2">
+   <div class="col-sm-6">
+       <label for="rear_parking_sensors">Rear parking sensors</label>
+      <select class="custom-select" id="rear_parking_sensors" name="rear_parking_sensors" required>
+        <option selected disabled value="">Rear parking sensors</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+       <label for="start_stop_technology">Start/stop technology</label>
+      <select class="custom-select" id="start_stop_technology" name="start_stop_technology" required>
+        <option selected disabled value="">Start/stop technology</option>
+        <option value="availiable">Availiable</option>
+      <option value="not-availiable">Not availiable</option>
+      </select>
+    </div>
+  </div><hr>
+   </div>
+
+<div class="container_car_specs m-2">
+<h3 class="mt-3">Car specs:</h3><hr>
+<h5>Perfomance and economy</h5><hr>
+
+<div class="row mt-2">
+  <div class="col-sm-4">
+    <label for="top_Speed">Top speed</label>
+      <input type="text" id="top_Speed" name="top_Speed" class="form-control" placeholder="126 mph">
+  </div>
+  <div class="col-sm-4">
+    <label for="acceleration">Acceleration(0-62 mph)</label>
+      <input type="text" id="acceleration" name="acceleration" class="form-control" placeholder="9.5 seconds">
+  </div>
+  <div class="col-sm-4">
+    <label for="engine_power">Engine power</label>
+      <input type="text" id="engine_power" name="engine_power" class="form-control" placeholder="114 bhp" required>
+  </div>
+  </div><hr>
+<h5>Weight and dimensions</h5><hr>
+<div class="row mt-2">
+  <div class="col-sm-4">
+    <label for="fuel_tank_capacity">Fuel tank capacity</label>
+      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control" placeholder="60 Litre">
+  </div>
+  <div class="col-sm-4">
+    <label for="boot_space">Boot space (seats-up)</label>
+      <input type="text" id="boot_space" name="boot_space" class="form-control" placeholder="335 litres">
+  </div>
+  <div class="col-sm-4">
+    <label for="length">Length</label>
+      <input type="text" id="length" name="length" class="form-control" placeholder="4029 mm">
+  </div>
+  </div>
+</div><hr>
+
+<div class="container_running_cost m-2">
+<h3 class="mt-3">Running costs:</h3><hr>
+<div class="row mt-2">
+  <div class="col-sm-4">
+    <label for="vehicle_tax">Vehicle tax</label>
+      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control" placeholder="£150 / year">
+  </div>
+  <div class="col-sm-4">
+    <label for="insurance">Insurance</label>
+      <input type="text" id="insurance" name="insurance" class="form-control" placeholder="Group 20 (approx. £413/y)">
+  </div>
+  <div class="col-sm-4">
+    <label for="fuel_consumption">Fuel_consumption</label>
+      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control" placeholder="47.1mpg (approx. £24 / week)">
+  </div>
+  </div><hr>
+
+
+</div>
+
+  <div class="row mt-5 mb-4 pb-4">
   <div class="col-sm-12 text-center">
     <button class="btn btn-primary" type="submit">
       Add New Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
@@ -113,13 +312,7 @@
   </div>
  
 </form>
- {% with messages = get_flashed_messages() %} 
-    {% if messages %}
-        {% for message in messages %}
-            <h3>{{ message }}</h3>
-        {% endfor %}
-    {% endif %} 
-{% endwith %}
+
 </div>
 
 {%endblock%}

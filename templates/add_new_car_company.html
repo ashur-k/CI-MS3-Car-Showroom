@@ -71,7 +71,18 @@
 <div class="container">
 <div class="row">
 <div class="col-sm-12">
-<a href="" class="btn btn-primary">Add New Car</a>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for results in car_make %}
+
+    <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+    
+    {% endfor %}
+  </div>
+</div>
 </div>
 </div>
 </div>
