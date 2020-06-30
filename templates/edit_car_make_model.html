@@ -38,60 +38,27 @@
 </nav>
 </header>
 <div class="container p-3">
-<h3>Cars clients are intersted in</h3>
-    <div class="row">
-        <div class="col-sm-6">
-        <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
- 
-        <h5 class="card-title">Car make: car_make</h5>
-  
-        <p class="card-text">Car model: car_model</p>
-        </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Car reg num: car reg num</li>
-        <li class="list-group-item">Registration Year: car reg year</li>
-        <li class="list-group-item">Waranty: car warranty date</li>
-    </ul>
-  <h6>see full car info</h6>
- </div>
+<h3 class="">Car Make{{ car_make }}</h3>
 
-        </div>
-        <div class="col-sm-6">
-        <h3>client infomration</h3>
-        <p>Client Name: client name</p>
-        <p>Client Email: client name</p>
-        <p>Client mobile</p>
-        <p>best time to contact</p>
-        <p>best way to contact</p>
-        <p>Client Offer: client offer</p>
-
-        </div>
-    </div>
-    </div>
-
-<div class="container p-3 m-3">
- {% with messages = get_flashed_messages(category_filter=["reg_num"]) %} 
- {% if messages %}
-   
-            {% for message in messages %}
-            <a href="{{ url_for('add_car_details', car_make=car_make, car_model=car_model, reg_num=reg_num) }}" class="lead para-custom-style p-3 m-3">{{ message }}</a>
-            {% endfor %}
-       
-        {% endif %} 
-        {% endwith %}
+  <div class="form-row">
+      <div class="col-md-6">
+    <label for="reg_no">Please select car make to change</label>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose New Car Make
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for results in car_make_results %}
+    <a class="dropdown-item" href="{{ url_for('car_update_page', car_make=results.car_make ) }}">{{ results.car_make }}</a>
+    {% endfor %}
+  </div>
 </div>
+    </div>
+  
 
- {% with messages = get_flashed_messages() %} {% if messages %}
-       
-            {% for message in messages %}
-            <p class="lead para-custom-style p-3 m-3">{{ message }}</p>
-            {% endfor %}
-      
-        {% endif %} {% endwith %}
+</div>
+<script>
+//document.getElementById("car_model").setCustomValidity("No models aviliable, please go to manage car and add model");
 
-
+</script>
 {%endblock%}
-    
-    

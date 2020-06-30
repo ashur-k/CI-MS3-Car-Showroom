@@ -38,56 +38,46 @@
   
 </nav>
     </header>
-<h3><i class="far fa-caret-square-right"></i> {{ car_makers.car_make }} </h3>
+<h3><i class="far fa-caret-square-right"></i> some text </h3>
 <div class="container">
- 
-<form action="{{ url_for('add_car') }}" name="add_new_car"  method="POST">
 
-<div class="container_basic_information m-2">
-<h3 class="mt-3">Basic car informaiton</h3><hr>
-{% with messages = get_flashed_messages() %} {% if messages %}
-   
-            {% for message in messages %}
-            <p class="lead para-custom-style p-2 m-2">{{ message }}</p>
-            {% endfor %}
-       
-        {% endif %} {% endwith %}
+<form action="{{ url_for('update_info_db', car_id=car_coll._id) }}" name="add_car_details" method="POST">
+ <div class="container_basic_information m-2">
   <div class="row mt-2">
-    <div class="col-sm-4">
-       <label for="car-make">Car Make</label>
-    <select class="custom-select" id="car_make" name="car_make" required>
-        <option value="{{ car_makers.car_make }}">{{ car_makers.car_make }}</option>
-    </select>
+     <div class="col-md-4">
+    <label for="reg_no">Car Make</label>
+      <select class="form-control form-control-lg" id="car_make" name="car_make" required>
+           <option value="{{ car_make.car_make }}">{{ car_make.car_make }}</option>
+        </select>
     </div>
-    <div class="col-sm-4">
-       <label for="car-make">Car Model</label>
-      <select class="custom-select" id="car_model" name="car_model" required>     
-        <option value="{{ car_model}}">{{ car_model }}</option>
-      </select>
+     <div class="col-md-4">
+   <label for="car_model">Car Model</label>
+      <select class="form-control form-control-lg" id="car_model" name="car_model" required>
+      {% for results in car_model_results %}
+        <option value="{{ results.car_model }}">{{ results.car_model }}</option>
+        {% endfor %}
+        </select>
     </div>
-      <div class="col-sm-4">
-       <label for="car-make">Registration number</label>
-    <select class="custom-select" id="reg_num" name="reg_num" required>
-        <option value="{{ reg_num }}">{{ reg_num }}</option>
-    </select>
+    <div class="col-md-4">
+    <label for="reg_no">Registration Number</label>
+      <input class="form-control form-control-lg" id="reg_num" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required>
     </div>
+  
   </div>
-
-  <div class="row mt-2">
+   <div class="row mt-2">
   <div class="col-sm-4">
     <label for="body_type">Body type</label>
-      <input type="text" id="body_type" name="body_type" class="form-control" placeholder="5 door hatchback">
+      <input type="text" id="body_type" name="body_type" class="form-control form-control-lg" value="{{ car_coll.body_type }}">
   </div>
   <div class="col-sm-4">
     <label for="exterior_colour">Exterior colour</label>
-      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control" placeholder="black">
+      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control form-control-lg" value="{{ car_coll.exterior_colour }}">
   </div>
   <div class="col-sm-4">
     <label for="gear_box">Gear box</label>
-      <input type="text" id="gear_box" name="gear_box" class="form-control" placeholder="automatic, 7 speed">
+      <input type="text" id="gear_box" name="gear_box" class="form-control form-control-lg" value="{{ car_coll.gear_box }}">
   </div>
   </div>
-
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="fuel_type">Fuel type</label>
@@ -110,19 +100,18 @@
   </div>
   <div class="col-sm-4">
      <label for="warranty_expire_date">Warranty expires</label><br>
-      <input type="date" id="warranty_expire_date" name="warranty_expire_date">
+      <input type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}">
   </div>
   </div>
-  
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="registration_year">Registration year</label>
-      <input type="text" id="registration_year" name="registration_year" class="form-control" placeholder="2016">
+      <input type="text" id="registration_year" name="registration_year" class="form-control" value="{{ car_coll.registration_year }}">
    
   </div>
   <div class="col-sm-4">
     <label for="mileage">Mileage</label>
-      <input type="text" id="mileage" name="mileage" class="form-control" placeholder="3576">
+      <input type="text" id="mileage" name="mileage" class="form-control" value="{{ car_coll.mileage }}">
   </div>
   <div class="col-sm-4">
      <label for="transmisson">Transmission</label><br>
@@ -134,16 +123,15 @@
       </select>
   </div>
   </div>
- 
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="seats">Seats</label>
-      <input type="text" id="seats" name="seats" class="form-control" placeholder="5 seats">
+      <input type="text" id="seats" name="seats" class="form-control" value="{{ car_coll.seats }}">
    
   </div>
    <div class="col-sm-4">
      <label for="drive_type">Drive Type</label><br>
-       <input type="text" id="drive_type" name="drive_type" class="form-control" placeholder="Front wheel drive">
+       <input type="text" id="drive_type" name="drive_type" class="form-control" value="{{ car_coll.drive_type }}">
   </div>
   </div>
    <hr>
@@ -254,30 +242,30 @@
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="top_Speed">Top speed</label>
-      <input type="text" id="top_Speed" name="top_Speed" class="form-control" placeholder="126 mph">
+      <input type="text" id="top_Speed" name="top_Speed" class="form-control" value="{{ car_coll.top_Speed }}">
   </div>
   <div class="col-sm-4">
     <label for="acceleration">Acceleration(0-62 mph)</label>
-      <input type="text" id="acceleration" name="acceleration" class="form-control" placeholder="9.5 seconds">
+      <input type="text" id="acceleration" name="acceleration" class="form-control" value="{{ car_coll.acceleration }}">
   </div>
   <div class="col-sm-4">
     <label for="engine_power">Engine power</label>
-      <input type="text" id="engine_power" name="engine_power" class="form-control" placeholder="114 bhp" required>
+      <input type="text" id="engine_power" name="engine_power" class="form-control" value="{{ car_coll.engine_power }}" required>
   </div>
   </div><hr>
 <h5>Weight and dimensions</h5><hr>
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="fuel_tank_capacity">Fuel tank capacity</label>
-      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control" placeholder="60 Litre">
+      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control" value="{{ car_coll.fuel_tank_capacity }}">
   </div>
   <div class="col-sm-4">
     <label for="boot_space">Boot space (seats-up)</label>
-      <input type="text" id="boot_space" name="boot_space" class="form-control" placeholder="335 litres">
+      <input type="text" id="boot_space" name="boot_space" class="form-control" value="{{ car_coll.boot_space }}">
   </div>
   <div class="col-sm-4">
     <label for="length">Length</label>
-      <input type="text" id="length" name="length" class="form-control" placeholder="4029 mm">
+      <input type="text" id="length" name="length" class="form-control" value="{{ car_coll.length }}">
   </div>
   </div>
 </div><hr>
@@ -287,30 +275,24 @@
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="vehicle_tax">Vehicle tax</label>
-      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control" placeholder="£150 / year">
+      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control" value="{{ car_coll.vehicle_tax }}">
   </div>
   <div class="col-sm-4">
     <label for="insurance">Insurance</label>
-      <input type="text" id="insurance" name="insurance" class="form-control" placeholder="Group 20 (approx. £413/y)">
+      <input type="text" id="insurance" name="insurance" class="form-control" value="{{ car_coll.insurance }}">
   </div>
   <div class="col-sm-4">
     <label for="fuel_consumption">Fuel_consumption</label>
-      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control" placeholder="47.1mpg (approx. £24 / week)">
+      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control" value="{{ car_coll.fuel_consumption }}">
   </div>
   </div><hr>
 
 
 </div>
 
-  <div class="row mt-5 mb-4 pb-4">
-  <div class="col-sm-12 text-center">
-    <button class="btn btn-primary" type="submit">
-      Add New Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
-        </button>
-  </div>
-
-  </div>
- 
+     <div class="col-md-12 m-3">
+     <button type="submit" class="btn btn-primary btn-lg">Update</button>
+     </div>  
 </form>
 
 </div>

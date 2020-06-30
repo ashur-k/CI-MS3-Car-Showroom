@@ -12,8 +12,9 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars 
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add New Car Company</a>
+        <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
         <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
         </div>
       </li>
     </ul>
@@ -35,17 +36,19 @@
 
   
 </nav>
-    </header>
+</header>
 <div class="container p-3">
-<form action="{{ url_for('reg_verification') }}" name="add_car_details" method="POST">
+<h3 class="">{{ car_make }}</h3>
+<form action="{{ url_for('reg_verification', car_make=car_make) }}" name="add_car_details" method="POST">
   <div class="form-row">
+  
     <div class="col-md-6">
     <label for="reg_no">New Car Registration Number</label>
       <input class="form-control form-control-lg" id="reg_num" name="reg_num" type="text" placeholder="registration number" required>
     </div>
    <div class="col-md-6">
    <label for="car_model">Select Model</label>
-      <select class="form-control form-control-lg" name="car_model" required>
+      <select class="form-control form-control-lg" id="car_model" name="car_model" required>
       {% for results in car_models %}
         <option value="{{ results.car_model }}">{{ results.car_model }}</option>
         {% endfor %}
@@ -56,13 +59,10 @@
      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
      </div>  
 </form>
-{% with messages = get_flashed_messages() %} {% if messages %}
-   
-            {% for message in messages %}
-            <p class="lead">{{ message }}</p>
-            {% endfor %}
-       
-        {% endif %} {% endwith %}
-</div>
 
+</div>
+<script>
+//document.getElementById("car_model").setCustomValidity("No models aviliable, please go to manage car and add model");
+
+</script>
 {%endblock%}
