@@ -1,7 +1,7 @@
 import os
 if os.path.exists('env.py'):
     import env
-from flask import Flask, render_template, redirect, request, url_for, flash, session
+from flask import Flask, render_template, redirect, request, url_for, flash, session, jsonify, json
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -193,29 +193,64 @@ def update_car_info():
 
 @app.route('/update_options', methods=['POST', 'GET'])
 def update_options():
-    car_make_results = cars_make.find()
+    if 'reg_num' in session:
+        new_reg_num = session['new_reg_num']
+        car_make_results = cars_make.find()
+        car_coll = basic_car_info.find_one({'reg_num': session['reg_num']})
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num)
+
     reg_num = request.form['car_reg_num']
-    print(reg_num)
+    
+
     car_coll = basic_car_info.find_one({'reg_num': reg_num})
-    flash(u'Update basic informaiton for registraion number {}.'.format(reg_num), 'update_registration')
-    flash(u'Change Car make to change {}.'.format(reg_num), 'update_make_model')
-    return render_template('update_car_info.html', car_coll=car_coll, car_make_results=car_make_results)
+    if car_coll:
+        car_make_results = cars_make.find()
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results)
+    else:
+        flash('Sorry, There is no car in database with this registration number {}.'.format(reg_num))
+        return redirect(url_for('update_car_info'))
 
 
-@app.route('/car_update_page/<car_make>/<coll_id>', methods=['GET', 'POST'])
-def car_update_page(car_make, coll_id):
+@app.route('/car_update_page', methods=['GET', 'POST'])
+def car_update_page():
+    old_reg_num = request.form['old_reg_num']
+    new_reg_num = request.form['reg_num']
+    car_make = request.form['car_make']
+    session['reg_num'] = old_reg_num
+    session['new_reg_num'] = new_reg_num
+    availiable_models = \
+            cars_model.find_one({'car_make': request.form['car_make']})
+    if availiable_models is None:
+        flash('There are no models in car make {}. Please first add model from add car make/model in admin options.'.format(car_make))
+        return redirect(url_for('update_options'))
+
+    if new_reg_num != old_reg_num:
+        existing_registration = \
+        basic_car_info.find_one({'reg_num': new_reg_num})
+       
+        if existing_registration:
+            flash('{} registraion number is already in database.'.format(new_reg_num))
+            return redirect(url_for('update_options'))
+        
+    
+    car_make = request.form['car_make']
+    coll_Id = request.form['hiddenCarId']
     car_make_results = cars_make.find_one({'car_make': car_make})
     car_model_results = cars_model.find({'car_make': car_make})
-    car_coll = basic_car_info.find_one({'_id': ObjectId(coll_id)})
-    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll)
+    car_coll = basic_car_info.find_one({'_id': ObjectId(coll_Id)})
+    session.clear()
+    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num)
 
 
-@app.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
-def update_info_db(car_id):
-    existing_reg_num = basic_car_info.find_one({'reg_num': request.form['reg_num']})
-    print(existing_reg_num)
-    print('testing')
-    basic_car_info.update({'_id': ObjectId(car_id)}, {
+@app.route('/update_info_db', methods=['POST', 'GET'])
+def update_info_db():
+    session.clear()
+    db_reg_num = request.form['hiddenDbRegNum']
+    new_reg_num = request.form['reg_num']
+    registration_num_search = \
+        basic_car_info.find_one({'reg_num': new_reg_num})
+
+    basic_car_info.update({'_id': ObjectId(request.form['hiddenCarId'])}, {
         'car_make': request.form.get('car_make'),
         'car_model': request.form.get('car_model'),
         'reg_num': request.form.get('reg_num'),
@@ -230,7 +265,7 @@ def update_info_db(car_id):
         'transmisson': request.form.get('transmisson'),
         'seats': request.form.get('seats'),
         'drive_type': request.form.get('drive_type'),
-        'alloy wheels': request.form.get('alloy wheels'),
+        'alloy_wheels': request.form.get('alloy_wheels'),
         'metallic_paint': request.form.get('metallic_paint'),
         'bluetooth': request.form.get('bluetooth'),
         'climate_control': request.form.get('climate_control'),
@@ -248,26 +283,23 @@ def update_info_db(car_id):
         'length': request.form.get('length'),
         'vehicle_tax': request.form.get('vehicle_tax'),
         'insurance': request.form.get('insurance'),
-        'fuel_consumption': request.form.get('fuel_consumption'),
-
-    })
-    return '<h1>Update code is under construction</h1>'
-
-
-@app.route('/update_make_model/<reg_num>', methods=['GET', 'POST'])
-def update_make_model(reg_num):
-    car_make_results = cars_make.find()
-    car_model_results = cars_model.find({'car_make': 'audi'})
-    return render_template('edit_car_make_model.html',
-                           car_make_results=car_make_results,
-                           car_model_results=car_model_results)
+        'fuel_consumption': request.form.get('fuel_consumption')})
+    flash('car details updated successfully')
+    return redirect(url_for('update_car_info'))
+#@app.route('/update_make_model/<reg_num>', methods=['GET', 'POST'])
+#def update_make_model(reg_num):
+   # car_make_results = cars_make.find()
+   # car_model_results = cars_model.find({'car_make': 'audi'})
+   # return render_template('edit_car_make_model.html',
+                        #   car_make_results=car_make_results,
+                          # car_model_results=car_model_results)
 
 
-@app.route('/update/<car_make>', methods=['POST', 'GET'])
-def update(car_make):
-    car_make_results = cars_make.find()
-    car_model_results = cars_model.find({'car_make': car_make})
-    return render_template('edit_car_make_model.html', car_make_results=car_make_results, car_model_results=car_model_results )
+#@app.route('/update/<car_make>', methods=['POST', 'GET'])
+#def update(car_make):
+    #car_make_results = cars_make.find()
+    #car_model_results = cars_model.find({'car_make': car_make})
+   # return render_template('edit_car_make_model.html', car_make_results=car_make_results, car_model_results=car_model_results )
 
 
 if __name__ == '__main__':

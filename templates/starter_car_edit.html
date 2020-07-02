@@ -1,6 +1,5 @@
 {% extends 'base.html' %} 
 {% block content %}
-<!--Car Basic information-->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark custom_nav">
   <a class="navbar-brand" href="#">Admin Loged-In</a>
@@ -42,20 +41,54 @@
   
 </nav>
 </header>
-
-<h3><i class="far fa-edit"></i>Edit Existing Car Information</h3>
-<div class="container">
+<div class="container p-2 mt-4">
+<form action="{{ url_for('car_update_page') }}" name="update_starter_page"  method="POST">
 <div class="row">
-    <div class="col-md-12">
-<form class="form" action="{{url_for('update_options')}}" method="POST">
 
-  <div class="form-group mr-4 mb-2">
-    <label for="car_reg_num" class="">Car Registration Number</label>
-    <input type="search" class="form-control" id="car_reg_num" name="car_reg_num"  placeholder="Registration number" required>
+<div class="col-sm-4">
+       <label for="car-make">Car Make</label>
+    <select class="custom-select form-control-lg" id="car_make" required>
+           <option value="{{ car_coll.car_make }}">{{ car_coll.car_make }}</option>
+        </select>
+</div>
+<div class="col-md-8">
+  <label for="reg_no">Registration Number</label>
+  <select class="custom-select form-control-lg" id="reg_num" name="old_reg_num" required>
+  <option value="{{ car_coll.reg_num }}">{{ car_coll.reg_num }}</option>
+    <input type="hidden" id="hiddenId" name="hiddenCarId" value="{{ car_coll._id}}">
+      </select>
+</div>
+<div class="col-md-12">
+<p class="p-2 m-2">Please select changes you want to make. Please make sure change registraion number here if you want to change</p><hr>
+</div>
+<div class="col-sm-4 mt-4">
+       <label for="car-make">Car Make</label>
+    <select class="custom-select form-control-lg" id="new_car_make" name="car_make" required>
+    {% for results in car_make_results %}
+           <option value="{{ results.car_make }}">{{ results.car_make }}</option>
+{% endfor %}
+        </select>
+</div>
+<div class="col-md-8 mt-4">
+{% if new_reg_num %}
+ <label for="reg_no">Fill-in new registration number if you want to update</label>
+      <input class="form-control" id="new_reg_num" name="reg_num" value="{{ new_reg_num }}" type="text" required>  
+ {% else %}
+ <label for="reg_no">Fill-in new registration number if you want to update</label>
+      <input class="form-control" id="new_reg_num" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required> 
+ {% endif %}
+   
+    
+</div>
+
+<div class="col-sm-12 mt-4">
+    <button class="btn btn-primary" type="submit">
+      Update Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
+        </button>
   </div>
-  <button type="submit" class="btn btn-primary mb-2">Search</button>
-</form></div>
-<div class="row">
+</div>
+
+</form>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     
@@ -65,14 +98,7 @@
    
   {% endif %}
 {% endwith %}
- </div>
-
-</div>
-
 </div>
 
 
-<script>
-
-</script>
 {%endblock%}

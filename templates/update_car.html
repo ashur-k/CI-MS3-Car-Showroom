@@ -16,6 +16,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
         <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
         </div>
       </li>
     </ul>
@@ -37,12 +38,14 @@
 
   
 </nav>
-    </header>
+</header>
 <h3><i class="far fa-caret-square-right"></i> some text </h3>
 <div class="container">
 
-<form action="{{ url_for('update_info_db', car_id=car_coll._id) }}" name="add_car_details" method="POST">
- <div class="container_basic_information m-2">
+<form action="{{ url_for('update_info_db', reg_num=car_coll.reg_num) }}" name="add_car_details" method="POST">
+<input type="hidden" id="hiddenId" name="hiddenCarId" value="{{ car_coll._id}}">
+<input type="hidden" id="hiddenDbRegNum" name="hiddenDbRegNum" value="{{ car_coll.reg_num }}">
+ <div class="container_basic_information m-2"><hr>
   <div class="row mt-2">
      <div class="col-md-4">
     <label for="reg_no">Car Make</label>
@@ -60,29 +63,30 @@
     </div>
     <div class="col-md-4">
     <label for="reg_no">Registration Number</label>
-      <input class="form-control form-control-lg" id="reg_num" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required>
-    </div>
+    <select class="form-control form-control-lg" id="reg_num" name="reg_num" required>
+<option value="{{ new_reg_num }}">{{ new_reg_num }}</option>
+    </select>    </div>
   
   </div>
    <div class="row mt-2">
   <div class="col-sm-4">
     <label for="body_type">Body type</label>
-      <input type="text" id="body_type" name="body_type" class="form-control form-control-lg" value="{{ car_coll.body_type }}">
+      <input type="text" id="body_type" name="body_type" class="form-control form-control-lg" value="{{ car_coll.body_type }}" required>
   </div>
   <div class="col-sm-4">
     <label for="exterior_colour">Exterior colour</label>
-      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control form-control-lg" value="{{ car_coll.exterior_colour }}">
+      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control form-control-lg" value="{{ car_coll.exterior_colour }}" readonly>
   </div>
   <div class="col-sm-4">
     <label for="gear_box">Gear box</label>
-      <input type="text" id="gear_box" name="gear_box" class="form-control form-control-lg" value="{{ car_coll.gear_box }}">
+      <input type="text" id="gear_box" name="gear_box" class="form-control form-control-lg" value="{{ car_coll.gear_box }}" required>
   </div>
   </div>
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="fuel_type">Fuel type</label>
-       <select class="custom-select" id="fuel_type" name="fuel_type" required>
-        <option selected disabled value="">Fuel type</option>
+       <select class="custom-select form-control-lg" id="fuel_type" name="fuel_type" required>
+        <option class="form-control-lg" selected value="{{ car_coll.fuel_type }}">"{{ car_coll.fuel_type }}"</option>
         <option value="petrol">Petrol</option>
         <option value="deisel">Deisel</option>
         <option value="gas">Gas</option>
@@ -93,30 +97,30 @@
   </div>
   <div class="col-sm-4">
     <label>ULEZ compliant</label>
-    <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" name="is_ULEZ_compliant" id="is_ULEZ_compliant">
+    <div class="form-control-lg custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant">
         <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
     </div>
   </div>
   <div class="col-sm-4">
      <label for="warranty_expire_date">Warranty expires</label><br>
-      <input type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}">
+      <input class="form-control form-control-lg" type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}" required>
   </div>
   </div>
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="registration_year">Registration year</label>
-      <input type="text" id="registration_year" name="registration_year" class="form-control" value="{{ car_coll.registration_year }}">
+      <input type="text" id="registration_year" name="registration_year" class="form-control form-control-lg" value="{{ car_coll.registration_year }}" required>
    
   </div>
   <div class="col-sm-4">
     <label for="mileage">Mileage</label>
-      <input type="text" id="mileage" name="mileage" class="form-control" value="{{ car_coll.mileage }}">
+      <input type="text" id="mileage" name="mileage" class="form-control form-control-lg" value="{{ car_coll.mileage }}" required>
   </div>
   <div class="col-sm-4">
      <label for="transmisson">Transmission</label><br>
-        <select class="custom-select" id="transmisson" name="transmisson" required>
-        <option selected disabled value="">Transmission</option>
+        <select class="custom-select form-control-lg" id="transmisson" name="transmisson" required>
+        <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.fuel_type }}</option>
         <option value="manual">manual</option>
         <option value="automatic">automatic</option>
        
@@ -126,12 +130,12 @@
   <div class="row mt-2">
   <div class="col-sm-4">
   <label for="seats">Seats</label>
-      <input type="text" id="seats" name="seats" class="form-control" value="{{ car_coll.seats }}">
+      <input type="text" id="seats" name="seats" class="form-control form-control-lg" value="{{ car_coll.seats }}" required>
    
   </div>
    <div class="col-sm-4">
      <label for="drive_type">Drive Type</label><br>
-       <input type="text" id="drive_type" name="drive_type" class="form-control" value="{{ car_coll.drive_type }}">
+       <input type="text" id="drive_type" name="drive_type" class="form-control form-control-lg" value="{{ car_coll.drive_type }}" required>
   </div>
   </div>
    <hr>
@@ -143,16 +147,16 @@
   <div class="row mt-2">
    <div class="col-sm-6">
        <label for="alloy wheels">16 inch alloy wheels</label>
-      <select class="custom-select" id="alloy wheels" name="alloy wheels" required>
-        <option selected disabled value="">16 inch alloy wheels</option>
+      <select class="custom-select form-control-lg" id="alloy_wheels" name="alloy_wheels" required>
+        <option selected value="{{ car_coll.alloy_wheels }}">{{ car_coll.alloy_wheels }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
     </div>
     <div class="col-sm-6">
        <label for="metallic_paint">Metallic paints</label>
-      <select class="custom-select" id="metallic_paint" name="metallic_paint" required>
-        <option selected disabled value="">Metallic paint</option>
+      <select class="custom-select form-control-lg" id="metallic_paint" name="metallic_paint" required>
+        <option selected value="{{ car_coll.metallic_paint }}">{{ car_coll.metallic_paint }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
@@ -164,16 +168,16 @@
   <div class="row mt-2">
    <div class="col-sm-6">
        <label for="bluetooth">Bluetooth</label>
-      <select class="custom-select" id="bluetooth" name="bluetooth" required>
-        <option selected disabled value="">Bluetooth</option>
+      <select class="custom-select form-control-lg" id="bluetooth" name="bluetooth" required>
+        <option selected value="{{ car_coll.bluetooth }}">{{ car_coll.bluetooth }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
     </div>
     <div class="col-sm-6">
        <label for="climate_control">Climate control</label>
-      <select class="custom-select" id="climate_control" name="climate_control" required>
-        <option selected disabled value="">Climate control</option>
+      <select class="custom-select form-control-lg" id="climate_control" name="climate_control" required>
+        <option selected value="{{ car_coll.climate_control }}">{{ car_coll.climate_control }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
@@ -182,16 +186,16 @@
  <div class="row mt-2">
    <div class="col-sm-6">
        <label for="seats_material">Seats material</label>
-      <select class="custom-select" id="seats_material" name="seats_material" required>
-        <option selected disabled value="">Seats material</option>
+      <select class="custom-select form-control-lg" id="seats_material" name="seats_material" required>
+        <option selected value="{{ car_coll.seats_material }}">{{ car_coll.seats_material }}</option>
         <option value="availiable">Leather</option>
       <option value="not-availiable">Cloth</option>
       </select>
     </div>
     <div class="col-sm-6">
        <label for="cruise_control">Cruise control</label>
-      <select class="custom-select" id="cruise_control" name="cruise_control" required>
-        <option selected disabled value="">Cruise control</option>
+      <select class="custom-select form-control-lg" id="cruise_control" name="cruise_control" required>
+        <option selected value="{{ car_coll.cruise_control }}">{{ car_coll.cruise_control }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
@@ -200,16 +204,16 @@
  <div class="row mt-2">
    <div class="col-sm-6">
        <label for="DAB">DAB</label>
-      <select class="custom-select" id="DAB" name="DAB" required>
-        <option selected disabled value="">DAB</option>
+      <select class="custom-select form-control-lg" id="DAB" name="DAB" required>
+        <option selected value="{{ car_coll.DAB }}">{{ car_coll.DAB }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
     </div>
     <div class="col-sm-6">
        <label for="ISOFIX_fittings">ISOFIX fittings</label>
-      <select class="custom-select" id="ISOFIX_fittings" name="ISOFIX_fittings" required>
-        <option selected disabled value="">ISOFIX fittings</option>
+      <select class="custom-select form-control-lg" id="ISOFIX_fittings" name="ISOFIX_fittings" required>
+        <option selected value="{{ car_coll.ISOFIX_fittings }}">{{ car_coll.ISOFIX_fittings }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
@@ -218,16 +222,16 @@
 <div class="row mt-2">
    <div class="col-sm-6">
        <label for="rear_parking_sensors">Rear parking sensors</label>
-      <select class="custom-select" id="rear_parking_sensors" name="rear_parking_sensors" required>
-        <option selected disabled value="">Rear parking sensors</option>
+      <select class="custom-select form-control-lg" id="rear_parking_sensors" name="rear_parking_sensors" required>
+        <option selected value="{{ car_coll.rear_parking_sensors }}">{{ car_coll.rear_parking_sensors }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
     </div>
     <div class="col-sm-6">
        <label for="start_stop_technology">Start/stop technology</label>
-      <select class="custom-select" id="start_stop_technology" name="start_stop_technology" required>
-        <option selected disabled value="">Start/stop technology</option>
+      <select class="custom-select form-control-lg" id="start_stop_technology" name="start_stop_technology" required>
+        <option selected value="{{ car_coll.start_stop_technology }}">{{ car_coll.start_stop_technology }}</option>
         <option value="availiable">Availiable</option>
       <option value="not-availiable">Not availiable</option>
       </select>
@@ -242,30 +246,30 @@
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="top_Speed">Top speed</label>
-      <input type="text" id="top_Speed" name="top_Speed" class="form-control" value="{{ car_coll.top_Speed }}">
+      <input type="text" id="top_Speed" name="top_Speed" class="form-control form-control-lg" value="{{ car_coll.top_Speed }}" required>
   </div>
   <div class="col-sm-4">
     <label for="acceleration">Acceleration(0-62 mph)</label>
-      <input type="text" id="acceleration" name="acceleration" class="form-control" value="{{ car_coll.acceleration }}">
+      <input type="text" id="acceleration" name="acceleration" class="form-control form-control-lg" value="{{ car_coll.acceleration }}" required> 
   </div>
   <div class="col-sm-4">
     <label for="engine_power">Engine power</label>
-      <input type="text" id="engine_power" name="engine_power" class="form-control" value="{{ car_coll.engine_power }}" required>
+      <input type="text" id="engine_power" name="engine_power" class="form-control form-control-lg" value="{{ car_coll.engine_power }}" required>
   </div>
   </div><hr>
 <h5>Weight and dimensions</h5><hr>
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="fuel_tank_capacity">Fuel tank capacity</label>
-      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control" value="{{ car_coll.fuel_tank_capacity }}">
+      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control form-control-lg" value="{{ car_coll.fuel_tank_capacity }}" readonly>
   </div>
   <div class="col-sm-4">
     <label for="boot_space">Boot space (seats-up)</label>
-      <input type="text" id="boot_space" name="boot_space" class="form-control" value="{{ car_coll.boot_space }}">
+      <input type="text" id="boot_space" name="boot_space" class="form-control form-control-lg" value="{{ car_coll.boot_space }}" required>
   </div>
   <div class="col-sm-4">
     <label for="length">Length</label>
-      <input type="text" id="length" name="length" class="form-control" value="{{ car_coll.length }}">
+      <input type="text" id="length" name="length" class="form-control form-control-lg" value="{{ car_coll.length }}" required>
   </div>
   </div>
 </div><hr>
@@ -275,15 +279,15 @@
 <div class="row mt-2">
   <div class="col-sm-4">
     <label for="vehicle_tax">Vehicle tax</label>
-      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control" value="{{ car_coll.vehicle_tax }}">
+      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control form-control-lg" value="{{ car_coll.vehicle_tax }}" required>
   </div>
   <div class="col-sm-4">
     <label for="insurance">Insurance</label>
-      <input type="text" id="insurance" name="insurance" class="form-control" value="{{ car_coll.insurance }}">
+      <input type="text" id="insurance" name="insurance" class="form-control form-control-lg" value="{{ car_coll.insurance }}" required>
   </div>
   <div class="col-sm-4">
     <label for="fuel_consumption">Fuel_consumption</label>
-      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control" value="{{ car_coll.fuel_consumption }}">
+      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control form-control-lg" value="{{ car_coll.fuel_consumption }}" required>
   </div>
   </div><hr>
 
@@ -297,4 +301,24 @@
 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+<script>
+$(function(){
+	$('#button').click(function(){
+		var user = $('#inputUsername').val();
+		var pass = $('#inputPassword').val();
+		$.ajax({
+			url: '/signUpUser',
+			data: $('form').serialize(),
+			type: 'POST',
+			success: function(response){
+				console.log(response);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
+});
+</script>
 {%endblock%}
