@@ -152,20 +152,19 @@ def search():
         cars_model.find_one({'car_model': request.form['search']})
 
     if registration_num_search:
-        return render_template('search.html',
-                               results=registration_num_search)
+        return render_template('make_search.html',
+                               reg_results=registration_num_search)
     elif car_make_search:
         available_car_makes = \
             basic_car_info.find({'car_make': request.form['search']})
         if available_car_makes.count() > 0:
             return render_template('make_search.html',
                                    car_make_search=car_make_search,
-                                   results=available_car_makes)
+                                   car_make_results=available_car_makes)
         else:
-            flash('No cars aviliable in car make.')
+            flash('No results found in car make')
             return render_template('make_search.html',
-                                   car_make_search=car_make_search,
-                                   results=car_make_search)
+                                   car_make_search=car_make_search)
     elif car_model_search:
         available_car_models = \
             basic_car_info.find({'car_model': request.form['search']})
@@ -174,16 +173,17 @@ def search():
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('model_search.html',
-                                   results=available_car_models)
+            return render_template('make_search.html',
+                                    car_model_search=car_model_search,
+                                   model_results=available_car_models)
         else:
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('model_search.html',
-                                   results=available_car_models)
-    flash('No results found')
-    return redirect(url_for('index'))
+            return render_template('make_search.html',
+                                   car_model_search=car_model_search)
+    
+    return render_template('make_search.html')
 
 
 @app.route('/update_car_info', methods=['POST', 'GET'])
@@ -199,8 +199,7 @@ def update_options():
         car_coll = basic_car_info.find_one({'reg_num': session['reg_num']})
         return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num)
 
-    reg_num = request.form['car_reg_num']
-    
+    reg_num = request.form['reg_num']
 
     car_coll = basic_car_info.find_one({'reg_num': reg_num})
     if car_coll:
@@ -218,21 +217,14 @@ def car_update_page():
     car_make = request.form['car_make']
     session['reg_num'] = old_reg_num
     session['new_reg_num'] = new_reg_num
-    availiable_models = \
-            cars_model.find_one({'car_make': request.form['car_make']})
-    if availiable_models is None:
-        flash('There are no models in car make {}. Please first add model from add car make/model in admin options.'.format(car_make))
-        return redirect(url_for('update_options'))
 
     if new_reg_num != old_reg_num:
         existing_registration = \
         basic_car_info.find_one({'reg_num': new_reg_num})
-       
         if existing_registration:
             flash('{} registraion number is already in database.'.format(new_reg_num))
             return redirect(url_for('update_options'))
-        
-    
+
     car_make = request.form['car_make']
     coll_Id = request.form['hiddenCarId']
     car_make_results = cars_make.find_one({'car_make': car_make})
@@ -242,64 +234,22 @@ def car_update_page():
     return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num)
 
 
-@app.route('/update_info_db', methods=['POST', 'GET'])
-def update_info_db():
+@app.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
+def update_info_db(car_id):
     session.clear()
-    db_reg_num = request.form['hiddenDbRegNum']
-    new_reg_num = request.form['reg_num']
-    registration_num_search = \
-        basic_car_info.find_one({'reg_num': new_reg_num})
 
-    basic_car_info.update({'_id': ObjectId(request.form['hiddenCarId'])}, {
-        'car_make': request.form.get('car_make'),
-        'car_model': request.form.get('car_model'),
-        'reg_num': request.form.get('reg_num'),
-        'body_type': request.form.get('body_type'),
-        'exterior_colour': request.form.get('exterior_colour'),
-        'gear_box': request.form.get('gear_box'),
-        'fuel_type': request.form.get('fuel_type'),
-        'is_ULEZ_compliant': request.form.get('is_ULEZ_compliant'),
-        'warranty_expire_date': request.form.get('warranty_expire_date'),
-        'registration_year': request.form.get('registration_year'),
-        'mileage': request.form.get('mileage'),
-        'transmisson': request.form.get('transmisson'),
-        'seats': request.form.get('seats'),
-        'drive_type': request.form.get('drive_type'),
-        'alloy_wheels': request.form.get('alloy_wheels'),
-        'metallic_paint': request.form.get('metallic_paint'),
-        'bluetooth': request.form.get('bluetooth'),
-        'climate_control': request.form.get('climate_control'),
-        'seats_material': request.form.get('seats_material'),
-        'cruise_control': request.form.get('cruise_control'),
-        'DAB': request.form.get('DAB'),
-        'ISOFIX_fittings': request.form.get('ISOFIX_fittings'),
-        'rear_parking_sensors': request.form.get('rear_parking_sensors'),
-        'start_stop_technology': request.form.get('start_stop_technology'),
-        'top_Speed': request.form.get('top_Speed'),
-        'acceleration': request.form.get('acceleration'),
-        'engine_power': request.form.get('engine_power'),
-        'fuel_tank_capacity': request.form.get('fuel_tank_capacity'),
-        'boot_space': request.form.get('boot_space'),
-        'length': request.form.get('length'),
-        'vehicle_tax': request.form.get('vehicle_tax'),
-        'insurance': request.form.get('insurance'),
-        'fuel_consumption': request.form.get('fuel_consumption')})
-    flash('car details updated successfully')
+    basic_car_info.update({'_id': ObjectId(car_id)},
+                          request.form.to_dict())
+    flash('Car details are successfully updated to registration number {}.'.format(request.form['reg_num']))
     return redirect(url_for('update_car_info'))
-#@app.route('/update_make_model/<reg_num>', methods=['GET', 'POST'])
-#def update_make_model(reg_num):
-   # car_make_results = cars_make.find()
-   # car_model_results = cars_model.find({'car_make': 'audi'})
-   # return render_template('edit_car_make_model.html',
-                        #   car_make_results=car_make_results,
-                          # car_model_results=car_model_results)
 
 
-#@app.route('/update/<car_make>', methods=['POST', 'GET'])
-#def update(car_make):
-    #car_make_results = cars_make.find()
-    #car_model_results = cars_model.find({'car_make': car_make})
-   # return render_template('edit_car_make_model.html', car_make_results=car_make_results, car_model_results=car_model_results )
+@app.route('/delete_car/<car_id>/<reg_num>', methods=['POST', 'GET'])
+def delete_car(car_id, reg_num):
+    basic_car_info.remove({'_id': ObjectId(car_id)})
+    session.clear()
+    flash('{} Registraion number is deleted succesfully'.format(reg_num))
+    return redirect(url_for('update_car_info'))
 
 
 if __name__ == '__main__':

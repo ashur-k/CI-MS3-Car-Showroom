@@ -31,7 +31,10 @@
         </div>
       </li>
     </ul>
-    
+    <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
 
   
@@ -76,7 +79,7 @@
  {% if messages %}
    
             {% for message in messages %}
-            <a href="{{ url_for('add_car_details', car_make=car_make, car_model=car_model, reg_num=reg_num) }}" class="lead para-custom-style p-3 m-3">{{ message }}</a>
+            <p  class="lead para-custom-style p-3 m-3">{{ message }}</p>
             {% endfor %}
        
         {% endif %} 

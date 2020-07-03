@@ -58,15 +58,19 @@
     <input type="hidden" id="hiddenId" name="hiddenCarId" value="{{ car_coll._id}}">
       </select>
 </div>
+<div class="col-sm-12 mt-4">
+<a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete car</a>
+</div>
 <div class="col-md-12">
 <p class="p-2 m-2">Please select changes you want to make. Please make sure change registraion number here if you want to change</p><hr>
 </div>
 <div class="col-sm-4 mt-4">
        <label for="car-make">Car Make</label>
     <select class="custom-select form-control-lg" id="new_car_make" name="car_make" required>
+    <option value="{{ car_coll.car_make }}" selected>{{ car_coll.car_make }}</option>
     {% for results in car_make_results %}
            <option value="{{ results.car_make }}">{{ results.car_make }}</option>
-{% endfor %}
+    {% endfor %}
         </select>
 </div>
 <div class="col-md-8 mt-4">
@@ -82,7 +86,7 @@
 </div>
 
 <div class="col-sm-12 mt-4">
-    <button class="btn btn-primary" type="submit">
+    <button class="btn btn-primary btn-sm" type="submit">
       Update Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
         </button>
   </div>
@@ -99,6 +103,24 @@
   {% endif %}
 {% endwith %}
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <a class="btn btn-danger" href="{{ url_for('delete_car', car_id=car_coll._id, reg_num=car_coll.reg_num ) }}" >Delete: {{ car_coll.reg_num }}</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
 
 {%endblock%}

@@ -33,7 +33,10 @@
         </div>
       </li>
     </ul>
-    
+    <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
 
   
@@ -42,9 +45,7 @@
 <h3><i class="far fa-caret-square-right"></i> some text </h3>
 <div class="container">
 
-<form action="{{ url_for('update_info_db', reg_num=car_coll.reg_num) }}" name="add_car_details" method="POST">
-<input type="hidden" id="hiddenId" name="hiddenCarId" value="{{ car_coll._id}}">
-<input type="hidden" id="hiddenDbRegNum" name="hiddenDbRegNum" value="{{ car_coll.reg_num }}">
+<form action="{{ url_for('update_info_db', car_id=car_coll._id) }}" name="add_car_details" method="POST">
  <div class="container_basic_information m-2"><hr>
   <div class="row mt-2">
      <div class="col-md-4">
