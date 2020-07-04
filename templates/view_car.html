@@ -1,5 +1,79 @@
 {% extends 'base.html' %} 
+ {% block admin_content %}
+   
+      <ul class="navbar-nav mr-auto">  
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
+                <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
+        </div>
+      </li> 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="add_new_car" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add new car
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% for results in admin_cars_make %}
+        <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+        <div class="dropdown-divider"></div>
+       {% endfor %}
+        </div>
+      </li>
+    </ul>
+    <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+{%endblock%}
 {% block content %}
+<div class="container pt-2">
+<div class="jumbotron" style="background-image: url({{ car_info.car_image_url }});">
+  <div class="container">
+
+</div>
+  </div>
+  
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h2>{{ car_info.car_make }}</h2>
+</div>
+
+<div class="col-md-12 body_sec p-2">
+<p class="lead">Welcome to {{ car_info.car_make }} {{ car_info.car_model }}, {{ car_info.reg_num}}</p>
+    <p>Registration Year: <strong> {{ car_info.registration_year }} </strong>
+    <br> Engine power: <strong>{{ car_info.engine_power }} </strong></p>
+</div>
+
+</div> 
+<div class="row custom-row justify-content-center vcenter vertical-align">
+<div class="col-md-2 m-3 vcenter custom-col vertical-align">Fuel Type: {{car_info.fuel_type}}</div>
+<div class="col-md-2 m-3 vcenter custom-col">Mileage: {{car_info.mileage}}</div>
+<div class="col-md-2 m-3 vcenter custom-col">Transmission: {{car_info.transmisson}}</div>
+<div class="col-md-2 m-3 vcenter custom-col">Seats: {{car_info.seats}}</div>
 
 
+</div>
+
+</div>
+<div class="container mt-4 mb-4">
+<div class="row">
+<div class="col-md-12"><h4>Car Features</h4></div>
+<div class="col-md-12"><h5>Exterior</h5></div>
+<div class="col-md-6"><p>Alloy Wheels: {{ car_info.alloy_wheels }}</p><hr></div>
+<div class="col-md-6"><p>Metallic Paint: {{ car_info.metallic_paint }}</p><hr></div>
+<div class="col-md-12"><h5>Interior</h5></div>
+<div class="col-md-6"><p>Bluetooth: {{ car_info.bluetooth }}</p><hr></div>
+<div class="col-md-6"><p>Climate cotrol: {{ car_info.climate_control }}</p><hr></div>
+<div class="col-md-6"><p>Seats Material: {{ car_info.seats_material }}</p><hr></div>
+<div class="col-md-6"><p>Metallic Paint: {{ car_info.metallic_paint }}</p><hr></div>
+<div class="col-md-6"><p>ISO Fittings: {{ car_info.ISOFIX_fittings }}</p><hr></div>
+<div class="col-md-6"><p>Rear Parking Sensors: {{ car_info.rear_parking_sensors }}</p><hr></div>
+<div class="col-md-6"><p>Start stop technology: {{ car_info.start_stop_technology }}</p><hr></div>
+<div class="col-md-6"><p>Top speed: {{ car_info.top_Speed }}</p><hr></div>
+</div>
+<hr></div>
 {%endblock%}

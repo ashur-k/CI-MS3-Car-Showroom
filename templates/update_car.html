@@ -1,26 +1,16 @@
 {% extends 'base.html' %} 
-{% block content %}
-<!--Car Basic information-->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark custom_nav">
-  <a class="navbar-brand" href="#">Admin Loged-In</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">   
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars 
-        </a>
+ {% block admin_content %}
+   
+      <ul class="navbar-nav mr-auto">  
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
-        <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
+            <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
+                <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
         </div>
-      </li>
-    </ul>
-      <ul class="navbar-nav mr-auto">   
+      </li> 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="add_new_car" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add new car
         </a>
@@ -29,7 +19,6 @@
         <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
         <div class="dropdown-divider"></div>
        {% endfor %}
-
         </div>
       </li>
     </ul>
@@ -37,11 +26,11 @@
       <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-  </div>
 
-  
-</nav>
-</header>
+{%endblock%}
+{% block content %}
+<!--Car Basic information-->
+
 <h3><i class="far fa-caret-square-right"></i> some text </h3>
 <div class="container">
 
@@ -189,8 +178,8 @@
        <label for="seats_material">Seats material</label>
       <select class="custom-select form-control-lg" id="seats_material" name="seats_material" required>
         <option selected value="{{ car_coll.seats_material }}">{{ car_coll.seats_material }}</option>
-        <option value="availiable">Leather</option>
-      <option value="not-availiable">Cloth</option>
+        <option value="Leather">Leather</option>
+      <option value="Cloth">Cloth</option>
       </select>
     </div>
     <div class="col-sm-6">
@@ -303,23 +292,5 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
-<script>
-$(function(){
-	$('#button').click(function(){
-		var user = $('#inputUsername').val();
-		var pass = $('#inputPassword').val();
-		$.ajax({
-			url: '/signUpUser',
-			data: $('form').serialize(),
-			type: 'POST',
-			success: function(response){
-				console.log(response);
-			},
-			error: function(error){
-				console.log(error);
-			}
-		});
-	});
-});
-</script>
+
 {%endblock%}

@@ -1,3 +1,7 @@
+  * {
+      padding: 0;
+      margin: 0;
+  }
 .para-custom-style{
     color: red;
     background-color: lightblue;
@@ -5,4 +9,40 @@
 }
 .custom_nav{
     background-color: rgb(102, 40, 40);
+}
+.jumbotron{
+    color: white;
+   height: 50vh; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  object-fit: contain;
+  width: 100%;
+ -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: conta;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    
+}
+.custom-row{
+    background-color: #ebebdc;
+}
+.custom-col{
+    background-color: #ccccc0;
+    border-radius: 10px;
+}
+.vcenter {
+   
+    
+    float: none;
+    display: flex;
+    vertical-align: middle;
 }

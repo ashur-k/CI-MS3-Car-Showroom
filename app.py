@@ -5,13 +5,16 @@ from flask import Flask, render_template, redirect, request, url_for, flash, ses
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'mySecret'
 
 app.config["MONGO_DBNAME"] = 'Cars_Sales_Showroom'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", 'mongodb://localhost')
 
 mongo = PyMongo(app)
+
 
 # Setting up variables for database collections
 
@@ -22,7 +25,7 @@ basic_car_info = mongo.db.basic_car_information
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', cars_make=cars_make.find())
+    return render_template('index.html')
 
 
 @app.route('/admin')
@@ -30,12 +33,12 @@ def admin():
     if 'car_make' in session:
         flash('Registration number {} still neede updating'.format(session['reg_num']), 'reg_num')
         return render_template('admin.html',
-                               cars_make=cars_make.find(),
+                               admin_cars_make=cars_make.find(),
                                car_make=session['car_make'],
                                car_model=session['car_model'],
                                reg_num=session['reg_num'])
 
-    return render_template('admin.html', cars_make=cars_make.find())
+    return render_template('admin.html', admin_cars_make=cars_make.find())
 
 
 @app.route('/add_new_car/<car_make>', methods=['Get', 'POST'])
@@ -43,7 +46,7 @@ def add_new_car(car_make):
     if 'car_make' in session:
         flash('Registration number {} still neede updating'.format(session['reg_num']), 'reg_num')
         return render_template('admin.html',
-                               cars_make=cars_make.find(),
+                               admin_cars_make=cars_make.find(),
                                car_make=session['car_make'],
                                car_model=session['car_model'],
                                reg_num=session['reg_num'])
@@ -52,7 +55,7 @@ def add_new_car(car_make):
     if car_models.count() < 1:
         flash(u'Please add models', 'no_model_error')
         return redirect(url_for('add_car_company'))
-    return render_template('add_car.html', car_make=car_make, cars_make=cars_make.find(),
+    return render_template('add_car.html', car_make=car_make, admin_cars_make=cars_make.find(),
                            car_models=car_models)
 
 
@@ -80,7 +83,7 @@ def add_car_details(car_make, car_model, reg_num):
     car_makers = cars_make.find_one({'car_make': session['car_make']})
     return render_template('add_new_car.html', car_makers=car_makers,
                            car_model=car_model, reg_num=reg_num,
-                           cars_make=cars_make.find())
+                           admin_cars_make=cars_make.find())
 
 
 @app.route('/add_car', methods=['POST', 'GET'])
@@ -108,7 +111,7 @@ def add_car():
 def add_car_company():
     car_makers = cars_make.find()
     car_make = cars_make.find()
-    return render_template('add_new_car_company.html',
+    return render_template('add_new_car_company.html', admin_cars_make=cars_make.find(),
                            car_makers=car_makers, car_make=car_make)
 
 
@@ -137,9 +140,9 @@ def add_model():
             cars_model.insert_one(request.form.to_dict())
             flash(u'Thanks, {} car model is successfully added.'.format(
                 request.form['car_model']), 'model_error')
-            return redirect(url_for('add_car_company'))
+            return redirect(url_for('add_new_car', car_make=request.form['car_make']))
         flash(u'We already have model in database', 'model_error')
-    return redirect(url_for('add_car_company'))
+    return redirect(url_for('add_new_car'))
 
 
 @app.route('/search', methods=['POST', 'GET'])
@@ -159,11 +162,13 @@ def search():
             basic_car_info.find({'car_make': request.form['search']})
         if available_car_makes.count() > 0:
             return render_template('make_search.html',
+                                    admin_cars_make=cars_make.find(),
                                    car_make_search=car_make_search,
                                    car_make_results=available_car_makes)
         else:
             flash('No results found in car make')
-            return render_template('make_search.html',
+            return render_template('make_search.html', 
+                                admin_cars_make=cars_make.find(),
                                    car_make_search=car_make_search)
     elif car_model_search:
         available_car_models = \
@@ -173,22 +178,22 @@ def search():
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('make_search.html',
+            return render_template('make_search.html', admin_cars_make=cars_make.find(),
                                     car_model_search=car_model_search,
                                    model_results=available_car_models)
         else:
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('make_search.html',
+            return render_template('make_search.html', admin_cars_make=cars_make.find(),
                                    car_model_search=car_model_search)
     
-    return render_template('make_search.html')
+    return render_template('make_search.html', admin_cars_make=cars_make.find())
 
 
 @app.route('/update_car_info', methods=['POST', 'GET'])
 def update_car_info():
-    return render_template('update_car_info.html')
+    return render_template('update_car_info.html', admin_cars_make=cars_make.find())
 
 
 @app.route('/update_options', methods=['POST', 'GET'])
@@ -197,14 +202,14 @@ def update_options():
         new_reg_num = session['new_reg_num']
         car_make_results = cars_make.find()
         car_coll = basic_car_info.find_one({'reg_num': session['reg_num']})
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num)
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=cars_make.find())
 
     reg_num = request.form['reg_num']
 
     car_coll = basic_car_info.find_one({'reg_num': reg_num})
     if car_coll:
         car_make_results = cars_make.find()
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results)
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, admin_cars_make=cars_make.find())
     else:
         flash('Sorry, There is no car in database with this registration number {}.'.format(reg_num))
         return redirect(url_for('update_car_info'))
@@ -250,6 +255,12 @@ def delete_car(car_id, reg_num):
     session.clear()
     flash('{} Registraion number is deleted succesfully'.format(reg_num))
     return redirect(url_for('update_car_info'))
+
+
+@app.route('/view/<car_id>/')
+def view(car_id):
+    car_info = basic_car_info.find_one({'_id': ObjectId(car_id)})
+    return render_template('view_car.html', admin_cars_make=cars_make.find(), car_info=car_info)
 
 
 if __name__ == '__main__':
