@@ -96,8 +96,10 @@
   <div class="col-sm-4">
     <label>ULEZ compliant</label>
     <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" name="is_ULEZ_compliant" id="is_ULEZ_compliant">
+        <input type="checkbox" class="custom-control-input" name="is_ULEZ_compliant" id="is_ULEZ_compliant" value="Yes">
         <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
+        
+        
     </div>
   </div>
   <div class="col-sm-4">
@@ -136,6 +138,10 @@
    <div class="col-sm-4">
      <label for="drive_type">Drive Type</label><br>
        <input type="text" id="drive_type" name="drive_type" class="form-control" placeholder="Front wheel drive">
+  </div>
+   <div class="col-sm-4">
+     <label for="drive_type">Engine</label><br>
+       <input type="text" id="engine" name="engine" class="form-control form-control-lg" placeholder="1L" required>
   </div>
   </div>
    <hr>
@@ -288,6 +294,10 @@
   <div class="col-sm-4">
     <label for="fuel_consumption">Fuel_consumption</label>
       <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control" placeholder="47.1mpg (approx. £24 / week)">
+  </div>
+  <div class="col-sm-4">
+    <label for="fuel_consumption">Car price</label>
+      <input type="text" id="car_price" name="car_price" class="form-control" placeholder="£21050">
   </div>
   </div><hr>
 

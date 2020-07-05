@@ -29,25 +29,18 @@
 {%endblock%}
 {% block content %}
 <div class="container pt-2">
-<div class="jumbotron" style="background-image: url({{ car_info.car_image_url }});">
-  <div class="container">
-
-</div>
-  </div>
-  
+<div class="jumbotron" style="background-image: url({{ car_info.car_image_url }});"> </div>
 </div>
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h2>{{ car_info.car_make }}</h2>
+<h2>{{ car_info.car_make }} {{ car_info.car_model }}</h2><hr>
 </div>
-
 <div class="col-md-12 body_sec p-2">
-<p class="lead">Welcome to {{ car_info.car_make }} {{ car_info.car_model }}, {{ car_info.reg_num}}</p>
+<p> <strong style="font-size: 26px;"><mark>{{ car_info.car_price}}</mark></strong></p>
     <p>Registration Year: <strong> {{ car_info.registration_year }} </strong>
-    <br> Engine power: <strong>{{ car_info.engine_power }} </strong></p>
+    <br> Engine: <strong>{{ car_info.engine }} </strong></p>
 </div>
-
 </div> 
 <div class="row custom-row justify-content-center vcenter vertical-align">
 <div class="col-md-2 m-3 vcenter custom-col vertical-align">Fuel Type: {{car_info.fuel_type}}</div>
@@ -57,11 +50,26 @@
 
 
 </div>
+<div class="container mt-4 mb-4">
+<div class="row">
+<div class="col-md-12"><h4>Car summary</h4></div>
 
+<div class="col-md-6"><p>Body type: </p><strong><p>{{ car_info.body_type }}</p></strong><hr></div>
+<div class="col-md-6"><p>Exterior colour:</p><strong><p> {{ car_info.exterior_colour }}</p></strong><hr></div>
+<div class="col-md-6"><p>Gear box: </p> <strong><p>{{ car_info.gear_box }}</p></strong><hr></div>
+<div class="col-md-6"><p>Drive type: </p> <strong><p>{{ car_info.drive_type }}</p></strong><hr></div>
+<div class="col-md-6"><p>Registration number: </p> <strong><p>{{ car_info.reg_num }}</p></strong><hr></div>
+<div class="col-md-6"><p>Warranty expires date: </p> <strong><p>{{ car_info.warranty_expire_date }}</p></strong><hr></div>
+{% if car_info.is_ULEZ_compliant %}
+<div class="col-md-6"><p>ULEZ compliant: </p> <strong><p>{{ car_info.is_ULEZ_compliant }}</p></strong><hr></div>
+{% endif %}
+
+
+</div>
 </div>
 <div class="container mt-4 mb-4">
 <div class="row">
-<div class="col-md-12"><h4>Car Features</h4></div>
+<div class="col-md-12"><h4>Car features</h4></div>
 <div class="col-md-12"><h5>Exterior</h5></div>
 <div class="col-md-6"><p>Alloy Wheels: {{ car_info.alloy_wheels }}</p><hr></div>
 <div class="col-md-6"><p>Metallic Paint: {{ car_info.metallic_paint }}</p><hr></div>
@@ -73,7 +81,33 @@
 <div class="col-md-6"><p>ISO Fittings: {{ car_info.ISOFIX_fittings }}</p><hr></div>
 <div class="col-md-6"><p>Rear Parking Sensors: {{ car_info.rear_parking_sensors }}</p><hr></div>
 <div class="col-md-6"><p>Start stop technology: {{ car_info.start_stop_technology }}</p><hr></div>
-<div class="col-md-6"><p>Top speed: {{ car_info.top_Speed }}</p><hr></div>
+<div class="col-md-6"><p>Cruise control: {{ car_info.cruise_control }}</p><hr></div>
 </div>
-<hr></div>
+</div>
+<div class="container mt-4 mb-4">
+<div class="row">
+<div class="col-md-12"><h4>Car specs</h4></div>
+<div class="col-md-12"><h5>Perfomance and economy</h5></div>
+<div class="col-md-6"><p>Top speed: </p><strong><p>{{ car_info.top_Speed }}</p></strong><hr></div>
+<div class="col-md-6"><p>Acceleration (0-62 mph):</p><strong><p> {{ car_info.acceleration }}</p></strong><hr></div>
+<div class="col-md-6"><p>Engine power: </p><strong><p>{{ car_info.engine_power }}</p></strong><hr></div>
+<div class="col-md-12"><h5>Weight and dimensions</h5></div>
+<div class="col-md-6"><p>Length:</p><strong><p> {{ car_info.length }}</p></strong><hr></div>
+<div class="col-md-6"><p>Boot space (seats-up):</p><strong><p> {{ car_info.boot_space }}</p></strong><hr></div>
+<div class="col-md-6"><p>Fuel tank capacity: </p><strong><p>{{ car_info.fuel_tank_capacity }}</p></strong><hr></div>
+
+</div>
+</div>
+<div class="container mt-4 mb-4">
+<div class="row">
+<div class="col-md-12"><h4>Car specs</h4></div>
+<div class="col-md-12"><h5>Perfomance and economy</h5></div>
+<div class="col-md-6"><p>Vehicle tax: </p><strong><p>{{ car_info.vehicle_tax }}</p></strong><hr></div>
+<div class="col-md-6"><p>Insurance:</p><strong><p> {{ car_info.insurance }}</p></strong><hr></div>
+<div class="col-md-6"><p>Fuel consumption: </p> <strong><p>{{ car_info.fuel_consumption }}</p></strong><hr></div>
+
+
+</div>
+</div>
+</div>
 {%endblock%}

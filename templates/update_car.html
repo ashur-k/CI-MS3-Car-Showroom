@@ -88,7 +88,7 @@
   <div class="col-sm-4">
     <label>ULEZ compliant</label>
     <div class="form-control-lg custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant">
+        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant" value="Yes">
         <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
     </div>
   </div>
@@ -110,7 +110,7 @@
   <div class="col-sm-4">
      <label for="transmisson">Transmission</label><br>
         <select class="custom-select form-control-lg" id="transmisson" name="transmisson" required>
-        <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.fuel_type }}</option>
+        <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.transmisson }}</option>
         <option value="manual">manual</option>
         <option value="automatic">automatic</option>
        
@@ -126,6 +126,10 @@
    <div class="col-sm-4">
      <label for="drive_type">Drive Type</label><br>
        <input type="text" id="drive_type" name="drive_type" class="form-control form-control-lg" value="{{ car_coll.drive_type }}" required>
+  </div>
+   <div class="col-sm-4">
+     <label for="drive_type">Engine</label><br>
+       <input type="text" id="engine" name="engine" class="form-control form-control-lg" value="{{ car_coll.engine }}" required>
   </div>
   </div>
    <hr>
@@ -279,7 +283,12 @@
     <label for="fuel_consumption">Fuel_consumption</label>
       <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control form-control-lg" value="{{ car_coll.fuel_consumption }}" required>
   </div>
-  </div><hr>
+   <div class="col-sm-4">
+    <label for="fuel_consumption">Car price</label>
+      <input type="text" id="car_price" name="car_price" class="form-control form-control-lg" value="{{ car_coll.car_price }}" required>
+  </div>
+  </div>
+  <hr>
 
 
 </div>
