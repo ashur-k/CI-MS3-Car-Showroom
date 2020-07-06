@@ -85,11 +85,17 @@
       </select>
    
   </div>
+
   <div class="col-sm-4">
     <label>ULEZ compliant</label>
     <div class="form-control-lg custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant" value="Yes">
+    {% if car_coll.is_ULEZ_compliant == "on" %} 
+        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant" checked>
         <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
+       {% else %}
+    <input type="checkbox" name="is_ULEZ_compliant" class="custom-control-input" id="not_ULEZ_compliant">
+    <label class="custom-control-label" for="not_ULEZ_compliant">yes/no</label>
+{% endif %} 
     </div>
   </div>
   <div class="col-sm-4">

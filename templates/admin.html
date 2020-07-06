@@ -20,6 +20,15 @@
        {% endfor %}
         </div>
       </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ url_for('login.signout') }}">Signout</a>
+        <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{{ url_for('login.signout') }}">Add new user</a>
+        </div>
+      </li>
     </ul>
     <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
@@ -61,6 +70,9 @@
         <p>Client Offer: client offer</p>
 
         </div>
+    </div>
+    <div class="row">
+    <a href="" class="btn btn-dark m-2 p-2">Signout</a>
     </div>
     </div>
 

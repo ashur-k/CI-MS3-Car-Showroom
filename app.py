@@ -2,18 +2,19 @@ import os
 if os.path.exists('env.py'):
     import env
 from flask import Flask, render_template, redirect, request, url_for, flash, session, jsonify, json
-from flask_pymongo import PyMongo
+from database import mongo
 from bson.objectid import ObjectId
-
+from admin.login import login
 
 app = Flask(__name__)
+app.register_blueprint(login, url_prefix="/login")
 
 app.config['SECRET_KEY'] = 'mySecret'
 
 app.config["MONGO_DBNAME"] = 'Cars_Sales_Showroom'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", 'mongodb://localhost')
 
-mongo = PyMongo(app)
+mongo.init_app(app)
 
 
 # Setting up variables for database collections
@@ -28,7 +29,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/admin')
+@app.route('/admin/')
 def admin():
     if 'car_make' in session:
         flash('Registration number {} still neede updating'.format(session['reg_num']), 'reg_num')
