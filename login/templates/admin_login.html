@@ -15,7 +15,7 @@
     </div>
       <button type="submit" class="btn btn-primary">Log In</button>
       
-      <p>Don't have an account? <a href="{{ url_for('login.register') }}">Sign up here</a></p>
+     
         {% with messages = get_flashed_messages() %} 
         {% if messages %}    
            {% for message in messages %}

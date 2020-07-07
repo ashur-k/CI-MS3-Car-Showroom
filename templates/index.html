@@ -1,18 +1,85 @@
 {% extends 'base.html' %} 
-{% block content %}
+  {% block admin_content %}
+   
+     
+    
 
-<div class="container m-3 text-center">
-<h3>Index Page</h3>
-   <div class="container">
-<a href="">some</a>
-</div> 
+{%endblock%}
+{% block content %}
+<h3 class="mt-4 ml-4">Index Page</h3>
+
+
+<div class="container m-4">
+<form action="{{ url_for('user_car_view') }}" method="POST">
+<div class="row m-5">
+<div class="col-md-3"><div class="dropdown">
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select make {{cars.count()}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  {% for car in cars %}
+    <a class="dropdown-item" href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
+    {% endfor %}
+  </div>
+</div></div>
+
+<div class="col-md-5">
+<select name="car_model" class="custom-select">
+ {% if car_models %}
+  <option selected>Car models {{car_models.count()}}</option>
+  {% for models in car_models %}
+  <option value="{{models.car_model}}">{{models.car_model}}</option>
+  {% endfor %}
+
+{% endif %}
+</select>
 </div>
 
- {% with messages = get_flashed_messages() %} {% if messages %}
-       
-            {% for message in messages %}
-            <p class="lead para-custom-style p-3 m-3">{{ message }}</p>
-            {% endfor %}
+<div class="col-md-4">
+<button type="submit" class="btn btn-primary">View Cars</button>
+</div>
+
+</div>
+</form>
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-6 mt-4">
+<div class="card" style="width: 18rem;">
+  <img src="" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Car Make:</h5>  
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Car Model:<strong><mark></mark></strong></li>
+    <li class="list-group-item">Reg Num: <strong><mark></mark></strong></li>
+    <li class="list-group-item">Reg Year:<strong><mark></mark></strong></li>
+  </ul>
+  <div class="card-body">
+  <div class="row">
+ <form action="{{url_for('update_options')}}" method="POST" name="make_search_form">
+  <input type="hidden" name="car_make" value="">
+  <input type="hidden" name="car_model" value="">
+  <input type="hidden"  name="reg_num" value="">
+   <div class="col-md-12 m-2">
+       <a href="" class="btn btn-sm btn-dark">View full specs</a>
+       </div>
+    <div class="col-md-12 m-2">
+    <button class="btn btn-dark btn-sm" type="submit">Book a test drive</button> 
+    </div>
       
-        {% endif %} {% endwith %}
+  </form>
+    
+   
+  </div>
+  </div>
+</div>
+    </div>
+</div>
+
+</div>
 {%endblock%}
+

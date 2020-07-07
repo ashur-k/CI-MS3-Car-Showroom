@@ -5,9 +5,9 @@
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
+            <a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a>
                 <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
+            <a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Make/Model/info</a>
         </div>
       </li> 
       <li class="nav-item dropdown">
@@ -15,13 +15,26 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         {% for results in admin_cars_make %}
-        <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+        <a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
         <div class="dropdown-divider"></div>
        {% endfor %}
         </div>
       </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="">Admin Home Page</a>
+          <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
+        <div class="dropdown-divider"></div>
+       
+      <a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a>
+        </div>
+
+      </li>
     </ul>
-    <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+    <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -39,7 +52,7 @@
 <div class="row">
    {% for result in car_make_results %}
    
-<div class="col-md-6 mt-4">
+<div class="col-sm-12 col-md-6 mt-4">
 <div class="card" style="width: 18rem;">
   <img src="{{ result.car_image_url }}" class="card-img-top" alt="...">
   <div class="card-body">
@@ -49,17 +62,24 @@
     <li class="list-group-item">Car Model:<strong><mark>{{result.car_model}}</mark></strong></li>
     <li class="list-group-item">Reg Num: <strong><mark>{{result.reg_num}}</mark></strong></li>
     <li class="list-group-item">Reg Year:<strong><mark>{{result.registration_year}}</mark></strong></li>
+      {% if result.car_sold == 'Sold' %}
+         <li class="list-group-item">Car Sales Status:<strong><mark class="bg-warning ml-1 p-1">{{result.car_sold}}</mark></strong></li>
+         <li class="list-group-item">Owner Name:<strong><mark>{{result.client_name_car_sold_to}}</mark></strong></li>
+         {% else %}
+        <li class="list-group-item">Car Sales Status:<strong><mark>Not Sold</mark></strong></li>
+         <li class="list-group-item">Owner Name:<strong><mark>Car Sales Showroom</mark></strong></li>
+      {% endif %}
   </ul>
   <div class="card-body">
   <div class="row">
- <form action="{{url_for('update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+ <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
   <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
   <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
   <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
     <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
   </form>
     
-    <div class="col-md-4 p-1"> <a href="{{url_for('view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
+    <div class="col-md-4 p-1"> <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
     <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete car</a></div>
   </div>
   </div>
@@ -78,7 +98,7 @@
      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <a class="btn btn-danger" href="{{ url_for('delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
+        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
        
       </div>
     </div>
@@ -158,8 +178,8 @@
 <div class="row">
    {% for result in model_results %}
  
-<div class="col-md-6 mt-4">
-<div class="card" style="width: 18rem;">
+<div class="col-md-12 mt-4">
+<div class="card" style="width: 56rem;">
   <img src="{{ result.car_image_url }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Car Make: {{result.car_make}}</h5>  

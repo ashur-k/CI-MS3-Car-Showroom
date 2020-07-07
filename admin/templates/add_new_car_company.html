@@ -5,9 +5,9 @@
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{url_for('add_car_company')}}">Add Car Make/Model</a>
+            <a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a>
                 <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{url_for('update_car_info')}}">Edit existing Car Make/Model/info</a>
+            <a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Make/Model/info</a>
         </div>
       </li> 
       <li class="nav-item dropdown">
@@ -15,13 +15,26 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         {% for results in admin_cars_make %}
-        <a class="dropdown-item" href="{{url_for('add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+        <a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
         <div class="dropdown-divider"></div>
        {% endfor %}
         </div>
       </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="">Admin Home Page</a>
+          <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
+        <div class="dropdown-divider"></div>
+       
+      <a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a>
+        </div>
+
+      </li>
     </ul>
-    <form action="{{ url_for('search') }}" method="POST" class="form-inline my-2 my-lg-0">
+    <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -32,7 +45,7 @@
 <div class="container">
 
 <h5 class="mt-3 p-2"><i class="fas fa-car"></i> Add New Car Company <hr></h5>
-<form action="{{ url_for('add_company') }}" name="add_company" id="add_company" method="POST">
+<form action="{{ url_for('admin.add_company') }}" name="add_company" id="add_company" method="POST">
   <div class="row mt-2">
       <div class="col-sm-8 m-2">
       <label for="car_make"> <i class="far fa-file"></i> New company name</label>
@@ -62,10 +75,10 @@
 
 <div class="container">
 <h5 class="mt-3 p-2"><i class="fas fa-car"></i> Add New Car Models <hr></h5>
-<form action="{{ url_for('add_model') }}" name="add_company" id="add_model" method="POST">
+<form action="{{ url_for('admin.add_model') }}" name="add_company" id="add_model" method="POST">
 <div class="row">
   <div class="col-sm-4">
-       <label for="car-make"> Car make</label>
+       <label for="car-make">Car make</label>
       <select class="custom-select" id="car_make_for_adding_model" name="car_make" required>
         <option selected disabled value="">Car make</option>
         {% for makers in car_makers %}

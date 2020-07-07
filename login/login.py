@@ -4,12 +4,14 @@ from database import mongo
 from bson.objectid import ObjectId
 
 
-login = Blueprint ("login", __name__, static_folder="static", template_folder="templates")
+login = Blueprint("login", __name__, static_folder="static", template_folder="templates")
 
 
 @login.route("/home")
-@login.route("/")
-def home():
+@login.route("/admin_login")
+def admin_login():
+    if 'username' in session:
+        return redirect(url_for('admin.admin_homepage'))
     return render_template('admin_login.html')
 
 
@@ -21,13 +23,13 @@ def logging_in():
     if login_user:
         if pbkdf2_sha256.verify(password_entered, login_user['user_pwd']):
             session['username'] = request.form['username']
-            return redirect (url_for('admin'))
-        flash('Invalid password provided')
-        return redirect(url_for('login.home'))
+            return redirect(url_for('admin.admin_homepage'))
+        flash('Invalid username/password provided')
+        return redirect(url_for('login.admin_login'))
 
     else:
-        flash(u'Invalid password provided', 'error')
-        return redirect(url_for('login.home'))
+        flash('Invalid username/password provided')
+        return redirect(url_for('login.admin_login'))
 
 
 @login.route('/register', methods=['POST', 'GET'])
@@ -50,4 +52,4 @@ def register():
 @login.route('/signout')
 def signout():
     session.clear()
-    return redirect('/login')
+    return redirect(url_for('login.admin_login'))

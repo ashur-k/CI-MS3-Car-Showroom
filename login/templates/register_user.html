@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+
+{% block head %} Registeration-Page {% endblock %} 
+ {% block admin_content %}
+   
+      <ul class="navbar-nav mr-auto">  
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a>
+                <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Make/Model/info</a>
+        </div>
+      </li> 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="add_new_car" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add new car
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% for results in admin_cars_make %}
+        <a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
+        <div class="dropdown-divider"></div>
+       {% endfor %}
+        </div>
+      </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ url_for('login.signout') }}">Signout</a>
+        <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="{{ url_for('login.register') }}">Add new user</a>
+        </div>
+      </li>
+    </ul>
+    <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+{%endblock%}
+
+{% block content %}
+
+<div class="container">
+<h1>Registration Page</h1>
+<div class="row">
+<div class="col-md-12">
+    <form method="POST" action="">
+    <div class="form-group col-md-12">
+      <label for="Username">Username</label>
+      <input type="text" class="form-control" id="name" name="username" aria-describedby="emailHelp" required/>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="user_pwd" required/>
+    </div>
+     <div class="form-group col-md-12">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="user_email" required/>
+    </div>
+      <div class="form-group col-md-12">
+      <label for="user_role">User Role</label>
+     <select class="custom-select" id="user_role" name="user_role" required>
+           <option value="admin">Admin</option>
+           <option value="admin_asst">Admin Assistant</option>
+    </select>
+    </div>
+      
+      <button type="submit" class="form-group btn btn-primary btn-block">Make User</button>
+    </form><br>
+     {% with messages = get_flashed_messages() %} 
+        {% if messages %}    
+           {% for message in messages %}
+            <p>{{ message  }}</p>
+            {% endfor %}
+        
+        {% endif %} 
+        {% endwith %}
+</div>
+</div>   
+</div>
+
+
+{% endblock %}
