@@ -24,7 +24,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Admin Home Page</a>
+          <a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a>
           <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
         <div class="dropdown-divider"></div>
@@ -135,14 +135,14 @@
   </ul>
   <div class="card-body">
   <div class="row">
- <form action="{{url_for('update_options')}}" method="POST"  name="make_search_form">
+ <form action="{{url_for('admin.update_options')}}" method="POST"  name="make_search_form">
   <input type="hidden"  name="car_make" value="{{reg_results.car_make}}">
   <input type="hidden"  name="car_model" value="{{reg_results.car_model}}">
   <input type="hidden"  name="reg_num" value="{{reg_results.reg_num}}">
     <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
   </form>
     
-    <div class="col-md-4 p-1"><a href="{{url_for('view', car_id=reg_results._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
+    <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=reg_results._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
     <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete Car</a></div>
   </div>
   </div>
@@ -163,7 +163,7 @@
      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <a class="btn btn-danger" href="{{ url_for('delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >Delete: {{ reg_results.reg_num }}</a>
+        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >Delete: {{ reg_results.reg_num }}</a>
        
       </div>
     </div>
@@ -191,14 +191,14 @@
   </ul>
   <div class="card-body">
   <div class="row">
- <form action="{{url_for('update_options')}}" method="POST" name="make_search_form">
+ <form action="{{url_for('admin.update_options')}}" method="POST" name="make_search_form">
   <input type="hidden" name="car_make" value="{{result.car_make}}">
   <input type="hidden" name="car_model" value="{{result.car_model}}">
   <input type="hidden"  name="reg_num" value="{{result.reg_num}}">
     <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
   </form>
     
-    <div class="col-md-4 p-1"><a href="{{url_for('view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
+    <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
     <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete Car</a></div>
   </div>
   </div>
@@ -217,7 +217,7 @@
      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <a class="btn btn-danger" href="{{ url_for('delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
+        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
        
       </div>
     </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 
 {% block head %} Registeration-Page {% endblock %} 
- {% block admin_content %}
+  {% block admin_content %}
    
       <ul class="navbar-nav mr-auto">  
         <li class="nav-item dropdown">
@@ -26,10 +26,14 @@
         <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{ url_for('login.signout') }}">Signout</a>
+          <a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a>
+          <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
         <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="{{ url_for('login.register') }}">Add new user</a>
+       
+      <a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a>
         </div>
+
       </li>
     </ul>
     <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">

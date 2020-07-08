@@ -24,7 +24,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Admin Home Page</a>
+          <a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a>
           <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
         <div class="dropdown-divider"></div>
@@ -102,10 +102,16 @@
     </div>
   
 </div>
-
 {% endif %}
-
-
+{% if car_add_successfully %}
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h6>{{car_add_successfully}}</h6>
+</div>
+</div>
+</div>
+{% endif %}
 {%endblock%}
     
     

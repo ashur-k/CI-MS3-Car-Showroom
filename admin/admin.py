@@ -7,14 +7,17 @@ from bson.objectid import ObjectId
 admin = Blueprint("admin", __name__, static_folder="static", template_folder="templates")
 
 
-@admin.route('/')
-@admin.route('/admin_homepage')
-def admin_homepage():
+@admin.route('/admin_homepage/<car_add_successfully>')
+@admin.route('/admin_homepage', defaults={'car_add_successfully': None})
+def admin_homepage(car_add_successfully):
     if 'username' not in session:
         return redirect(url_for('login.admin_login'))
 
     if 'car_make' in session:
         return admin_carmake_session_package()
+
+    if car_add_successfully:
+        return admin_with_login_package(car_add_successfully)
 
     return admin_with_login_package()
 
@@ -33,10 +36,13 @@ def add_new_car(car_make):
 
 
 # admin login with all information admin needs for nav/dashboard
-def admin_with_login_package():
+def admin_with_login_package(car_add_successfully=None):
+    print(car_add_successfully)
     client_info = mongo.db.client_info
     cars_make = mongo.db.car_make
     clients_info = client_info.find()
+    if car_add_successfully:
+        return render_template('admin.html', admin_cars_make=cars_make.find(), clients_info=clients_info, car_add_successfully=car_add_successfully)
     return render_template('admin.html', admin_cars_make=cars_make.find(), clients_info=clients_info)
 
 
@@ -87,7 +93,8 @@ def add_car():
         session.pop('reg_num', None)
         flash('Thanks, car added to registration number {}.'.format(
             request.form['reg_num']))
-        return redirect(url_for('admin.admin_homepage'))
+        car_add_successfully = "Thanks, car registration number " + request.form['reg_num'] + " is added successfully to database" 
+        return redirect(url_for('admin.admin_homepage', car_add_successfully=car_add_successfully ))
 
 
 @admin.route('/add_car_company')
@@ -200,6 +207,7 @@ def update_options():
         return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, admin_cars_make=mongo.db.car_make.find())
     else:
         flash('Sorry, There is no car in database with this registration number {}.'.format(reg_num))
+        return redirect(url_for('admin.update_car_info'))
 
 
 @admin.route('/car_update_page', methods=['GET', 'POST'])
@@ -229,7 +237,7 @@ def car_update_page():
 
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
 def update_info_db(car_id):
-    #session.clear()
+    # session.clear()
 
     mongo.db.basic_car_information.update({'_id': ObjectId(car_id)},
                           request.form.to_dict())
@@ -248,13 +256,13 @@ def delete_car(car_id, reg_num):
 @admin.route('/view/<car_id>/')
 def view(car_id):
     car_info = mongo.db.basic_car_information.find_one({'_id': ObjectId(car_id)})
-    return render_template('view_car.html', admin_cars_make=mongo.db.car_make.find(), car_info=car_info)
+    admin_cars_make = mongo.db.car_make.find()
+    return render_template('view_car.html', admin_cars_make=admin_cars_make, car_info=car_info)
 
 
 def admin_carmake_session_package():
-    flash('Registration number {} still neede updating'.format(session['reg_num']), 'reg_num')
-    return render_template('admin.html',
-                           admin_cars_make=mongo.db.car_make.find(),
+    flash('Registration number {} still needed updating'.format(session['reg_num']), 'reg_num')
+    return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(),
                            car_make=session['car_make'],
                            car_model=session['car_model'],
                            reg_num=session['reg_num'])

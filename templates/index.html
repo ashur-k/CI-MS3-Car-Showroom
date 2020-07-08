@@ -1,85 +1,73 @@
 {% extends 'base.html' %} 
-  {% block admin_content %}
-   
-     
-    
-
-{%endblock%}
+  
 {% block content %}
 <h3 class="mt-4 ml-4">Index Page</h3>
-
-
-<div class="container m-4">
-<form action="{{ url_for('user_car_view') }}" method="POST">
-<div class="row m-5">
-<div class="col-md-3"><div class="dropdown">
+<div class="container">
+<div class="form-inline" action="" method="">
+  <div class="form-group mb-2">
+    
+    <div class="dropdown">
 
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Select make {{cars.count()}}
+    {{cars.count()}} Make availiable
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   {% for car in cars %}
     <a class="dropdown-item" href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
+    <input type="hidden" name="car_make" value="{{ car.car_make }}">
     {% endfor %}
   </div>
-</div></div>
-
-<div class="col-md-5">
-<select name="car_model" class="custom-select">
- {% if car_models %}
-  <option selected>Car models {{car_models.count()}}</option>
-  {% for models in car_models %}
-  <option value="{{models.car_model}}">{{models.car_model}}</option>
-  {% endfor %}
-
-{% endif %}
-</select>
 </div>
-
-<div class="col-md-4">
-<button type="submit" class="btn btn-primary">View Cars</button>
-</div>
-
-</div>
-</form>
-</div>
-
-
-<div class="container">
-<div class="row">
-<div class="col-md-6 mt-4">
-<div class="card" style="width: 18rem;">
-  <img src="" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Car Make:</h5>  
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Car Model:<strong><mark></mark></strong></li>
-    <li class="list-group-item">Reg Num: <strong><mark></mark></strong></li>
-    <li class="list-group-item">Reg Year:<strong><mark></mark></strong></li>
-  </ul>
-  <div class="card-body">
-  <div class="row">
- <form action="{{url_for('update_options')}}" method="POST" name="make_search_form">
-  <input type="hidden" name="car_make" value="">
-  <input type="hidden" name="car_model" value="">
-  <input type="hidden"  name="reg_num" value="">
-   <div class="col-md-12 m-2">
-       <a href="" class="btn btn-sm btn-dark">View full specs</a>
-       </div>
-    <div class="col-md-12 m-2">
-    <button class="btn btn-dark btn-sm" type="submit">Book a test drive</button> 
-    </div>
-      
-  </form>
+  <div class="form-group mx-sm-3 mb-2">
+    <div class="dropdown">
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownCarModelMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   {% if car_models %}
+    {{car_models.count()}} Models availiable
+    {%else%}
+    Select make
+    {% endif %}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for models in car_models %}
+
+    <a class="dropdown-item" href="{{url_for('index', car_make=models.car_make, car_model=models.car_model)}}">{{ models.car_model }}</a>
     
-   
+ 
+    {% endfor %}
   </div>
-  </div>
-</div>
-    </div>
 </div>
 
+  </div>
+  {% if total_car_in_make %}
+   {% if total_car_in_make.count() > 0 %}
+    <form id="carMakeForm" name="carMakeForm" action="{{ url_for('user_car_view') }}" method="POST">
+        <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}">
+        <input type="hidden" name="car_model" value="">
+        <button type="submit" name="carMakeForm" class="btn btn-primary mb-2">{{total_car_in_make.count()}} Cars availiable in {{ car_make }}</button>
+   </form>
+     {% else %}
+      <button type="submit"  class="btn btn-primary mb-2">{{total_car_in_make.count()}} Cars availiable in {{ car_make }}</button>
+    
+      {% endif %}
+  {% endif %}
+ {% if total_car_in_models  %}
+ {% if total_car_in_models.count() > 0 %}
+    <form  action="{{ url_for('user_car_view') }}" method="POST">
+        <input type="hidden" name="car_model" value="{{ car_model }}">
+        <button type="submit"  class="btn btn-primary mb-2">{{ total_car_in_models.count() }} Cars availiable in {{ car_model }}</button>
+    </form>
+    {% else %}
+     <button type="submit" class="btn btn-primary mb-2">{{ total_car_in_models.count() }} Cars availiable in {{ car_model }}</button>
+    {% endif %}
+     {% endif %}
+      {% if all_cars  %}
+       <button type="submit" class="btn btn-primary mb-2">{{ all_cars.count() }} Cars availiable</button>
+       {% endif %}
+
+
 </div>
+
 {%endblock%}
 

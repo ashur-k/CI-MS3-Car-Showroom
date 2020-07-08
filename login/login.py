@@ -46,7 +46,7 @@ def register():
             return redirect(url_for('login.register'))
 
         flash('User name already exist')
-    return render_template('register_user.html')
+    return render_template('register_user.html', admin_cars_make=mongo.db.car_make.find())
 
 
 @login.route('/signout')
