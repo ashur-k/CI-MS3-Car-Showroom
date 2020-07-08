@@ -131,7 +131,7 @@ def add_model():
             flash(u'Thanks, {} car model is successfully added.'.format(
                 request.form['car_model']), 'model_error')
             return redirect(url_for('admin.add_company'))
-    
+
     flash(u'We already have model in database', 'model_error')
     return redirect(url_for('admin.add_company'))
 

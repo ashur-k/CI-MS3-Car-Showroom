@@ -28,6 +28,7 @@ basic_car_info = mongo.db.basic_car_information
 client_info = mongo.db.client_info
 
 
+@app.route('/', defaults={'car_make': None, 'car_model': None})
 @app.route('/index', defaults={'car_make': None, 'car_model': None})
 @app.route('/index/<car_make>/<car_model>', methods=['GET', 'POST'])
 @app.route('/index/<car_make>/', defaults={'car_model': None}, methods=['GET', 'POST'])
@@ -57,6 +58,18 @@ def user_car_view():
         availiable_cars_in_make = mongo.db.basic_car_information.find({'car_make': request.form['car_make']})
         return render_template('user_car_view.html', availiable_cars_in_make=availiable_cars_in_make)
     return 'code is in development'
+
+
+@app.route('/book_test_drive', methods=['POST', 'GET'])
+def book_test_drive():
+    
+    return render_template('book_test_drive_form.html', car_info=request.form.to_dict())
+
+
+@app.route('/user_book_test_request', methods=['POST', 'GET'])
+def user_book_test_request():
+    mongo.db.client_info.insert_one(request.form.to_dict())
+    return 'request submitted successfully'
 
 
 if __name__ == '__main__':

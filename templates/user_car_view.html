@@ -11,7 +11,7 @@
 {% for make in availiable_cars_in_make %}
 
 <div class="col-md-12 mt-4">
-<div class="card" style="width: 56rem;">
+<div class="card" style="width: 36rem;">
   <img src="{{ make.car_image_url }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Car Make: {{make.car_make}}</h5>  
@@ -23,14 +23,12 @@
   </ul>
   <div class="card-body">
   <div class="row">
- <form action="{{url_for('admin.update_options')}}" method="POST" name="make_search_form">
-  <input type="hidden" name="car_make" value="{{make.car_make}}">
-  <input type="hidden" name="car_model" value="{{make.car_model}}">
+ <form action="{{url_for('book_test_drive')}}" method="POST" name="make_search_form">
   <input type="hidden"  name="reg_num" value="{{make.reg_num}}">
-    <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
-  </form>
-    
-    <div class="col-md-4 p-1"><a href="" class="btn btn-dark btn-sm">View Car</a></div>
+   </form>
+    <div class="col-md-4 p-1">
+    <button class="btn btn-dark btn-sm" type="submit">Book test drive</button> </div>
+    <div class="col-md-4 p-1"><a href="" class="btn btn-dark btn-sm">View car full specs</a></div>
    
   </div>
   </div>
@@ -56,7 +54,7 @@
 {% for models in availiable_cars_in_model %}
 
 <div class="col-md-12 mt-4">
-<div class="card" style="width: 56rem;">
+<div class="card" style="width: 36rem;">
   <img src="{{ models.car_image_url }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Car Make: {{models.car_make}}</h5>  
@@ -67,19 +65,21 @@
     <li class="list-group-item">Reg Year:<strong><mark>{{models.registration_year}}</mark></strong></li>
   </ul>
   <div class="card-body">
-  <div class="row">
- <form action="{{url_for('admin.update_options')}}" method="POST" name="make_search_form">
+  <form action="{{url_for('book_test_drive')}}" method="POST" name="make_search_form">
   <input type="hidden" name="car_make" value="{{models.car_make}}">
-  <input type="hidden" name="car_model" value="{{models.car_model}}">
-  <input type="hidden"  name="reg_num" value="{{models.reg_num}}">
-    <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
-  </form>
-    
-    <div class="col-md-4 p-1"><a href="" class="btn btn-dark btn-sm">View Car</a></div>
-   
-  </div>
-  </div>
+   <input type="hidden" name="car_model" value="{{models.car_model}}">
+  <input type="hidden" name="reg_num" value="{{models.reg_num}}">
+  <input type="hidden" name="registration_year" value="{{models.registration_year}}">
+
+  <div class="form-row">
+     <div class="col mb-2"><button class="btn btn-dark btn-sm" type="submit">Book test drive</button> </div>
+    <div class="col mb-2"><a href="" class="btn btn-dark btn-sm">View car full specs</a></div>
+   </div>
+   </form>
+   </div>
+
 </div>
+
     </div>
 
     
