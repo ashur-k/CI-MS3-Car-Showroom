@@ -50,7 +50,7 @@ def index(car_make, car_model):
 @app.route('/user_car_view', methods=['POST', 'GET'])
 def user_car_view():
     if request.form['car_model']:
-        print(request.form['car_model'])
+    
         availiable_cars_in_model = mongo.db.basic_car_information.find({'car_model': request.form['car_model']})
         return render_template('user_car_view.html', availiable_cars_in_model=availiable_cars_in_model)
     if request.form['car_make']:
@@ -63,13 +63,24 @@ def user_car_view():
 @app.route('/book_test_drive', methods=['POST', 'GET'])
 def book_test_drive():
     
-    return render_template('book_test_drive_form.html', car_info=request.form.to_dict())
+
+    car_info = request.form.to_dict()
+    print(car_info)
+
+
+    return render_template('book_test_drive_form.html', car_info = request.form.to_dict())
 
 
 @app.route('/user_book_test_request', methods=['POST', 'GET'])
 def user_book_test_request():
     mongo.db.client_info.insert_one(request.form.to_dict())
-    return 'request submitted successfully'
+    return redirect(url_for('index'))
+
+
+@app.route('/user_view_car_specs/<car_id>')
+def user_view_car_specs(car_id):
+    car_info = mongo.db.basic_car_information.find_one({'_id': ObjectId(car_id)})
+    return render_template('user_view_full_car_specs.html', car_info=car_info)
 
 
 if __name__ == '__main__':
