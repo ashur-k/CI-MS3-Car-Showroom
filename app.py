@@ -6,11 +6,13 @@ from database import mongo
 from bson.objectid import ObjectId
 from login.login import login
 from admin.admin import admin
-
+from clients.clients import client_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(login, url_prefix="/login")
 app.register_blueprint(admin, url_prefix="/admin")
+app.register_blueprint(client_blueprint, url_prefix="/client_blueprint")
+
 
 app.config['SECRET_KEY'] = 'mySecret'
 
@@ -62,12 +64,8 @@ def user_car_view():
 
 @app.route('/book_test_drive', methods=['POST', 'GET'])
 def book_test_drive():
-    
-
     car_info = request.form.to_dict()
     print(car_info)
-
-
     return render_template('book_test_drive_form.html', car_info = request.form.to_dict())
 
 

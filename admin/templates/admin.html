@@ -42,43 +42,8 @@
 {%endblock%}
 
  {% block content %}
-{% for clients in clients_info %}
-<div class="container p-3">
-<h3>Cars clients are intersted in</h3>
-    <div class="row">
-        <div class="col-sm-6">
-        <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ clients.car_image_url }}" alt="Card image cap">
-        <div class="card-body">
- 
-        <h5 class="card-title">Car make: {{ clients.car_make }}</h5>
-  
-        <p class="card-text">Car model: {{ clients.car_model }}</p>
-        </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Car reg num: {{ clients.reg_num }}</li>
-        <li class="list-group-item">Registration Year: {{ clients.registration_year }}</li>
-   
-    </ul>
-  <h6>see full car info</h6>
- </div>
 
-        </div>
-        <div class="col-sm-6">
-        <h3>client infomration</h3>
-        <p>Client Name: {{ clients.full_name }}</p>
-        <p>Client Email: {{ clients.email }}</p>
-        <p>Client phone: {{ clients.phone}}</p>
-        <p>Best time to contact: {{ clients.best_time_to_contact }}</p>
-        <p>Best date to contact: {{ clients.date_to_contact}}</p>
-      
-       
-
-        </div>
-    </div>
-    </div>
-{% endfor %}
-{% if car_make and car_model and reg_num %}
+ {% if car_make and car_model and reg_num %}
 <div class="container p-3 m-3">
     <div class="row">
     <div class="col-md-12">  
@@ -112,6 +77,133 @@
 </div>
 </div>
 {% endif %}
+<div class="row">
+<div class="col-md-12">
+{% with errors = get_flashed_messages(category_filter=["appiontment"]) %}
+{% if errors %}
+
+
+    {%- for msg in errors %}
+    <p class="lead">{{ msg }}</p>
+    {% endfor -%}
+  
+{% endif %}
+{% endwith %}
+</div>
+</div>
+{% for clients in clients_info %}
+<div class="container p-3">
+<h3>Cars clients requested</h3>
+    <div class="row">
+        <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ clients.car_image_url }}" alt="Card image cap">
+        <div class="card-body">
+ 
+        <h5 class="card-title">Car make: {{ clients.car_make }}</h5>
+  
+        <p class="card-text">Car model: {{ clients.car_model }}</p>
+        </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Car reg num: {{ clients.reg_num }}</li>
+        <li class="list-group-item">Registration Year: {{ clients.registration_year }}</li>
+   
+    </ul>
+    <a class="btn btn-sm bg-dark m-1" style="color: white;" href="#">See full car info</a>
+    <a class="btn btn-sm bg-dark m-1" style="color: white;" href="#">Car sold</a>
+ </div>
+
+        </div>
+ 
+        <div class="col-sm-6">
+        <h3>Client's information</h3>
+        <p>Client Name: {{ clients.full_name }}</p>
+        <p>Client Email: {{ clients.email }}</p>
+        <p>Client phone: {{ clients.phone}}</p>
+        <p>Best time to contact: {{ clients.best_time_to_contact }}</p>
+        <p>Best date to contact: {{ clients.date_to_contact}}</p>
+         <div class="col-sm-12 p-0 m-0">
+        <a class="btn btn-sm bg-dark m-1" style="color: white;" data-toggle="modal" data-target="#appiontment{{ clients._id }}">Client bookings</a>
+               <!-- appiontment Modal -->
+        <div class="modal fade" id="appiontment{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="appiontment{{ clients._id }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="appiontment{{ clients._id }}Label">Book appiontment</h5>
+           
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+             <div class="modal-body">
+                <form id="appiontment_form{{ clients._id }}" action="{{url_for('client_blueprint.add_appiontments_records')}}" method="POST">
+                    <input type="hidden" class="form-control" id="client_id" name="client_id" value="{{clients._id}}" required>
+                    <input type="hidden" name="car_make" value="{{clients.car_make}}">
+                    <input type="hidden" name="car_model" value="{{clients.car_model}}">
+                    <input type="hidden" name="registration_year" value="{{clients.registration_year}}">
+                    <input type="hidden" name="car_image_url" value="{{clients.car_image_url}}">
+                    <input type="hidden" class="form-control" id="reg_num" name="reg_num" value="{{clients.reg_num}}" required> 
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Full name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{clients.full_name}}" readonly required>
+                    </div>
+                    <div class="form-group">
+                     <label for="email">Email <address></address></label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{clients.email}}" readonly  required>
+                    </div>
+                    <div class="form-group">
+                    <label  for="phone">Telephone number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value="{{clients.phone}}" readonly  required> 
+                    </div>
+                    <div class="form-group">
+                    <label   for="best_time_to_contact">Appiontment time</label>
+                        <input class="ml-2" type="time" id="best_time_to_contact" name="appiontment time" readonly  required>
+                        <label class="ml-2" for="start">Appiontment date:</label>
+                    <input class="ml-2" type="date" id="start" name="appiontment date" value="2018-07-22" min="2020-01-01" max="2022-12-31" required>
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Client related notes</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="client_related_notes" rows="3"></textarea>
+                    </div>  
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" form="appiontment_form{{ clients._id }}" class="btn btn-danger" >Make appiontment: {{ clients.full_name }}</button>
+            </div>
+           
+    </div>
+  </div>
+</div>
+        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal{{ clients._id }}">
+        Delete client
+        </button>
+        </div>
+        </div>
+       
+    </div>
+    </div>
+       <!-- Modal -->
+<div class="modal fade" id="modal{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="modal{{ clients._id }}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal{{ clients._id }}Label">Delete Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 {%endblock%}
     
     

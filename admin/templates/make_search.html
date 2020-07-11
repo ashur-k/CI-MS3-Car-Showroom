@@ -62,13 +62,13 @@
     <li class="list-group-item">Car Model:<strong><mark>{{result.car_model}}</mark></strong></li>
     <li class="list-group-item">Reg Num: <strong><mark>{{result.reg_num}}</mark></strong></li>
     <li class="list-group-item">Reg Year:<strong><mark>{{result.registration_year}}</mark></strong></li>
-      {% if result.car_sold == 'Sold' %}
+     <!-- {% if result.car_sold == 'Sold' %}
          <li class="list-group-item">Car Sales Status:<strong><mark class="bg-warning ml-1 p-1">{{result.car_sold}}</mark></strong></li>
          <li class="list-group-item">Owner Name:<strong><mark>{{result.client_name_car_sold_to}}</mark></strong></li>
          {% else %}
         <li class="list-group-item">Car Sales Status:<strong><mark>Not Sold</mark></strong></li>
          <li class="list-group-item">Owner Name:<strong><mark>Car Sales Showroom</mark></strong></li>
-      {% endif %}
+      {% endif %}--> 
   </ul>
   <div class="card-body">
   <div class="row">
@@ -76,21 +76,26 @@
   <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
   <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
   <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
-    <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
+  <div class="row m-1">
+    <button class="btn btn-dark btn-sm m-1" type="submit">Update</button>
+     <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
+         <a href="#" class="btn btn-dark btn-sm m-1" >Car sold</a>
+       </div>
   </form>
-    
-    <div class="col-md-4 p-1"> <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
-    <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete car</a></div>
+    <div class="row m-1" >
+ 
+    <a href="#" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#deleteModal{{result._id}}">Delete car</a>
+     </div> 
   </div>
   </div>
 </div>
     </div>
     <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal{{result._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{result._id}}Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Record</h5>
+        <h5 class="modal-title" id="deleteModal{{result._id}}Label">Delete Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -199,17 +204,17 @@
   </form>
     
     <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
-    <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete Car</a></div>
+    <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{result._id}}">Delete Car</a></div>
   </div>
   </div>
 </div>
     </div>
      <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal{{result._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{result._id}}Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Record</h5>
+        <h5 class="modal-title" id="deleteModal{{result._id}}Label">Delete Record</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
