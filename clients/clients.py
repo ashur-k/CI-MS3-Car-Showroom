@@ -102,3 +102,10 @@ def find_reg_num_for_client():
         return redirect(url_for('client_blueprint.add_new_client', reg_num=request.form['reg_num']))
 
     return 'registration not find'
+
+
+@client_blueprint.route('/view/<reg_num>/')
+def view(reg_num):
+    car_info = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
+    admin_cars_make = mongo.db.car_make.find()
+    return render_template('view_car.html', admin_cars_make=admin_cars_make, car_info=car_info)

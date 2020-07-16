@@ -284,3 +284,16 @@ def finish_car_registration():
                         car_make=session['car_make'],
                         car_model=session['car_model'],
                         reg_num=session['reg_num']))
+
+
+@admin.route('/car_sold_form/<reg_num>', methods=['POST', 'GET'])
+def car_sold_form(reg_num):
+    sold_car = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
+    return render_template('car_sold_form.html', admin_cars_make=mongo.db.car_make.find(), sold_car=sold_car)
+
+
+@admin.route('/car_sold/<car_id>', methods=['POST', 'GET'])
+def car_sold(car_id):
+    mongo.db.car_sold.insert_one(request.form.to_dict())
+    mongo.db.basic_car_information.remove({'_id': ObjectId(car_id)})
+    return redirect(url_for('admin.admin_homepage'))

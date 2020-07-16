@@ -69,8 +69,8 @@
         <li class="list-group-item">Registration Year: {{ clients.registration_year }}</li>
    
     </ul>
-    <a href="{{url_for('admin.view', car_id=clients._id)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
-    <a class="btn btn-sm bg-dark m-1" style="color: white;" href="#">Car sold</a>
+    <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
+    <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>
  </div>
 
         </div>

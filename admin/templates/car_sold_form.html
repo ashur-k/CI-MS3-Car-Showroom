@@ -1,0 +1,69 @@
+{% extends 'admin_base.html' %}
+  {% block content %}
+<div class="container mt-3">
+<h2>Car sold to:</h2><hr>
+<form  action="{{url_for('admin.car_sold', car_id=sold_car._id)}}" method="POST">
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Full name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="" required>
+                    </div>
+                    <div class="form-group">
+                     <label for="email">Email <address></address></label>
+                        <input type="email" class="form-control" id="email" name="email" value=""  required>
+                    </div>
+                    <div class="form-group">
+                    <label  for="phone">Telephone number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value=""  required> 
+                    </div>
+                    <div class="form-group">
+                    <label  for="address">Address</label>
+                    <input type="tel" class="form-control" id="address" name="address" value=""  required> 
+                    </div>
+                    <div class="form-group">
+                    <label  for="sold_amount">Sold_amount</label>
+                    <input type="tel" class="form-control" id="sold_amount" name="sold_amount" value=""  required> 
+                    </div>
+                                
+                    <input type="hidden" name="car_make" value="{{sold_car.car_make}}">            
+                    <input type="hidden" name="car_model" value="{{sold_car.car_model}}">
+                     <input type="hidden" name="reg_num" value="{{sold_car.reg_num}}">
+                     <input type="hidden" name="body_type" value="{{sold_car.body_type}}">
+                     <input type="hidden" name="exterior_colour" value="{{sold_car.exterior_colour}}">
+                     <input type="hidden" name="gear_box" value="{{sold_car.gear_box}}">
+                     <input type="hidden" name="fuel_type" value="{{sold_car.fuel_type}}">
+                     <input type="hidden" name="is_ULEZ_compliant" value="{{sold_car.is_ULEZ_compliant}}">
+                     <input type="hidden" name="warranty_expire_date" value="{{sold_car.warranty_expire_date}}">
+                    <input type="hidden" name="registration_year" value="{{sold_car.registration_year}}">
+                    <input type="hidden" name="mileage" value="{{sold_car.mileage}}">
+                    <input type="hidden" name="transmisson" value="{{sold_car.transmisson}}">
+                    <input type="hidden" name="seats" value="{{sold_car.seats}}">
+                    <input type="hidden" name="drive_type" value="{{sold_car.drive_type}}">
+                    <input type="hidden" name="engine" value="{{sold_car.engine}}">
+                    <input type="hidden" name="alloy_wheels" value="{{sold_car.alloy_wheels}}">
+                    <input type="hidden" name="metallic_paint" value="{{sold_car.metallic_paint}}">
+                    <input type="hidden" name="bluetooth" value="{{sold_car.bluetooth}}">
+                    <input type="hidden" name="climate_control" value="{{sold_car.climate_control}}">
+                    <input type="hidden" name="seats_material" value="{{sold_car.seats_material}}">
+                    <input type="hidden" name="cruise_control" value="{{sold_car.cruise_control}}">
+                    <input type="hidden" name="DAB" value="{{sold_car.DAB}}">
+                    <input type="hidden" name="ISOFIX_fittings" value="{{sold_car.ISOFIX_fittings}}">
+                    <input type="hidden" name="rear_parking_sensors" value="{{sold_car.rear_parking_sensors}}">
+                    <input type="hidden" name="start_stop_technology" value="{{sold_car.start_stop_technology}}">
+                    <input type="hidden" name="top_Speed" value="{{sold_car.top_Speed}}">
+                    <input type="hidden" name="acceleration" value="{{sold_car.acceleration}}">
+                    <input type="hidden" name="engine_power" value="{{sold_car.engine_power}}">
+                    <input type="hidden" name="fuel_tank_capacity" value="{{sold_car.fuel_tank_capacity}}">
+                    <input type="hidden" name="boot_space" value="{{sold_car.boot_space}}">
+                    <input type="hidden" name="length" value="{{sold_car.length}}">
+                    <input type="hidden" name="vehicle_tax" value="{{sold_car.vehicle_tax}}">
+                    <input type="hidden" name="insurance" value="{{sold_car.insurance}}">
+                    <input type="hidden" name="fuel_consumption" value="{{sold_car.fuel_consumption}}">
+                    <input type="hidden" name="car_original_price" value="{{sold_car.car_price}}">
+                    <input type="hidden" name="car_image_url" value="{{sold_car.car_image_url}}">
+
+                   
+                    <button class="btn btn-dark" type="submit">Submit information</button>
+                </form>
+</div>
+
+  {%endblock%}

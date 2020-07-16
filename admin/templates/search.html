@@ -38,7 +38,7 @@
   <div class="row m-1">
     <button class="btn btn-dark btn-sm m-1" type="submit">Update</button>
      <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
-         <a href="#" class="btn btn-dark btn-sm m-1" >Car sold</a>
+         <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
        </div>
   </form>
     <div class="row m-1" >
