@@ -138,52 +138,54 @@ def add_model():
 
 @admin.route('/search', methods=['POST', 'GET'])
 def search():
-    cars_make = mongo.db.car_make
-    cars_model = mongo.db.car_model
-    basic_car_info = mongo.db.basic_car_information
-    client_info = mongo.db.client_info
+    #cars_make = mongo.db.car_make
+    #cars_model = mongo.db.car_model
+    #client_info = mongo.db.client_info
+
     registration_num_search = \
-        basic_car_info.find_one({'reg_num': request.form['search']})
+        mongo.db.basic_car_information.find_one({'reg_num': request.form['search']})
+
     car_make_search = \
-        cars_make.find_one({'car_make': request.form['search']})
+        mongo.db.car_make.find_one({'car_make': request.form['search']})
+
     car_model_search = \
-        cars_model.find_one({'car_model': request.form['search']})
+        mongo.db.car_model.find_one({'car_model': request.form['search']})
 
     if registration_num_search:
-        return render_template('make_search.html',
-                               reg_results=registration_num_search)
+        return render_template('search.html',
+                               reg_results=registration_num_search, admin_cars_make=mongo.db.car_make.find())
     elif car_make_search:
         available_car_makes = \
-            basic_car_info.find({'car_make': request.form['search']})
+            mongo.db.basic_car_information.find({'car_make': request.form['search']})
         if available_car_makes.count() > 0:
-            return render_template('make_search.html',
-                                    admin_cars_make=cars_make.find(),
+            return render_template('search.html',
+                                    admin_cars_make=mongo.db.car_make.find(),
                                    car_make_search=car_make_search,
                                    car_make_results=available_car_makes)
         else:
             flash('No results found in car make')
-            return render_template('make_search.html', 
-                                admin_cars_make=cars_make.find(),
+            return render_template('search.html', 
+                                admin_cars_make=mongo.db.car_make.find(),
                                    car_make_search=car_make_search)
     elif car_model_search:
         available_car_models = \
-            basic_car_info.find({'car_model': request.form['search']})
+            mongo.db.basic_car_information.find({'car_model': request.form['search']})
 
         if available_car_models.count() > 0:
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('make_search.html', admin_cars_make=cars_make.find(),
+            return render_template('search.html', admin_cars_make=mongo.db.car_make.find(),
                                     car_model_search=car_model_search,
                                    model_results=available_car_models)
         else:
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
-            return render_template('make_search.html', admin_cars_make=cars_make.find(),
+            return render_template('search.html', admin_cars_make=mongo.db.car_make.find(),
                                    car_model_search=car_model_search)
     
-    return render_template('make_search.html', admin_cars_make=cars_make.find())
+    return render_template('search.html', admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/update_car_info', methods=['POST', 'GET'])

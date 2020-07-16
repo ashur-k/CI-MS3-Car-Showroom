@@ -1,0 +1,59 @@
+{% extends 'admin_base.html' %}
+
+ {% block content %}
+
+<div class="container mt-3">
+<h3>Clients appiontment form</h3><hr>
+  <form action="{{url_for('client_blueprint.find_reg_num_for_client')}}" method="POST">
+        <div class="form-group">
+            <p class="lead m-3"><strong><mark>Please, search car client is interested in:</mark></strong></p>
+            <label class="m-3" for="email">Car registration number</label>
+            <input class="m-3" type="text" id="reg_num" name="reg_num" required>
+            <button class="btn btn-primary btn-sm m-3" type="submit">Search car</button>
+        </div>
+
+    </form> 
+
+
+{% if car_clients_intrest %}
+
+<h4>Book appiontment for {{car_clients_intrest.car_make}} {{car_clients_intrest.car_model}}, registration {{car_clients_intrest.reg_num}}</h4><hr>
+
+
+<form action="{{url_for('client_blueprint.admin_make_appiontment')}}" method="POST">
+     <div class="form-group">
+    <input type="hidden" name="car_make" value="{{car_clients_intrest.car_make}}" readonly>
+    <input type="hidden" name="car_model" value="{{car_clients_intrest.car_model}}" readonly>
+    <input type="hidden"  id="reg_num" name="reg_num" value="{{car_clients_intrest.reg_num}}" readonly>
+   <input type="hidden" name="registration_year" value="{{car_clients_intrest.registration_year}}" readonly>
+ <input type="hidden" name="car_image_url" value="{{car_clients_intrest.car_image_url}}" readonly>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Full name</label>
+    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="full name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email <address></address></label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+  </div>
+  <div class="form-group">
+     <label  for="phone">Telephone number</label>
+    <input type="tel" class="form-control" id="phone" name="phone" placeholder="phone number" required> 
+  </div>
+   <div class="form-group">
+    <label   for="best_time_to_contact">Appiontment time</label>
+    <input class="ml-5" type="time" id="best_time_to_contact" name="appiontment_time" required>
+    <label class="ml-5" for="start">Appiontment date:</label>
+    <input class="ml-5" type="date" id="start" name="appiontment_date" value="2018-07-22" min="2020-01-01" max="2022-12-31" required>
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Client related notes</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" name="client_related_notes" rows="3"></textarea>
+  </div>
+
+  
+  <button type="submit" class="btn btn-primary m-3">Make appiontment</button>
+</form>
+{% endif %}
+</div>
+ {%endblock%}
