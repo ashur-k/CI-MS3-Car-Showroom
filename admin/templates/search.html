@@ -107,6 +107,7 @@
   </form>
     
     <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=reg_results._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
+    <a href="{{url_for('admin.car_sold_form', reg_num=reg_results.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
     <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete Car</a></div>
   </div>
   </div>
@@ -163,6 +164,7 @@
   </form>
     
     <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
+    <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
     <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{result._id}}">Delete Car</a></div>
   </div>
   </div>

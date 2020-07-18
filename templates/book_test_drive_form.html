@@ -5,6 +5,7 @@
 <div class="container">
 
 <form action="{{url_for('user_book_test_request')}}" method="POST">
+
 <input type="hidden" name="dashboard_status" value="true">
   <div class="form-group">
     <label for="exampleInputEmail1">Full name</label>
@@ -20,7 +21,7 @@
     
   </div>
    <div class="form-group">
-     <label   for="best_time_to_contact">Best time to contact</label>
+     <label for="best_time_to_contact">Best time to contact</label>
   <input class="ml-5" type="time" id="best_time_to_contact" name="best_time_to_contact">
     <label class="ml-5" for="start">Select date:</label>
     <input class="ml-5" type="date" id="best_date_to_contact" name="best_date_to_contact" value="2018-07-22" min="2020-01-01" max="2022-12-31">
@@ -37,12 +38,15 @@
 
 </select>
   </div>
-  
-  <input type="hidden" name="car_make" value="{{car_info.car_make}}">
+  <input type="hidden" name="appiontment_time" value="">
+  <input type="hidden" name="appiontment_date" value="">
+   <input type="hidden" name="car_make" value="{{car_info.car_make}}">
    <input type="hidden" name="car_model" value="{{car_info.car_model}}">
   <input type="hidden" name="reg_num" value="{{car_info.reg_num}}">
   <input type="hidden" name="registration_year" value="{{car_info.registration_year}}">
  <input type="hidden" name="car_image_url" value="{{car_info.car_image_url}}">
+ 
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>

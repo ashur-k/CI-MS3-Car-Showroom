@@ -23,7 +23,7 @@
   </ul>
   <div class="card-body">
   <div class="row">
- <form action="{{url_for('book_test_drive')}}" method="POST" id="make_search_form" name="make_search_form">
+ <form action="" method="POST" id="make_search_form" name="make_search_form">
  <input type="hidden"  name="car_make" value="{{make.car_make}}">
  <input type="hidden"  name="car_model" value="{{make.car_model}}">
   <input type="hidden" name="reg_num" value="{{make.reg_num}}">
@@ -32,7 +32,7 @@
 
    </form>
     <div class="col-md-4 p-1">
-    <button class="btn btn-dark btn-sm" form="make_search_form" type="submit">Book test drive</button> </div>
+    <a href="{{url_for('book_test_drive', car_id=make._id)}}" class="btn btn-dark btn-sm" form="make_search_form" type="submit">Book test drive</a> </div>
     <div class="col-md-4 p-1"><a href="{{url_for('user_view_car_specs', car_id=make._id )}}" class="btn btn-dark btn-sm">View car full specs</a></div>
    
   </div>
@@ -70,7 +70,7 @@
     <li class="list-group-item">Reg Year:<strong><mark>{{models.registration_year}}</mark></strong></li>
   </ul>
   <div class="card-body">
-  <form action="{{url_for('book_test_drive')}}" method="POST" name="make_search_form">
+  <form action="" method="POST" name="make_search_form">
   <input type="hidden" name="car_make" value="{{models.car_make}}">
    <input type="hidden" name="car_model" value="{{models.car_model}}">
   <input type="hidden" name="reg_num" value="{{models.reg_num}}">
@@ -78,7 +78,7 @@
   <input type="hidden" name="car_image_url" value="{{models.car_image_url}}">
 
   <div class="form-row">
-     <div class="col mb-2"><button class="btn btn-dark btn-sm" type="submit">Book test drive</button> </div>
+     <div class="col mb-2"><a href="{{url_for('book_test_drive', car_id=models._id)}}" class="btn btn-dark btn-sm" form="make_search_form" type="submit">Book test drive</a> </div>
     <div class="col mb-2"><a href="{{url_for('user_view_car_specs', car_id=models._id )}}" class="btn btn-dark btn-sm">View car full specs</a></div>
    </div>
    </form>

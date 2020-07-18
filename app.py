@@ -62,11 +62,13 @@ def user_car_view():
     return 'code is in development'
 
 
-@app.route('/book_test_drive', methods=['POST', 'GET'])
-def book_test_drive():
-    car_info = request.form.to_dict()
-    print(car_info)
-    return render_template('book_test_drive_form.html', car_info = request.form.to_dict())
+@app.route('/book_test_drive/<car_id>', methods=['POST', 'GET'])
+def book_test_drive(car_id):
+    #car_info = request.form.to_dict()
+    #print(car_info)
+    car_info = mongo.db.basic_car_information.find_one({'_id': ObjectId(car_id)})
+
+    return render_template('book_test_drive_form.html', car_info = car_info)
 
 
 @app.route('/user_book_test_request', methods=['POST', 'GET'])

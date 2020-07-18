@@ -37,13 +37,16 @@ def add_new_car(car_make):
 
 # admin login with all information admin needs for nav/dashboard
 def admin_with_login_package(car_add_successfully=None):
-    print(car_add_successfully)
-    client_info = mongo.db.client_info
-    cars_make = mongo.db.car_make
-    clients_info = client_info.find()
+    # print(car_add_successfully)
+    # client_info = mongo.db.client_info
+    # cars_make = mongo.db.car_make
+    # clients_info = mongo.db.client_info.find()
+    # find_reg = mongo.db.client_info.find()
+    # for reg in find_reg:
+        # print(reg['reg_num'])
     if car_add_successfully:
         return render_template('admin.html', admin_cars_make=cars_make.find(), clients_info=clients_info, car_add_successfully=car_add_successfully)
-    return render_template('admin.html', admin_cars_make=cars_make.find(), clients_info=clients_info)
+    return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
 
 
 @admin.route('/reg_verification/<car_make>', methods=['POST', 'GET'])
@@ -286,14 +289,29 @@ def finish_car_registration():
                         reg_num=session['reg_num']))
 
 
-@admin.route('/car_sold_form/<reg_num>', methods=['POST', 'GET'])
-def car_sold_form(reg_num):
+@admin.route('/add_new_client/<reg_num>', defaults={'client_id': None})
+@admin.route('/car_sold_form/<reg_num>/<client_id>', methods=['POST', 'GET'])
+def car_sold_form(reg_num, client_id):
     sold_car = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
-    return render_template('car_sold_form.html', admin_cars_make=mongo.db.car_make.find(), sold_car=sold_car)
+    client_info = mongo.db.client_info.find_one({'_id': ObjectId(client_id)})
+    
+    return render_template('car_sold_form.html', admin_cars_make=mongo.db.car_make.find(), sold_car=sold_car, client_info=client_info)
 
 
 @admin.route('/car_sold/<car_id>', methods=['POST', 'GET'])
 def car_sold(car_id):
-    mongo.db.car_sold.insert_one(request.form.to_dict())
+
+    registraion_number = request.form['reg_num']
+    print(registraion_number)
+    add_car_sold_info_to_client_db = mongo.db.client_info.find({'reg_num': request.form['reg_num']})
+    
+    if add_car_sold_info_to_client_db.count() > 0:
+        mongo.db.client_info.update_many({"reg_num": request.form['reg_num'] }, {'$set': {'car_status':'car_is_sold'}})
+
+
+    #mongo.db.basic_car_information.update({'_id': ObjectId(car_id)}, request.form.to_dict())
+    # mongo.db.basic_car_information.remove({'_id': ObjectId(car_id)})
+    mongo.db.sold_cars.insert_one(request.form.to_dict())
     mongo.db.basic_car_information.remove({'_id': ObjectId(car_id)})
+    flash(u'Information is succesfully added to sold car datebase.', 'car_sold')
     return redirect(url_for('admin.admin_homepage'))

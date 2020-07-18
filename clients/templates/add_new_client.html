@@ -3,8 +3,10 @@
  {% block content %}
 
 <div class="container mt-3">
-<h3>Clients appiontment form</h3><hr>
-  <form action="{{url_for('client_blueprint.find_reg_num_for_client')}}" method="POST">
+<div class="row">
+<div class="col-md-12" ><h3>Clients appiontment form</h3><hr></div>
+<div class="col-md-12">
+<form action="{{url_for('client_blueprint.find_reg_num_for_client')}}" method="POST">
         <div class="form-group">
             <p class="lead m-3"><strong><mark>Please, search car client is interested in:</mark></strong></p>
             <label class="m-3" for="email">Car registration number</label>
@@ -13,20 +15,70 @@
         </div>
 
     </form> 
+</div>
+</div>
+<div class="row">
+{% with messages = get_flashed_messages(category_filter=["client_appiontment_message"]) %}
+{% if messages %} 
+    {%- for msg in messages %}
+    <p class="lead">{{ msg }}</p>
+    {% endfor -%}
+{% endif %}
+{% endwith %}
 
-
+</div>
+</div>
+<div class="container mt-2">
 {% if car_clients_intrest %}
-
 <h4>Book appiontment for {{car_clients_intrest.car_make}} {{car_clients_intrest.car_model}}, registration {{car_clients_intrest.reg_num}}</h4><hr>
+<div class="row text-center">
+<div class="col-md-12">
+<img src="{{ car_clients_intrest.car_image_url}}" class="img-fluid" alt="Responsive image"><hr>
+</div>
+</div>
+</div>
+{% if other_appiontments.count() > 0 %}
+<div class="container mt-2">
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          {{other_appiontments.count() }} more appiontments on {{car_clients_intrest.reg_num}} <i class="fas fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="row card-body">
+       {% for appiontment in other_appiontments %}
+            <div class="col-md-4">
+            <p>Client name: {{appiontment.full_name}} </p>
+            <p>Cleint phone: {{appiontment.phone}}  </p>
+            <p>Appiontment date: {{appiontment.appiontment_date}}</p>
+            <p>Appiontment time: {{appiontment.appiontment_time}} </p>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 
+<hr>
+</div>
+</div>
+{% endif %}
+<div class="container mt-2">
+<div class="row">
+<h3>Cleint registration form</h3>
 
+</div>
 <form action="{{url_for('client_blueprint.admin_make_appiontment')}}" method="POST">
      <div class="form-group">
-    <input type="hidden" name="car_make" value="{{car_clients_intrest.car_make}}" readonly>
-    <input type="hidden" name="car_model" value="{{car_clients_intrest.car_model}}" readonly>
-    <input type="hidden"  id="reg_num" name="reg_num" value="{{car_clients_intrest.reg_num}}" readonly>
-   <input type="hidden" name="registration_year" value="{{car_clients_intrest.registration_year}}" readonly>
- <input type="hidden" name="car_image_url" value="{{car_clients_intrest.car_image_url}}" readonly>
+     <input type="hidden" name="dashboard_status" value="true">
+    <input type="hidden" name="car_make" value="{{car_clients_intrest.car_make}}">
+    <input type="hidden" name="car_model" value="{{car_clients_intrest.car_model}}">
+    <input type="hidden" name="reg_num" value="{{car_clients_intrest.reg_num}}">
+   <input type="hidden" name="registration_year" value="{{car_clients_intrest.registration_year}}">
+ <input type="hidden" name="car_image_url" value="{{car_clients_intrest.car_image_url}}">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Full name</label>
@@ -42,7 +94,7 @@
   </div>
    <div class="form-group">
     <label   for="best_time_to_contact">Appiontment time</label>
-    <input class="ml-5" type="time" id="best_time_to_contact" name="appiontment_time" required>
+    <input class="ml-5" type="time" name="appiontment_time" required>
     <label class="ml-5" for="start">Appiontment date:</label>
     <input class="ml-5" type="date" id="start" name="appiontment_date" value="2018-07-22" min="2020-01-01" max="2022-12-31" required>
   </div>

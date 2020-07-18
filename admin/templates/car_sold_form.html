@@ -1,29 +1,35 @@
 {% extends 'admin_base.html' %}
   {% block content %}
 <div class="container mt-3">
+<h4>Seeling car {{sold_car.car_make}} {{sold_car.car_model}}, registration number {{sold_car.reg_num}}</h4><hr>
+<div class="row text-center">
+<div class="col-md-12">
+<img src="{{ sold_car.car_image_url}}" class="img-fluid" alt="Responsive image"><hr>
+</div>
+</div>
 <h2>Car sold to:</h2><hr>
 <form  action="{{url_for('admin.car_sold', car_id=sold_car._id)}}" method="POST">
                     <div class="form-group">
                     <label for="exampleInputEmail1">Full name</label>
-                        <input type="text" class="form-control" id="full_name" name="full_name" value="" required>
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{client_info.full_name}}" required>
                     </div>
                     <div class="form-group">
                      <label for="email">Email <address></address></label>
-                        <input type="email" class="form-control" id="email" name="email" value=""  required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{client_info.email}}" required>
                     </div>
                     <div class="form-group">
                     <label  for="phone">Telephone number</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value=""  required> 
+                    <input type="tel" class="form-control" id="phone" name="phone" value="{{client_info.phone}}"  required> 
                     </div>
                     <div class="form-group">
                     <label  for="address">Address</label>
-                    <input type="tel" class="form-control" id="address" name="address" value=""  required> 
+                    <input type="tel" class="form-control" id="address" name="address" required> 
                     </div>
                     <div class="form-group">
                     <label  for="sold_amount">Sold_amount</label>
                     <input type="tel" class="form-control" id="sold_amount" name="sold_amount" value=""  required> 
                     </div>
-                                
+                       <input type="hidden" name="car_status" value="car_is_sold">           
                     <input type="hidden" name="car_make" value="{{sold_car.car_make}}">            
                     <input type="hidden" name="car_model" value="{{sold_car.car_model}}">
                      <input type="hidden" name="reg_num" value="{{sold_car.reg_num}}">
@@ -62,7 +68,7 @@
                     <input type="hidden" name="car_image_url" value="{{sold_car.car_image_url}}">
 
                    
-                    <button class="btn btn-dark" type="submit">Submit information</button>
+                    <button class="btn btn-dark mb-4" type="submit">Submit information</button>
                 </form>
 </div>
 
