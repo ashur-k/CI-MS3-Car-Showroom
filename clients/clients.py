@@ -17,23 +17,23 @@ def clients(client_id):
 @client_blueprint.route('/add_appiontments_records', methods=['POST', 'GET'])
 def add_appiontments_records():
     other_car_appiontments = mongo.db.client_info.find({'reg_num': request.form['reg_num']})
-    appiontment_time = request.form['appiontment_time']
-    appiontment_date = request.form['appiontment_date']
+    #print(other_car_appiontments.count())
 
     if other_car_appiontments.count() > 0:
         for apt in other_car_appiontments:
-            if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
-                mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
-                flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'appiontment')
-                return redirect(url_for('admin.admin_homepage'))
-
-            if apt['appiontment_time'] == appiontment_time and apt['appiontment_date'] == appiontment_date:
+            print(apt['full_name'])
+            if apt['appiontment_time'] == request.form['appiontment_time'] and apt['appiontment_date'] == request.form['appiontment_date']:
                 flash(u'There is already appiontment book on car with same date and time.', 'appiontment')
+                print(apt)
                 return redirect(url_for('admin.admin_homepage'))
-
-            mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
-            flash(u'Client appiontment has been made successfully.There are {} more appiontments on the same car.'.format(other_car_appiontments.count()), 'appiontment')
-            return redirect(url_for('admin.admin_homepage'))
+            #if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
+                #mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
+                #flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'appiontment')
+                #return redirect(url_for('admin.admin_homepage'))
+            #else:
+        mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
+        flash(u'Client appiontment has been made successfully.There are {} more appiontments on the same car.'.format(other_car_appiontments.count()), 'appiontment')
+        return redirect(url_for('admin.admin_homepage'))
 
     mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
     flash(u'Appiontment details are successfully updated', 'appiontment')
@@ -81,17 +81,18 @@ def add_new_client(reg_num):
 def admin_make_appiontment():
 
     other_car_appiontments = mongo.db.client_info.find({'reg_num': request.form['reg_num']})
-    #appiontment_time = request.form['appiontment_time']
-    #appiontment_date = request.form['appiontment_date']
+    appiontment_time = request.form['appiontment_time']
+    appiontment_date = request.form['appiontment_date']
     #print(appiontment_time)
     
 
     if other_car_appiontments.count() > 0:
         for apt in other_car_appiontments:
-            if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
-                mongo.db.client_info.insert_one(request.form.to_dict())
-                flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'client_appiontment_message')
-                return redirect(url_for('client_blueprint.add_new_client'))
+            #if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
+                
+                #mongo.db.client_info.insert_one(request.form.to_dict())
+                #flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'client_appiontment_message')
+                #return redirect(url_for('client_blueprint.add_new_client'))
 
             if apt['appiontment_time'] == appiontment_time and apt['appiontment_date'] == appiontment_date:
                 flash(u'there is already appiontment book on car with same date and time.', 'client_appiontment_message')
