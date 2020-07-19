@@ -45,7 +45,7 @@ def admin_with_login_package(car_add_successfully=None):
     # for reg in find_reg:
         # print(reg['reg_num'])
     if car_add_successfully:
-        return render_template('admin.html', admin_cars_make=cars_make.find(), clients_info=clients_info, car_add_successfully=car_add_successfully)
+        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find(), car_add_successfully=car_add_successfully)
     return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
 
 
@@ -202,7 +202,7 @@ def update_options():
         new_reg_num = session['new_reg_num']
         car_make_results = mongo.db.car_make.find()
         car_coll = mongo.db.basic_car_information.find_one({'reg_num': session['reg_num']})
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=cars_make.find())
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=mongo.db.cars_make.find())
 
     reg_num = request.form['reg_num']
 
@@ -219,17 +219,20 @@ def update_options():
 def car_update_page():
     old_reg_num = request.form['old_reg_num']
     new_reg_num = request.form['reg_num']
+    print(old_reg_num)
+    print(new_reg_num)
+
     car_make = request.form['car_make']
     session['reg_num'] = old_reg_num
     session['new_reg_num'] = new_reg_num
 
     if new_reg_num != old_reg_num:
-        existing_registration = \
-        basic_car_info.find_one({'reg_num': new_reg_num})
+        existing_registration = mongo.db.basic_car_information.find_one({'reg_num': request.form['reg_num']})
         if existing_registration:
             flash('{} registraion number is already in database.'.format(new_reg_num))
-            return redirect(url_for('update_options'))
+            return redirect(url_for('admin.update_options'))
 
+    
     car_make = request.form['car_make']
     coll_Id = request.form['hiddenCarId']
     car_make_results = mongo.db.car_make.find_one({'car_make': car_make})

@@ -41,7 +41,7 @@
       <input class="form-control" id="new_reg_num" name="reg_num" value="{{ new_reg_num }}" type="text" required>  
  {% else %}
  <label for="reg_no">Fill-in new registration number if you want to update</label>
-      <input class="form-control" id="new_reg_num" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required> 
+      <input class="form-control" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required> 
  {% endif %}
    
     

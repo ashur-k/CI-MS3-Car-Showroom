@@ -113,6 +113,7 @@ def client_search():
     find_client_name = mongo.db.client_info.find({'full_name': request.form['search']})
     find_client_email = mongo.db.client_info.find({'email': request.form['search']})
     find_client_phone = mongo.db.client_info.find({'phone': request.form['search']})
+    find_client_from_car_registration = mongo.db.client_info.find({'reg_num': request.form['search']})
 
     if find_client_name.count() > 0:
         client_name = 'with name ' + request.form['search']
@@ -125,6 +126,10 @@ def client_search():
     elif find_client_phone.count() > 0:
         client_phone = 'with phone ' + request.form['search']
         return render_template('client_search.html', admin_cars_make=mongo.db.car_make.find(), clients=find_client_phone, client=client_phone)
+    
+    elif find_client_from_car_registration.count() > 0:
+        car_reg = 'with car registration ' + request.form['search']
+        return render_template('client_search.html', admin_cars_make=mongo.db.car_make.find(), clients=find_client_from_car_registration, client=car_reg)
 
     return render_template('client_search.html', admin_cars_make=mongo.db.car_make.find())
 
@@ -146,8 +151,22 @@ def view(reg_num):
     return render_template('view_car.html', admin_cars_make=admin_cars_make, car_info=car_info)
 
 
+@client_blueprint.route('/sold_cars/')
+def sold_cars():
+    sold_cars = mongo.db.sold_cars.find()
+    admin_cars_make = mongo.db.car_make.find()
+    return render_template('sold_cars.html', admin_cars_make=admin_cars_make, sold_cars=sold_cars)
+
+
 @client_blueprint.route('/sold_car_info/<reg_num>/')
 def sold_car_info(reg_num):
     car_info = mongo.db.sold_cars.find_one({'reg_num': reg_num})
     admin_cars_make = mongo.db.car_make.find()
     return render_template('sold_car_info.html', admin_cars_make=admin_cars_make, car_info=car_info)
+
+
+@client_blueprint.route('/view_all_clients')
+def view_all_clients():
+    client_info = mongo.db.client_info.find()
+    admin_cars_make = mongo.db.car_make.find()
+    return render_template('view_clients.html', admin_cars_make=admin_cars_make, clients_info=client_info)

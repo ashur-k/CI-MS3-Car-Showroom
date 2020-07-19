@@ -1,0 +1,63 @@
+{% extends 'admin_base.html' %}
+
+ {% block content %}
+<div class="container mt-3">
+<h3 class="mb-3">All sold cars:</h3><hr>
+    <div class="row">
+        
+            <div class="col-md-3">
+                <p class="m-3"><strong>Client Name</strong></p>
+            </div>
+            <div class="col-md-3">
+                <p class="m-3"><strong>Car Registration</strong></p>
+            </div>
+            <div class="col-md-3">
+                <p class="m-3"><strong>Client Phone</strong></p>
+            </div>
+        </div> <hr>
+    
+    <div class="row">
+{% for cars in sold_cars %}
+<div class="col-md-3 ">
+            <p class="m-3">{{cars.full_name}}</p>
+    </div>
+    <div class="col-md-3">
+        <p class="m-3">{{cars.reg_num}}</p>
+    </div>
+     <div class="col-md-3">
+        <p class="m-3">{{cars.phone}}</p>
+    </div>    
+     <div class="col-md-3">
+        <div class="row">
+        <a class="btn btn-dark btn-sm m-3" href="{{url_for('client_blueprint.sold_car_info', reg_num=cars.reg_num)}}">View all</a>
+        <a class="btn btn-danger btn-sm m-3" href="" data-toggle="modal" data-target="#modal{{ cars._id }}">Delete info</a>
+        </div> 
+    </div> 
+  <!-- delete client Modal -->
+<div class="modal fade" id="modal{{ cars._id }}" tabindex="-1" role="dialog" aria-labelledby="modal{{ cars._id }}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal{{ cars._id }}Label">Delete Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <span>Are you sure you wan't to delete client, once client is deleted from here we will no longer have any information about this client.</span>
+      </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <a class="btn btn-danger" href="#">Delete: {{ cars.full_name }}</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div><hr>
+</div>
+
+
+ {% endblock %}

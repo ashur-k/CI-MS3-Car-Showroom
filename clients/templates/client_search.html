@@ -22,8 +22,20 @@
         <li class="list-group-item">Registration Year: {{ client.registration_year }}</li>
    
     </ul>
+{% if client.car_status == 'car_is_sold' %}
+        <a
+          href="{{url_for('client_blueprint.sold_car_info', reg_num=client.reg_num)}}"
+          class="btn btn-dark btn-sm m-1"
+          >See full car info</a
+        >
+        <p class="lead text-center" style="color: red; font-weight: bolder;">
+          This car is sold.
+        </p>
+{% else %}
+
     <a class="btn btn-sm bg-dark m-1" style="color: white;" href="{{url_for('client_blueprint.view', reg_num=client.reg_num)}}">See full car info</a>
     <a class="btn btn-sm bg-dark m-1" style="color: white;" href="{{url_for('admin.car_sold_form', reg_num=client.reg_num)}}">Car sold</a>
+     {%endif%}
  </div>
   </div>
        <div class="col-sm-6">
