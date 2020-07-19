@@ -3,6 +3,21 @@
  {% block content %}
 <div class="container mt-3">
 <h3 class="mb-3">All sold cars:</h3><hr>
+
+{% with errors = get_flashed_messages(category_filter=["delete_flash"]) %}
+{% if errors %}
+<div class="row alert-message block-message error">
+  
+ 
+    {%- for msg in errors %}
+    <p class="lead" style="color:green; font-weight::bold;">{{ msg }}</p>
+    {% endfor -%}
+  
+ </div><hr>
+{% endif %}
+{% endwith %}
+
+   
     <div class="row">
         
             <div class="col-md-3">
@@ -49,7 +64,7 @@
      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         
-        <a class="btn btn-danger" href="#">Delete: {{ cars.full_name }}</a>
+        <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_sold_car', car_id=cars._id)}}">Delete: {{ cars.full_name }}</a>
        
       </div>
     </div>

@@ -1,22 +1,61 @@
 {% extends 'admin_base.html' %}
 {% block content %}
 <div class="container mt-5">
+<div class="container mt-2">
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Buyer information <i class="fas fa-chevron-circle-down"></i>
+        </button>
+      </h2>
+    </div>
+     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="row card-body">
+      
+            <div class="col-md-12 mb-2">
+            <p>Buyer name: {{car_info.full_name}}</p>
+            </div>
+             <div class="col-md-12 mb-2">
+            <p>Buyer email address: {{car_info.email}}</p>
+                </div>
+                   <div class="col-md-12 mb-2">
+            <p>Buyer phone number: {{car_info.phone}}</p>
+            </div>
+               <div class="col-md-12 mb-2">
+            <p>Buyer postal address: {{car_info.address}}</p>
+            </div>
+               <div class="col-md-12 mb-2">
+            <p>Car sold amount: {{car_info.sold_amount}}</p>
+            </div>
+      
+      </div>
+    </div>
+  </div>
+
+<hr>
+</div>
+</div>
+
+
+
 <h3>Buyer information</h3>
 <div class="row">
 <div class="col-md-2">
-Name: {{car_info.full_name}}
+Name: 
 </div>
 <div class="col-md-3">
-Email: {{car_info.email}}
+Email: 
 </div>
 <div class="col-md-2">
-Phone: {{car_info.phone}}
+Phone: 
 </div>
 <div class="col-md-3">
-Address: {{car_info.address}}
+Address: 
 </div>
 <div class="col-md-2">
-Sold amount: {{car_info.sold_amount}}
+Sold amount: 
 </div>
 </div><hr>
 </div>

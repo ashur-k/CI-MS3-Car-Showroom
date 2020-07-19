@@ -43,7 +43,7 @@
 
 
     {%- for msg in errors %}
-    <p class="lead">{{ msg }}</p>
+    <p class="lead" style="color: green; font-weight:normal; text-decoration: underline;">{{ msg }}</p>
     {% endfor -%}
   
 {% endif %}
@@ -55,10 +55,11 @@
 {% if clients.dashboard_status == 'true' %}
 
 <div class="container p-3">
-<h3>Cars clients requested</h3>
+<h3>Car client is requesting:</h3>
     <div class="row">
         <div class="col-sm-6">
         <div class="card" style="width: 18rem;">
+        <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
         <img class="card-img-top" src="{{ clients.car_image_url }}" alt="Card image cap">
         <div class="card-body">
  
@@ -74,7 +75,7 @@
     
     {% if clients.car_status == 'car_is_sold' %}
     <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
-    <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+    <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn btn-dark btn-sm m-1">Book different car for client</a>
     {% else %}
     <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
     <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>

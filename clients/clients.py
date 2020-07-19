@@ -23,7 +23,7 @@ def add_appiontments_records():
         for apt in other_car_appiontments:
             print(apt['full_name'])
             if apt['appiontment_time'] == request.form['appiontment_time'] and apt['appiontment_date'] == request.form['appiontment_date']:
-                flash(u'There is already appiontment book on car with same date and time.', 'appiontment')
+                flash(u'There is already an appiontment booked on car with same date and time.', 'appiontment')
                 print(apt)
                 return redirect(url_for('admin.admin_homepage'))
             #if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
@@ -32,13 +32,12 @@ def add_appiontments_records():
                 #return redirect(url_for('admin.admin_homepage'))
             #else:
         mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
-        flash(u'Client appiontment has been made successfully.There are {} more appiontments on the same car.'.format(other_car_appiontments.count()), 'appiontment')
+        flash(u'Client appiontment has been made successfully.{} appiontments on the same car.'.format(other_car_appiontments.count()), 'appiontment')
         return redirect(url_for('admin.admin_homepage'))
 
     mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
     flash(u'Appiontment details are successfully updated', 'appiontment')
     return redirect(url_for('admin.admin_homepage'))
-
 
 
 @client_blueprint.route('/delete_client/<client_id>', methods=['POST', 'GET'])
@@ -160,9 +159,22 @@ def sold_cars():
 
 @client_blueprint.route('/sold_car_info/<reg_num>/')
 def sold_car_info(reg_num):
+
+    
     car_info = mongo.db.sold_cars.find_one({'reg_num': reg_num})
-    admin_cars_make = mongo.db.car_make.find()
-    return render_template('sold_car_info.html', admin_cars_make=admin_cars_make, car_info=car_info)
+    if car_info:
+        admin_cars_make = mongo.db.car_make.find()
+        return render_template('sold_car_info.html', admin_cars_make=admin_cars_make, car_info=car_info)
+
+    flash(u'Admin has removed car information from all client and car databases.', 'appiontment')   
+    return redirect(url_for('admin.admin_homepage'))
+
+@client_blueprint.route('/delete_sold_car/<car_id>', methods=['POST', 'GET'])
+def delete_sold_car(car_id):
+
+    mongo.db.sold_cars.remove({'_id': ObjectId(car_id)})
+    flash(u'Car and client inforamtion is successfully deleted from database.', 'delete_flash')
+    return redirect(url_for('client_blueprint.sold_cars'))
 
 
 @client_blueprint.route('/view_all_clients')

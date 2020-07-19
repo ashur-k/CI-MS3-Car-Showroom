@@ -1,5 +1,5 @@
 {% extends 'admin_base.html' %} {% block content %}
-<div class="container">
+<div class="container mt-3">
 <div class="row">
 <div class="col-md-12">
 <h3>Search Clients</h3>
@@ -97,29 +97,13 @@
       {%endif%}
 
       <div class="col-sm-12 p-0 m-0">
-        <a
-          class="btn btn-sm bg-dark m-1"
-          style="color: white;"
-          data-toggle="modal"
-          data-target="#appiontment{{ clients._id }}"
-          >Client bookings</a
-        >
-        <button
-          type="button"
-          class="btn btn-danger btn-sm m-1"
-          data-toggle="modal"
-          data-target="#modal{{ clients._id }}"
-        >
-          Delete client
-        </button>
-        <button
-          type="button"
-          class="btn btn-dark btn-sm m-1"
-          data-toggle="modal"
-          data-target="#removeFromDashboard{{ clients._id }}"
-        >
-          Remove client from dashboard
-        </button>
+       
+       
+        {% if clients.dashboard_status == 'false' %}
+        <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ clients._id }}">Move to dashboard</button>
+        {% else %}
+        
+        {% endif %}
       </div>
     </div>
   </div>
