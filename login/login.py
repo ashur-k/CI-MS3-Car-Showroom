@@ -4,7 +4,7 @@ from database import mongo
 from bson.objectid import ObjectId
 
 
-login = Blueprint("login", __name__, static_folder="static", template_folder="templates")
+login = Blueprint("login", __name__, static_folder="login_static", template_folder="login_templates")
 
 
 @login.route("/home")

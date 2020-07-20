@@ -15,20 +15,11 @@
           
       </div> 
    </div>
-   <div class="text-center">
-     <img src="{{url_for('static', filename='img/27442-8-wave-picture.png')}}" class="bottom_img">
-
-   </div>
-
-</section>
-
-<section class="cars_dropbox_section">
-<div class="container">
-<h2 class="mt-4 mb-4">Cars Sales Showroom</h2>
-  <div class="row justify-content-center drop_box_row_styleing">
+<div class="row justify-content-center drop_box_row_styleing">
     <div class="">
+    
       <div class="dropdown p-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{cars.count()}} Make availiable
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -41,12 +32,15 @@
       </div>
     </div>
   
-        <div class="dropdown p-2">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownCarModelMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {% if car_models %} {{car_models.count()}} Models availiable 
+        <div class="dropdown p-2 ">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCarModelMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if car_models %} 
+        {{car_models.count()}} Models availiable 
+
         {%else%}
-          Select make 
+          Select make
         {% endif %}
+        
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <!--Pouplating car models drop down-->
@@ -93,6 +87,19 @@
     </button>
     {% endif %}
   </div>
+   <div class="text-center">
+     <img src="{{url_for('static', filename='img/27442-8-wave-picture.png')}}" class="bottom_img">
+
+   </div>
+
+</section>
+
+
+
+<section class="cars_dropbox_section">
+<div class="container">
+<h2 class="mt-4 mb-4">Cars Sales Showroom</h2>
+ 
 </div>
 </section>
 {%endblock%}
