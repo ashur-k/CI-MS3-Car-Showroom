@@ -59,7 +59,9 @@
     <div class="row">
         <div class="col-sm-6">
         <div class="card" style="width: 18rem;">
+        {% if clients.car_status == 'car_is_sold' %}
         <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+        {% endif %}
         <img class="card-img-top" src="{{ clients.car_image_url }}" alt="Card image cap">
         <div class="card-body">
  

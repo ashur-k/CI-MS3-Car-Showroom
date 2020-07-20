@@ -1,73 +1,99 @@
-{% extends 'base.html' %} 
-  
-{% block content %}
-<h3 class="mt-4 ml-4">Index Page</h3>
+{% extends 'base.html' %} {% block content %}
+
+<section id="banner">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6">
+         <p class="promo_tilte">Car Sales Showroom</p>
+         <p>We are second hand car dealers. All cars have followed thourough inspection and reconditioned 
+          by our engineers to highest statndards.</p>
+         </div>
+         <div class="col-md-6 text-center">
+         <img src="{{url_for('static', filename='img/banner.svg')}}" class="img-fluid">
+         
+         </div>
+          
+      </div> 
+   </div>
+   <div class="text-center">
+     <img src="{{url_for('static', filename='img/27442-8-wave-picture.png')}}" class="bottom_img">
+
+   </div>
+
+</section>
+
+<section class="cars_dropbox_section">
 <div class="container">
-<div class="form-inline" action="" method="">
-  <div class="form-group mb-2">
-    
-    <div class="dropdown">
+<h2 class="mt-4 mb-4">Cars Sales Showroom</h2>
+  <div class="row justify-content-center drop_box_row_styleing">
+    <div class="">
+      <div class="dropdown p-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{cars.count()}} Make availiable
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!--Pouplating car make drop down-->
+        {% for car in cars %}
+          <a class="dropdown-item" href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
+          <input type="hidden" name="car_make" value="{{ car.car_make }}" />
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  
+        <div class="dropdown p-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownCarModelMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if car_models %} {{car_models.count()}} Models availiable 
+        {%else%}
+          Select make 
+        {% endif %}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!--Pouplating car models drop down-->
+        {% for models in car_models %}
+          <a class="dropdown-item" href="{{url_for('index', car_make=models.car_make, car_model=models.car_model)}}">{{ models.car_model }}</a>
+        {% endfor %}
+        </div>
+      
+    </div>
 
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{cars.count()}} Make availiable
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  {% for car in cars %}
-    <a class="dropdown-item" href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
-    <input type="hidden" name="car_make" value="{{ car.car_make }}">
-    {% endfor %}
-  </div>
-</div>
-  </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <div class="dropdown">
+    {% if total_car_in_make %}
+    {% if total_car_in_make.count() > 0 %}
 
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownCarModelMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   {% if car_models %}
-    {{car_models.count()}} Models availiable
-    {%else%}
-    Select make
-    {% endif %}
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    {% for models in car_models %}
-
-    <a class="dropdown-item" href="{{url_for('index', car_make=models.car_make, car_model=models.car_model)}}">{{ models.car_model }}</a>
-    
- 
-    {% endfor %}
-  </div>
-</div>
-
-  </div>
-  {% if total_car_in_make %}
-   {% if total_car_in_make.count() > 0 %}
     <form id="carMakeForm" name="carMakeForm" action="{{ url_for('user_car_view') }}" method="POST">
-        <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}">
-        <input type="hidden" name="car_model" value="">
-        <button type="submit" name="carMakeForm" class="btn btn-primary mb-2">{{total_car_in_make.count()}} Cars availiable in {{ car_make }}</button>
-   </form>
-     {% else %}
-      <button type="submit"  class="btn btn-primary mb-2">{{total_car_in_make.count()}} Cars availiable in {{ car_make }}</button>
-    
-      {% endif %}
-  {% endif %}
- {% if total_car_in_models  %}
- {% if total_car_in_models.count() > 0 %}
-    <form  action="{{ url_for('user_car_view') }}" method="POST">
-        <input type="hidden" name="car_model" value="{{ car_model }}">
-        <button type="submit"  class="btn btn-primary mb-2">{{ total_car_in_models.count() }} Cars availiable in {{ car_model }}</button>
+        <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}"/>
+        <input type="hidden" name="car_model" value="" />
+        <button type="submit" name="carMakeForm" class="btn btn-primary">
+        {{total_car_in_make.count()}} Cars availiable in {{ car_make }}
+        </button>
     </form>
     {% else %}
-     <button type="submit" class="btn btn-primary mb-2">{{ total_car_in_models.count() }} Cars availiable in {{ car_model }}</button>
+    <button type="submit" class="btn btn-primary p-2">
+      {{total_car_in_make.count()}} Cars availiable in {{ car_make }}
+    </button>
+
+    {% endif %} 
+    {% endif %} 
+
+    {% if total_car_in_models %}
+    {% if total_car_in_models.count() > 0 %}
+    <form action="{{ url_for('user_car_view') }}" method="POST">
+      <input type="hidden" name="car_model" value="{{ car_model }}" />
+      <button type="submit" class="btn btn-primary p-2">
+        {{ total_car_in_models.count() }} Cars availiable in {{ car_model }}
+      </button>
+    </form>
+    {% else %}
+    <button type="submit" class="btn btn-primary p-2">
+      {{ total_car_in_models.count() }} Cars availiable in {{ car_model }}
+    </button>
+    {% endif %} {% endif %} {% if all_cars %}
+    <button type="submit" class="btn btn-primary p-2">
+      {{ all_cars.count() }} Cars availiable
+    </button>
     {% endif %}
-     {% endif %}
-      {% if all_cars  %}
-       <button type="submit" class="btn btn-primary mb-2">{{ all_cars.count() }} Cars availiable</button>
-       {% endif %}
-
-
+  </div>
 </div>
-
+</section>
 {%endblock%}
 

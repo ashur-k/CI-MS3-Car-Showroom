@@ -1,7 +1,66 @@
   * {
       padding: 0;
       margin: 0;
+      
   }
+  /* base.html navbar styling */
+  .logo_image{
+      
+      height: 40px;
+      padding-left: 20px;
+  }
+  #nav-bar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+  }
+  .navbar{
+      background-image: linear-gradient(to right, #a517ba, #5f1782);
+      padding: 0 !important;
+  }
+  .navbar-nav li{
+      padding: 0 10px;
+  }
+   .navbar-nav li a{
+      color: #fff !important;
+      font-weight: 600;
+      float: right;
+      text-align: left;
+  }
+  .navbar-toggler{
+      outline: none !important;
+  }
+
+  /* index.html banner section styling */
+  #banner{
+      background-image: linear-gradient(to right, #a517ba, #5f1782);
+      color: #fff;
+      padding-top: 5%;
+     
+     
+  }
+  .promo_tilte{
+      font-size: 40px;
+      font-weight: 600;
+      margin-top: 100px;
+
+  }
+.bottom_img{
+    width: 50%;
+    
+}
+
+.cars_dropbox_section{
+    height: 50vh;
+}
+.drop_box_row_styleing{
+    background-image: linear-gradient(to right, #a517ba, #5f1782);
+    padding: 10px;
+    margin: auto;
+    border-radius: 25px;
+    align-items: center;
+  justify-content: center;
+}
 .para-custom-style{
     color: red;
     background-color: lightblue;
