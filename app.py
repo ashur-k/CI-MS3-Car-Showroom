@@ -35,23 +35,20 @@ client_info = mongo.db.client_info
 @app.route('/index/<car_make>/<car_model>', methods=['GET', 'POST'])
 @app.route('/index/<car_make>/', defaults={'car_model': None}, methods=['GET', 'POST'])
 def index(car_make, car_model):
-    # random_collections = mongo.db.basic_car_information.aggregate( [ { '$sample': {reg_num: 20} } ] )
-    #for collections in random_collections:
-        #print (collections)
-    
+    random_collections = mongo.db.basic_car_information.aggregate( [ { '$sample': {'size': 3} } ] )
 
     if car_make:
         if car_model:
             total_car_in_models = mongo.db.basic_car_information.find({'car_model': car_model})
             car_models = cars_model.find({'car_make': car_make})
-            return render_template('index.html', cars=mongo.db.car_make.find(), car_models=cars_model.find({'car_make': car_make}), total_car_in_models=total_car_in_models, car_model=car_model)
+            return render_template('index.html', cars=mongo.db.car_make.find(), car_models=cars_model.find({'car_make': car_make}), total_car_in_models=total_car_in_models, car_model=car_model, random_collections=random_collections)
 
         total_car_in_make = mongo.db.basic_car_information.find({'car_make': car_make})
         car_models = cars_model.find({'car_make': car_make})
-        return render_template('index.html', cars=mongo.db.car_make.find(), car_models=car_models, total_car_in_make=total_car_in_make, car_make=car_make)
+        return render_template('index.html', cars=mongo.db.car_make.find(), car_models=car_models, total_car_in_make=total_car_in_make, car_make=car_make, random_collections=random_collections)
 
     all_cars = mongo.db.basic_car_information.find()
-    return render_template('index.html', cars=mongo.db.car_make.find(), all_cars=all_cars)
+    return render_template('index.html', cars=mongo.db.car_make.find(), all_cars=all_cars, random_collections=random_collections)
 
 
 @app.route('/user_car_view', methods=['POST', 'GET'])

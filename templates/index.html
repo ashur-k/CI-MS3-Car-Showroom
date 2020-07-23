@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
  {% block content %}
-<!--Top section-->
+<!--Car choose drop down buttons section-->
 <section class="slider">
  <ul class="slides">
       <li>
-        <img src="{{url_for('static', filename='img/1.jpg')}}"> <!-- random image -->
+        <img src="{{url_for('static', filename='img/slider_image_1.jpg')}}"> <!-- random image -->
         <div class="caption center-align">
           <h2>Buy your dream car!</h2>
           <h5 class="light grey-text text-lighten-3 hide-on-small-only">Best cars in the world.</h5>
@@ -18,103 +18,109 @@
         </div>
       </li>
       <li>
-        <img src="{{url_for('static', filename='img/3.jpg')}}"> <!-- random image -->
+        <img src="{{url_for('static', filename='img/slider_image3.jpg')}}"> <!-- random image -->
         <div class="caption right-align">
           <h2>New & second hand cars aviliable.</h2>
           <h5 class="light grey-text text-lighten-3">Best cars in the world.</h5>
         </div>
       </li>
     </ul>
-
 </section>
 
 <!--second section-->
-<section id="search" class="section teal darken-1 white-text scrollspy">
+<section id="search" class="section black-text scrollspy">
     <div class="container">
     <h3 class="">Cars Sales Showroom</h3>
-        <div class="row" >
-    <div class="col">
-          <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn purple" href="#" data-target="car_make">
-        {{cars.count()}} Make availiable<i class="material-icons">arrow_drop_down</i>
-        </a>
+    </div>
 
-        <!-- Dropdown Structure Populating car make here -->
-        <ul id='car_make' class='dropdown-content'>
+<div class="grid-container container">
+    <div class="grid-item">
+          <!-- Dropdown Trigger -->
+    <a class="dropdown-trigger btn custom_btn" href="#" data-target="car_make">
+        {{cars.count()}} Make availiable<i class="material-icons right">arrow_drop_down</i>
+    </a>
+        <!-- Dropdown links -->
+        <ul id="car_make" class="dropdown-content">
         {% for car in cars %}
             <li>
-            <a href="{{url_for('index', car_make=car.car_make)}}">
-            {{ car.car_make }}</a>
-            </li>
-         <!--   <input type="hidden" name="car_make" value="{{ car.car_make }}"/>  I have left this here, I am not sure why I did so -->
+                <a href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
+            </li>    
         {% endfor %}
-        </ul>
-                    
+        </ul>                    
     </div>
-    <div class="col">
-           <a class='dropdown-trigger btn purple' href='#' data-target='car_models'>
+    <div class="grid-item">
+        <a class="dropdown-trigger btn custom_btn" href="#" data-target="car_models">
+        <!-- If logic to check if models are aviailiable -->
            {% if car_models %}
-           {{car_models.count()}} Models availiable <i class="material-icons">arrow_drop_down</i>
+           {{car_models.count()}} Models availiable<i class="material-icons right">arrow_drop_down</i>
+        <!-- else only show select make -->
            {%else%}
            Select make
            {% endif %}</a>
-         <!-- Dropdown Structure -->
-        <ul id='car_models' class='dropdown-content'>
-        <!-- Populating car models drop down here -->
+        <!-- Populating car models dropbox with results -->
+        <ul id="car_models" class="dropdown-content">
         {% for models in car_models %}
             <li>
-            <a href="{{url_for('index', car_make=models.car_make, car_model=models.car_model)}}">{{ models.car_model }}</a>
+                <a href="{{url_for('index', car_make=models.car_make, car_model=models.car_model)}}">{{ models.car_model }}</a>
             </li>
         {% endfor %}
         </ul>
     </div>
-    <!-- Button logic init to lead form to to car/make/models/aviliable-quantities cars urls -->
-    <div class="col">
-          {% if total_car_in_make %}
+
+    <div class="grid-item">
+    <!-- If logic to print correct text on top of button when any of **** car make **** is selected -->
+    {% if total_car_in_make %}
     {% if total_car_in_make.count() > 0 %}
-
-    <form id="carMakeForm" name="carMakeForm" action="{{ url_for('user_car_view') }}" method="POST">
-        <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}"/>
-        <input type="hidden" name="car_model" value="" />
-        <button type="submit" name="carMakeForm" class="btn purple btn-primary">
-        {{total_car_in_make.count()}} Cars availiable in {{ car_make }}<i class="material-icons right">send</i>
-        </button>
-    </form>
+        <form id="carMakeForm" name="carMakeForm" action="{{ url_for('user_car_view') }}" method="POST">
+            <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}"/>
+            <input type="hidden" name="car_model" value="" />
+            <button type="submit" name="carMakeForm" class="btn custom_btn ">
+            <!-- Populating car models drop down here -->
+            {{total_car_in_make.count()}} Cars availiable in {{ car_make }}<i class="material-icons right">send</i>
+            </button>
+        </form>
     {% else %}
-    <button type="submit" class="btn purple btn-primary p-2">
-      {{total_car_in_make.count()}} Cars availiable in {{ car_make }}
-    </button>
-
+        <!-- If any car make is selected -->
+        <!-- Button text will be cars availiable in that make -->
+        <button type="submit" class="btn custom_btn p-2">
+        {{total_car_in_make.count()}} Car availiable in {{ car_make }}
+        </button>
     {% endif %} 
     {% endif %} 
 
+    <!-- If logic to print correct text on top of button when any of **** car Model **** is selected -->
+    <!-- Logic starts when dropbox mode lbutton get clicked -->
     {% if total_car_in_models %}
     {% if total_car_in_models.count() > 0 %}
     <form action="{{ url_for('user_car_view') }}" method="POST">
-      <input type="hidden" name="car_model" value="{{ car_model }}" />
-      <button type="submit" class="btn purple btn-primary p-2">
-        {{ total_car_in_models.count() }} Cars availiable in {{ car_model }}<i class="material-icons right">send</i>
+        <input type="hidden" name="car_model" value="{{ car_model }}" />
+        <!-- Button text will be number of models availilable in make -->
+        <button type="submit" class="btn purple custom_btn  p-2">
+            {{ total_car_in_models.count() }} Cars availiable in {{ car_model }}<i class="material-icons right">send</i>
       </button>
     </form>
     {% else %}
-    <button type="submit" class="btn purple btn-primary p-2">
+    <!-- If any car model is selected -->
+    <!-- Button text will be cars availiable in that model -->
+    <button type="submit" class="btn purple custom_btn  p-2">
       {{ total_car_in_models.count() }} Cars availiable in {{ car_model }}
     </button>
-    {% endif %} {% endif %} {% if all_cars %}
-    <button type="submit" class="btn purple btn-primary p-2">
+    {% endif %} 
+    {% endif %} 
+    <!-- This if will execute when template gets loaded, car make and car model both aren't choosen yet -->
+    {% if all_cars %}
+    <button type="submit" class="btn purple custom_btn p-2">
       {{ all_cars.count() }} Cars availiable
     </button>
     {% endif %}
     </div>
-
-    </div>
-    </div>
+</div>  
 </section>
 
+
 <!--third section-->
-<div class="section section-icons grey lighten-4">
+<div class="section section-icons lighten-4">
     <div class="container">
-   
         <div class="row">
          <h4>How it works</h4>
             <div class="col s12 m4">
@@ -149,43 +155,45 @@
 <section id="popular" class="section section-popular scrollspy">
     <div class="container">
         <div class="row">
-        <h4>Discover our most recent collections</h4>
+        <h4>Book a test drive for one of this today.</h4>
+        {% for collections in random_collections %}
+        
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                          <img class="" src="{{url_for('static', filename='img/caleb-white-XGJBSkoqX_I-unsplash.jpg')}}" style="width:100%;">
-                        <span class="card-title green-text">Jeep Renegade</span></div>
+                          <img class="" src="{{ collections.car_image_url }}" style="width:100%;">
+                        <span class="card-title bg-text teal-text"> <h5>{{ collections.car_make }}  {{ collections.car_model }}</h5></span></div>
                         <div class="card-content">
-                            some text here
+                            <p class=""><strong> {{ collections.engine }}</strong></p>
+                            <p class=""><strong>{{ collections.car_price }}</strong></p>
+                            <p class=""><strong>{{ collections.registration_year }}</strong></p>
+                          
+                        </div>
+                        <div class="card-action">
+                         <form action="{{url_for('book_test_drive', car_id=collections._id)}}" method="POST" id="{{collections._id}}" name="{{collections._id}}">
+                            <input type="hidden"  name="car_make" value="{{collections.car_make}}">
+                            <input type="hidden"  name="car_model" value="{{collections.car_model}}">
+                            <input type="hidden" name="reg_num" value="{{collections.reg_num}}">
+                            <input type="hidden"  name="registration_year" value="{{collections.registration_year}}">
+                            <input type="hidden"  name="car_image_url" value="{{collections.car_image_url}}">
+                        
+                            
+                         </form>
+                             <button class="waves-effect waves-light btn" form="{{collections._id}}" type="submit">
+                            <i class="material-icons right">airline_seat_recline_normal</i>Book test drive</button>
+                            <a href="{{url_for('user_view_car_specs', car_id=collections._id )}}" class="waves-effect waves-light btn"><i class="material-icons right">chrome_reader_mode</i>View specs</a>
                         </div>
                     </div>
                 </div>
-                  <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                          <img class="" src="{{url_for('static', filename='img/hugh-mccann-uO3LFxRhVLI-unsplash.jpg')}}" style="width:100%;">
-                        <span class="card-title green-text">Jeep Renegade</span></div>
-                        <div class="card-content">
-                            some text here
-                        </div>
-                    </div>
-                </div>
-                  <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                          <img class="" src="{{url_for('static', filename='img/caleb-white-XGJBSkoqX_I-unsplash.jpg')}}" style="width:100%;">
-                        <span class="card-title green-text">Jeep Renegade</span></div>
-                        <div class="card-content">
-                            some text here
-                        </div>
-                    </div>
-                </div>
+           
+            {% endfor %}
             </div>
         </div>
  
 </section>
+
  <!--fifth section--> 
- <section class="section section-follow teal darken-2 white-text">
+ <section class="section section-follow web_theme white-text">
  <div class="container">
  <div class="row">
  <dic class="col s12">
@@ -200,19 +208,20 @@
  </div>
  </div>
  </section>
+
  <!--sixth section-->
  <section id="gallery" class="section-gallery scrollspy">
  <div class="container">
- <h4 class="center">Our cars photo gallery</h4>
+ <h4 class="">Our cars photo gallery</h4>
  <div class="row">
  <div class="col s12 m3">
- <img src="https://source.unsplash.com/640x426/?car" alt="" class="materialboxed responsive-img">
- </div>
- <div class="col s12 m3">
- <img src="https://source.unsplash.com/640x426/?jeep" alt="" class="materialboxed responsive-img">
+ <img src="https://source.unsplash.com/640x426/?Audi" alt="" class="materialboxed responsive-img">
  </div>
  <div class="col s12 m3">
  <img src="https://source.unsplash.com/640x426/?BMW" alt="" class="materialboxed responsive-img">
+ </div>
+ <div class="col s12 m3">
+ <img src="https://source.unsplash.com/640x426/?mercedes benz car" alt="" class="materialboxed responsive-img">
  </div>
  <div class="col s12 m3">
  <img src="https://source.unsplash.com/640x426/?Audi" alt="" class="materialboxed responsive-img">
@@ -248,12 +257,13 @@
  </div>
  </div>
   </section> 
+
     <!--seventh section-->   
     <section id="contact" class="section section-contact scrollspy">
         <div class="container">
         <div class="row">
         <div class="col s12 m6">
-        <div class="card-panel teal white-text center">
+        <div class="card-panel web_theme white-text center">
             <i class="material-icons">email</i>
             <h5>Contact us for more inforamtion</h5>
             <p>some dummy text here Lorem ipsum dolor sit amet, 
@@ -298,13 +308,16 @@
       </div>
     
     </section>
+
+  
 <!--footer section-->  
-<footer class="section teal darken-2 white-text center">
+<footer class="section web_theme white-text center">
 <p class="flow-text">Car sales showroom &copy; 2020 </p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
     var options = {  }

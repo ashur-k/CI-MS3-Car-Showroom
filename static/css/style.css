@@ -5,47 +5,57 @@
   }
   /* base.html navbar styling */
    /* Making materialise nave fixed and and applying colouring */
-  #M__customise_nav{
-      
-      background-image: linear-gradient(to right, #a517ba, #5f1782);
-    
+  .web_theme{
+      background-image: linear-gradient(to right, #ee2222, #532c2c, #1b1b1a);
   }
   
    /* Car logo image */
   .logo_image{
       height: 40px;
       padding-left: 20px;
+      padding-top: 5px;
       }
 
-  /* index.html banner section styling */
-.parallax-container{
-    min-height: 75vh;
-    height: auto;    
-}
-.parallax{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-attachment: fixed;
-   
-}
-.parallax_img{
-    width: 50%;
- 
-}
-.image-div{
-overflow: hidden;
-}
-/*
-.section-search {
-    padding: 5px !important;
-    font-size: 18px !important;
-    width: 100% !important;
-    border: #f4f4f4 3px solid !important;
-}*/
 .section-follow .fa-4x{
     margin: 5px 10px;
 }
-
-
+/*This is for giving bg color to randomly gernrated car results*/
+.bg-text{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px !important;
+    margin: 0px 0px 5px !important;
+   
+text-shadow:
+   -1px -1px 0 #fff,  
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+     1px 1px 0 #fff;
+}
+/* --Dropbox sizing and apperance-- */
+.custom_btn {
+    display: block;
+    width: auto;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #ee2222, #532c2c, #1b1b1a);
+    background-size: 200%;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase; 
+    cursor: pointer;
+    transition: .5s;
+    border-radius: 5px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+ 
+  padding: 10px;
+}
+.grid-item {
+  
+  padding: 5px;
+   
+  text-align: center;
+}
 

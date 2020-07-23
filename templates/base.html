@@ -19,7 +19,7 @@
 <header id="materialise-side-navbar" >
 <!-- navbar content here  --> 
 <div class="navbar-fixed">
-    <nav class="teal">
+    <nav class="teal web_theme">
         <div class="contianer">     
             <div class="nav-wrappper">            
                 <a  class="brand-logo" href="{{url_for('index')}}">
@@ -47,6 +47,7 @@
         <li><a href=""><i class="material-icons">email</i>Contact us</a></li>
     </ul>      
 </header>
+
 {% block content %}
 
     
@@ -63,7 +64,7 @@
   const slider = document.querySelector('.slider');
   M.Slider.init(slider, {
       indicators: false,
-      height: 600,
+      height: 650,
       transition: 500,
       interval: 6000
   });
@@ -73,6 +74,12 @@
 
    const ss = document.querySelectorAll('.scrollspy');
   M.Scrollspy.init(ss,{})
+
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.parallax');
+     var options = {  }
+    var instances = M.Parallax.init(elems, options);
+  });
     </script>
     
   </body>

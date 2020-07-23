@@ -6,12 +6,9 @@
 {% if availiable_cars_in_make %}
 
 <div class="container">
-<h1>USER Make VIEW</h1>
+<h2>Please book you test drive today:</h2>
 
 <div class="row">
-
-
-
 
 {% for make in availiable_cars_in_make %}
 
@@ -28,8 +25,8 @@
     <li class="list-group-item">Reg Year:<strong> {{make.registration_year}}</strong></li>
   </ul>
     </div>
-      <p>
-      <form action="{{url_for('book_test_drive', car_id=make._id)}}" method="POST" id="{{make._id}}" name="{{make._id}}">
+      <div class="card-action">
+    <form action="{{url_for('book_test_drive', car_id=make._id)}}" method="POST" id="{{make._id}}" name="{{make._id}}">
         <input type="hidden"  name="car_make" value="{{make.car_make}}">
         <input type="hidden"  name="car_model" value="{{make.car_model}}">
         <input type="hidden" name="reg_num" value="{{make.reg_num}}">
@@ -42,7 +39,7 @@
       Book test drive <i class="material-icons right">send</i>
       </button> 
       
-      </p>
+      </div>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
