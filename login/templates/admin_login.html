@@ -1,4 +1,9 @@
 {% extends 'base.html' %} 
+
+ {% block head %} 
+  <link rel="stylesheet" href="{{url_for('login.static', filename='css/login_style.css')}}">
+ {% endblock %}
+
   
 {% block content %}
     <img src= "{{url_for('static', filename='img/3.jpg')}}" class="wave">

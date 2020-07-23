@@ -2,47 +2,67 @@
   
 {% block content %}
 
+
 {% if availiable_cars_in_make %}
-<h1>USER Make VIEW</h1>
+
 <div class="container">
+<h1>USER Make VIEW</h1>
 
 <div class="row">
 
+
+
+
 {% for make in availiable_cars_in_make %}
 
-<div class="col-md-12 mt-4">
-<div class="card" style="width: 36rem;">
-  <img src="{{ make.car_image_url }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Car Make: {{make.car_make}}</h5>  
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Car Model:<strong><mark>{{make.car_model}}</mark></strong></li>
-    <li class="list-group-item">Reg Num: <strong><mark>{{make.reg_num}}</mark></strong></li>
-    <li class="list-group-item">Reg Year:<strong><mark>{{make.registration_year}}</mark></strong></li>
+<div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{ make.car_image_url }}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{make.car_make}} {{make.car_model}} <i class="material-icons right">more_vert</i></span>
+       <div class="card-content">
+      <ul class="list-group list-group-flush">
+    <li class="list-group-item">Car Model:<strong> {{make.engine}}</strong></li>
+    <li class="list-group-item">Reg Num: <strong> {{make.reg_num}}</strong></li>
+    <li class="list-group-item">Reg Year:<strong> {{make.registration_year}}</strong></li>
   </ul>
-  <div class="card-body">
-  <div class="row">
- <form action="" method="POST" id="make_search_form" name="make_search_form">
- <input type="hidden"  name="car_make" value="{{make.car_make}}">
- <input type="hidden"  name="car_model" value="{{make.car_model}}">
-  <input type="hidden" name="reg_num" value="{{make.reg_num}}">
- <input type="hidden"  name="registration_year" value="{{make.registration_year}}">
-  <input type="hidden"  name="car_image_url" value="{{make.car_image_url}}">
+    </div>
+      <p>
+      <form action="{{url_for('book_test_drive', car_id=make._id)}}" method="POST" id="{{make._id}}" name="{{make._id}}">
+        <input type="hidden"  name="car_make" value="{{make.car_make}}">
+        <input type="hidden"  name="car_model" value="{{make.car_model}}">
+        <input type="hidden" name="reg_num" value="{{make.reg_num}}">
+        <input type="hidden"  name="registration_year" value="{{make.registration_year}}">
+        <input type="hidden"  name="car_image_url" value="{{make.car_image_url}}">
 
    </form>
-    <div class="col-md-4 p-1">
-    <a href="{{url_for('book_test_drive', car_id=make._id)}}" class="btn btn-dark btn-sm" form="make_search_form" type="submit">Book test drive</a> </div>
-    <div class="col-md-4 p-1"><a href="{{url_for('user_view_car_specs', car_id=make._id )}}" class="btn btn-dark btn-sm">View car full specs</a></div>
-   
-  </div>
-  </div>
-</div>
+    <a href="{{url_for('user_view_car_specs', car_id=make._id )}}" class="waves-effect waves-light btn"> View car full specs </a>
+      <button class="waves-effect waves-light btn" form="{{make._id}}" type="submit"> 
+      Book test drive <i class="material-icons right">send</i>
+      </button> 
+      
+      </p>
     </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <div class="col-md-12"><h4>Car summary</h4></div>
 
-    
-   {% endfor %}
+<div class="col-md-6"><p>Body type: </p><strong><p>{{ make.body_type }}</p></strong><hr></div>
+<div class="col-md-6"><p>Exterior colour:</p><strong><p> {{ make.exterior_colour }}</p></strong><hr></div>
+<div class="col-md-6"><p>Gear box: </p> <strong><p>{{ make.gear_box }}</p></strong><hr></div>
+<div class="col-md-6"><p>Drive type: </p> <strong><p>{{ make.drive_type }}</p></strong><hr></div>
+<div class="col-md-6"><p>Registration number: </p> <strong><p>{{ make.reg_num }}</p></strong><hr></div>
+<div class="col-md-6"><p>Warranty expires date: </p> <strong><p>{{ make.warranty_expire_date }}</p></strong><hr></div>
+{% if make.is_ULEZ_compliant %}
+<div class="col-md-6"><p>ULEZ compliant: </p> <strong><p>Yes</p></strong><hr></div>
+{% endif %}
+    </div>
+  </div>
+            
 
+ 
+{% endfor %}
 
 </div>
 

@@ -1,9 +1,16 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<h1>book_test_drive_form</h1>
-<div class="container">
 
+
+<div class="container">
+<h5>Booking a test drive:</h5>
+<ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons right"> keyboard_arrow_down</i> <i class="fas fa-car-side" style="margin-left:5px;"></i>{{car_info.car_make}} {{car_info.car_model}}, Registration number {{car_info.reg_num}}</div>
+      <div class="collapsible-body"><span><img class="activator" src="{{ car_info.car_image_url }}"></span></div>
+    </li>
+  </ul>
 <form action="{{url_for('user_book_test_request')}}" method="POST">
 
 <input type="hidden" name="dashboard_status" value="true">
@@ -29,14 +36,14 @@
    <div class="form-group">
      
   </div>
+ 
    <div class="form-group">
     <label for="email">Best way to contact</label>
     <select class="custom-select">
+          <option value="1">Telephone call</option>
+         <option value="2">email </option>
 
-  <option value="1">Telephone call</option>
-  <option value="2">email</option>
-
-</select>
+        </select>
   </div>
   <input type="hidden" name="appiontment_time" value="">
   <input type="hidden" name="appiontment_date" value="">
@@ -50,5 +57,16 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    options = {};
+    var instances = M.Collapsible.init(elems, options);
+  });
+   document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    options = {};
+    var instances = M.FormSelect.init(elems, options);
+  });
+</script>
 {%endblock%}

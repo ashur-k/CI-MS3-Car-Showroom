@@ -35,6 +35,11 @@ client_info = mongo.db.client_info
 @app.route('/index/<car_make>/<car_model>', methods=['GET', 'POST'])
 @app.route('/index/<car_make>/', defaults={'car_model': None}, methods=['GET', 'POST'])
 def index(car_make, car_model):
+    # random_collections = mongo.db.basic_car_information.aggregate( [ { '$sample': {reg_num: 20} } ] )
+    #for collections in random_collections:
+        #print (collections)
+    
+
     if car_make:
         if car_model:
             total_car_in_models = mongo.db.basic_car_information.find({'car_model': car_model})

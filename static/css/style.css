@@ -4,110 +4,48 @@
       
   }
   /* base.html navbar styling */
-  .logo_image{
+   /* Making materialise nave fixed and and applying colouring */
+  #M__customise_nav{
       
+      background-image: linear-gradient(to right, #a517ba, #5f1782);
+    
+  }
+  
+   /* Car logo image */
+  .logo_image{
       height: 40px;
       padding-left: 20px;
-  }
-  #nav-bar{
-      position: sticky;
-      top: 0;
-      z-index: 10;
-  }
-  .navbar{
-      background-image: linear-gradient(to right, #a517ba, #5f1782);
-      padding: 0 !important;
-  }
-  .navbar-nav li{
-      padding: 0 10px;
-  }
-   .navbar-nav li a{
-      color: #fff !important;
-      font-weight: 600;
-      float: right;
-      text-align: left;
-  }
-  .navbar-toggler{
-      outline: none !important;
-  }
+      }
 
   /* index.html banner section styling */
-  #banner{
-      background-image: linear-gradient(to right, #a517ba, #5f1782);
-      color: #fff;
-      padding-top: 5%;
-      
-      
-     
-     
-  }
-  .promo_tilte{
-      font-size: 40px;
-      font-weight: 600;
-      margin-top: 100px;
-
-  }
-.bottom_img{
-    width: 50%;
-    
+.parallax-container{
+    min-height: 75vh;
+    height: auto;    
 }
-
-.cars_dropbox_section{
-    height: 50vh;
-}
-.drop_box_row_styleing{
-    background-image: linear-gradient(to right, #a517ba, #5f1782);
-    padding: 10px;
-    margin: auto;
-    border-radius: 25px;
-    align-items: center;
-  justify-content: center;
-}
-.para-custom-style{
-    color: red;
-    background-color: lightblue;
-    border-radius: 25px;
-}
-.custom_nav{
-    background-color: rgb(102, 40, 40);
-}
-.jumbotron{
-    color: white;
-   height: 50vh; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  
-  object-fit: contain;
-  width: 100%;
- -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: conta;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-
-    
-}
-.custom-row{
-    background-color: #ebebdc;
-}
-.custom-col{
-    background-color: #ccccc0;
-    border-radius: 10px;
-}
-.vcenter {
+.parallax{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-attachment: fixed;
    
-    
-    float: none;
-    display: flex;
-    vertical-align: middle;
 }
-
+.parallax_img{
+    width: 50%;
+ 
+}
+.image-div{
+overflow: hidden;
+}
+/*
+.section-search {
+    padding: 5px !important;
+    font-size: 18px !important;
+    width: 100% !important;
+    border: #f4f4f4 3px solid !important;
+}*/
+.section-follow .fa-4x{
+    margin: 5px 10px;
+}
 
 
 
