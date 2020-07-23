@@ -1,10 +1,10 @@
 {% extends 'base.html' %} 
-
+ {% block head %}Booking test drive{% endblock %}
 {% block content %}
 
 
 <div class="container">
-<h5>Booking a test drive:</h5>
+<h2>Booking a test drive:</h2>
 <ul class="collapsible">
     <li>
       <div class="collapsible-header"><i class="material-icons right"> keyboard_arrow_down</i> <i class="fas fa-car-side" style="margin-left:5px;"></i>{{car_info.car_make}} {{car_info.car_model}}, Registration number {{car_info.reg_num}}</div>
@@ -54,7 +54,7 @@
  <input type="hidden" name="car_image_url" value="{{car_info.car_image_url}}">
  
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn custom_btn">Book your test drive</button>
 </form>
 </div>
 <script>

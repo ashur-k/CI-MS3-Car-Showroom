@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+ {% block head %}Home Page{% endblock %}
  {% block content %}
 <!--Car choose drop down buttons section-->
 <section class="slider">
@@ -162,7 +163,7 @@
                 <div class="card">
                     <div class="card-image">
                           <img class="" src="{{ collections.car_image_url }}" style="width:100%;">
-                        <span class="card-title bg-text teal-text"> <h5>{{ collections.car_make }}  {{ collections.car_model }}</h5></span></div>
+                        <span class="card-title bg-text  red-text"> <h5>{{ collections.car_make }}  {{ collections.car_model }}</h5></span></div>
                         <div class="card-content">
                             <p class=""><strong> {{ collections.engine }}</strong></p>
                             <p class=""><strong>{{ collections.car_price }}</strong></p>
@@ -179,9 +180,10 @@
                         
                             
                          </form>
-                             <button class="waves-effect waves-light btn" form="{{collections._id}}" type="submit">
+                            <button class="waves-effect waves-light btn custom_btn" form="{{collections._id}}" type="submit">
                             <i class="material-icons right">airline_seat_recline_normal</i>Book test drive</button>
-                            <a href="{{url_for('user_view_car_specs', car_id=collections._id )}}" class="waves-effect waves-light btn"><i class="material-icons right">chrome_reader_mode</i>View specs</a>
+                            <a href="{{url_for('user_view_car_specs', car_id=collections._id )}}" class="waves-effect waves-light btn custom_btn">
+                            <i class="material-icons right">chrome_reader_mode</i>View specs</a>
                         </div>
                     </div>
                 </div>
@@ -310,10 +312,7 @@
     </section>
 
   
-<!--footer section-->  
-<footer class="section web_theme white-text center">
-<p class="flow-text">Car sales showroom &copy; 2020 </p>
-</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
