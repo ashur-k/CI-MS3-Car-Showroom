@@ -24,7 +24,7 @@
   <div class="navbar-fixed">
     <nav class="">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">User Interface</a>
+      <a href="{{url_for('index')}}" class="brand-logo">User Interface</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a class="dropdown-trigger" href="#!" data-target="manage_cars">Manage Cars<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="add_new_car">Add new car<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -107,6 +107,10 @@ $( document ).ready(function() {
       $('.modal').modal();
         $(document).ready(function(){
     $('.collapsible').collapsible();
+   
+   $('select').formSelect({
+    
+   });
   });
 
 });

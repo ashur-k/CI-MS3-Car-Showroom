@@ -65,13 +65,13 @@
         <div class="col s12 m12 l5">
           <h3>Car Client is interesetd in</h3>
             {% if clients.car_status == 'car_is_sold' %}
-        <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+            <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
             {% endif %}
         <div class="card hoverable">
         <div class="card-image">
           <img src="{{ clients.car_image_url }}">
           <span class="card-title">Car make: {{ clients.car_make }}</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        
         </div>
         <div class="card-content">
             <ul class="collection">
@@ -80,6 +80,7 @@
                 <li class="collection-item">Registration Year: {{ clients.registration_year }}</li>
             </ul>
         </div>
+        
          <div class="card-action">
          {% if clients.car_status == 'car_is_sold' %}
             <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
@@ -89,7 +90,7 @@
             <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>
             {%endif%}
         </div>
-      </div>
+        </div>
 
         
         </div>
@@ -148,7 +149,7 @@
                         </div>
 
                         <div class="input-field">
-                        <i class="material-icons prefix">date_range</i>
+                        <i class="material-icons prefix">mode_edit</i>
                         <label for="exampleFormControlTextarea1">Client related notes</label>
                         <textarea class="materialize-textarea" id="exampleFormControlTextarea1" name="client_related_notes" rows="3">{{clients.client_related_notes}}</textarea>
                         </div>  

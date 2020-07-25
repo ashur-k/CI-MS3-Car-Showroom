@@ -1,23 +1,23 @@
 {% extends 'admin_base.html' %}
 
 {% block content %}
-
 <div class="container">
+<h2 class=""><i class="fas fa-car"></i>Add new car company / model<hr></h2>
+</div>
 
-<h5 class="mt-3 p-2"><i class="fas fa-car"></i> Add New Car Company <hr></h5>
+<div class="container" style="padding-top:10px;">
+<h4>Add new car compnay</h4>
 <form action="{{ url_for('admin.add_company') }}" name="add_company" id="add_company" method="POST">
-  <div class="row mt-2">
-      <div class="col-sm-8 m-2">
-      <label for="car_make"> <i class="far fa-file"></i> New company name</label>
-      <input type="text" id="car_make" name="car_make" class="form-control" placeholder="car make">
-    </div>
-  </div>
-<div class="row mt-2">
-  <div class="col-sm-8 m-2">
-    <button class="btn btn-primary" type="submit">
-      Add New Car Company <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
+    <div class="row">
+        <div class="input-field col s6">
+            <input class="validate" type="text" id="car_make" name="car_make" placeholder="car make" required>
+            <label for="car_make"><i class="far fa-file"></i>New company name</label>
+        </div>
+    <div class="col s12">
+        <button class="btn btn-primary" type="submit" form="add_company">
+            Add New Car Company <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
         </button>
-  </div>
+    </div>
 
   </div>
  
@@ -33,33 +33,30 @@
 {% endwith %}
     </div>
 
-<div class="container">
-<h5 class="mt-3 p-2"><i class="fas fa-car"></i> Add New Car Models <hr></h5>
-<form action="{{ url_for('admin.add_model') }}" name="add_company" id="add_model" method="POST">
-<div class="row">
-  <div class="col-sm-4">
-       <label for="car-make">Car make</label>
-      <select class="custom-select" id="car_make_for_adding_model" name="car_make" required>
-        <option selected disabled value="">Car make</option>
-        {% for makers in car_makers %}
-        <option value="{{ makers.car_make }}">{{ makers.car_make }}</option>
-        {%  endfor %}
-      </select>
-    </div>
-    <div class="col-sm-4">
-       <label for="car-model">Car Model</label>
-        <input type="text" id="car_model" name="car_model" class="form-control" placeholder="car model" required>
-    </div>
-</div>
-<div class="row mt-2">
-  <div class="col-sm-8 m-2">
-    <button class="btn btn-primary" type="submit">
-      Add New Car Model <i class="fas fa-plus"></i> <i class="fas fa-car-side"></i>
-        </button>
-  </div>
-
-  </div>
-</form>
+<div class="container" style="padding-top:10px;">
+<h4>Add new car models</h4>
+    <form action="{{ url_for('admin.add_model') }}" name="add_model" id="add_model" method="POST">
+        <div class="row">
+            <div class="input-field  col s6">
+                <select class="custom-select" id="car_make_for_adding_model" name="car_make" required>
+                    <option selected disabled value="">Car make</option>
+                    {% for makers in car_makers %}
+                    <option value="{{ makers.car_make }}">{{ makers.car_make }}</option>
+                    {%  endfor %}
+                </select>
+                <label for="car-make">Car make</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="car_model" name="car_model" class="validate" placeholder="car model" required>
+                <label for="car-model"><i class="far fa-file"></i>new car model name</label>
+            </div>
+            <div class="col s8 m-2">
+                <button class="btn btn-primary" type="submit" form="add_model">
+                    Add New Car Model <i class="fas fa-plus"></i> <i class="fas fa-car-side"></i>
+                </button>
+            </div>
+        </div>
+    </form>
  {% with errors = get_flashed_messages(category_filter=["model_error"]) %}
 {% if errors %}
 <div class="alert-message block-message error">
