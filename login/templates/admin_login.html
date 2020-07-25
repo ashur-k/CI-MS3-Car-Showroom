@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
-
+{% block login_css %}<link rel="stylesheet" href="{{url_for('login.static', filename='css/login_style.css')}}"> {% endblock %}
  {% block head %} 
-  <link rel="stylesheet" href="{{url_for('login.static', filename='css/login_style.css')}}">
+  Admin Login
  {% endblock %}
 
   

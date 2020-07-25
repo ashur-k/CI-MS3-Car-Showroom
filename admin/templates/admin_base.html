@@ -1,22 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
-    <!-- section related css -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+    <!-- Font Awsome -->
+    <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
+     <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+       <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
-    <title>Document</title>
-</head>
+    
+            
+ 
+    {% block login_css %} {% endblock %}
+    <title>{% block head %} {% endblock %}</title>
+ 
+    
+  </head>
 <body>
+<header>
+  <div class="navbar-fixed">
+
+      <nav class="" style="opacity:1;">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">User Interface</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="dropdown-trigger" href="#!" data-target="manage_cars">Manage Cars<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="add_new_car">Add new car<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="manage_clients">Manage clients<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="admin">Admin Logged-In<i class="material-icons right">arrow_drop_down</i></a></li>
+          <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+ 
+      </ul>
+    </div>
+  </nav>
+   <ul id="manage_cars" class="dropdown-content">
+  <li><a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a></li>
+  <li class="divider"></li>
+ <li><a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Info</a></li>
+  <li class="divider"></li>
+ <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>
+    </ul>
+    <ul id="add_new_car" class="dropdown-content">
+     {% for results in admin_cars_make %}
+  <li><a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
+  <li class="divider"></li>
+   {% endfor %}
+    </ul>
+    <ul id="manage_clients" class="dropdown-content">
+    <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a></li>
+    <li class="divider"></li>
+    <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
+    <li class="divider"></li>
+
+        <form action="{{url_for('client_blueprint.client_search')}}" method="POST" class="p-2">
+                <input class="form-control mr-sm-2" id="client_search" name="search" type="client_search" placeholder="Search clients" aria-label="Search" required>
+                <button class="btn btn-outline-success mt-2" type="submit">Search</button></form>
+        </ul>
+
+ <ul id="admin" class="dropdown-content">
+  <li><a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a></li>
+  <li class="divider"></li>
+ <li><a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a></li>
+  <li class="divider"></li>
+ <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a></li>
+    </ul>
+  </div>   
+ 
+    </header>   
+      
+
+ {% block content %}
+
+ {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+
+    <script>
+    
+  
+    
+$( document ).ready(function() {
+   
+    $('.sidenav').sidenav({
+        menuWidth: 300,
+        edge: 'left'
+    });
+    $(".dropdown-trigger").dropdown({
+        alignment: 'right',
+        hover: false,
+        coverTrigger: false
+    });
+      $('.modal').modal();
+
+});
+
+    </script>
+</body>
+</html>
+
+<!--
+
  <header>
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark p-1">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark p-1">
   <a class="ml-2" href="{{url_for('index')}}">Car Showroom</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -86,15 +182,5 @@
 </nav>
 
 </header>
- {% block content %}
 
- {% endblock %}
-
-     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+-->

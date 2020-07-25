@@ -1,19 +1,20 @@
 {% extends 'admin_base.html' %}
-{% block head %}Admin page{% endblock %}
   {% block content %}
-  <!--This block of code will only execute when new car registration is in process and stopped-->
-{% if car_make and car_model and reg_num %}
-<div class="container">
-<div class="row">
-<div class="col s12">
-<h6>Car registeration is already in proces, you are in middle of adding information to database:</h6>
-</div>
- <div class="col s12"><p>Car make: <strong>{{ car_make }}</strong></p></div>
-    <div class="col s2"><p>Car model: <strong>{{ car_model }}</strong></p></div>
-    <div class="col s12"><p>Car registraion number: <strong>{{ reg_num }}</strong> </p></div>
-    <div class="col s12 ">
+<div class="container mt-2">
+<h2>Admin dashboard</h2><hr>
+ {% if car_make and car_model and reg_num %}
+<div class="container p-3 m-3">
+    <div class="row">
+    <div class="col-md-12">  
+     <h6>Car registeration is already in proces, you are in middle of adding information to database:</h6>
+     </div>
+ 
+    <div class="col-md-12"><p>Car make: <strong>{{ car_make }}</strong></p></div>
+    <div class="col-md-12"><p>Car model: <strong>{{ car_model }}</strong></p></div>
+    <div class="col-md-12"><p>Car registraion number: <strong>{{ reg_num }}</strong> </p></div>
+    <div class="col-md-12 ">
 
-    <div class="col s12">
+    <div class="col-md-6 m-2">
     <a href="{{ url_for('admin.finish_car_registration') }}" class="btn btn-dark btn-sm">Finish adding information</a>
     </div>
     <div class="col-md-6 m-2">
@@ -21,25 +22,26 @@
     </div>
     
     </div>
-</div>
+    
+    </div>
+  
 </div>
 {% endif %}
-<!--This message will only appear if car new car is added succesfully-->
 {% if car_add_successfully %}
 <div class="container">
 <div class="row">
-<div class="col s12">
+<div class="col-md-12">
 <h6>{{car_add_successfully}}</h6>
 </div>
 </div>
 </div>
 {% endif %}
-<!--Flashing server side messages in this block-->
-<div class="container">
 <div class="row">
-<div class="col s12">
+<div class="col-md-12">
 {% with errors = get_flashed_messages(category_filter=["appiontment"]) %}
 {% if errors %}
+
+
     {%- for msg in errors %}
     <p class="lead" style="color: green; font-weight:normal; text-decoration: underline;">{{ msg }}</p>
     {% endfor -%}
@@ -49,86 +51,73 @@
 
 </div>
 </div>
-</div>
-
-<!--Admin Dahsboard codes-->
-<div class="container">
-<h2>Admin dashboard</h2><hr>
-</div>
 {% for clients in clients_info %}
 {% if clients.dashboard_status == 'true' %}
-<div class="section container" id=""> 
- 
-    <div class="row">
-        <!--Cat cliet is interested in infomation column-->
-        <div class="col s12 l5">
-          <h3>Car Client is interesetd in</h3>
-            {% if clients.car_status == 'car_is_sold' %}
-        <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
-            {% endif %}
-        <div class="card hoverable">
-        <div class="card-image">
-          <img src="{{ clients.car_image_url }}">
-          <span class="card-title">Car make: {{ clients.car_make }}</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-        </div>
-        <div class="card-content">
-            <ul class="collection">
-                <li class="collection-item">Car model: {{ clients.car_model }}</li>
-                <li class="collection-item">Car reg num: {{ clients.reg_num }}</li>
-                <li class="collection-item">Registration Year: {{ clients.registration_year }}</li>
-            </ul>
-        </div>
-         <div class="card-action">
-         {% if clients.car_status == 'car_is_sold' %}
-            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
-            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn btn-dark btn-sm m-1">Book different car for client</a>
-            {% else %}
-            <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
-            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>
-            {%endif%}
-        </div>
-      </div>
 
-        
+<div class="container p-3">
+<h3>Car client is requesting:</h3>
+    <div class="row">
+        <div class="col-sm-6">
+        <div class="card" style="width: 18rem;">
+        {% if clients.car_status == 'car_is_sold' %}
+        <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+        {% endif %}
+        <img class="card-img-top" src="{{ clients.car_image_url }}" alt="Card image cap">
+        <div class="card-body">
+ 
+        <h5 class="card-title">Car make: {{ clients.car_make }}</h5>
+  
+        <p class="card-text">Car model: {{ clients.car_model }}</p>
         </div>
-        <!--Cliet infomation column-->
-        <div class="col s12 l5 offset-l2">
-          <h3>Client information</h3>
-     <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                <span class="card-title">Client Name: {{ clients.full_name }}</span>
-                <p>Client Instructions:{{clients.client_related_notes}}</p>
-                </div>
-                  <div class="card-content">
-                    <ul class="collection">
-                    <li class="collection-item">Client Email: {{ clients.email }}</li>
-                    <li class="collection-item">Client phone: {{ clients.phone}}</li>
-                    <li class="collection-item">Best time to contact: {{ clients.best_time_to_contact }}</li>
-                    <li class="collection-item">Best date to contact: {{ clients.best_date_to_contact}}</li>
-                        {% if clients.appiontment_time %}
-                    <li class="collection-item">Appiontment time:{{clients.appiontment_time}}</li>
-                    <li class="collection-item">Appiontment date: {{clients.appiontment_date}}</li>
-                        {% else %}
-                    <li class="collection-item">Appiontment time: Client has not been contacted yet</li>
-                        {%endif%}
-                </ul>
-                </div>
-                <div class="card-action">
-                 <a class="btn btn-sm bg-dark m-1" style="color: white;" data-toggle="modal" data-target="#appiontment{{ clients._id }}">Client bookings</a>
-                <button type="button" class="waves-effect waves-light btn modal-trigger" href="#modal{{ clients._id }}">Delete client</button>
-                 <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ clients._id }}">Remove client from dashboard</button>
-                </div>
-                </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Car reg num: {{ clients.reg_num }}</li>
+        <li class="list-group-item">Registration Year: {{ clients.registration_year }}</li>
+   
+    </ul>
     
+    {% if clients.car_status == 'car_is_sold' %}
+    <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
+    <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn btn-dark btn-sm m-1">Book different car for client</a>
+    {% else %}
+    <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
+    <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>
+    {%endif%}
+    
+    
+ </div>
+
+        </div>
+ 
+        <div class="col-sm-6">
+        <h3>Client's information</h3>
+        <p>Client Name: {{ clients.full_name }}</p>
+        <p>Client Email: {{ clients.email }}</p>
+        <p>Client phone: {{ clients.phone}}</p>
+
+ 
+        <p>Best time to contact: {{ clients.best_time_to_contact }}</p>
+        <p>Best date to contact: {{ clients.best_date_to_contact}}</p>
+
+{% if clients.appiontment_time %}
+            <p class="lead m-2"> <mark> Appiontment time:<strong>{{clients.appiontment_time}}</strong> </mark></p>
+            <p class="lead m-2"><mark>Appiontment date:<strong> {{clients.appiontment_date}}</strong></mark></p>
+            <p class="m-2"><mark>Client Instructions:<p class="m-2">{{clients.client_related_notes}}</p></mark></p>
+            {% else %}
+            <p class="lead m-2"> Appiontment time: Client has not been contacted yet </p>
+            
+{%endif%}
+
+         <div class="col-sm-12 p-0 m-0">
+        <a class="btn btn-sm bg-dark m-1" style="color: white;" data-toggle="modal" data-target="#appiontment{{ clients._id }}">Client bookings</a>
+        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal{{ clients._id }}">Delete client</button>
+        <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ clients._id }}">Remove client from dashboard</button>
+        </div>
         </div>
        
     </div>
-    
-</div>
-
+    </div>
              <!-- client appiontment Modal -->
-<div class="modal fade" id="appiontment{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="appiontment{{ clients._id }}Label" aria-hidden="true">
+        <div class="modal fade" id="appiontment{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="appiontment{{ clients._id }}Label" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             <div class="modal-header">
@@ -181,19 +170,25 @@
     </div>
   </div>
 </div>
-       <!-- delete client Modal --> 
-       <!-- Modal Structure -->
-        <div class="modal" id="modal{{ clients._id }}" >
-        <div class="modal-content">
-            <h4>Delete Record</h4>
-            <p>You are going to delete client name {{ clients.full_name }}.</p>
-        </div>
-        <div class="modal-footer">  
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
-            <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
-        </div>
+       <!-- delete client Modal -->
+<div class="modal fade" id="modal{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="modal{{ clients._id }}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal{{ clients._id }}Label">Delete Record</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
+       
+      </div>
     </div>
- 
+  </div>
+</div>
 <!-- Modal Remove client from dashboard -->
 <div class="modal fade" id="removeFromDashboard{{ clients._id }}" tabindex="-1" role="dialog" aria-labelledby="removeFromDashboard{{ clients._id }}Label" aria-hidden="true">
   <div class="modal-dialog">
@@ -218,6 +213,7 @@
 {% endif %}
 
 {% endfor %}
+</div>
 {%endblock%}
     
     
