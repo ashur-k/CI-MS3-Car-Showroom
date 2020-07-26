@@ -61,28 +61,44 @@
 </div>
 
 <div class="row">
-    <div class="col s12"><h4>Car specs</h4></div>
-    <div class="col s12"><h5>Perfomance and economy</h5></div>
-    <div class="col s6"><p>Top speed: </p><strong><p>{{ car_info.top_Speed }}</p></strong><hr></div>
-    <div class="col s6"><p>Acceleration (0-62 mph):</p><strong><p> {{ car_info.acceleration }}</p></strong><hr></div>
-    <div class="col s6"><p>Engine power: </p><strong><p>{{ car_info.engine_power }}</p></strong><hr></div>
-    <div class="col s6"><h5>Weight and dimensions</h5></div>
-    <div class="col s6"><p>Length:</p><strong><p> {{ car_info.length }}</p></strong><hr></div>
-    <div class="col s6"><p>Boot space (seats-up):</p><strong><p> {{ car_info.boot_space }}</p></strong><hr></div>
-    <div class="col s6"><p>Fuel tank capacity: </p><strong><p>{{ car_info.fuel_tank_capacity }}</p></strong><hr></div>
 
+    <div class="col s12"><h4>Car specs</h4></div>
+
+    
+    <div class="col s6">
+    <div class="col s12"><h5>Perfomance and economy</h5></div>
+        <div class="col s12"><p>Top speed: </p><strong><p>{{ car_info.top_Speed }}</p></strong><hr></div>
+        <div class="col s12"><p>Acceleration (0-62 mph):</p><strong><p> {{ car_info.acceleration }}</p></strong><hr></div>
+        <div class="col s12"><p>Engine power: </p><strong><p>{{ car_info.engine_power }}</p></strong><hr></div>
+    </div>
+   
+    <div class="col s6">
+     <div class="col s6"><h5>Weight and dimensions</h5></div>
+        <div class="col s12"><p>Length:</p><strong><p> {{ car_info.length }}</p></strong><hr></div>
+        <div class="col s12"><p>Boot space (seats-up):</p><strong><p> {{ car_info.boot_space }}</p></strong><hr></div>
+        <div class="col s12"><p>Fuel tank capacity: </p><strong><p>{{ car_info.fuel_tank_capacity }}</p></strong><hr></div>
+    </div>    
 </div>
 
 <div class="row">
-    <div class="col s12"><h4>Car specs</h4></div>
-    <div class="col s12"><h5>Perfomance and economy</h5></div>
+     <div class="col s12"><h4>Perfomance and economy</h4></div>
+ 
     <div class="col s6"><p>Vehicle tax: </p><strong><p>{{ car_info.vehicle_tax }}</p></strong><hr></div>
     <div class="col s6"><p>Insurance:</p><strong><p> {{ car_info.insurance }}</p></strong><hr></div>
     <div class="col s6"><p>Fuel consumption: </p> <strong><p>{{ car_info.fuel_consumption }}</p></strong><hr></div>
 
 
 </div>
-<button class="waves-effect waves-light btn custom_btn" form="{{car_info._id}}" type="submit">
-                            <i class="material-icons right">airline_seat_recline_normal</i>Book test drive</button>
+<form action="{{url_for('book_test_drive', car_id=car_info._id)}}" method="POST" id="{{car_info._id}}" name="{{car_info._id}}">
+        <input type="hidden"  name="car_make" value="{{car_info.car_make}}">
+        <input type="hidden"  name="car_model" value="{{car_info.car_model}}">
+        <input type="hidden" name="reg_num" value="{{car_info.reg_num}}">
+        <input type="hidden"  name="registration_year" value="{{car_info.registration_year}}">
+        <input type="hidden"  name="car_image_url" value="{{car_info.car_image_url}}">
+
+   </form>
+   <button class="waves-effect waves-light btn custom_btn" form="{{car_info._id}}" type="submit"> 
+      Book test drive <i class="material-icons right">send</i>
+      </button> 
 </div>
 {%endblock%}

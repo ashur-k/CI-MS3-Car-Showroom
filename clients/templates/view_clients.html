@@ -1,21 +1,90 @@
 {% extends 'admin_base.html' %} {% block content %}
-<div class="container mt-3">
-<div class="row">
-<div class="col-md-12">
-<h3>Search Clients</h3>
+<div class="container red lighten-2" style="padding:20px; margin-top: 20px;">
+    <div class="row ">
+        <h2><i class="material-icons" style="font-size:42px;">search</i>Search client</h2><hr>
+        
+        <h6><strong>Please enter client details you want to search for.</strong></h6>
+        <form class="col s12" action="{{url_for('client_blueprint.client_search')}}" method="POST">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="m-3" type="text" id="client_search" name="search" required>
+                    <label class="m-3" for="search">Car registration number</label>
+                </div>
+                <div class="input-field col s12">
+                    <button class="waves-effect waves-light btn tooltipped" data-position="bottom" data-tooltip="you can search with user name/email/telephone number" type="submit">
+                    <i class="material-icons left">search</i>Find client
+                    </button>
+                </div>
+            </div>
+        </form> 
+    </div>
+   
 </div>
 
-<div class="col-md-12">
-<form action="{{url_for('client_blueprint.client_search')}}" method="POST" class="p-2">
-    <input class="form-control mr-sm-2" id="client_search" name="search" type="client_search" placeholder="Search clients" aria-label="Search" required>
-    <button class="btn btn-outline-success mt-2" type="submit">Search</button>
-</form>
+<div class="container" >
+    <div class="row" style="width: 50% !important;"> 
+    {% for clients in clients_info %}  
+        <div class="col s12">
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light" style="padding:40px;">
+                    <img class="activator" src="{{ clients.car_image_url }}">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ clients.full_name }}<i class="material-icons right">more_vert</i></span>
+                    <p>{{clients.client_related_notes}}</p>
+                </div>
+                <div class="card-panel teal">
+                    <div class="row">
+                        <div class="col s4">{{ clients.email }}</div>
+                        <div class="col s4">{{ clients.phone}}</div>
+                        <div class="col s4">{{ clients.best_time_to_contact }}</div>
+                    </div>
+                    <div class="row">   
+                        <div class="col s4">{{ clients.best_date_to_contact}}</div>
+                         {% if clients.appiontment_time %}
+                        <div class="col s4">{{clients.appiontment_time}}</div>
+                        <div class="col s4">{{clients.appiontment_date}}</div>
+                        {% else %}
+                            <p class="lead m-2">
+                                Appiontment time: Client has not been contacted yet
+                            </p>
+
+                            {%endif%}
+                    </div>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    <p>{{ clients.car_make }} {{ clients.car_model }}</p>
+                    <p>{{ clients.reg_num }}</p>
+                    <p>{{ clients.registration_year }}</p>
+                    <p>registration year</p>
+                     <div class="card-action">
+                               {% if clients.car_status == 'car_is_sold' %}
+                            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
+                            <p class="lead text-center" style="color: red; font-weight: bolder;">
+                            This car is sold.
+                            </p>
+                        {% else %}
+                            <a  href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn btn-dark btn-sm m-1">See full car info</a>
+                            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn btn-sm bg-dark m-1" style="color: white;" >Car sold</a>
+                        {%endif%}
+                        </div>
+                     </div>
+
+                <div class="card-action">
+             {% if clients.dashboard_status == 'false' %}
+        <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ clients._id }}">Move to dashboard</button>
+        {% else %}
+        
+        {% endif %}
+                </div>
+            </div>    
+        </div><br>
+    {% endfor %}
+    </div>
 </div>
 
-</div><hr>
 
-</div>
-{% for clients in clients_info %}
 <div class="container pb-3 mt-4">
   <h3 class="mb-3">Client View:</h3>
   <div class="row">
@@ -23,90 +92,60 @@
       <div class="card" style="width: 18rem;">
         <img
           class="card-img-top"
-          src="{{ clients.car_image_url }}"
+          src=""
           alt="Card image cap"
         />
         <div class="card-body">
-          <h5 class="card-title">Car make: {{ clients.car_make }}</h5>
+          <h5 class="card-title">Car make: </h5>
 
-          <p class="card-text">Car model: {{ clients.car_model }}</p>
+          <p class="card-text">Car model: </p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Car reg num: {{ clients.reg_num }}</li>
+          <li class="list-group-item">Car reg num: </li>
           <li class="list-group-item">
-            Registration Year: {{ clients.registration_year }}
+            Registration Year: 
           </li>
         </ul>
 
-        {% if clients.car_status == 'car_is_sold' %}
-        <a
-          href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}"
-          class="btn btn-dark btn-sm m-1"
-          >See full car info</a
-        >
-        <p class="lead text-center" style="color: red; font-weight: bolder;">
-          This car is sold.
-        </p>
-        {% else %}
-        <a
-          href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}"
-          class="btn btn-dark btn-sm m-1"
-          >See full car info</a
-        >
-        <a
-          href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}"
-          class="btn btn-sm bg-dark m-1"
-          style="color: white;"
-          >Car sold</a
-        >
-        {%endif%}
+       
       </div>
     </div>
 
     <div class="col-sm-6">
       <h3>Client's information</h3>
-      <p>Client Name: {{ clients.full_name }}</p>
-      <p>Client Email: {{ clients.email }}</p>
-      <p>Client phone: {{ clients.phone}}</p>
+      <p>Client Name: </p>
+      <p>Client Email: </p>
+      <p>Client phone: </p>
 
-      <p>Best time to contact: {{ clients.best_time_to_contact }}</p>
-      <p>Best date to contact: {{ clients.best_date_to_contact}}</p>
+      <p>Best time to contact: </p>
+      <p>Best date to contact: </p>
 
-      {% if clients.appiontment_time %}
+     
       <p class="lead m-2">
         <mark>
-          Appiontment time:<strong>{{clients.appiontment_time}}</strong>
+          Appiontment time:<strong></strong>
         </mark>
       </p>
       <p class="lead m-2">
         <mark
-          >Appiontment date:<strong> {{clients.appiontment_date}}</strong></mark
+          >Appiontment date:<strong> </strong></mark
         >
       </p>
       <p class="m-2">
         <mark
           >Client Instructions:
-          <p class="m-2">{{clients.client_related_notes}}</p></mark
+          <p class="m-2"></p></mark
         >
       </p>
-      {% else %}
-      <p class="lead m-2">
-        Appiontment time: Client has not been contacted yet
-      </p>
-
-      {%endif%}
+      
 
       <div class="col-sm-12 p-0 m-0">
        
        
-        {% if clients.dashboard_status == 'false' %}
-        <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ clients._id }}">Move to dashboard</button>
-        {% else %}
-        
-        {% endif %}
+       
       </div>
     </div>
   </div>
 </div>
-{% endfor %}
+
 {%endblock%}

@@ -101,7 +101,7 @@
 
                 <div class="card-content white-text">
                 <span class="card-title">Client Name: {{ clients.full_name }}</span> 
-                <p>Client Instructions:{{clients.client_related_notes}}</p>
+                <p>Client Instructions: {{clients.client_related_notes}}</p>
                 </div>
                     <ul class="collapsible popout">
                         <li>
@@ -154,7 +154,7 @@
                         <textarea class="materialize-textarea" id="exampleFormControlTextarea1" name="client_related_notes" rows="3">{{clients.client_related_notes}}</textarea>
                         </div>  
 
-                            <button type="submit" form="appiontment_form{{ clients._id }}" class="btn btn-sm btn-dark" >Make appiontment: {{ clients.full_name }}</button>
+                        <button class="waves-effect waves-light btn" type="submit" form="appiontment_form{{ clients._id }}" class="btn btn-sm btn-dark" >Make appiontment: {{ clients.full_name }}</button>
                         </form>
                         
                         </div>
@@ -172,7 +172,8 @@
                     <li class="collection-item">Appiontment time:{{clients.appiontment_time}}</li>
                     <li class="collection-item">Appiontment date: {{clients.appiontment_date}}</li>
                         {% else %}
-                    <li class="collection-item">Appiontment time: Client has not been contacted yet</li>
+                    <li class="collection-item pulse">
+                    <a class="waves-effect waves-light btn red pulse">Appiontment time: Client has not been contacted yet</a></li>
                         {%endif%}
                 </ul>
                 </div>
@@ -207,7 +208,7 @@
       <div class="modal-header">
         <h4 class="modal-title" id="removeFromDashboard{{ clients._id }}Label">Modal title</h4>
        <p>You are about to remove client name {{ clients.full_name }} from dashboard. You still can find and bring client to dahsboard.</p>
-        </button>
+       <!-- </button>-->
       <div class="modal-footer">
         <button type="button" class="modal-close teal white-text waves-effect waves-green btn-flat">I am not sure!</button>
         <a href="{{url_for('client_blueprint.remove_from_dashboard', client_id=clients._id)}}" class="btn btn-primary">Yes I am sure!</a>

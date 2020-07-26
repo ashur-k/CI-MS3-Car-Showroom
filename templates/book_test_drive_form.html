@@ -5,57 +5,85 @@
 
 <div class="container">
 <h2>Booking a test drive:</h2>
-<ul class="collapsible">
-    <li>
-      <div class="collapsible-header"><i class="material-icons right"> keyboard_arrow_down</i> <i class="fas fa-car-side" style="margin-left:5px;"></i>{{car_info.car_make}} {{car_info.car_model}}, Registration number {{car_info.reg_num}}</div>
-      <div class="collapsible-body"><span><img class="activator" src="{{ car_info.car_image_url }}"></span></div>
-    </li>
-  </ul>
-<form action="{{url_for('user_book_test_request')}}" method="POST">
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+    <div class="col s12 center-align">
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">
+                <i class="material-icons right"> keyboard_arrow_down</i> 
+                <i class="fas fa-car-side" style="margin-left:5px;"></i>
+                {{car_info.car_make}} {{car_info.car_model}}, Registration number {{car_info.reg_num}}
+                </div>
+                <div class="collapsible-body"><span><img class="activator" src="{{ car_info.car_image_url }}"></span></div>
+            </li>
+        </ul>
+    </div>
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col s12">
+<h4>Plese give you details:</h4><hr>
+</div>
+    <form action="{{url_for('user_book_test_request')}}" method="POST">
 
-<input type="hidden" name="dashboard_status" value="true">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Full name</label>
-    <input type="text" class="form-control" id="full_name" name="full_name" aria-describedby="emailHelp" required>
-  </div>
-  <div class="form-group">
-    <label for="email">Email <address></address></label>
-    <input type="email" class="form-control" id="email" name="email" required>
-  </div>
-  <div class="form-group">
-     <label  for="phone">Telephone number</label>
-    <input type="tel" class="form-control" id="phone" name="phone" required>
-    
-  </div>
-   <div class="form-group">
-     <label for="best_time_to_contact">Best time to contact</label>
-  <input class="ml-5" type="time" id="best_time_to_contact" name="best_time_to_contact">
-    <label class="ml-5" for="start">Select date:</label>
-    <input class="ml-5" type="date" id="best_date_to_contact" name="best_date_to_contact" value="2018-07-22" min="2020-01-01" max="2022-12-31">
-  </div>
-   <div class="form-group">
-     
-  </div>
- 
-   <div class="form-group">
-    <label for="email">Best way to contact</label>
-    <select class="custom-select">
-          <option value="1">Telephone call</option>
-         <option value="2">email </option>
+    <input type="hidden" name="dashboard_status" value="true">
 
+    <div class="input-field col s12">
+        <i class="material-icons prefix">account_circle</i>
+        <input type="text" class="validate" id="full_name" name="full_name" aria-describedby="emailHelp" required>
+        <label for="exampleInputEmail1">Full name</label>
+    </div>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">email</i>
+        <input type="email" class="validate" id="email" name="email" required>
+        <label for="email">Email <address></address></label>
+    </div>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">phone</i>
+        <input type="tel" class="validate" id="phone" name="phone" required>
+        <label  for="phone">Telephone number</label>
+    </div>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">timer</i>
+        <input class="ml-5" type="time" id="best_time_to_contact" name="best_time_to_contact">
+        <label for="best_time_to_contact">Best time to contact</label>
+    </div>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">date_range</i>
+        <input class="ml-5" type="date" id="best_date_to_contact" name="best_date_to_contact" value="2018-07-22" min="2020-01-01" max="2022-12-31">
+        <label class="ml-5" for="start">Select date:</label>
+    </div>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">favorite_border</i>
+        <select class="validate" required>
+            <option value="1">Telephone call <i class="material-icons prefix">phone</i></option>
+            <option value="2">email </option>
         </select>
-  </div>
-  <input type="hidden" name="appiontment_time" value="">
-  <input type="hidden" name="appiontment_date" value="">
-   <input type="hidden" name="car_make" value="{{car_info.car_make}}">
-   <input type="hidden" name="car_model" value="{{car_info.car_model}}">
-  <input type="hidden" name="reg_num" value="{{car_info.reg_num}}">
-  <input type="hidden" name="registration_year" value="{{car_info.registration_year}}">
- <input type="hidden" name="car_image_url" value="{{car_info.car_image_url}}">
+        <label for="email">Best way to contact</label>
+    </div>
+    <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+          <textarea id="textarea1" class="materialize-textarea" name="client_related_notes"></textarea>
+          <label for="textarea1">Textarea</label>
+        </div>
+
+        <input type="hidden" name="appiontment_time" value="">
+        <input type="hidden" name="appiontment_date" value="">
+        <input type="hidden" name="car_make" value="{{car_info.car_make}}">
+        <input type="hidden" name="car_model" value="{{car_info.car_model}}">
+        <input type="hidden" name="reg_num" value="{{car_info.reg_num}}">
+        <input type="hidden" name="registration_year" value="{{car_info.registration_year}}">
+        <input type="hidden" name="car_image_url" value="{{car_info.car_image_url}}">
  
 
-  <button type="submit" class="btn custom_btn">Book your test drive</button>
+    <button type="submit" class="btn custom_btn">Book your test drive</button>
+
 </form>
+</div>
+
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -244,17 +244,23 @@ def car_update_page():
     car_make_results = mongo.db.car_make.find_one({'car_make': car_make})
     car_model_results = mongo.db.car_model.find({'car_make': car_make})
     car_coll = mongo.db.basic_car_information.find_one({'_id': ObjectId(coll_Id)})
-    session.pop('reg_num', None)
-    session.pop('new_reg_num', None)
+    # session.pop('reg_num', None)
+    # session.pop('new_reg_num', None)
     return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num,admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
 def update_info_db(car_id):
     # session.clear()
+    if session['reg_num'] != session['new_reg_num']:
+        clients_who_requested_same_this_car = mongo.db.client_info.find({'reg_num': session['reg_num']})
+        print (clients_who_requested_same_this_car)
+        mongo.db.client_info.update_many({"reg_num": session['reg_num'] }, {'$set': {'reg_num':session['new_reg_num']}})
 
     mongo.db.basic_car_information.update({'_id': ObjectId(car_id)},
                           request.form.to_dict())
+    session.pop('reg_num', None)
+    session.pop('new_reg_num', None)
     flash('Car details are successfully updated to registration number {}.'.format(request.form['reg_num']))
     return redirect(url_for('admin.update_car_info'))
 

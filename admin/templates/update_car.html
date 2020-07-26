@@ -2,13 +2,12 @@
 {% block content %}
 <!--Car Basic information-->
 <div class="container">
-<h2>Car information update</h2>
+<h2>Car information update</h2><hr>
 <h6 style="text-decoration: underline; margin-bottom:15px;" >Car Make: {{car_make.car_make}}</h6>
 <h6 style="text-decoration: underline; margin-bottom:15px;">Registraion number {{ new_reg_num }}</h6>
 </div>
 <div class="container">
 <section class="slider">
-
  <ul class="slides">
       <li>
         <img src="{{ car_coll.car_image_url }}"> <!-- random image -->
@@ -50,7 +49,7 @@
             <label for="body_type">Body type</label>
         </div>
         <div class="input-field col s4">
-           <input type="text" id="exterior_colour" name="exterior_colour" class="validate" value="{{ car_coll.exterior_colour }}" readonly>
+           <input type="text" id="exterior_colour" name="exterior_colour" class="validate" value="{{ car_coll.exterior_colour }}" required>
             <label for="exterior_colour">Exterior colour</label>
         </div>
         <div class="input-field col s4">
@@ -103,7 +102,7 @@
                     <input name="is_ULEZ_compliant" type="checkbox">
                 {% endif %}
                   <span class="lever"></span>
-                  Is Urgent
+                  ULEZ_compliant
                 </label>
             </div>
         </div>

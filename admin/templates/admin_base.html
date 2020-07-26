@@ -59,11 +59,6 @@
     <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a></li>
     <li class="divider"></li>
     <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
-    <li class="divider"></li>
-
-        <form action="{{url_for('client_blueprint.client_search')}}" method="POST" class="p-2">
-                <input class="form-control mr-sm-2" id="client_search" name="search" type="client_search" placeholder="Search clients" aria-label="Search" required>
-                <button class="btn btn-outline-success mt-2" type="submit">Search</button></form>
         </ul>
 
  <ul id="admin" class="dropdown-content">
@@ -117,6 +112,7 @@ $( document ).ready(function() {
    $('select').formSelect({
     
    });
+   $('.tooltipped').tooltip();
   });
 
 });
