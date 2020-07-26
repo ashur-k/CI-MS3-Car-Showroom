@@ -1,286 +1,297 @@
 {% extends 'admin_base.html' %}
 {% block content %}
 <!--Car Basic information-->
-
-<h3><i class="far fa-caret-square-right"></i> some text </h3>
 <div class="container">
-
-<form action="{{ url_for('admin.update_info_db', car_id=car_coll._id) }}" name="add_car_details" method="POST">
- <div class="container_basic_information m-2"><hr>
-  <div class="row mt-2">
-     <div class="col-md-4">
-    <label for="reg_no">Car Make</label>
-      <select class="form-control form-control-lg" id="car_make" name="car_make" required>
-           <option value="{{ car_make.car_make }}">{{ car_make.car_make }}</option>
-        </select>
-    </div>
-     <div class="col-md-4">
-   <label for="car_model">Car Model</label>
-      <select class="form-control form-control-lg" id="car_model" name="car_model" required>
-      {% for results in car_model_results %}
-        <option value="{{ results.car_model }}">{{ results.car_model }}</option>
-        {% endfor %}
-        </select>
-    </div>
-    <div class="col-md-4">
-    <label for="reg_no">Registration Number</label>
-    <select class="form-control form-control-lg" id="reg_num" name="reg_num" required>
-<option value="{{ new_reg_num }}">{{ new_reg_num }}</option>
-    </select>    </div>
-  
-  </div>
-   <div class="row mt-2">
-  <div class="col-sm-4">
-    <label for="body_type">Body type</label>
-      <input type="text" id="body_type" name="body_type" class="form-control form-control-lg" value="{{ car_coll.body_type }}" required>
-  </div>
-  <div class="col-sm-4">
-    <label for="exterior_colour">Exterior colour</label>
-      <input type="text" id="exterior_colour" name="exterior_colour" class="form-control form-control-lg" value="{{ car_coll.exterior_colour }}" readonly>
-  </div>
-  <div class="col-sm-4">
-    <label for="gear_box">Gear box</label>
-      <input type="text" id="gear_box" name="gear_box" class="form-control form-control-lg" value="{{ car_coll.gear_box }}" required>
-  </div>
-  </div>
-  <div class="row mt-2">
-  <div class="col-sm-4">
-  <label for="fuel_type">Fuel type</label>
-       <select class="custom-select form-control-lg" id="fuel_type" name="fuel_type" required>
-        <option class="form-control-lg" selected value="{{ car_coll.fuel_type }}">"{{ car_coll.fuel_type }}"</option>
-        <option value="petrol">Petrol</option>
-        <option value="deisel">Deisel</option>
-        <option value="gas">Gas</option>
-        <option value="electric">Electric</option>
-        <option value="hybird">Hybird</option>
-      </select>
-   
-  </div>
-
-  <div class="col-sm-4">
-    <label>ULEZ compliant</label>
-    <div class="form-control-lg custom-control custom-switch">
-    {% if car_coll.is_ULEZ_compliant == "on" %} 
-        <input type="checkbox" class="custom-control-input form-control-lg" name="is_ULEZ_compliant" id="is_ULEZ_compliant" checked>
-        <label class="custom-control-label" for="is_ULEZ_compliant">yes/no</label>
-       {% else %}
-    <input type="checkbox" name="is_ULEZ_compliant" class="custom-control-input" id="not_ULEZ_compliant">
-    <label class="custom-control-label" for="not_ULEZ_compliant">yes/no</label>
-{% endif %} 
-    </div>
-  </div>
-  <div class="col-sm-4">
-     <label for="warranty_expire_date">Warranty expires</label><br>
-      <input class="form-control form-control-lg" type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}" required>
-  </div>
-  </div>
-  <div class="row mt-2">
-  <div class="col-sm-4">
-  <label for="registration_year">Registration year</label>
-      <input type="text" id="registration_year" name="registration_year" class="form-control form-control-lg" value="{{ car_coll.registration_year }}" required>
-   
-  </div>
-  <div class="col-sm-4">
-    <label for="mileage">Mileage</label>
-      <input type="text" id="mileage" name="mileage" class="form-control form-control-lg" value="{{ car_coll.mileage }}" required>
-  </div>
-  <div class="col-sm-4">
-     <label for="transmisson">Transmission</label><br>
-        <select class="custom-select form-control-lg" id="transmisson" name="transmisson" required>
-        <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.transmisson }}</option>
-        <option value="manual">manual</option>
-        <option value="automatic">automatic</option>
-       
-      </select>
-  </div>
-  </div>
-  <div class="row mt-2">
-  <div class="col-sm-4">
-  <label for="seats">Seats</label>
-      <input type="text" id="seats" name="seats" class="form-control form-control-lg" value="{{ car_coll.seats }}" required>
-   
-  </div>
-   <div class="col-sm-4">
-     <label for="drive_type">Drive Type</label><br>
-       <input type="text" id="drive_type" name="drive_type" class="form-control form-control-lg" value="{{ car_coll.drive_type }}" required>
-  </div>
-   <div class="col-sm-4">
-     <label for="drive_type">Engine</label><br>
-       <input type="text" id="engine" name="engine" class="form-control form-control-lg" value="{{ car_coll.engine }}" required>
-  </div>
-  </div>
-   <hr>
-   </div>
-
-<div class="container_car_features m-2">
-    <h3 class="mt-3">Car Features:</h3><hr>
-  <h5>Exterior</h5><hr>
-  <div class="row mt-2">
-   <div class="col-sm-6">
-       <label for="alloy wheels">16 inch alloy wheels</label>
-      <select class="custom-select form-control-lg" id="alloy_wheels" name="alloy_wheels" required>
-        <option selected value="{{ car_coll.alloy_wheels }}">{{ car_coll.alloy_wheels }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-    <div class="col-sm-6">
-       <label for="metallic_paint">Metallic paints</label>
-      <select class="custom-select form-control-lg" id="metallic_paint" name="metallic_paint" required>
-        <option selected value="{{ car_coll.metallic_paint }}">{{ car_coll.metallic_paint }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-  </div><hr>
-   
-   
-    <h5>Interior</h5><hr>
-  <div class="row mt-2">
-   <div class="col-sm-6">
-       <label for="bluetooth">Bluetooth</label>
-      <select class="custom-select form-control-lg" id="bluetooth" name="bluetooth" required>
-        <option selected value="{{ car_coll.bluetooth }}">{{ car_coll.bluetooth }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-    <div class="col-sm-6">
-       <label for="climate_control">Climate control</label>
-      <select class="custom-select form-control-lg" id="climate_control" name="climate_control" required>
-        <option selected value="{{ car_coll.climate_control }}">{{ car_coll.climate_control }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-  </div>
- <div class="row mt-2">
-   <div class="col-sm-6">
-       <label for="seats_material">Seats material</label>
-      <select class="custom-select form-control-lg" id="seats_material" name="seats_material" required>
-        <option selected value="{{ car_coll.seats_material }}">{{ car_coll.seats_material }}</option>
-        <option value="Leather">Leather</option>
-      <option value="Cloth">Cloth</option>
-      </select>
-    </div>
-    <div class="col-sm-6">
-       <label for="cruise_control">Cruise control</label>
-      <select class="custom-select form-control-lg" id="cruise_control" name="cruise_control" required>
-        <option selected value="{{ car_coll.cruise_control }}">{{ car_coll.cruise_control }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-  </div>
- <div class="row mt-2">
-   <div class="col-sm-6">
-       <label for="DAB">DAB</label>
-      <select class="custom-select form-control-lg" id="DAB" name="DAB" required>
-        <option selected value="{{ car_coll.DAB }}">{{ car_coll.DAB }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-    <div class="col-sm-6">
-       <label for="ISOFIX_fittings">ISOFIX fittings</label>
-      <select class="custom-select form-control-lg" id="ISOFIX_fittings" name="ISOFIX_fittings" required>
-        <option selected value="{{ car_coll.ISOFIX_fittings }}">{{ car_coll.ISOFIX_fittings }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-  </div>
-<div class="row mt-2">
-   <div class="col-sm-6">
-       <label for="rear_parking_sensors">Rear parking sensors</label>
-      <select class="custom-select form-control-lg" id="rear_parking_sensors" name="rear_parking_sensors" required>
-        <option selected value="{{ car_coll.rear_parking_sensors }}">{{ car_coll.rear_parking_sensors }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-    <div class="col-sm-6">
-       <label for="start_stop_technology">Start/stop technology</label>
-      <select class="custom-select form-control-lg" id="start_stop_technology" name="start_stop_technology" required>
-        <option selected value="{{ car_coll.start_stop_technology }}">{{ car_coll.start_stop_technology }}</option>
-        <option value="availiable">Availiable</option>
-      <option value="not-availiable">Not availiable</option>
-      </select>
-    </div>
-  </div><hr>
-   </div>
-
-<div class="container_car_specs m-2">
-<h3 class="mt-3">Car specs:</h3><hr>
-<h5>Perfomance and economy</h5><hr>
-
-<div class="row mt-2">
-  <div class="col-sm-4">
-    <label for="top_Speed">Top speed</label>
-      <input type="text" id="top_Speed" name="top_Speed" class="form-control form-control-lg" value="{{ car_coll.top_Speed }}" required>
-  </div>
-  <div class="col-sm-4">
-    <label for="acceleration">Acceleration(0-62 mph)</label>
-      <input type="text" id="acceleration" name="acceleration" class="form-control form-control-lg" value="{{ car_coll.acceleration }}" required> 
-  </div>
-  <div class="col-sm-4">
-    <label for="engine_power">Engine power</label>
-      <input type="text" id="engine_power" name="engine_power" class="form-control form-control-lg" value="{{ car_coll.engine_power }}" required>
-  </div>
-  </div><hr>
-<h5>Weight and dimensions</h5><hr>
-<div class="row mt-2">
-  <div class="col-sm-4">
-    <label for="fuel_tank_capacity">Fuel tank capacity</label>
-      <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="form-control form-control-lg" value="{{ car_coll.fuel_tank_capacity }}" readonly>
-  </div>
-  <div class="col-sm-4">
-    <label for="boot_space">Boot space (seats-up)</label>
-      <input type="text" id="boot_space" name="boot_space" class="form-control form-control-lg" value="{{ car_coll.boot_space }}" required>
-  </div>
-  <div class="col-sm-4">
-    <label for="length">Length</label>
-      <input type="text" id="length" name="length" class="form-control form-control-lg" value="{{ car_coll.length }}" required>
-  </div>
-  </div>
-</div><hr>
-
-<div class="container_running_cost m-2">
-<h3 class="mt-3">Running costs:</h3><hr>
-<div class="row mt-2">
-  <div class="col-sm-4">
-    <label for="vehicle_tax">Vehicle tax</label>
-      <input type="text" id="vehicle_tax" name="vehicle_tax" class="form-control form-control-lg" value="{{ car_coll.vehicle_tax }}" required>
-  </div>
-  <div class="col-sm-4">
-    <label for="insurance">Insurance</label>
-      <input type="text" id="insurance" name="insurance" class="form-control form-control-lg" value="{{ car_coll.insurance }}" required>
-  </div>
-  <div class="col-sm-4">
-    <label for="fuel_consumption">Fuel_consumption</label>
-      <input type="text" id="fuel_consumption" name="fuel_consumption" class="form-control form-control-lg" value="{{ car_coll.fuel_consumption }}" required>
-  </div>
-   <div class="col-sm-4">
-    <label for="fuel_consumption">Car price</label>
-      <input type="text" id="car_price" name="car_price" class="form-control form-control-lg" value="{{ car_coll.car_price }}" required>
-  </div>
-   <div class="col-sm-8">
-    <label for="fuel_consumption">Paste image URL here</label>
-      <input type="text" id="car_image_url" name="car_image_url" class="form-control form-control-lg" value="{{ car_coll.car_image_url }}" required>
-  </div>
-  </div>
-  <hr>
-
-
+<h2>Car information update</h2>
+<h6 style="text-decoration: underline; margin-bottom:15px;" >Car Make: {{car_make.car_make}}</h6>
+<h6 style="text-decoration: underline; margin-bottom:15px;">Registraion number {{ new_reg_num }}</h6>
 </div>
+<div class="container">
+<section class="slider">
 
-     <div class="col-md-12 m-3">
-     <button type="submit" class="btn btn-primary btn-lg">Update</button>
-     </div>  
+ <ul class="slides">
+      <li>
+        <img src="{{ car_coll.car_image_url }}"> <!-- random image -->
+        <div class="caption center-align">
+        </div>
+      </li>
+    </ul>
+</section>
+</div>
+<div class="container">
+<form action="{{ url_for('admin.update_info_db', car_id=car_coll._id) }}" name="add_car_details" method="POST">
+<h4 class="mt-3">Basic car informaiton</h4><hr>
+    <div class="row">
+        <div class="input-field col s4">
+            <select class="validate" id="car_make" name="car_make" required>
+                <option value="{{ car_make.car_make }}">{{ car_make.car_make }}</option>
+            </select>
+            <label for="reg_no">Car Make</label>
+        </div>
+        <div class="input-field col s4">
+            <select class="validate" id="car_model" name="car_model" required>
+                {% for results in car_model_results %}
+                <option value="{{ results.car_model }}">{{ results.car_model }}</option>
+                {% endfor %}
+            </select>
+            <label for="car_model">Car Model</label>
+        </div>
+        <div class="input-field col s4">
+            <select class="validate" id="reg_num" name="reg_num" required>
+                <option value="{{ new_reg_num }}">{{ new_reg_num }}</option>
+            </select>
+            <label for="reg_no">Registration Number</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s4">
+            <input type="text" id="body_type" name="body_type" class="validate" value="{{ car_coll.body_type }}" required>
+            <label for="body_type">Body type</label>
+        </div>
+        <div class="input-field col s4">
+           <input type="text" id="exterior_colour" name="exterior_colour" class="validate" value="{{ car_coll.exterior_colour }}" readonly>
+            <label for="exterior_colour">Exterior colour</label>
+        </div>
+        <div class="input-field col s4">
+            <input type="text" id="gear_box" name="gear_box" class="validate" value="{{ car_coll.gear_box }}" required>
+            <label for="gear_box">Gear box</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s4">
+            <select class="validate" id="fuel_type" name="fuel_type" required>
+                <option class="form-control-lg" selected value="{{ car_coll.fuel_type }}">{{ car_coll.fuel_type }}</option>
+                <option value="petrol">Petrol</option>
+                <option value="deisel">Deisel</option>
+                <option value="gas">Gas</option>
+                <option value="electric">Electric</option>
+                <option value="hybird">Hybird</option>
+            </select>
+            <label for="fuel_type">Fuel type</label>
+        </div>
+           <div class="input-field col s4">
+            <select class="validate" id="transmisson" name="transmisson" required>
+                <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.transmisson }}</option>
+                <option value="manual">manual</option>
+                <option value="automatic">automatic</option>
+            </select>
+            <label for="transmisson">Transmission</label><br>
+        </div>
+        <div class="input-field col s4">
+            <input class="validate" type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}" required>
+            <label for="warranty_expire_date">Warranty expires</label>
+            </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s4">
+            <input type="text" id="registration_year" name="registration_year" class="validate" value="{{ car_coll.registration_year }}" required>
+            <label for="registration_year">Registration year</label>
+        </div>
+        <div class="input-field col s4">
+            <input type="text" id="mileage" name="mileage" class="validate" value="{{ car_coll.mileage }}" required>
+            <label for="mileage">Mileage</label>
+        </div>
+        <div class="input-field col s4">
+             <div class="switch">
+                <label>
+                {% if car_coll.is_ULEZ_compliant == "on" %} 
+                  <input id="is_ULEZ_compliant" name="is_ULEZ_compliant" type="checkbox" checked>
+                {% else %}
+                    <input name="is_ULEZ_compliant" type="checkbox">
+                {% endif %}
+                  <span class="lever"></span>
+                  Is Urgent
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="input-field col s4">
+            <input type="text" id="seats" name="seats" class="validate" value="{{ car_coll.seats }}" required>
+            <label for="seats">Seats</label>
+        </div>
+        <div class="input-field col s4">
+            <input type="text" id="drive_type" name="drive_type" class="validate" value="{{ car_coll.drive_type }}" required>
+            <label for="drive_type">Drive Type</label>
+        </div>
+        <div class="input-field col s4">
+            <input type="text" id="engine" name="engine" class="validate" value="{{ car_coll.engine }}" required>
+            <label for="drive_type">Engine</label>
+        </div>
+    </div>
+ 
+<h4 >Car Features:</h4><hr>
+    <h5>Exterior</h5>
+    <div class="row">
+        <div class="input-field col s6">
+            <select class="validate" id="alloy_wheels" name="alloy_wheels" required>
+                <option selected value="{{ car_coll.alloy_wheels }}">{{ car_coll.alloy_wheels }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="alloy wheels">16 inch alloy wheels</label>
+        </div>
+        <div class="input-field col s6">
+            <select class="validate" id="metallic_paint" name="metallic_paint" required>
+                <option selected value="{{ car_coll.metallic_paint }}">{{ car_coll.metallic_paint }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="metallic_paint">Metallic paints</label>
+        </div>
+    </div>
+
+    <h5>Interior</h5>
+    <div class="row">
+        <div class="input-field col s6">
+            <select class="validate" id="bluetooth" name="bluetooth" required>
+                <option selected value="{{ car_coll.bluetooth }}">{{ car_coll.bluetooth }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="bluetooth">Bluetooth</label>
+        </div>
+        <div class="input-field col s6">
+            <select class="validate" id="climate_control" name="climate_control" required>
+                <option selected value="{{ car_coll.climate_control }}">{{ car_coll.climate_control }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="climate_control">Climate control</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            <select class="validate" id="seats_material" name="seats_material" required>
+                <option selected value="{{ car_coll.seats_material }}">{{ car_coll.seats_material }}</option>
+                <option value="Leather">Leather</option>
+                <option value="Cloth">Cloth</option>
+            </select>
+            <label for="seats_material">Seats material</label>
+            </div>
+        <div class="input-field col s6">
+            <select class="validate" id="cruise_control" name="cruise_control" required>
+                <option selected value="{{ car_coll.cruise_control }}">{{ car_coll.cruise_control }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="cruise_control">Cruise control</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            <select class="validate" id="DAB" name="DAB" required>
+                <option selected value="{{ car_coll.DAB }}">{{ car_coll.DAB }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="DAB">DAB</label>
+        </div>
+        <div class="input-field col s6">
+            <select class="validate" id="ISOFIX_fittings" name="ISOFIX_fittings" required>
+                <option selected value="{{ car_coll.ISOFIX_fittings }}">{{ car_coll.ISOFIX_fittings }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="ISOFIX_fittings">ISOFIX fittings</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            <select class="validate" id="rear_parking_sensors" name="rear_parking_sensors" required>
+                <option selected value="{{ car_coll.rear_parking_sensors }}">{{ car_coll.rear_parking_sensors }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="rear_parking_sensors">Rear parking sensors</label>
+            </div>
+        <div class="input-field col s6">
+            <select class="validate" id="start_stop_technology" name="start_stop_technology" required>
+                <option selected value="{{ car_coll.start_stop_technology }}">{{ car_coll.start_stop_technology }}</option>
+                <option value="availiable">Availiable</option>
+                <option value="not-availiable">Not availiable</option>
+            </select>
+            <label for="start_stop_technology">Start/stop technology</label>
+        </div>
+    </div>
+
+<h4 class="mt-3">Car specs:</h4><hr>   
+    <div class="row">
+    <div class="col s6" >
+        <h5>Perfomance and economy</h5>
+        <div class="row center-align">
+            <div class="input-field col s12">
+                <input type="text" id="top_Speed" name="top_Speed" class="validate" value="{{ car_coll.top_Speed }}" required>
+                <label for="top_Speed">Top speed</label>
+                </div>
+            <div class="input-field col s12">
+                <input type="text" id="acceleration" name="acceleration" class="validate" value="{{ car_coll.acceleration }}" required> 
+                <label for="acceleration">Acceleration(0-62 mph)</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="engine_power" name="engine_power" class="validate" value="{{ car_coll.engine_power }}" required>
+                <label for="engine_power">Engine power</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s6" >
+        <h5>Weight and dimensions</h5>
+        <div class="row center-align">
+            <div class="input-field col s12">
+                <input type="text" id="fuel_tank_capacity" name="fuel_tank_capacity" class="validate" value="{{ car_coll.fuel_tank_capacity }}" required>
+                <label for="fuel_tank_capacity">Fuel tank capacity</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="boot_space" name="boot_space" class="validate" value="{{ car_coll.boot_space }}" required>
+                <label for="boot_space">Boot space (seats-up)</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" id="length" name="length" class="validate" value="{{ car_coll.length }}" required>
+                <label for="length">Length</label>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<h4>Running costs:</h4><hr>
+    <div class="row">
+    <div class="input-field col s6">
+        <input type="text" id="vehicle_tax" name="vehicle_tax" class="validate" value="{{ car_coll.vehicle_tax }}" required>
+        <label for="vehicle_tax">Vehicle tax</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" id="insurance" name="insurance" class="validate" value="{{ car_coll.insurance }}" required>
+        <label for="insurance">Insurance</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" id="fuel_consumption" name="fuel_consumption" class="validate" value="{{ car_coll.fuel_consumption }}" required>
+        <label for="fuel_consumption">Fuel_consumption</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="text" id="car_price" name="car_price" class="validate" value="{{ car_coll.car_price }}" required>
+        <label for="fuel_consumption">Car price</label>
+    </div>
+    <div class="input-field col s12">
+        <input type="text" id="car_image_url" name="car_image_url" class="validate" value="{{ car_coll.car_image_url }}" required>
+        <label for="fuel_consumption">Paste image URL here</label>
+    </div>
+    </div>
+    <div class="row">
+        <div class="input-field  col s12">
+            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+        </div>  
+    </div> 
 </form>
 
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
 
 {%endblock%}

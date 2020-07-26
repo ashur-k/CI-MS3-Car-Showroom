@@ -196,13 +196,22 @@ def update_car_info():
     return render_template('update_car_info.html', admin_cars_make=mongo.db.car_make.find())
 
 
-@admin.route('/update_options', methods=['POST', 'GET'])
-def update_options():
+# using doubel route to finsish if reg_num session if in session
+# if request is coming from update car info search template
+@admin.route('/update_options', defaults={'registration_number': None})
+@admin.route('/update_options/<registration_number>', methods=['POST', 'GET'])
+def update_options(registration_number):
+    # ending session if request is generated from update_car_info.html temolate
+    if registration_number:
+        if 'reg_num' and 'new_reg_num' in session:
+            session.pop('reg_num', None)
+            session.pop('new_reg_num', None)
+
     if 'reg_num' in session:
         new_reg_num = session['new_reg_num']
         car_make_results = mongo.db.car_make.find()
         car_coll = mongo.db.basic_car_information.find_one({'reg_num': session['reg_num']})
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=mongo.db.cars_make.find())
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=mongo.db.car_make.find())
 
     reg_num = request.form['reg_num']
 
@@ -219,8 +228,6 @@ def update_options():
 def car_update_page():
     old_reg_num = request.form['old_reg_num']
     new_reg_num = request.form['reg_num']
-    print(old_reg_num)
-    print(new_reg_num)
 
     car_make = request.form['car_make']
     session['reg_num'] = old_reg_num
@@ -232,7 +239,6 @@ def car_update_page():
             flash('{} registraion number is already in database.'.format(new_reg_num))
             return redirect(url_for('admin.update_options'))
 
-    
     car_make = request.form['car_make']
     coll_Id = request.form['hiddenCarId']
     car_make_results = mongo.db.car_make.find_one({'car_make': car_make})
@@ -240,7 +246,7 @@ def car_update_page():
     car_coll = mongo.db.basic_car_information.find_one({'_id': ObjectId(coll_Id)})
     session.pop('reg_num', None)
     session.pop('new_reg_num', None)
-    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num)
+    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num,admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
