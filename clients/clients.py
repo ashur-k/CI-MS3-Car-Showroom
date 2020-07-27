@@ -45,8 +45,8 @@ def delete_client(client_id):
     print(client_id)
     mongo.db.client_info.remove({'_id': ObjectId(client_id)})
 
-    flash(u'Client is successfully deleted from database.', 'appiontment')
-    return redirect(url_for('admin.admin_homepage'))
+    flash(u'Client is successfully deleted from database.', 'client_deleted')
+    return redirect(url_for('client_blueprint.view_all_clients'))
 
 
 @client_blueprint.route('/remove_from_dashboard/<client_id>', methods=['POST', 'GET'])
@@ -61,7 +61,7 @@ def remove_from_dashboard(client_id):
 @client_blueprint.route('/move_to_dashboard/<client_id>', methods=['POST', 'GET'])
 def move_to_dashboard(client_id):   
     mongo.db.client_info.update({"_id": ObjectId(client_id)}, {'$set': {'dashboard_status':'true'}})
-    return redirect (url_for('admin.admin_homepage'))
+    return redirect (url_for('client_blueprint.view_all_clients'))
 
 
 @client_blueprint.route('/add_new_client', defaults={'reg_num': None})

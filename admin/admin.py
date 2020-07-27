@@ -148,6 +148,9 @@ def search():
     registration_num_search = \
         mongo.db.basic_car_information.find_one({'reg_num': request.form['search']})
 
+    sold_car_search = \
+        mongo.db.sold_cars.find_one({'reg_num': request.form['search']})
+
     car_make_search = \
         mongo.db.car_make.find_one({'car_make': request.form['search']})
 
@@ -157,6 +160,8 @@ def search():
     if registration_num_search:
         return render_template('search.html',
                                reg_results=registration_num_search, admin_cars_make=mongo.db.car_make.find())
+    elif sold_car_search:
+        return redirect (url_for('client_blueprint.sold_car_info', reg_num=request.form['search']))
     elif car_make_search:
         available_car_makes = \
             mongo.db.basic_car_information.find({'car_make': request.form['search']})
@@ -329,4 +334,13 @@ def car_sold(car_id):
     mongo.db.sold_cars.insert_one(request.form.to_dict())
     mongo.db.basic_car_information.remove({'_id': ObjectId(car_id)})
     flash(u'Information is succesfully added to sold car datebase.', 'car_sold')
+    return redirect(url_for('admin.admin_homepage'))
+
+
+@admin.route('/delete_client_admin_url/<client_id>', methods=['POST', 'GET'])
+def delete_client_admin_url(client_id):
+    print(client_id)
+    mongo.db.client_info.remove({'_id': ObjectId(client_id)})
+
+    flash(u'Client is successfully deleted from database.', 'appiontment')
     return redirect(url_for('admin.admin_homepage'))

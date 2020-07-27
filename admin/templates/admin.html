@@ -66,6 +66,7 @@
           <h3>Car Client is interesetd in</h3>
             {% if clients.car_status == 'car_is_sold' %}
             <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+            
             {% endif %}
         <div class="card hoverable">
         <div class="card-image">
@@ -97,7 +98,7 @@
         <!--Cliet infomation column-->
         <div class="col s12 m12 l5 offset-l2">
           <h3>Client information</h3>
-            <div class="card blue-grey darken-1" style="margin-top:0px">
+            <div class="card blue-grey darken-1 hoverable" style="margin-top:0px">
 
                 <div class="card-content white-text">
                 <span class="card-title">Client Name: {{ clients.full_name }}</span> 
@@ -197,7 +198,7 @@
         </div>
         <div class="modal-footer">  
             <a class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
-            <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
+            <a class="btn btn-danger" href="{{url_for('admin.delete_client_admin_url', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
         </div>
     </div>
  
