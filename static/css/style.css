@@ -15,6 +15,18 @@ font-family: 'Roboto', sans-serif;
    /* Making materialise nave fixed and and applying colouring */
   .web_theme{
       background-color: #b71c1c !important;
+      color:#fff;
+  }
+  .web_theme-card{
+      background-color: #b71c1c !important;
+      color:#000;
+  }
+
+  .web_theme-card, span{
+        font-weight: bolder;
+        
+     
+     
   }
   
    /* Car logo image */

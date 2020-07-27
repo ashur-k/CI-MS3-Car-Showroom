@@ -16,21 +16,20 @@
 </div>
 {% endif %}
 {% endwith %}
-<div class="container red lighten-2" style="padding:20px; margin-top: 20px;">
-    <div class="row ">
-        <h2><i class="material-icons" style="font-size:42px;">search</i>Search client</h2><hr>
+<div class="container web_theme" style="padding:20px; margin-top: 20px;">
+    <div class="row">
+        <h2><i class="material-icons" style="font-size:42px;">search</i>Search client</h2>
         
-        <h6><strong>Please enter client details you want to search for.</strong></h6>
-        <form class="col s12" action="{{url_for('client_blueprint.client_search')}}" method="POST">
+        <h6><strong>Please enter client detail's you want to search for.</strong></h6><hr>
+        <form class="col s12" action="{{url_for('client_blueprint.client_search')}}" method="POST" autocomplete="off">
             <div class="row">
                 <div class="input-field col s12">
-                    <input class="m-3" type="text" id="client_search" name="search" required>
-                    <label class="m-3" for="search">Car registration number</label>
+                    <input class="validate input-area white-text valid" type="text" id="client_search" name="search" required>
+                    <label class="custom-input-class white-text"  for="search">Car registration number</label>
                 </div>
                 <div class="input-field col s12">
-                    <button class="waves-effect waves-light btn tooltipped" data-position="bottom" data-tooltip="you can search with user name/email/telephone number" type="submit">
-                    <i class="material-icons left">search</i>Find client
-                    </button>
+                    <button class="waves-effect waves-light btn tooltipped grey darken-3" data-position="right" data-tooltip="Search user name/email/phone" type="submit">
+                    <i class="material-icons left">search</i>Find client</button>
                 </div>
             </div>
         </form> 

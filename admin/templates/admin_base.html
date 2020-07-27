@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
        <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
     
             
@@ -22,7 +23,7 @@
 <body>
 <header>
   <div class="navbar-fixed">
-    <nav class="">
+    <nav class="web_theme">
     <div class="nav-wrapper">
       <a href="{{url_for('index')}}" class="brand-logo">User Interface</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -31,12 +32,12 @@
         <li><a class="dropdown-trigger" href="#!" data-target="manage_clients">Manage clients<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a class="dropdown-trigger" href="#!" data-target="admin">Admin Logged-In<i class="material-icons right">arrow_drop_down</i></a></li>
         <li style="margin-right:12px;">
-            <form id="search" name="search" action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
+            <form id="search" name="search" action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0" autocomplete="off">
                 <input class="input-field"  name="search" type="search" placeholder="Search" aria-label="Search" required>
             </form>
         </li>
         <li style="margin-right:12px;">
-           <button form="search" class="btn btn-outline-success" type="submit">Search</button>
+           <button form="search" class="waves-effect waves-light btn tooltipped grey darken-3" type="submit" data-tooltip="Search user make/model/registration">Search</button>
            
         </li>
       </ul>
@@ -114,6 +115,7 @@ $( document ).ready(function() {
    });
    $('.tooltipped').tooltip();
   });
+  M.updateTextFields();
 
 });
 

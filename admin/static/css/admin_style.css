@@ -1,11 +1,4 @@
-.para-custom-style{
-    color: red;
-    background-color: lightblue;
-    border-radius: 25px;
-}
-body{
 
-}
 .custom-button{
     margin: 2px;
 }
@@ -16,4 +9,9 @@ body{
    
     box-sizing: border-box;
     position: sticky;
+}
+.input-area{
+        border-bottom: 1px solid #ffffff !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
 }
