@@ -203,7 +203,7 @@ def update_car_info():
 
 # using doubel route to finsish if reg_num session if in session
 # if request is coming from update car info search template
-@admin.route('/update_options', defaults={'registration_number': None})
+@admin.route('/update_options', methods=['POST', 'GET'], defaults={'registration_number': None})
 @admin.route('/update_options/<registration_number>', methods=['POST', 'GET'])
 def update_options(registration_number):
     # ending session if request is generated from update_car_info.html temolate

@@ -3,196 +3,259 @@
 {% block content %}
 
 <!--Car make results found row-->
-  {% if car_make_results %}
-<div class="container p-2">
-<hr>
-<h3 >Car seached in car make: {{ car_make_search.car_make }}</h3><hr>
-<!--Make results found row-->
-<div class="row">
-   {% for result in car_make_results %}
-   
-<div class="col-sm-12 col-md-6 mt-4">
-<div class="card" style="width: 18rem;">
-  <img src="{{ result.car_image_url }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Car Make: {{result.car_make}}</h5>  
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Car Model:<strong><mark>{{result.car_model}}</mark></strong></li>
-    <li class="list-group-item">Reg Num: <strong><mark>{{result.reg_num}}</mark></strong></li>
-    <li class="list-group-item">Reg Year:<strong><mark>{{result.registration_year}}</mark></strong></li>
-     <!-- {% if result.car_sold == 'Sold' %}
-         <li class="list-group-item">Car Sales Status:<strong><mark class="bg-warning ml-1 p-1">{{result.car_sold}}</mark></strong></li>
-         <li class="list-group-item">Owner Name:<strong><mark>{{result.client_name_car_sold_to}}</mark></strong></li>
-         {% else %}
-        <li class="list-group-item">Car Sales Status:<strong><mark>Not Sold</mark></strong></li>
-         <li class="list-group-item">Owner Name:<strong><mark>Car Sales Showroom</mark></strong></li>
-      {% endif %}--> 
-  </ul>
-  <div class="card-body">
-  <div class="row">
- <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
-  <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
-  <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
-  <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
-  <div class="row m-1">
-    <button class="btn btn-dark btn-sm m-1" type="submit">Update</button>
-     <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
-         <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
-       </div>
-  </form>
-    <div class="row m-1" >
- 
-    <a href="#" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#deleteModal{{result._id}}">Delete car</a>
-     </div> 
-  </div>
-  </div>
-</div>
+{% if car_make_results %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h3><i class="fas fa-search-plus"></i> {{car_make_results.count()}} Cars are seached in car make {{ car_make_search.car_make }}</h3><hr>
+        </div>
     </div>
-    <!-- Modal -->
-<div class="modal fade" id="deleteModal{{result._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{result._id}}Label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModal{{result._id}}Label">Delete Record</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
-       
-      </div>
-    </div>
-  </div>
 </div>
 
-            {% endfor %}
+<!--Make results found row-->
+<div class="container">
+    <div class="row">
+        
+    {% for result in car_make_results %}
+    <div class="row">
+    <h4>Find Results:</h4><hr>
+        <div class="col s12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ result.car_image_url }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{result.car_make}} {{result.car_model}}<i class="material-icons right">more_vert</i></span>
+                          <ul class="collection">
+                            <li class="collection-item">Car Price {{result.car_price}}</li>
+                            <li class="collection-item">Car registration number {{result.reg_num}}</li>
+                            <li class="collection-item">Car registraion year {{result.registration_year}}</li>
+                        </ul>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{result.car_make}} {{result.car_model}} Reg-Num: {{result.reg_num}} summary<i class="material-icons right">close</i></span>
+                        <div class="col s12">
+                        <ul class="collection">
+                            <li class="collection-item">Body type: {{result.body_type}}</li>
+                            <li class="collection-item">Exterior colour: {{result.exterior_colour}}</li>
+                            <li class="collection-item">Gear box: {{result.gear_box}}</li>
+                            <li class="collection-item">Fuel type: {{result.fuel_type}}</li>
+                            <li class="collection-item">Transmission: {{result.transmisson}}</li>
+                            <li class="collection-item">Running mileage: {{result.mileage}}</li>
+                            <li class="collection-item">Number of seats: {{result.seats}}</li>
+                            <li class="collection-item">Car drive type: {{result.drive_type}}</li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <!--Hiiden form for updating car-->
+                        <div class="row" style="display:none;">
+                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                                <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
+                                <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
+                                <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
+                            </form> 
+                        </div>
+                        <!--Car's CRUD operations buttons-->
+                        <button form="make_search_form" class="btn btn-dark btn-sm m-1" type="submit">Update</button>
+                        <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
+                        <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#deleteModal{{result._id}}">Delete car</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Modal -->
+    <div id="deleteModal{{result._id}}" class="modal">
+        <div class="modal-content">
+            <h4>Delting car in process</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
+            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete {{ result.reg_num }}</a>
+        </div>
     </div>
-  </div>
+    </div>
+    {% endfor %}
+    </div>  
+</div>
   <!--For no results in make results found row-->
-  {% elif car_make_search %}
-  <div class="container p-4">
-<div class="row">
-    <h3>There are no cars available in the car make: {{ car_make_search.car_make }}</h3>
-    
+{% elif car_make_search %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h2><i class="fas fa-search-plus"></i> No Cars are seached in car make {{ car_make_search.car_make }}.</h2><hr>
+        </div>
+    </div>
+</div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col s12">
+            <h5>At the moment there are no cars aviliable in showroom for car make {{ car_make_search.car_make }}.</h5>
+        </div>
     </div>
 </div>
   <!--Registration results found row-->
 {% elif reg_results %}
-<div class="container p-2">
-<hr>
-<h3 >Car seached in car make: {{ reg_results.car_make }}</h3><hr>
-<div class="row">   
-<div class="col-md-6 mt-4">
-<div class="card" style="width: 18rem;">
-  <img src="{{ reg_results.car_image_url }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Car Make: {{reg_results.car_make}}</h5>  
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Car Model:<strong><mark>{{reg_results.car_model}}</mark></strong></li>
-    <li class="list-group-item">Reg Num: <strong><mark>{{reg_results.reg_num}}</mark></strong></li>
-    <li class="list-group-item">Reg Year:<strong><mark>{{reg_results.registration_year}}</mark></strong></li>
-  </ul>
-  <div class="card-body">
-  <div class="row">
- <form action="{{url_for('admin.update_options')}}" method="POST"  name="make_search_form">
-  <input type="hidden"  name="car_make" value="{{reg_results.car_make}}">
-  <input type="hidden"  name="car_model" value="{{reg_results.car_model}}">
-  <input type="hidden"  name="reg_num" value="{{reg_results.reg_num}}">
-    <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
-  </form>
-    
-    <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=reg_results._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
-    <a href="{{url_for('admin.car_sold_form', reg_num=reg_results.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
-    <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete Car</a></div>
-  </div>
-  </div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h4><i class="fas fa-search-plus"></i> Registraion number {{reg_results.reg_num}} is seached.</h4><hr>
+        </div>
+    </div>
 </div>
-    </div>
-    </div>
-  </div>
-  <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Record</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >Delete: {{ reg_results.reg_num }}</a>
-       
-      </div>
-    </div>
-  </div>
-</div>
-  <!--Model results found row-->
-   {% elif model_results %} 
-   <div class="container p-2">
-<hr>
-<h3 >Car seached in car Model: {{ car_model_search.car_model}}</h3><hr>
+<div class="container">
+    <div class="row">
 
-<div class="row">
-   {% for result in model_results %}
- 
-<div class="col-md-12 mt-4">
-<div class="card" style="width: 56rem;">
-  <img src="{{ result.car_image_url }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Car Make: {{result.car_make}}</h5>  
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Car Model:<strong><mark>{{result.car_model}}</mark></strong></li>
-    <li class="list-group-item">Reg Num: <strong><mark>{{result.reg_num}}</mark></strong></li>
-    <li class="list-group-item">Reg Year:<strong><mark>{{result.registration_year}}</mark></strong></li>
-  </ul>
-  <div class="card-body">
-  <div class="row">
- <form action="{{url_for('admin.update_options')}}" method="POST" name="make_search_form">
-  <input type="hidden" name="car_make" value="{{result.car_make}}">
-  <input type="hidden" name="car_model" value="{{result.car_model}}">
-  <input type="hidden"  name="reg_num" value="{{result.reg_num}}">
-    <div class="col-md-4 p-1"><button class="btn btn-dark btn-sm" type="submit">Update</button> </div>
-  </form>
-    
-    <div class="col-md-4 p-1"><a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm">View Car</a></div>
-    <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
-    <div class="col-md-4 p-1"> <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{result._id}}">Delete Car</a></div>
-  </div>
-  </div>
-</div>
+
+    <h4>Find Result:</h4><hr>
+        <div class="col s12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ reg_results.car_image_url }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{reg_results.car_make}} {{reg_results.car_model}}<i class="material-icons right">more_vert</i></span>
+                          <ul class="collection">
+                            <li class="collection-item">Car Price {{reg_results.car_price}}</li>
+                            <li class="collection-item">Car registration number {{reg_results.reg_num}}</li>
+                            <li class="collection-item">Car registraion year {{reg_results.registration_year}}</li>
+                        </ul>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{reg_results.car_make}} {{reg_results.car_model}} Reg-Num: {{reg_results.reg_num}} summary<i class="material-icons right">close</i></span>
+                        <div class="col s12">
+                        <ul class="collection">
+                            <li class="collection-item">Body type: {{reg_results.body_type}}</li>
+                            <li class="collection-item">Exterior colour: {{reg_results.exterior_colour}}</li>
+                            <li class="collection-item">Gear box: {{reg_results.gear_box}}</li>
+                            <li class="collection-item">Fuel type: {{reg_results.fuel_type}}</li>
+                            <li class="collection-item">Transmission: {{reg_results.transmisson}}</li>
+                            <li class="collection-item">Running mileage: {{reg_results.mileage}}</li>
+                            <li class="collection-item">Number of seats: {{reg_results.seats}}</li>
+                            <li class="collection-item">Car drive type: {{reg_results.drive_type}}</li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <!--Hiiden form for updating car-->
+                        <div class="row" style="display:none;">
+                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                                <input type="hidden" id="car_make" name="car_make" value="{{reg_results.car_make}}">
+                                <input type="hidden" id="car_model" name="car_model" value="{{reg_results.car_model}}">
+                                <input type="hidden" id="reg_num" name="reg_num" value="{{reg_results.reg_num}}">
+                            </form> 
+                        </div>
+                        <!--Car's CRUD operations buttons-->
+                        <button form="make_search_form" class="btn btn-dark btn-sm m-1" type="submit">Update</button>
+                        <a href="{{url_for('admin.view', car_id=reg_results._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
+                        <a href="{{url_for('admin.car_sold_form', reg_num=reg_results.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#deleteModal{{reg_results._id}}">Delete car</a>
+                    </div>
+           
+            </div>
+        </div>
+    <!-- Modal -->
+    <div id="deleteModal{{reg_results._id}}" class="modal">
+        <div class="modal-content">
+            <h4>Delting car in process</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
+            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >Delete {{ reg_results.reg_num }}</a>
+        </div>
     </div>
-     <!-- Modal -->
-<div class="modal fade" id="deleteModal{{result._id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{result._id}}Label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModal{{result._id}}Label">Delete Record</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        <a class="btn btn-danger" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete: {{ result.reg_num }}</a>
-       
-      </div>
     </div>
-  </div>
+
+    </div>  
 </div>
- {% endfor %}
- </div>
-  </div>
-    {% elif car_model_search %} 
+<!--
+    Model results are here
+-->
+{% elif model_results %} 
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h3><i class="fas fa-search-plus"></i> {{model_results.count()}} Cars are seached in {{ car_model_search.car_make }} {{ car_model_search.car_model}}  </h3><hr>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+
+
+{% for result in model_results %}
+            <div class="row">
+    <h4>Find Results:</h4><hr>
+        <div class="col s12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ result.car_image_url }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{result.car_make}} {{result.car_model}}<i class="material-icons right">more_vert</i></span>
+                          <ul class="collection">
+                            <li class="collection-item">Car Price {{result.car_price}}</li>
+                            <li class="collection-item">Car registration number {{result.reg_num}}</li>
+                            <li class="collection-item">Car registraion year {{result.registration_year}}</li>
+                        </ul>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{result.car_make}} {{result.car_model}} Reg-Num: {{result.reg_num}} summary<i class="material-icons right">close</i></span>
+                        <div class="col s12">
+                        <ul class="collection">
+                            <li class="collection-item">Body type: {{result.body_type}}</li>
+                            <li class="collection-item">Exterior colour: {{result.exterior_colour}}</li>
+                            <li class="collection-item">Gear box: {{result.gear_box}}</li>
+                            <li class="collection-item">Fuel type: {{result.fuel_type}}</li>
+                            <li class="collection-item">Transmission: {{result.transmisson}}</li>
+                            <li class="collection-item">Running mileage: {{result.mileage}}</li>
+                            <li class="collection-item">Number of seats: {{result.seats}}</li>
+                            <li class="collection-item">Car drive type: {{result.drive_type}}</li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <!--Hiiden form for updating car-->
+                        <div class="row" style="display:none;">
+                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                                <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
+                                <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
+                                <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
+                            </form> 
+                        </div>
+                        <!--Car's CRUD operations buttons-->
+                        <button form="make_search_form" class="btn btn-dark btn-sm m-1" type="submit">Update</button>
+                        <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn btn-dark btn-sm m-1">View Car</a>
+                        <a href="{{url_for('admin.car_sold_form', reg_num=result.reg_num)}}" class="btn btn-dark btn-sm m-1" >Car sold</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#deleteModal{{result._id}}">Delete car</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Modal -->
+    <div id="deleteModal{{result._id}}" class="modal">
+        <div class="modal-content">
+            <h4>Delting car in process</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
+            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete {{ result.reg_num }}</a>
+        </div>
+    </div>
+    </div>
+{% endfor %}
+    </div>  
+</div> 
+
+{% elif car_model_search %} 
 
  <div class="container p-4">
 <div class="row">
