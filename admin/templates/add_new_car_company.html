@@ -1,8 +1,11 @@
 {% extends 'admin_base.html' %}
 
 {% block content %}
-<div class="container">
-<h2 class=""><i class="fas fa-car"></i>Add new car company / model<hr></h2>
+<div class="container admin-dashboard-container">
+    <div class="row row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-folder-plus red-text"></i> Add new car company - model</h3>
+    </div>
+    <hr class="container-bottom-hr-styling">
 </div>
 
 <div class="container" style="padding-top:10px;">
@@ -11,11 +14,11 @@
     <div class="row">
         <div class="input-field col s6">
             <input class="validate" type="text" id="car_make" name="car_make" placeholder="car make" required>
-            <label for="car_make"><i class="far fa-file"></i>New company name</label>
+            <label for="car_make"><i class="far fa-file"></i> New company name</label>
         </div>
     <div class="col s12">
-        <button class="btn btn-primary" type="submit" form="add_company">
-            Add New Car Company <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
+        <button class="btn waves-effect waves-red admin-custom-buttons" type="submit" form="add_company">
+           <i class="fas fa-plus red-text"></i> Add New Car Company
         </button>
     </div>
 
@@ -48,11 +51,11 @@
             </div>
             <div class="input-field col s6">
                 <input type="text" id="car_model" name="car_model" class="validate" placeholder="car model" required>
-                <label for="car-model"><i class="far fa-file"></i>new car model name</label>
+                <label for="car-model"><i class="far fa-file"></i> New car model name</label>
             </div>
             <div class="col s8 m-2">
-                <button class="btn btn-primary" type="submit" form="add_model">
-                    Add New Car Model <i class="fas fa-plus"></i> <i class="fas fa-car-side"></i>
+                <button class="btn waves-effect waves-red admin-custom-buttons" type="submit" form="add_model">
+                   <i class="fas fa-plus red-text"></i> Add New Car Model
                 </button>
             </div>
         </div>

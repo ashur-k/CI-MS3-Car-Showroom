@@ -1,8 +1,11 @@
 {% extends 'admin_base.html' %}
 {% block content %}
 <!--Car Basic information-->
-<div class="container">
-<h2>Car information update</h2><hr>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-user-edit red-text"></i> Car information update</h3>
+    </div><hr class="container-bottom-hr-styling">
+
 <h6 style="text-decoration: underline; margin-bottom:15px;" >Car Make: {{car_make.car_make}}</h6>
 <h6 style="text-decoration: underline; margin-bottom:15px;">Registraion number {{ new_reg_num }}</h6>
 </div>
@@ -286,7 +289,7 @@
     </div>
     <div class="row">
         <div class="input-field  col s12">
-            <button type="submit" class="btn btn-primary btn-lg">Update</button>
+            <button type="submit" class="btn waves-effect waves-red admin-custom-buttons"><i class="fas fa-edit red-text"></i> Update</button>
         </div>  
     </div> 
 </form>

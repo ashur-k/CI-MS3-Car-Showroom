@@ -1,8 +1,11 @@
 {% extends 'admin_base.html' %}
 
  {% block content %}
-<div class="container">
-<h3>All sold cars are here:</h3><hr>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-money-check red-text"></i> All sold cars are here</h3>
+    </div><hr class="container-bottom-hr-styling">
+
 
 {% with errors = get_flashed_messages(category_filter=["delete_flash"]) %}
 {% if errors %}
@@ -16,7 +19,7 @@
  </div><hr>
 {% endif %}
 {% endwith %}
-   <table>
+<table id="sold-cars">
         <thead>
           <tr>
               <th>Client Name</th>
@@ -26,17 +29,22 @@
           </tr>
         </thead>
 
-        <tbody>
+
 {% for cars in sold_cars %}
-          <tr>
-            <td>{{cars.full_name}}</td>
-            <td>{{cars.reg_num}}</td>
-            <td>{{cars.phone}}</td>
-            <td><a class="btn btn-dark btn-sm m-3" href="{{url_for('client_blueprint.sold_car_info', reg_num=cars.reg_num)}}">View all</a>
-      
-             <a class="waves-effect waves-light btn modal-trigger" href="#modal{{ cars._id }}">Delete info</a>
-            </td>
-          </tr>
+    <tbody>  
+    <tr>
+        <td>{{cars.full_name}}</td>
+        <td>{{cars.reg_num}}</td>
+        <td>{{cars.phone}}</td>
+        <td>
+            <a class="btn waves-effect waves-red admin-secondary-custom-buttons" href="{{url_for('client_blueprint.sold_car_info', reg_num=cars.reg_num)}}">
+                <i class="fas fa-info-circle red-text"></i> See all info
+            </a>
+            <a class="btn waves-effect waves-red admin-secondary-custom-buttons modal-trigger" href="#modal{{ cars._id }}">
+                <i class="fas fa-trash-alt red-text"></i> Delete info
+            </a>
+        </td>
+    </tr>
         <div class="modal" id="modal{{ cars._id }}">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,12 +58,16 @@
             </div>
             </div>
         </div>
-        
+    </tbody>
   {% endfor %}   
 
-        </tbody>
-      </table>
-
+     
+</table>
+<div class="row">
+    <div class="col s12">
+        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
+        <i class="fas fa-hand-point-left red-text"></i> Go back to Admin dashboard</a>
+    </div>
 </div>
 
 

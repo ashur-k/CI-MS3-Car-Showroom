@@ -1,11 +1,11 @@
 {% extends 'admin_base.html' %}
 {% block content %}
 <!--Car Basic information-->
+<div class="container admin-dashboard-container">
+<div class="row grey darken-4 valign-wrapper">
+    <h3 class="white-text"><i class="far fa-edit red-text"></i> Edit existing car information</h3>
+</div><hr class="container-bottom-hr-styling">
 
-
-
-<div class="container">
-<h2><i class="far fa-edit"></i>Edit existing car information</h2>
 <div class="row">
 <h5>Please enter car registration number you want to update.</h5>
                                                                   <!--I am sending this reg_num in url to ditinguish this template request from server side url generate to continue update process with reg_num session -->  
@@ -16,7 +16,7 @@
               
             </div>
         <div class="col s12">
-            <button type="submit" class="btn btn-primary mb-2">Search</button>
+            <button type="submit" class="btn waves-effect waves-red admin-custom-buttons"><i class="fas fa-search-plus red-text"></i> Search</button>
         </div>
     </form>
 </div>

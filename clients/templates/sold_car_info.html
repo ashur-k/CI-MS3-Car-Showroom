@@ -1,14 +1,17 @@
 {% extends 'admin_base.html' %}
 {% block content %}
 <!--Page top container AKA car make/model/registration number-->
-<div class="container">
-<h2> <i class="fas fa-arrow-alt-circle-down"></i> Sold car information</h2><hr>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-arrow-alt-circle-down red-text"></i> Sold car information</h3>
+    </div><hr class="container-bottom-hr-styling">
+
 
 <!--Collapsible section AKA user information-->
 <ul class="collapsible">
     <li>
         <div class="collapsible-header">
-            <span><i class="material-icons">expand_more</i></span><span><i class="material-icons right">account_circle</i>Buyer Information</span>
+            <span><i class="material-icons red-text">expand_more</i></span><span><i class="material-icons red-text right">account_circle</i>Buyer Information</span>
         </div>
         <div class="collapsible-body">
         <table>
@@ -37,6 +40,15 @@
         </div>
     </li>
 </ul>
+ <div class="row info_title_row">
+        <div class="col s12">
+            <h5>{{ car_info.car_make }} {{ car_info.car_model }}</h5>
+            <hr class="">
+        </div>
+        <div class="col s12">
+            <h5>{{ car_info.car_original_price}}</h5>           
+        </div>
+    </div> 
 </div>
 <!--Slider contianer AKA car picture-->
 <div class="container">
@@ -54,15 +66,8 @@
 
 <!--information container AKA BAsic car information-->
 <div class="container" style="margin-bottom:40px">
-    <div class="row">
-        <div class="col s12">
-            <h2>{{ car_info.car_make }} {{ car_info.car_model }}</h2><hr>
-        </div>
-        <div class="col s12">
-            <h3>{{ car_info.car_original_price}}</h3>           
-        </div>
-    </div> 
-<div class="row red lighten-3">
+   
+<div class="row red darken-4 white-text">
     <div class="col s12 m2 l2 valign-wrapper" >
         <blockquote>
             <h6 class="center-align">Seats: </h6>
@@ -161,8 +166,8 @@
 </div>
 <div class="row">
     <div class="col s12">
-        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn custom_btn">
-        <i class="fas fa-hand-point-left"></i> Go back to Admin dashboard</a>
+        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
+        <i class="fas fa-hand-point-left red-text"></i> Go back to Admin dashboard</a>
     </div>
 </div>
 </div>

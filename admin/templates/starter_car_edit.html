@@ -3,14 +3,17 @@
 
 {% block content %}
 
-<div class="container">
-<h2>Car update-delete form</h2>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-user-edit red-text"></i> Car update-delete form</h3>
+    </div>
+    <hr class="container-bottom-hr-styling">
 </div>
 <div class="container">
 
     <form action="{{ url_for('admin.car_update_page') }}" id="update_starter_page" name="update_starter_page"  method="POST">
-        <div class="row">
-        <h4>Delete car</h4>
+       <div class="row"><h5><i class="fas fa-trash-alt red-text"></i> Delete car</h5></div>
+        <div class="row">     
             <div class="input-field col s6">
                 <select class="validate" id="car_make" required>
                     <option value="{{ car_coll.car_make }}">{{ car_coll.car_make }}</option>
@@ -26,14 +29,14 @@
                 <input type="hidden" name="hiddenCarId" value="{{ car_coll._id}}">
             </div>
             <div class="col s12">
-                <a href="#deleteModal" class="waves-effect waves-light btn modal-trigger">Delete car</a>
+                <a href="#deleteModal" class="btn waves-effect waves-red admin-custom-buttons modal-trigger"><i class="fas fa-trash-alt red-text"></i> Delete car</a>
             </div>
         </div>
-        <div class="row">
-          <h4>Update car</h4>      
-            <div class="col s12">
-                <h6 class="p-2 m-2">You can change registration number and car make now if you want to.</h6>
+         <div class="row"><h5><i class="far fa-edit red-text"></i> Update car</h5></div>
+           <div class="row">
+                <h6>Please change registration number or car make here if you want to.</h6>
             </div>
+        <div class="row">
             <div class="input-field col s6">
                 <select class="validate" id="new_car_make" name="car_make" required>
                     <option value="{{ car_coll.car_make }}" selected>{{ car_coll.car_make }}</option>
@@ -53,9 +56,8 @@
                 {% endif %}
             </div>
             <div class="col s12">
-                <button class="btn btn-primary btn-sm" form="update_starter_page" type="submit">
-                    Update Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
-                </button>
+                <button class="btn waves-effect waves-red admin-custom-buttons" form="update_starter_page" type="submit">
+                  <i class="far fa-edit red-text"></i> Update car</button>
             </div>
         </div>
 

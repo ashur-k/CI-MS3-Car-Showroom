@@ -54,11 +54,11 @@
 <!--Admin Dahsboard codes-->
 {% if clients_info %}
 
-<div class="section container ">
+<div class="section container admin-dashboard-container">
 <!--Add heading in a tag to use tooltip-->
-<div class="row grey darken-4 valign-wrapper" style="margin-top:22px; margin-bottom: 5px;">
-<a class="tooltipped" data-position="top" data-tooltip="{{clients_info.count()}} pending clients on dashboard">
-<h3 class="white-text" style="margin:20px;  font-weight:bolder;"><i class="fas fa-user-shield red-text"></i> ADMIN DASHBOARD</h3>
+<div class="row grey darken-4 valign-wrapper">
+    <a class="tooltipped" data-position="top" data-tooltip="{{clients_info.count()}} pending clients on dashboard">
+    <h3 class="white-text" ><i class="fas fa-users-cog red-text"></i> ADMIN DASHBOARD</h3>
 </a>
 </div><hr class="container-bottom-hr-styling">
 
@@ -66,12 +66,12 @@
 {% for clients in clients_info %}
 {% if clients.dashboard_status == 'true' %}
 
-<div class="section container" id="" style=""> 
+<div class="section container"> 
     <div class="row">
         <!--Cat cliet is interested in infomation column-->
         <div class="col s12 m12 l5">
             <div class="row valign-wrapper">
-                <h4 class="" style=""><span><i class="fas fa-car black-text" ></i> CAR CLIENT IS INTERESTED IN</span><hr></h4>
+                <h4><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h4>
             </div>
         
 
@@ -79,12 +79,12 @@
             {% if clients.car_status == 'car_is_sold' %}
             <div class="row">
             <div class="col s12 ">
-            <p class="lead  text-center" style="color:red; font-weight:bolder; font-size:22px;">This car is sold.</p>
+            <p class="car-sold-para  text-center">This car is sold.</p>
             </div>
             </div>
             {% endif %}
         <div class="card grey darken-4  hoverable">
-        <div class="card-image" style="padding:22px">
+        <div class="card-image card-image-padding">
           <img src="{{ clients.car_image_url }}">
           <span class="card-title"><span class="admin-custom-card-title">Car make: {{ clients.car_make }}</span></span>
         
@@ -98,11 +98,13 @@
         </div>
         
          <div class="card-action">
-         <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" style="font-weight:bolder;">See full car info</a>
-         {% if clients.car_status == 'car_is_sold' %}
-            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" style="font-weight:bolder;">Book different car for client</a>
+         
+            {% if clients.car_status == 'car_is_sold' %}
+            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">See full car info</a>
+            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">Book different car for client</a>
             {% else %}
-            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">Car sold</a>
+            <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">See full car info</a>
+            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">Sell car</a>
             {%endif%}
         </div>
         </div>
@@ -112,10 +114,10 @@
         <!--Cliet infomation column-->
         <div class="col s12 m12 l5 offset-l2">
         <div class="row valign-wrapper">
-            <h4 class="" style=""><span><i class="fas fa-info-circle" style=" color:#000;"></i> CLIENT'S INFORMATION</span><hr></h4>
+            <h4><span><i class="fas fa-info-circle red-text"></i> CLIENT'S INFORMATION</span><hr></h4>
         </div>
         
-            <div class="card web_theme-card hoverable" style="margin-top:0px">
+            <div class="card web_theme-card hoverable">
 
                 <div class="card-content white-text">
                 <span class="card-title">Client Name: {{ clients.full_name }}</span> 
