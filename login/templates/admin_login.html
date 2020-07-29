@@ -1,60 +1,64 @@
-{% extends 'base.html' %} 
-{% block login_css %}<link rel="stylesheet" href="{{url_for('login.static', filename='css/login_style.css')}}"> {% endblock %}
+{% extends 'admin_base.html' %} 
+
  {% block head %} 
   Admin Login
  {% endblock %}
 
   
 {% block content %}
-    <img src= "{{url_for('static', filename='img/3.jpg')}}" class="wave">
-    <div class="grid_container">
-        <div class="img">
-            <img src="">
-        </div>
-        <div class="login-content">
-            <form class="form" name="login_form" method="POST" action="{{ url_for('login.logging_in') }}">
-                <img src="{{url_for('static', filename='img/avatar.svg')}}">
-                <h2>Welcome</h2>
-                <div class="input-div one">
-                    <div class="i">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="div">
-                        
-                        <input type="text" placeholder="Username" name="username" class="input">
-                    </div>
-                </div>
-                <div class="input-div pass">
-                    <div class="i">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <div class="div">
-                        
-                        <input type="password" placeholder="Password" name="password" class="input">
-                    </div>
-                </div>
-                <a href="">Forgot Password...?</a>
-                <input type="submit" class="custom_btn" value="login">
-                   
-        {% with messages = get_flashed_messages() %} 
-        {% if messages %}    
-           {% for message in messages %}
-            <p>{{ message  }}</p>
-            {% endfor %}
-        
-        {% endif %} 
-        {% endwith %}
-            </form>
-        </div>
+<div class="section container admin-dashboard-container">
+<!--Add heading in a tag to use tooltip-->
+<div class="row grey darken-4 valign-wrapper">
+   <h3 class="white-text" ><i class="fas fa-sign-in-alt red-text"></i> Welcome to admin login</h3>
+</div><hr class="container-bottom-hr-styling">
+
+</div>
+<div class="container web_theme" style="padding:20px; margin-top: 20px;">
+    <div class="row valign-wrapper grey lighten-5">
+        <h4 class="black-text custom-h3-view-clients"><i class="fas fa-user-shield red-text"></i> Admin login</h4>
     </div>
 
+    <div class="row">
+        <form class="col s12" method="POST" action="{{ url_for('login.logging_in') }}" autocomplete="off">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="validate input-area white-text" type="text" name="username" required>
+                    <label class="custom-input-class login-input-label"  for="search"><i class="fas fa-user black-text"></i> User name</label>
+                </div>
+                 <div class="input-field col s12">
+                    <input class="validate input-area white-text" type="password" name="password"  required>
+                    <label class="custom-input-class login-input-label"  for="password"><i class="fas fa-key black-text"></i> Password</label>
+                </div>
+                <div class="row" style="padding-left:12px;">
+                <div class="col s12">
+                 {% with messages = get_flashed_messages() %} 
+                    {% if messages %}    
+                    {% for message in messages %}
+                        <p>{{ message  }}</p>
+                        {% endfor %}
+                    
+                    {% endif %} 
+                    {% endwith %}
+                </div>
+                <div class="col s12">
+                    <button class="waves-effect waves-light btn admin-custom-buttons tooltipped" data-position="right" data-tooltip="Search user name/email/phone" type="submit">
+                    <i class="fas fa-unlock-alt red-text"></i> Login</button>
+                </div>
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>
+               
+                   
+       
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script type="text/javascript" src="script.js">
     </script>
-</body>
 
-</html>
+
+
 {%endblock%}

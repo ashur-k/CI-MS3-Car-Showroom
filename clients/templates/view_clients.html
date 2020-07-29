@@ -1,4 +1,7 @@
-{% extends 'admin_base.html' %} {% block content %}
+{% extends 'admin_base.html' %} 
+{% block head %}Client Administration Page{% endblock %}
+{% block content %}
+
 {% with errors = get_flashed_messages(category_filter=["client_deleted"]) %}
 {% if errors %}
 <div class="container">
@@ -16,7 +19,7 @@
 <!--Add heading in a tag to use tooltip-->
 <div class="row grey darken-4 valign-wrapper">
     <a class="tooltipped" data-position="top" data-tooltip="{{clients_info.count()}} clients on dashboard">
-    <h3 class="white-text" ><i class="fas fa-users-cog red-text"></i> Admin Client Adminstration</h3>
+    <h3 class="white-text" ><i class="fas fa-users-cog red-text"></i> Client Adminstration Page</h3>
 </a>
 </div><hr class="container-bottom-hr-styling">
 

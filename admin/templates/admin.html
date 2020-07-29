@@ -1,6 +1,7 @@
 {% extends 'admin_base.html' %}
-{% block head %}Admin page{% endblock %}
+{% block head %}Admin home page{% endblock %}
   {% block content %}
+
   <!--This block of code will only execute when new car registration is in process and stopped-->
 {% if car_make and car_model and reg_num %}
 <div class="container registration-process-container">

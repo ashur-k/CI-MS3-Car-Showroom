@@ -146,3 +146,7 @@ padding-left: 12px;
     font-weight: bolder;
 }
 
+.login-input-label{
+    color: #212121;
+    font-size: 22px;
+}

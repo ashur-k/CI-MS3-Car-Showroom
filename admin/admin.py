@@ -344,3 +344,4 @@ def delete_client_admin_url(client_id):
 
     flash(u'Client is successfully deleted from database.', 'appiontment')
     return redirect(url_for('admin.admin_homepage'))
+
