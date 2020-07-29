@@ -1,9 +1,12 @@
 {% extends 'admin_base.html' %}
 {% block content %}
-<div class="container">
-<h2> <i class="fas fa-arrow-alt-circle-down"></i> Car information</h2><hr>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"> <i class="fas fa-arrow-alt-circle-down red-text"></i> Car information</h3>
+    </div><hr class="container-bottom-hr-styling">
+
 </div>
-<div class="container">
+<div class="container" style="padding-top:10px;">
 <section class="slider">
  <ul class="slides">
       <li>
@@ -15,19 +18,22 @@
 </section>
 </div>
 <div class="container" style="margin-bottom:40px">
-    <div class="row">
-        <div class="col s12">
-            <h2>{{ car_info.car_make }} {{ car_info.car_model }}</h2><hr>
+ <div class="row car-sold-row grey darken-4 valign-wrapper">
+            <h4 class="white-text">{{ car_info.car_make }} {{ car_info.car_model }}</h4>
         </div>
+    <div class="row red darken-4 white-text">
+       
         <div class="col s12">
-            <h3>{{ car_info.car_original_price}}</h3>           
-        </div>
-    </div> 
-<div class="row red lighten-3">
+        <div class="row" style="padding-left:12px;">
+           <h4>{{ car_info.car_price }}</h4>     
+        </div><hr>
+               
+        </div><hr>
+        <div class="row red darken-4 white-text">
     <div class="col s12 m2 l2 valign-wrapper" >
         <blockquote>
-            <h6 class="center-align">Seats: </h6>
-            <h6 class="center-align">{{car_info.seats}}</h6>
+            <h6 class="center-align black-text">Seats: </h6>
+            <h6 class="center-align ">{{car_info.seats}}</h6>
         </blockquote>
     </div>
     <div class="col s12 m2 l2 valign-wrapper">
@@ -61,7 +67,8 @@
         </blockquote>
     </div>
 
-</div>
+        </div>
+    </div> 
     <div class="row">
     <div class="col s12"><h4>Car summary</h4></div>
     <div class="col s12"><p>Body type: </p><strong><p>{{ car_info.body_type }}</p></strong><hr></div>
@@ -122,7 +129,7 @@
 </div>
 <div class="row">
     <div class="col s12">
-        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn custom_btn">
+        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
         <i class="fas fa-hand-point-left"></i> Go back to Admin dashboard</a>
     </div>
 </div>

@@ -3,19 +3,26 @@
 
 {% block content %}
 
-<div class="container p-3">
-<h3 class="">{{ car_make }}</h3><hr>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-plus red-text"></i> Adding car to car make {{ car_make }}</h3>
+    </div><hr class="container-bottom-hr-styling">
+</div>
+<div class="container">
+<div class="row">
+<h5>Please enter registration number fo new car and select car model.</h5>
+</div>
     <div class="row">
         <form class="col s12" action="{{ url_for('admin.reg_verification', car_make=car_make) }}" name="add_car_details" method="POST">
             <div class="row">
                 <div class="input-field col s6">
-          <i class="material-icons prefix">create_new_folder</i>
+          <i class="material-icons red-text prefix">create_new_folder</i>
           <input id="icon_prefix" name="reg_num" type="text" class="validate" required>
           <label for="icon_prefix">Car registraion number</label>
           
                 </div>
                 <div class="input-field col s6">
-          <i class="material-icons prefix">create_new_folder</i>
+          <i class="material-icons red-text prefix">create_new_folder</i>
           <select name="car_model" required class="validate">
             <option value="" disabled selected>Select car model</option>
             {% for results in car_models %}
@@ -26,16 +33,13 @@
                 </div>
             </div>
             
-            <button class="btn waves-effect waves-light" type="submit" name="action">Add car registration
-            <i class="material-icons left">add</i>
+            <button class="waves-effect waves-light btn admin-custom-buttons" type="submit" name="action">Add car registration
+            <i class="material-icons left red-text">add</i>
             </button>
         
         </form>
     </div>
 </div>
-
-
-
 
 <div class="container">
 <div class="row">

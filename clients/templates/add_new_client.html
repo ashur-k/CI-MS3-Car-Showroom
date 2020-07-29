@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<div class="container red lighten-2" style="padding:20px; margin-top: 20px;">
-    <div class="row ">
-        <h2><i class="material-icons" style="font-size:42px;">add_circle</i> Book cleint for test drive </h2><hr>
-        <h6><strong>Please, enter registration number of car you want to book appointment for.</strong></h6>
+<div class="container admin-dashboard-container" style="">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-bookmark red-text"></i> Book cleint for test drive </h3>
+    </div><hr class="container-bottom-hr-styling">
+    <div class="row">
+        <h6>Please, enter registration number of car you want to book test drive for.</h6>
         <form class="col s12" action="{{url_for('client_blueprint.find_reg_num_for_client')}}" method="POST">
             <div class="row">
                 <div class="input-field col s12">
@@ -13,7 +15,7 @@
                     <label class="m-3" for="email">Car registration number</label>
                 </div>
                 <div class="input-field col s12">
-                    <button class="waves-effect waves-light btn" type="submit"><i class="material-icons left">search</i>Find car</button>
+                    <button class="waves-effect waves-light btn admin-custom-buttons" type="submit"><i class="material-icons red-text left">search</i>Find car</button>
                 </div>
             </div>
         </form> 

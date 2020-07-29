@@ -5,9 +5,13 @@
 <!--Car Basic information-->
 
 
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-plus red-text"></i> Addine new car to {{ car_makers.car_make }} {{ car_model }}</h3>
+    </div><hr class="container-bottom-hr-styling">
+</div>
 <div class="container">
-<h2>{{ car_makers.car_make }} </h2>
-
+<div class="row">
 <form action="{{ url_for('admin.add_car') }}" name="add_new_car"  method="POST">
 <h4 class="mt-3">Basic car informaiton</h4><hr>
 
@@ -272,15 +276,15 @@
 
   <div class="row">
   <div class="col s12">
-    <button class="btn btn-primary" type="submit">
-      Add New Car <i class="fas fa-plus"></i> <i class="fas fa-car"></i>
+    <button class="btn waves-effect waves-red admin-custom-buttons" type="submit">
+      <i class="fas fa-plus red-text"></i> Add New Car 
         </button>
   </div>
 
   </div>
  
 </form>
-
+</div>
 </div>
 
 {%endblock%}

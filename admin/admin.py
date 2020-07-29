@@ -86,7 +86,7 @@ def add_car():
         return redirect(url_for('admin.add_car_details',
                         car_make=session['car_make'],
                         car_model=session['car_model'],
-                        reg_num=session['reg_num']))
+                        reg_num=session['reg_num'])) #this registration number is conflicitng with car update registraion number
 
     if existing_registration is None:
         add_car = mongo.db.basic_car_information
@@ -141,9 +141,9 @@ def add_model():
 
 @admin.route('/search', methods=['POST', 'GET'])
 def search():
-    #cars_make = mongo.db.car_make
-    #cars_model = mongo.db.car_model
-    #client_info = mongo.db.client_info
+    # cars_make = mongo.db.car_make
+    # cars_model = mongo.db.car_model
+    # client_info = mongo.db.client_info
 
     registration_num_search = \
         mongo.db.basic_car_information.find_one({'reg_num': request.form['search']})
@@ -206,16 +206,16 @@ def update_car_info():
 @admin.route('/update_options', methods=['POST', 'GET'], defaults={'registration_number': None})
 @admin.route('/update_options/<registration_number>', methods=['POST', 'GET'])
 def update_options(registration_number):
-    # ending session if request is generated from update_car_info.html temolate
+    # ending session if request is generated from update_car_info.html template
     if registration_number:
-        if 'reg_num' and 'new_reg_num' in session:
-            session.pop('reg_num', None)
+        if 'old_reg_num' and 'new_reg_num' in session: #change to old_reg_num here
+            session.pop('old_reg_num', None) #change to old_reg_num here
             session.pop('new_reg_num', None)
 
-    if 'reg_num' in session:
+    if 'old_reg_num' in session: # change to old_reg_num here
         new_reg_num = session['new_reg_num']
         car_make_results = mongo.db.car_make.find()
-        car_coll = mongo.db.basic_car_information.find_one({'reg_num': session['reg_num']})
+        car_coll = mongo.db.basic_car_information.find_one({'reg_num': session['old_reg_num']}) # change to old_reg_num here
         return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=mongo.db.car_make.find())
 
     reg_num = request.form['reg_num']
@@ -235,7 +235,7 @@ def car_update_page():
     new_reg_num = request.form['reg_num']
 
     car_make = request.form['car_make']
-    session['reg_num'] = old_reg_num
+    session['old_reg_num'] = old_reg_num # this is registration number which is conflicting #changing name to old_reg_num
     session['new_reg_num'] = new_reg_num
 
     if new_reg_num != old_reg_num:
@@ -257,14 +257,14 @@ def car_update_page():
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
 def update_info_db(car_id):
     # session.clear()
-    if session['reg_num'] != session['new_reg_num']:
+    if session['old_reg_num'] != session['new_reg_num']: #change to old_reg_num here
         clients_who_requested_same_this_car = mongo.db.client_info.find({'reg_num': session['reg_num']})
         print (clients_who_requested_same_this_car)
         mongo.db.client_info.update_many({"reg_num": session['reg_num'] }, {'$set': {'reg_num':session['new_reg_num']}})
 
     mongo.db.basic_car_information.update({'_id': ObjectId(car_id)},
                           request.form.to_dict())
-    session.pop('reg_num', None)
+    session.pop('old_reg_num', None) #change to old_reg_num here
     session.pop('new_reg_num', None)
     flash('Car details are successfully updated to registration number {}.'.format(request.form['reg_num']))
     return redirect(url_for('admin.update_car_info'))

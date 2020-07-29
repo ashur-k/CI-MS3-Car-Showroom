@@ -40,15 +40,6 @@
         </div>
     </li>
 </ul>
- <div class="row info_title_row">
-        <div class="col s12">
-            <h5>{{ car_info.car_make }} {{ car_info.car_model }}</h5>
-            <hr class="">
-        </div>
-        <div class="col s12">
-            <h5>{{ car_info.car_original_price}}</h5>           
-        </div>
-    </div> 
 </div>
 <!--Slider contianer AKA car picture-->
 <div class="container">
@@ -66,12 +57,22 @@
 
 <!--information container AKA BAsic car information-->
 <div class="container" style="margin-bottom:40px">
-   
-<div class="row red darken-4 white-text">
+ <div class="row car-sold-row grey darken-4 valign-wrapper">
+            <h4 class="white-text">{{ car_info.car_make }} {{ car_info.car_model }}</h4>
+        </div>
+    <div class="row red darken-4 white-text">
+       
+        <div class="col s12">
+        <div class="row" style="padding-left:12px;">
+           <h4>{{ car_info.car_original_price }}</h4>     
+        </div><hr>
+               
+        </div><hr>
+        <div class="row red darken-4 white-text">
     <div class="col s12 m2 l2 valign-wrapper" >
         <blockquote>
-            <h6 class="center-align">Seats: </h6>
-            <h6 class="center-align">{{car_info.seats}}</h6>
+            <h6 class="center-align black-text">Seats: </h6>
+            <h6 class="center-align ">{{car_info.seats}}</h6>
         </blockquote>
     </div>
     <div class="col s12 m2 l2 valign-wrapper">
@@ -105,7 +106,9 @@
         </blockquote>
     </div>
 
-</div>
+        </div>
+    </div> 
+
     <div class="row">
     <div class="col s12"><h4>Car summary</h4></div>
     <div class="col s12"><p>Body type: </p><strong><p>{{ car_info.body_type }}</p></strong><hr></div>

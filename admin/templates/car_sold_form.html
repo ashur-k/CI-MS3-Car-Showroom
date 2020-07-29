@@ -1,14 +1,18 @@
 {% extends 'admin_base.html' %}
   {% block content %}
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-arrow-alt-circle-down red-text"></i> Selling car</h3>
+    </div><hr class="container-bottom-hr-styling">
+</div>
 <div class="container">
-    <h2><i class="fas fa-arrow-alt-circle-down"></i> Selling car</h2><hr>
     <div class="row">
         <div class="col s12 center-align">
             <ul class="collapsible">
                 <li>
                     <div class="collapsible-header">
                         <i class="material-icons right"> keyboard_arrow_down</i> 
-                        <i class="fas fa-car-side" style="margin-left:5px;"></i>
+                        <i class="fas fa-car-side red-text" style="margin-left:5px;"></i>
                         {{sold_car.car_make}} {{sold_car.car_model}}, Registration number {{sold_car.reg_num}}
                     </div>
                     <div class="collapsible-body"><span><img class="activator" src="{{ sold_car.car_image_url }}"></span></div>
@@ -16,31 +20,34 @@
             </ul>
         </div>
     </div>
-    <h4>Fill in information below</h4><hr>
+    <div class="row">
+        <h5>Fill in information below</h5>
+    </div>
+    
     <div class="row">
         <form class="col s12" action="{{url_for('admin.car_sold', car_id=sold_car._id)}}" method="POST">
             <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
+                <i class="material-icons prefix red-text">account_circle</i>
                 <input type="text" class="form-control" id="full_name" name="full_name" value="{{client_info.full_name}}" required>
                 <label for="exampleInputEmail1">Full name</label>
             </div>
             <div class="input-field col s12">
-                <i class="material-icons prefix">email</i>
+                <i class="material-icons prefix red-text">email</i>
                 <input type="email" class="form-control" id="email" name="email" value="{{client_info.email}}" required>
                 <label for="email">Email <address></address></label>
             </div>
             <div class="input-field col s12">
-                <i class="material-icons prefix">phone</i>
+                <i class="material-icons prefix red-text">phone</i>
                 <input type="tel" class="form-control" id="phone" name="phone" value="{{client_info.phone}}"  required> 
                 <label  for="phone">Telephone number</label>
             </div>
             <div class="input-field col s12">
-                <i class="material-icons prefix">location_on</i>
+                <i class="material-icons prefix red-text">location_on</i>
                 <input type="tel" class="form-control" id="address" name="address" required>
                 <label  for="address">Address</label>
             </div>
             <div class="input-field col s12">
-                        <i class="material-icons prefix">money</i>
+                        <i class="material-icons prefix red-text">money</i>
                         <input type="tel" class="form-control" id="sold_amount" name="sold_amount" value=""  required> 
                         <label  for="sold_amount">Sold_amount</label>
             </div>
@@ -89,7 +96,7 @@
             <!--Button here-->
             <div class="row">
                 <div class="col s12">
-                    <button class="btn btn-dark mb-4" type="submit">Submit information <i class="material-icons right">send</i></button>
+                    <button class="waves-effect waves-light btn admin-custom-buttons" type="submit">Submit information <i class="material-icons right red-text">send</i></button>
                 </div>
             </div>
         </form>
