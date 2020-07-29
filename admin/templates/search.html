@@ -17,7 +17,7 @@
         
     {% for result in car_make_results %}
     <div class="row">
-    <h4>Find Results:</h4><hr>
+    <h4>Find results:</h4><hr>
         <div class="col s12">
             <div class="row">
                 <div class="card grey darken-4 hoverable">
@@ -93,14 +93,12 @@
 </div>
   <!--For no results in make results found row-->
 {% elif car_make_search %}
-<div class="container">
-    <div class="row">
-        <div class="col s12">
-            <h2><i class="fas fa-search-plus"></i> No Cars are seached in car make {{ car_make_search.car_make }}.</h2><hr>
-        </div>
-    </div>
+<div class="container admin-dashboard-container">
+    <div class="row grey darken-4 valign-wrapper">
+        <h3 class="white-text"><i class="fas fa-search-minus red-text"></i> No Cars are seached in car make {{ car_make_search.car_make }}.</h3>
+    </div><hr class="container-bottom-hr-styling">
 </div>
-<div class="container p-4">
+<div class="container">
     <div class="row">
         <div class="col s12">
             <h5>At the moment there are no cars aviliable in showroom for car make {{ car_make_search.car_make }}.</h5>
@@ -288,20 +286,34 @@
 
 {% elif car_model_search %} 
 
- <div class="container p-4">
-<div class="row">
-    <h3>There are no cars available in the car model: {{ car_model_search.car_model}}</h3>
+ <div class="container admin-dashboard-container">
+<div class="row grey darken-4 valign-wrapper">
+    <h3 class="white-text"><i class="fas fa-search-minus red-text"></i> No car available in {{ car_model_search.car_model}}</h3>
     
+    </div><hr class="container-bottom-hr-styling">
+</div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col s12">
+            <h5>At the moment there are no cars aviliable in showroom for {{ car_model_search.car_make }} {{ car_model_search.car_model }}.</h5>
+        </div>
     </div>
 </div>
 
     {% else %}
-     <div class="container p-4">
-<div class="row">
-    <h3>No results found in search you made.</h3>
-    
+    <div class="container admin-dashboard-container">
+        <div class="row grey darken-4 valign-wrapper">
+            <h3 class="white-text"><i class="fas fa-search-minus red-text"></i> No results found in search you made.</h3>
+        </div><hr class="container-bottom-hr-styling">
+    </div>
+    <div class="container p-4">
+    <div class="row">
+        <div class="col s12">
+            <h5>Please check keywords for your search. No car found related to keyword you are searched.</h5>
+        </div>
     </div>
 </div>
+
 
 {% endif %}
 

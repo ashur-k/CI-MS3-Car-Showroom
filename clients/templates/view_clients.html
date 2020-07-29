@@ -12,14 +12,24 @@
 </div>
 {% endif %}
 {% endwith %}
+<div class="section container admin-dashboard-container">
+<!--Add heading in a tag to use tooltip-->
+<div class="row grey darken-4 valign-wrapper">
+    <a class="tooltipped" data-position="top" data-tooltip="{{clients_info.count()}} clients on dashboard">
+    <h3 class="white-text" ><i class="fas fa-users-cog red-text"></i> Admin Client Adminstration</h3>
+</a>
+</div><hr class="container-bottom-hr-styling">
+
+</div>
+
 <div class="container web_theme" style="padding:20px; margin-top: 20px;">
-    <div class="row valign-wrapper grey darken-4">
-        <h3 class="custom-h3-view-clients"><i class="fas fa-search-plus red-text"></i> Search client</h3>
+    <div class="row valign-wrapper grey lighten-5">
+        <h4 class="black-text custom-h3-view-clients"><i class="fas fa-search-plus red-text"></i> Search client</h4>
     </div>
     <div class="row">
      <h6><strong>Please enter client detail's you want to search for.</strong></h6>
     </div>
-       
+    <div class="row">
         <form class="col s12" action="{{url_for('client_blueprint.client_search')}}" method="POST" autocomplete="off">
             <div class="row">
                 <div class="input-field col s12">
@@ -35,13 +45,7 @@
             </div>
         </form> 
     </div>
-   
-
-
-<div class="col s12 m12 l5"> </div>
-<div class="col s12 m12 l5 offset-l2"> </div>
-
-
+</div>
 
 {% for clients in clients_info |sort (reverse=false, attribute="full_name") %}
 <div class="section container" id="" style=""> 
@@ -50,7 +54,7 @@
         <!--Cat cliet is interested in infomation column-->
         <div class="col s12 m12 l5">
           <div class="row valign-wrapper">
-                <h5><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h5>
+                <h5 style="margin-left:20px;"><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h5>
             </div>
             {% if clients.car_status == 'car_is_sold' %}
             <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
@@ -71,11 +75,18 @@
         
          <div class="card-action">
          {% if clients.car_status == 'car_is_sold' %}
-            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">See full car info</a>
-            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">Book different car for client</a>
+            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                <i class="fas fa-info-circle red-text"></i> See full car info
+            </a>
+            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-exchange-alt red-text"></i> Book different car for client
+            </a>
             {% else %}
-            <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">See full car info</a>
-            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">Car sold</a>
+            <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                <i class="fas fa-info-circle red-text"></i> See full car info
+            </a>
+            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-money-check red-text"></i> Sell car</a>
             {%endif%}
         </div>
         </div>
@@ -85,7 +96,7 @@
         <!--Cliet infomation column-->
         <div class="col s12 m12 l5 offset-l2">
             <div class="row valign-wrapper">
-            <h5><span><i class="fas fa-info-circle red-text"></i> CLIENT'S INFORMATION</span><hr></h5>
+            <h5 style="margin-left:20px;"><span><i class="fas fa-info-circle red-text"></i> CLIENT'S INFORMATION</span><hr></h5>
         </div>
             <div class="card web_theme-card">
 
@@ -95,7 +106,7 @@
                 </div>
                     <ul class="collapsible popout">
                         <li>
-                        <div class="collapsible-header"><i class="fas fa-calendar-check red-text"></i>Book an appiontment<i class="material-icons right">keyboard_arrow_down</i></div>
+                        <div class="collapsible-header"><i class="fas fa-calendar-check red-text"></i>Book an appiontment<i class="material-icons red-text right">keyboard_arrow_down</i></div>
                         <div class="collapsible-body">
                         
                          <form class="" action="{{url_for('client_blueprint.add_appiontments_records')}}" id="appiontment_form{{ clients._id }}"  method="POST">
@@ -168,10 +179,13 @@
                 </ul>
                 </div>
                 <div class="card-action">
-                <a type="button" class="waves-effect waves-light btn modal-trigger custom-button" href="#modal{{ clients._id }}">Delete client</a>
+                <a type="button" class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#modal{{ clients._id }}">
+                <i class="fas fa-trash-alt red-text"></i> Delete client</a>
+                </a>
 
                  {% if clients.dashboard_status == 'false' %}
-               <a class="waves-effect waves-light btn modal-trigger" href="#movetosashboard{{ clients._id }}">Move client to dashboard</a>
+               <a class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#movetosashboard{{ clients._id }}">
+               <i class="fas fa-trash-restore-alt red-text"></i> Move client to dashboard</a>
                 {% else %}
                 
                 {% endif %}

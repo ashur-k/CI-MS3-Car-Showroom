@@ -1,171 +1,223 @@
 {% extends 'admin_base.html' %}
-
  {% block content %}
- <div class="container mt-2">
- <h2>Client search results:</h2><hr>
- {% if clients %}
-{% for client in clients %}
-    <div class="container p-3">
-<h3>Cars clients requested</h3>
+
+<div class="container web_theme" style="padding:20px; margin-top: 20px;">
+    <div class="row valign-wrapper grey lighten-5">
+        <h4 class="black-text custom-h3-view-clients"><i class="fas fa-search-plus red-text"></i> Search client</h4>
+    </div>
     <div class="row">
-        <div class="col-sm-6">
-        <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ client.car_image_url }}" alt="Card image cap">
-        <div class="card-body">
- 
-        <h5 class="card-title">Car make: {{ client.car_make }}</h5>
-  
-        <p class="card-text">Car model: {{ client.car_model }}</p>
+     <h6><strong>Please enter client detail's you want to search for.</strong></h6>
+    </div>
+    <div class="row">
+        <form class="col s12" action="{{url_for('client_blueprint.client_search')}}" method="POST" autocomplete="off">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="validate input-area white-text valid" type="text" id="client_search" name="search" required>
+                    <label class="custom-input-class white-text"  for="search">Car registration number</label>
+                </div>
+                <div class="row" style="padding-left:12px;">
+                <div class="col s12">
+                    <button class="waves-effect waves-light btn admin-custom-buttons tooltipped" data-position="right" data-tooltip="Search user name/email/phone" type="submit">
+                    <i class="fas fa-search-plus red-text"></i> Find client</button>
+                </div>
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>
+
+
+<div class="container" style="padding-top:22px;">
+    <div class="row">
+        <h4 class="black-text"> Client search results:</h4><hr>
+    </div>
+</div>
+
+
+{% if clients %}
+{% for client in clients %}
+<div class="section container"> 
+    <div class="row valign-wrapper">
+    <!--Car cliet is interested in infomation column-->
+         <div class="col s12 m12 l5">
+            <div class="row valign-wrapper">
+                <h5 style="margin-left:20px;"><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h5>
+            </div>
+            {% if client.car_status == 'car_is_sold' %}
+           <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
+            {% endif %}
+                <div class="card grey darken-4 hoverable">
+        <div class="card-image card-image-padding">
+          <img src="{{ client.car_image_url }}">
+          <span class="card-title">
+                <span class="admin-custom-card-title">
+                     Car make: {{ client.car_make }}
+                </span>
+            </span>
+        
         </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">Car reg num: {{ client.reg_num }}</li>
-        <li class="list-group-item">Registration Year: {{ client.registration_year }}</li>
-   
-    </ul>
-{% if client.car_status == 'car_is_sold' %}
-        <a
-          href="{{url_for('client_blueprint.sold_car_info', reg_num=client.reg_num)}}"
-          class="btn btn-dark btn-sm m-1"
-          >See full car info</a
-        >
-        <p class="lead text-center" style="color: red; font-weight: bolder;">
-          This car is sold.
-        </p>
-{% else %}
-
-    <a class="btn btn-sm bg-dark m-1" style="color: white;" href="{{url_for('client_blueprint.view', reg_num=client.reg_num)}}">See full car info</a>
-    <a class="btn btn-sm bg-dark m-1" style="color: white;" href="{{url_for('admin.car_sold_form', reg_num=client.reg_num)}}">Car sold</a>
-     {%endif%}
- </div>
-  </div>
-       <div class="col-sm-6">
-        <h3>Client's information</h3>
-        <p>Client Name: {{ client.full_name }}</p>
-        <p>Client Email: {{ client.email }}</p>
-        <p>Client phone: {{ client.phone}}</p>
-
- 
-        <p>Best time to contact: {{ client.best_time_to_contact }}</p>
-        <p>Best date to contact: {{ client.best_date_to_contact}}</p>
-
-{% if client.appiontment_time %}
-            <p class="lead m-2"> <mark> Appiontment time:<strong>{{client.appiontment_time}}</strong> </mark></p>
-            <p class="lead m-2"><mark>Appiontment date:<strong> {{client.appiontment_date}}</strong></mark></p>
-            <p class="m-2"><mark>Client Instructions:<p class="m-2">{{client.client_related_notes}}</p></mark></p>
+        <div class="card-content">
+            <ul class="collection">
+                <li class="collection-item admin-custom-li">Car model: {{ client.car_model }}</li>
+                <li class="collection-item admin-custom-li">Car reg num: {{ client.reg_num }}</li>
+                <li class="collection-item admin-custom-li">Registration Year: {{ client.registration_year }}</li>
+            </ul>
+        </div>
+        
+         <div class="card-action">
+         
+            {% if client.car_status == 'car_is_sold' %}
+            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=client.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-info-circle red-text"></i> See full car info
+            </a>
+            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-exchange-alt red-text"></i> Book different car for client</a>
             {% else %}
-            <p class="lead m-2"> Appiontment time: Client has not been contacted yet </p>
-            
-{%endif%}
+            <a href="{{url_for('client_blueprint.view', reg_num=client.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-info-circle red-text"></i> See full car info
+            </a>
+            <a href="{{url_for('admin.car_sold_form', reg_num=client.reg_num, client_id=client._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+            <i class="fas fa-money-check red-text"></i> Sell car</a>
+            {%endif%}
+        </div>
+        </div>
 
-         <div class="col-sm-12 p-0 m-0">
-        <a class="btn btn-sm bg-dark m-1" style="color: white;" data-toggle="modal" data-target="#appiontment{{ client._id }}">Client bookings</a>
-        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#modal{{ client._id }}">Delete client</button>
-        {% if client.dashboard_status == 'false' %}
-        <button type="button" class="btn btn-dark btn-sm m-1" data-toggle="modal" data-target="#removeFromDashboard{{ client._id }}">Move to dashboard</button>
-        {% else %}
         
-        {% endif %}
         </div>
+          <!--Cliet infomation column-->
+        <div class="col s12 m12 l5 offset-l2">
+        <div class="row valign-wrapper">
+            <h5 style="margin-left:20px;"><span><i class="fas fa-info-circle red-text"></i> CLIENT'S INFORMATION</span><hr></h5>
         </div>
-       
-    </div>
-    </div>
+            <div class="card web_theme-card hoverable">
 
-  <!-- client appiontment Modal -->
-        <div class="modal fade" id="appiontment{{ client._id }}" tabindex="-1" role="dialog" aria-labelledby="appiontment{{ client._id }}Label" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="appiontment{{ client._id }}Label">Book appiontment</h5>
-           
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-             <div class="modal-body">
-                <form id="appiontment_form{{ client._id }}" action="{{url_for('client_blueprint.add_appiontments_records')}}" method="POST">
-                <input type="hidden" name="dashboard_status" value="true">
-                    <input type="hidden" name="client_id" value="{{client._id}}">
-                    <input type="hidden" name="car_make" value="{{client.car_make}}">
-                    <input type="hidden" name="car_model" value="{{client.car_model}}">
-                    <input type="hidden" name="registration_year" value="{{client.registration_year}}">
-                    <input type="hidden" name="car_image_url" value="{{client.car_image_url}}">
-                    <input type="hidden" class="form-control" id="reg_num" name="reg_num" value="{{client.reg_num}}" required>
-                    <input type="hidden" class="form-control" id="best_time_to_contact" name="best_time_to_contact" value="{{client.best_time_to_contact}}" required> 
-                    <input type="hidden" class="form-control" id="best_date_to_contact" name="best_date_to_contact" value="{{client.best_date_to_contact}}" required> 
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">Full name</label>
-                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{client.full_name}}" readonly required>
-                    </div>
-                    <div class="form-group">
-                     <label for="email">Email <address></address></label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{client.email}}" readonly  required>
-                    </div>
-                    <div class="form-group">
-                    <label  for="phone">Telephone number</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value="{{client.phone}}" readonly  required> 
-                    </div>
-                    <div class="form-group">
-                    <label   for="best_time_to_contact">Appiontment time</label>
-                       <input class="ml-5" type="time" id="appiontment_time" name="appiontment_time" value="{{client.appiontment_time}}">
+                <div class="card-content white-text">
+                <span class="card-title">Client Name: {{ client.full_name }}</span> 
+                <p>Client Instructions: {{client.client_related_notes}}</p>
+                </div>
+                    <ul class="collapsible popout">
+                        <li>
+                        <div class="collapsible-header"><i class="fas fa-calendar-check red-text"></i>Book an appiontment<i class="material-icons red-text right">keyboard_arrow_down</i></div>
+                        <div class="collapsible-body">
+                        
+                        <form class="" action="{{url_for('client_blueprint.add_appiontments_records')}}" id="appiontment_form{{ client._id }}"  method="POST">
+                        <input type="hidden" name="dashboard_status" value="true">
+                        <input type="hidden" name="client_id" value="{{client._id}}">
+                        <input type="hidden" name="car_make" value="{{client.car_make}}">
+                        <input type="hidden" name="car_model" value="{{client.car_model}}">
+                        <input type="hidden" name="registration_year" value="{{client.registration_year}}">
+                        <input type="hidden" name="car_image_url" value="{{client.car_image_url}}">
+                        <input type="hidden" class="form-control" id="reg_num" name="reg_num" value="{{client.reg_num}}" required>
+                        <input type="hidden" class="form-control" id="best_time_to_contact" name="best_time_to_contact" value="{{client.best_time_to_contact}}" required> 
+                        <input type="hidden" class="form-control" id="best_date_to_contact" name="best_date_to_contact" value="{{client.best_date_to_contact}}" required> 
+                        
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" class="validate white-text" id="full_name" name="full_name" value="{{client.full_name}}" required>
+                            <label for="full_name">Full name</label>
+                        </div>
+
+                        <div class="input-field">
+                        <i class="material-icons prefix">email</i>
+                            <input type="email" class="validate white-text" id="email" name="email" value="{{client.email}}" required>
+                            <label for="email">Email</label>
+                        </div>
+
+                        <div class="input-field">
+                        <i class="material-icons prefix">phone</i>
+                        <input type="tel" class="validate white-text" id="phone" name="phone" value="{{client.phone}}" required> 
+                        <label  for="phone">Telephone number</label>
+                        </div>
+
+                        <div class="input-field">
+                        <i class="material-icons prefix">timer</i>
+                        <input class="ml-5 white-text" type="time" id="appiontment_time" name="appiontment_time" value="{{client.appiontment_time}}">
+                        <label   for="best_time_to_contact">Appiontment time</label>
+                        </div>
+                        <div class="input-field">
+                        <i class="material-icons prefix">date_range</i>
+                        <input class="ml-2 white-text" type="date" id="start" name="appiontment_date" value="{{client.appiontment_date}}" min="2020-01-01" max="2022-12-31" required>
                         <label class="ml-2" for="start">Appiontment date:</label>
-                    <input class="ml-2" type="date" id="start" name="appiontment_date" value="{{client.appiontment_date}}" min="2020-01-01" max="2022-12-31" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Client related notes</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="client_related_notes" rows="3">{{client.client_related_notes}}</textarea>
-                    </div>  
-                </form>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" form="appiontment_form{{ client._id }}" class="btn btn-sm btn-dark" >Make appiontment: {{ client.full_name }}</button>
-            </div>
-           
+                        </div>
+
+                        <div class="input-field">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <label for="exampleFormControlTextarea1">Client related notes</label>
+                        <textarea class="materialize-textarea white-text" id="exampleFormControlTextarea1" name="client_related_notes" rows="3">{{client.client_related_notes}}</textarea>
+                        </div>  
+
+                        <button class="waves-effect waves-light btn admin-secondary-custom-buttons" type="submit" form="appiontment_form{{ client._id }}">
+                        <i class="fas fa-bookmark red-text"></i> Book appiontment: {{ client.full_name }}
+                        </button>
+                        </form>
+                        
+                        </div>
+                        </li>
+                       
+
+                    </ul>
+                  <div class="card-content">
+                    <ul class="collection">
+                    <li class="collection-item">Client Email: {{ client.email }}</li>
+                    <li class="collection-item">Client phone: {{ client.phone}}</li>
+                    <li class="collection-item">Best time to contact: {{ client.best_time_to_contact }}</li>
+                    <li class="collection-item">Best date to contact: {{ client.best_date_to_contact}}</li>
+                        {% if client.appiontment_time %}
+                    <li class="collection-item">Appiontment time:{{client.appiontment_time}}</li>
+                    <li class="collection-item">Appiontment date: {{client.appiontment_date}}</li>
+                        {% else %}
+                    <li class="collection-item pulse">
+                    <a class="waves-effect waves-light btn red darken-4 pulse">Appiontment time: Client has not been contacted yet</a></li>
+                        {%endif%}
+                </ul>
+                </div>
+                <div class="card-action">
+                <a type="button" class="waves-effect waves-red  btn modal-trigger admin-secondary-custom-buttons" href="#modal{{ client._id }}">
+                    <i class="fas fa-trash-alt red-text"></i> Delete client
+                </a>
+                {% if client.dashboard_status == 'false' %}
+               <a class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#movetosashboard{{ client._id }}">
+                <i class="fas fa-trash-restore-alt red-text"></i> Move client to dashboard</a>
+                {% else %}
+                <a type="button" class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#removeFromDashboard{{ client._id }}"><i class="fas fa-user-times red-text"></i> Remove client from dashboard</a>
+                {% endif %}
+                </div>
+                </div>
+    
+        </div>
     </div>
-  </div>
 </div>
-      <!-- delete client Modal -->
-<div class="modal fade" id="modal{{ client._id }}" tabindex="-1" role="dialog" aria-labelledby="modal{{ client._id }}Label" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- delete client Modal --> 
+<!-- Modal Structure -->
+<div class="modal" id="modal{{ client._id }}" >
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal{{ client._id }}Label">Delete Record</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-        <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_client', client_id=client._id)}}">Delete: {{ client.full_name }}</a>
-       
-      </div>
+        <h4>Delete Record</h4>
+        <p>You are going to delete client name {{ client.full_name }}.</p>
     </div>
-  </div>
-</div>
+    <div class="modal-footer">  
+        <a class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
+        <a class="btn btn-danger" href="{{url_for('admin.delete_client_admin_url', client_id=client._id)}}">Delete: {{ client.full_name }}</a>
+    </div>
+    </div>
+ 
 <!-- Modal Remove client from dashboard -->
-<div class="modal fade" id="removeFromDashboard{{ client._id }}" tabindex="-1" role="dialog" aria-labelledby="removeFromDashboard{{ client._id }}Label" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal" id="removeFromDashboard{{ client._id }}">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="removeFromDashboard{{ client._id }}Label">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to remove <strong><mark>{{ client.full_name }}</mark></strong> from dashboard
-                 
-      </div>
+        <h4 class="modal-title" id="removeFromDashboard{{ client._id }}Label">Modal title</h4>
+       <p>You are about to remove client name {{ client.full_name }} from dashboard. You still can find and bring client to dahsboard.</p>
+       <!-- </button>-->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">I am not sure!</button>
-        <a href="{{url_for('client_blueprint.move_to_dashboard', client_id=client._id)}}" class="btn btn-primary">Yes I am sure!</a>
+        <button type="button" class="modal-close teal white-text waves-effect waves-green btn-flat">I am not sure!</button>
+        <a href="{{url_for('client_blueprint.remove_from_dashboard', client_id=client._id)}}" class="modal-close teal white-text waves-effect waves-green btn-flat">Yes I am sure!</a>
       </div>
     </div>
   </div>
 </div>
+
+
 {% endfor %}
+
 {% else %}
 <p class="lead">No results found</p>
 {% endif %}
