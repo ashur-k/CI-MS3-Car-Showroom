@@ -31,7 +31,7 @@ def add_new_car(car_make):
     if car_models.count() < 1:
         flash(u'Please add models', 'no_model_error')
         return redirect(url_for('admin.add_car_company'))
-    return render_template('add_car.html', car_make=car_make, admin_cars_make=mongo.db.car_make.find(),
+    return render_template('add_car.html', car_make=car_make, admin_cars_make=mongo.db.car_make.find(), small_screen_admin_cars_make=mongo.db.car_make.find(),
                            car_models=car_models)
 
 
@@ -45,8 +45,8 @@ def admin_with_login_package(car_add_successfully=None):
     # for reg in find_reg:
         # print(reg['reg_num'])
     if car_add_successfully:
-        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find(), car_add_successfully=car_add_successfully)
-    return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
+        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), small_screen_admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find(), car_add_successfully=car_add_successfully)
+    return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), small_screen_admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
 
 
 @admin.route('/reg_verification/<car_make>', methods=['POST', 'GET'])
@@ -55,7 +55,7 @@ def reg_verification(car_make):
         mongo.db.basic_car_information.find_one({'reg_num': request.form['reg_num']})
     if existing_registration:
         flash(u'Registration number already exist', 'error')
-        return redirect(url_for('admin.add_new_car',
+        return redirect(url_for('admin.add_new_car',  small_screen_admin_cars_make=mongo.db.car_make.find(),
                         car_make=car_make))
     else:
         session['car_make'] = car_make
@@ -72,7 +72,7 @@ def reg_verification(car_make):
 def add_car_details(car_make, car_model, reg_num):
     car_makers = mongo.db.car_make.find_one({'car_make': session['car_make']})
     return render_template('add_new_car.html', car_makers=car_makers,
-                           car_model=car_model, reg_num=reg_num,
+                           car_model=car_model, reg_num=reg_num, small_screen_admin_cars_make=mongo.db.car_make.find(),
                            admin_cars_make=mongo.db.car_make.find())
 
 
@@ -159,7 +159,7 @@ def search():
 
     if registration_num_search:
         return render_template('search.html',
-                               reg_results=registration_num_search, admin_cars_make=mongo.db.car_make.find())
+                               reg_results=registration_num_search, small_screen_admin_cars_make=mongo.db.car_make.find(), admin_cars_make=mongo.db.car_make.find())
     elif sold_car_search:
         return redirect (url_for('client_blueprint.sold_car_info', reg_num=request.form['search']))
     elif car_make_search:
@@ -169,12 +169,12 @@ def search():
             return render_template('search.html',
                                     admin_cars_make=mongo.db.car_make.find(),
                                    car_make_search=car_make_search,
-                                   car_make_results=available_car_makes)
+                                   car_make_results=available_car_makes, small_screen_admin_cars_make=mongo.db.car_make.find(),)
         else:
             flash('No results found in car make')
             return render_template('search.html', 
                                 admin_cars_make=mongo.db.car_make.find(),
-                                   car_make_search=car_make_search)
+                                   car_make_search=car_make_search, small_screen_admin_cars_make=mongo.db.car_make.find(),)
     elif car_model_search:
         available_car_models = \
             mongo.db.basic_car_information.find({'car_model': request.form['search']})
@@ -185,20 +185,20 @@ def search():
                   request.form['search']))
             return render_template('search.html', admin_cars_make=mongo.db.car_make.find(),
                                     car_model_search=car_model_search,
-                                   model_results=available_car_models)
+                                   model_results=available_car_models, small_screen_admin_cars_make=mongo.db.car_make.find())
         else:
             flash('{} Results found in {}.'.format(
                 available_car_models.count(),
                   request.form['search']))
             return render_template('search.html', admin_cars_make=mongo.db.car_make.find(),
-                                   car_model_search=car_model_search)
+                                   car_model_search=car_model_search, small_screen_admin_cars_make=mongo.db.car_make.find())
     
     return render_template('search.html', admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/update_car_info', methods=['POST', 'GET'])
 def update_car_info():
-    return render_template('update_car_info.html', admin_cars_make=mongo.db.car_make.find())
+    return render_template('update_car_info.html', small_screen_admin_cars_make=mongo.db.car_make.find(), admin_cars_make=mongo.db.car_make.find())
 
 
 # using doubel route to finsish if reg_num session if in session
@@ -216,14 +216,14 @@ def update_options(registration_number):
         new_reg_num = session['new_reg_num']
         car_make_results = mongo.db.car_make.find()
         car_coll = mongo.db.basic_car_information.find_one({'reg_num': session['old_reg_num']}) # change to old_reg_num here
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, admin_cars_make=mongo.db.car_make.find())
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, new_reg_num=new_reg_num, small_screen_admin_cars_make=mongo.db.car_make.find(), admin_cars_make=mongo.db.car_make.find())
 
     reg_num = request.form['reg_num']
 
     car_coll = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
     if car_coll:
         car_make_results = mongo.db.car_make.find()
-        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, admin_cars_make=mongo.db.car_make.find())
+        return render_template('starter_car_edit.html', car_coll=car_coll, car_make_results=car_make_results, small_screen_admin_cars_make=mongo.db.car_make.find(), admin_cars_make=mongo.db.car_make.find())
     else:
         flash('Sorry, There is no car in database with this registration number {}.'.format(reg_num))
         return redirect(url_for('admin.update_car_info'))
@@ -251,7 +251,7 @@ def car_update_page():
     car_coll = mongo.db.basic_car_information.find_one({'_id': ObjectId(coll_Id)})
     # session.pop('reg_num', None)
     # session.pop('new_reg_num', None)
-    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num,admin_cars_make=mongo.db.car_make.find())
+    return render_template('update_car.html', car_make =car_make_results ,car_model_results=car_model_results, car_coll=car_coll, new_reg_num=new_reg_num, small_screen_admin_cars_make=mongo.db.car_make.find(), admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
@@ -282,7 +282,7 @@ def delete_car(car_id, reg_num):
 def view(car_id):
     car_info = mongo.db.basic_car_information.find_one({'_id': ObjectId(car_id)})
     admin_cars_make = mongo.db.car_make.find()
-    return render_template('view_car.html', admin_cars_make=admin_cars_make, car_info=car_info)
+    return render_template('view_car.html', admin_cars_make=admin_cars_make, small_screen_admin_cars_make=mongo.db.car_make.find(), car_info=car_info)
 
 
 def admin_carmake_session_package():
@@ -290,7 +290,7 @@ def admin_carmake_session_package():
     return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(),
                            car_make=session['car_make'],
                            car_model=session['car_model'],
-                           reg_num=session['reg_num'])
+                           reg_num=session['reg_num'], small_screen_admin_cars_make=mongo.db.car_make.find())
 
 
 @admin.route('/end_car_reg_session')
@@ -315,7 +315,7 @@ def car_sold_form(reg_num, client_id):
     sold_car = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
     client_info = mongo.db.client_info.find_one({'_id': ObjectId(client_id)})
     
-    return render_template('car_sold_form.html', admin_cars_make=mongo.db.car_make.find(), sold_car=sold_car, client_info=client_info)
+    return render_template('car_sold_form.html', admin_cars_make=mongo.db.car_make.find(), sold_car=sold_car, small_screen_admin_cars_make=mongo.db.car_make.find(), client_info=client_info)
 
 
 @admin.route('/car_sold/<car_id>', methods=['POST', 'GET'])

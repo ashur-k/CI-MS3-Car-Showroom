@@ -17,6 +17,7 @@ font-family: 'Roboto', sans-serif;
       background-color: #b71c1c !important;
       color:#fff;
   }
+  
   .web_theme-card{
       background-color: #b71c1c !important;
       color:#000;
@@ -80,4 +81,22 @@ text-shadow:
 nav ul a{
     font-size: 18px !important;
     font-family: 'Lato', sans-serif!important;
+}
+.slides-headings{
+    color: #fff;
+    font-weight: 900;
+     text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000000,
+     1px 1px 0 #000;
+}
+.sec-slides-headings{
+    color: #b71c1c;
+    font-weight: 900;
+     text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Font Awsome -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <!-- Font Awsome -->
     <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
@@ -17,27 +16,15 @@
  
     {% block login_css %} {% endblock %}
     <title>{% block head %} {% endblock %}</title>
- <style>
-     header, main, footer {
-      padding-left: 200px;
-    }
-
-    @media only screen and (max-width : 992px) {
-      header, main, footer {
-        padding-left: 0;
-      }
-    }
-       
- </style>
-    
-  </head>
+   
+</head>
 <body>
 <header>
     <div class="navbar-fixed">
         <nav class="web_theme">
         
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">Car Showroom</a>
+                <a href="#" class="brand-logo left">Car Showroom</a>
                 <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large left right"><i class="material-icons">menu</i></a>
             <!--
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -60,7 +47,6 @@
         
         </nav>
         <!--Navbar dropdowns-->
-                <!--
                 <ul id="manage_cars" class="dropdown-content red darken-4">
                     <li><a class="dropdown-item white-text" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a></li>
                     <li class="divider"></li>
@@ -86,10 +72,9 @@
                     <li class="divider"></li>
                     <li><a class="dropdown-item white-text" href="{{url_for('login.register')}}">Add new user</a></li>
                 </ul>
-            -->
     </div>
 <!--SIDENAV STARTING HERE-->
-   <ul id="slide-out" class="sidenav grey darken-4 sidenav-fixed"><!--SIDENAV FIXED HERE MAKES NAV STAY ALIVE ALL THE TIME-->
+   <ul id="slide-out" class="sidenav grey darken-4">
         <li>
             <div class="user-view">
                 <div class="background red darken-4" ><!--This div provides background colour to top section of sidenav--></div>
@@ -162,72 +147,48 @@
         </ul>
     </ul>
 
+</header>    
 <!--
-<div class="navbar-fixed">
-    <nav class="web_theme">
-    <div class="nav-wrapper">
-      <a href="{{url_for('index')}}" class="brand-logo">User Interface</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a class="dropdown-trigger" href="#!" data-target="manage_cars">Manage Cars<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="add_new_car">Add new car<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="manage_clients">Manage clients<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="admin">Admin Logged-In<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li style="margin-right:12px;">
-            <form id="search" name="search" action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0" autocomplete="off">
-                <input class="input-field white-text"  name="search" type="search" placeholder="Search" aria-label="Search" required>
-            </form>
-        </li>
-        <li style="margin-right:12px;">
-        <button form="search" class="waves-effect waves-light btn admin-secondary-custom-buttons" type="submit" data-tooltip="Search user make/model/registration">
-          Search</button>
-        </li>
-      </ul>
-    </div>
-    </nav>
-    <ul id="manage_cars" class="dropdown-content">
-        <li><a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a></li>
-        <li class="divider"></li>
-        <li><a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Info</a></li>
-        <li class="divider"></li>
-        <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>
-    </ul>
-    <ul id="add_new_car" class="dropdown-content">
-     {% for results in admin_cars_make %}
-  <li><a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
-  <li class="divider"></li>
-   {% endfor %}
-    </ul>
-    <ul id="manage_clients" class="dropdown-content">
-    <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a></li>
-    <li class="divider"></li>
-    <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
-    </ul>
+<header class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
 
- <ul id="admin" class="dropdown-content">
-    <li><a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a></li>
-    <li class="divider"></li>
-    <li><a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a></li>
-    <li class="divider"></li>
-    <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a></li>
-</ul>
-</div>   
- -->
-</header>   
-    
-<main>
+            <div class="container">
+                <a href="#" class="brand-logo">Home</a>
+                <a href="" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li class=""><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul> 
+
+            </div>
+
+        </div>
+    </nav>
+      
+                <ul class="sidenav"  id="slide_out">
+                    <li class=""><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul> 
+</header>
+-->
+
  {% block content %}
 
  {% endblock %}
-</main>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
-
     <script>
-    
+
   const slider = document.querySelector('.slider');
   M.Slider.init(slider, {
       indicators: false,
@@ -237,11 +198,11 @@
   });
     
 $( document ).ready(function() {
-   
-    $('.sidenav').sidenav({
+      $('.sidenav').sidenav({
         menuWidth: 300,
         edge: 'left'
     });
+   
     $(".dropdown-trigger").dropdown({
         alignment: 'right',
         hover: false,
@@ -263,79 +224,3 @@ $( document ).ready(function() {
     </script>
 </body>
 </html>
-
-<!--
-
- <header>
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark p-1">
-  <a class="ml-2" href="{{url_for('index')}}">Car Showroom</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav"> 
-</ul>
-
-   
-    <ul class="navbar-nav mr-auto">  
-        <li class="nav-item dropdown p-1">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Cars</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a>
-                <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Info</a>
-            <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a>
-        </div>
-      </li> 
-      <li class="nav-item dropdown p-1">
-        <a class="nav-link dropdown-toggle" href="#" id="add_new_car" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add new car
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        {% for results in admin_cars_make %}
-        <a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a>
-        <div class="dropdown-divider"></div>
-       {% endfor %}
-        </div>
-      </li>
-       <li class="nav-item dropdown p-1">
-        <a class="nav-link dropdown-toggle" href="#" id="admin_logged_in" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage clients</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a>
-          <div class="dropdown-divider"></div>
-              <form action="{{url_for('client_blueprint.client_search')}}" method="POST" class="p-2">
-                <input class="form-control mr-sm-2" id="client_search" name="search" type="client_search" placeholder="Search clients" aria-label="Search" required>
-                <button class="btn btn-outline-success mt-2" type="submit">Search</button>
-            </form>
-        </div>
-
-        </li>
-          <li class="nav-item dropdown p-1">
-        <a class="nav-link dropdown-toggle" href="#" id="admin_login" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin Logged-In
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a>
-          <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a>
-        <div class="dropdown-divider"></div>
-       
-      <a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a>
-        </div>
-
-        </li>
-    </ul>
-    <form action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search" required>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
- 
-
-  </div>
-</nav>
-
-</header>
-
--->

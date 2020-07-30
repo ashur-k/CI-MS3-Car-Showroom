@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <!-- Font Awsome -->
+    <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
+     <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+       <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
+    
+            
+ 
+    {% block login_css %} {% endblock %}
+    <title>{% block head %} {% endblock %}</title>
+</head>
+<body>
+<header class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+
+            <div class="container">
+                <a href="#" class="brand-logo">Home</a>
+                <a href="" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li class=""><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul> 
+
+            </div>
+
+        </div>
+    </nav>
+        <!--
+            Placing small screen Nav here
+        -->
+                <ul class="sidenav"  id="slide_out">
+                    <li class=""><a href="#">Item 1</a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">Item 4</a></li>
+                </ul> 
+</header>
+
+ {% block content %}
+
+ {% endblock %}
+
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!--Side nav here-->
+<script>
+    const slide_menu = document.querySelectorAll(".sidenav");
+    M.Sidenav.init(slide_menu, {});
+</script>
+    <script>
+  const slider = document.querySelector('.slider');
+  M.Slider.init(slider, {
+      indicators: false,
+      height: 500,
+      transition: 500,
+      interval: 6000
+  });
+    
+$( document ).ready(function() {
+   
+   
+    $(".dropdown-trigger").dropdown({
+        alignment: 'right',
+        hover: false,
+        coverTrigger: false
+    });
+      $('.modal').modal();
+        $(document).ready(function(){
+    $('.collapsible').collapsible();
+   
+   $('select').formSelect({
+    
+   });
+   $('.tooltipped').tooltip();
+  });
+  M.updateTextFields();
+
+});
+
+    </script>
+</body>
+</html>

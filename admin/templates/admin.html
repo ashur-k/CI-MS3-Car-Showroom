@@ -74,46 +74,42 @@
                 <h5 style="margin-left:20px;"><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h5>
             </div>
                 {% if clients.car_status == 'car_is_sold' %}
-           <p class="lead text-center" style="color:red; font-weight:bolder">This car is sold.</p>
-            {% endif %}
-        <div class="card grey darken-4 hoverable">
-        <div class="card-image card-image-padding">
-          <img src="{{ clients.car_image_url }}">
-          <span class="card-title">
-                <span class="admin-custom-card-title">
-                     Car make: {{ clients.car_make }}
-                </span>
-            </span>
-        
-        </div>
-        <div class="card-content">
-            <ul class="collection">
-                <li class="collection-item admin-custom-li">Car model: {{ clients.car_model }}</li>
-                <li class="collection-item admin-custom-li">Car reg num: {{ clients.reg_num }}</li>
-                <li class="collection-item admin-custom-li">Registration Year: {{ clients.registration_year }}</li>
-            </ul>
-        </div>
-        
-         <div class="card-action">
-         
-            {% if clients.car_status == 'car_is_sold' %}
-            <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                <i class="fas fa-info-circle red-text"></i> See full car info
-            </a>
-            <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-           <i class="fas fa-exchange-alt red-text"></i> Book different car for client
-            </a>
-            {% else %}
-            <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                <i class="fas fa-info-circle red-text"></i> See full car info
-            </a>
-            <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-            <i class="fas fa-money-check red-text"></i> Sell car</a>
-            {%endif%}
-        </div>
-        </div>
-
-        
+                <p class="lead text-center red-text" style="font-weight:bolder">This car is sold.</p>
+                {% endif %}
+                <div class="card grey darken-4 hoverable">
+                    <div class="card-image card-image-padding">
+                        <img src="{{ clients.car_image_url }}">
+                        <span class="card-title">
+                            <span class="admin-custom-card-title">
+                            Car make: {{ clients.car_make }}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="card-content">
+                        <ul class="collection">
+                            <li class="collection-item admin-custom-li">Car model: {{ clients.car_model }}</li>
+                            <li class="collection-item admin-custom-li">Car reg num: {{ clients.reg_num }}</li>
+                            <li class="collection-item admin-custom-li">Registration Year: {{ clients.registration_year }}</li>
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        {% if clients.car_status == 'car_is_sold' %}
+                        <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                            <i class="fas fa-info-circle red-text"></i> See full car info
+                        </a>
+                        <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                            <i class="fas fa-exchange-alt red-text"></i> Book different car for client
+                        </a>
+                        {% else %}
+                        <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                            <i class="fas fa-info-circle red-text"></i> See full car info
+                        </a>
+                        <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
+                            <i class="fas fa-money-check red-text"></i> Sell car
+                        </a>
+                {%endif%}
+                    </div>
+               </div>     
         </div>
         <!--Cliet infomation column-->
         <div class="col s12 m12 l5 offset-l2">
@@ -212,7 +208,6 @@
                 </div>
     
         </div>
-       
     </div>
     
 </div>
