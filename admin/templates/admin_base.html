@@ -69,7 +69,7 @@
                     <li><a class="dropdown-item white-text" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>
                 </ul>
                 <ul id="add_new_car" class="dropdown-content red darken-4">
-                    {% for results in admin_cars_make %}
+                    {% for results in small_screen_admin_cars_make %}
                     <li><a class="dropdown-item white-text" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
                     <li class="divider"></li>
                     {% endfor %}
@@ -141,7 +141,7 @@
             </ul>
             <!--Small Screen Dropdown List Items For Add Car -->
             <ul id="for_small_add_new_car" class="dropdown-content">
-                {% for results in small_screen_admin_cars_make %}
+               {% for results in admin_cars_make %}
                 <li><a href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
                 {% endfor %}
             </ul>
@@ -192,7 +192,7 @@
         <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>
     </ul>
     <ul id="add_new_car" class="dropdown-content">
-     {% for results in admin_cars_make %}
+     {% for results in small_screen_admin_cars_make %}
   <li><a class="dropdown-item" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
   <li class="divider"></li>
    {% endfor %}
