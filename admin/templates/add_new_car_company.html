@@ -71,14 +71,15 @@
 {% endwith %}
 </div>
 
-
+<div class="container">
 {% with errors = get_flashed_messages(category_filter=["no_model_error"]) %}
 {% if errors %}
 <div class="alert-message block-message error">
    {%- for msg in errors %}
-    <p>{{ msg }}</p>
+    <p class="flow-text red-text">{{ msg }}</p>
     {% endfor -%}
 </div>
 {% endif %}
 {% endwith %}
+</div>
 {%endblock%}

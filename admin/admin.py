@@ -29,9 +29,9 @@ def add_new_car(car_make):
 
     car_models = mongo.db.car_model.find({'car_make': car_make})
     if car_models.count() < 1:
-        flash(u'Please add models', 'no_model_error')
+        flash(u'Please first add models to this car make.', 'no_model_error')
         return redirect(url_for('admin.add_car_company'))
-    return render_template('add_car.html', car_make=car_make, admin_cars_make=mongo.db.car_make.find(), small_screen_admin_cars_make=mongo.db.car_make.find(),
+    return render_template('add_car.html', car_make=car_make, admin_cars_make=mongo.db.car_make.find(), 
                            car_models=car_models)
 
 
@@ -55,7 +55,7 @@ def reg_verification(car_make):
         mongo.db.basic_car_information.find_one({'reg_num': request.form['reg_num']})
     if existing_registration:
         flash(u'Registration number already exist', 'error')
-        return redirect(url_for('admin.add_new_car',  small_screen_admin_cars_make=mongo.db.car_make.find(),
+        return redirect(url_for('admin.add_new_car', 
                         car_make=car_make))
     else:
         session['car_make'] = car_make

@@ -110,7 +110,7 @@
         </li>
         <ul>
             <li>
-                <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_add_new_car">Add new car<i class="material-icons right white-text">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger white-text" href="#!" data-target="add_new_car">Add new car<i class="material-icons right white-text">arrow_drop_down</i></a></li>
                 <div class="divider"></div>
                 <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_manage_cars">Manage Cars<i class="material-icons right white-text">arrow_drop_down</i></a></li>
                 <div class="divider"></div>
@@ -140,7 +140,7 @@
                 <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a></li>
             </ul>
             <!--Small Screen Dropdown List Items For Add Car -->
-            <ul id="for_small_add_new_car" class="dropdown-content">
+            <ul id="add_new_car" class="dropdown-content">
                {% for results in admin_cars_make %}
                 <li><a href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
                 {% endfor %}
