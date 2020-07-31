@@ -100,3 +100,8 @@ nav ul a{
     -1px 1px 0 #000,
      1px 1px 0 #000;
 }
+.image-gallery .col {
+   
+    padding: 2px;
+
+}

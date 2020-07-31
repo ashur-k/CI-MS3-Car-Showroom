@@ -73,10 +73,15 @@ def book_test_drive(car_id):
     return render_template('book_test_drive_form.html', car_info = car_info)
 
 
-@app.route('/user_book_test_request', methods=['POST', 'GET'])
-def user_book_test_request():
+@app.route('/user_book_test_request/<car_id>', methods=['POST', 'GET'])
+def user_book_test_request(car_id):
+    #ash = request.form['full_name']
+    #print(ash)
+    #return "Its in development and testing"
+    car_info = mongo.db.basic_car_information.find_one({'_id': ObjectId(car_id)})
     mongo.db.client_info.insert_one(request.form.to_dict())
-    return redirect(url_for('index'))
+    flash("Thanks {}, we have received your message. Our sales agent will contact you.".format(request.form["full_name"]))
+    return render_template('book_test_drive_form.html', car_info = car_info)
 
 
 @app.route('/user_view_car_specs/<car_id>')

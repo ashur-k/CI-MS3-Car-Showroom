@@ -215,30 +215,40 @@
        <!-- Modal Structure -->
     <div class="modal" id="modal{{ clients._id }}" >
         <div class="modal-content">
-            <h4>Delete Record</h4>
-            <p>You are going to delete client name {{ clients.full_name }}.</p>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete Record</h5>
         </div>
-        <div class="modal-footer">  
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
-            <a class="btn btn-danger" href="{{url_for('admin.delete_client_admin_url', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
+        <div class="row">
+            <p>You are deleting client name {{ clients.full_name }}.</p>
         </div>
+            <div class="modal-footer">  
+            <a class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+            <a class="btn white-text waves-effect waves-green btn admin-custom-buttons" href="{{url_for('admin.delete_client_admin_url', client_id=clients._id)}}">
+           <i class="fas fa-trash-alt red-text"></i> Delete: {{ clients.full_name }}</a>
+        </div>
+        </div>
+       
     </div>
  
 <!-- Modal Remove client from dashboard -->
 <div class="modal" id="removeFromDashboard{{ clients._id }}">
 
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="removeFromDashboard{{ clients._id }}Label">Modal title</h4>
-       <p>You are about to remove client name {{ clients.full_name }} from dashboard. You still can find and bring client to dahsboard.</p>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-user-times red-text"></i> Remove Client from Dashboard</h5>
+        </div> 
+        <div class="row">
+            <h6 style="padding:15px;">You are removing client name {{ clients.full_name }} from dashboard. You can find {{ clients.full_name }} in manage client, view all clients.</h6>
+        </div>
+       
        <!-- </button>-->
       <div class="modal-footer">
-        <button type="button" class="modal-close teal white-text waves-effect waves-green btn-flat">I am not sure!</button>
-        <a href="{{url_for('client_blueprint.remove_from_dashboard', client_id=clients._id)}}" class="modal-close teal white-text waves-effect waves-green btn-flat">Yes I am sure!</a>
+        <button type="button" class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</button>
+        <a href="{{url_for('client_blueprint.remove_from_dashboard', client_id=clients._id)}}" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons">
+        <i class="fas fa-user-times red-text"></i> Yes I am sure!</a>
       </div>
     </div>
   </div>
-</div>
 {% endif %}
 
 {% endfor %}

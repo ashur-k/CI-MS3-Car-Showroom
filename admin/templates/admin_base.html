@@ -89,20 +89,20 @@
             -->
     </div>
 <!--SIDENAV STARTING HERE-->
-   <ul id="slide-out" class="sidenav grey darken-4 sidenav-fixed"><!--SIDENAV FIXED HERE MAKES NAV STAY ALIVE ALL THE TIME-->
+   <ul id="slide-out" class="sidenav grey darken-4 sidenav-fixed" ><!--SIDENAV FIXED HERE MAKES NAV STAY ALIVE ALL THE TIME-->
         <li>
             <div class="user-view">
                 <div class="background red darken-4" ><!--This div provides background colour to top section of sidenav--></div>
-                <a href="#user"><img class="circle" src="{{url_for('static', filename='img/avatar.svg')}}"></a>
-                <a href="#name"><span class="white-text name">John Doe</span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                <a href="{{url_for('admin.admin_homepage')}}"><img class="circle" src="{{url_for('static', filename='img/avatar.svg')}}"></a>
+                <a href="{{url_for('admin.admin_homepage')}}"><span class="white-text name"><i class="fas fa-home white-text"></i> Admin Home Page</span></a>
+                <a href="{{url_for('index')}}"><span class="white-text email"><i class="fas fa-sitemap white-text"></i> Car Showroom Site</span></a>
             </div>
         </li>
         <li class="white-text">
             <a class="dropdown-trigger white-text" href="#!" data-target="for_small_admin">
                 Admin Logged-In
                 <i class="material-icons right white-text">arrow_drop_down</i>
-                <i class="material-icons white-text">cloud</i>
+                <i class="fas fa-user-shield red-text" style="font-size:22px"></i>
             </a>
         </li>
         <li>
@@ -110,11 +110,11 @@
         </li>
         <ul>
             <li>
-                <li><a class="dropdown-trigger white-text" href="#!" data-target="add_new_car">Add new car<i class="material-icons right white-text">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger white-text" href="#!" data-target="add_new_car"><i class="far fa-plus-square red-text" style="font-size:22px"></i>Add new car<i class="material-icons right white-text">arrow_drop_down</i></a></li>
                 <div class="divider"></div>
-                <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_manage_cars">Manage Cars<i class="material-icons right white-text">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_manage_cars"><i class="fas fa-layer-group red-text" style="font-size:22px"></i> Manage Cars<i class="material-icons right white-text">arrow_drop_down</i></a></li>
                 <div class="divider"></div>
-                <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_manage_clients">Manage clients<i class="material-icons white-text right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-trigger white-text" href="#!" data-target="for_small_manage_clients"><i class="fas fa-users red-text" style="font-size:22px"></i> Manage clients<i class="material-icons white-text right">arrow_drop_down</i></a></li>
                 <div class="divider"></div>
                 <li style="padding:10px;">
                     <form class="col s12" action="{{ url_for('admin.search') }}" method="POST">
@@ -133,8 +133,6 @@
             </li>
             <!--Small Screen Dropdown List Items For Admin Login -->
             <ul id="for_small_admin" class="dropdown-content">
-                <li><a class="dropdown-item" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a></li>
-                <li class="divider"></li>
                 <li><a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a></li>
                 <li class="divider"></li>
                 <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a></li>

@@ -79,13 +79,20 @@
     <!-- Modal -->
     <div id="deleteModal{{result._id}}" class="modal">
         <div class="modal-content">
-            <h4>Delting car in process</h4>
-            <p>A bunch of text</p>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete car data</h5>
+        </div>
+        <div class="row">
+        <h6 style="padding:15px;">You are deleting information about this car from database.</h6>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete {{ result.reg_num }}</a>
+            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+            <a class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >
+            <i class="fas fa-trash-alt red-text"></i> Delete {{ result.reg_num }}</a>
         </div>
+            
+        </div>
+        
     </div>
     </div>
     {% endfor %}
@@ -176,15 +183,22 @@
             </div>
         </div>
     <!-- Modal -->
-    <div id="deleteModal{{reg_results._id}}" class="modal">
+      <div id="deleteModal{{reg_results._id}}" class="modal">
         <div class="modal-content">
-            <h4>Delting car in process</h4>
-            <p>A bunch of text</p>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete car data</h5>
+        </div>
+        <div class="row">
+        <h6 style="padding:15px;">You are deleting information about this car from database.</h6>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >Delete {{ reg_results.reg_num }}</a>
+            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+            <a class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons" href="{{ url_for('admin.delete_car', car_id=reg_results._id, reg_num=reg_results.reg_num ) }}" >
+            <i class="fas fa-trash-alt red-text"></i> Delete {{ reg_results.reg_num }}</a>
         </div>
+            
+        </div>
+        
     </div>
     </div>
 
@@ -204,11 +218,8 @@
 </div>
 
 <div class="container">
-    <div class="row">
-
-
 {% for result in model_results %}
-            <div class="row">
+    <div class="row">
     <h4>Find Results:</h4><hr>
         <div class="col s12">
             <div class="row">
@@ -271,18 +282,27 @@
     <!-- Modal -->
     <div id="deleteModal{{result._id}}" class="modal">
         <div class="modal-content">
-            <h4>Delting car in process</h4>
-            <p>A bunch of text</p>
+            <div class="row grey darken-4 white-text valign-wrapper">
+                <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete car data</h5>
+            </div>
+            <div class="row">
+                <h6 style="padding:15px">You are deleting information about this car from database.</h6>
+            </div>
+      
+            <div class="modal-footer">
+                <a href="#!" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+                <a class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >
+                <i class="fas fa-trash-alt red-text"></i> Delete {{ result.reg_num }}</a>
+           
+            </div>
+            </div>
+            
+            
+            </div>
+        
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Non now</a>
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{ url_for('admin.delete_car', car_id=result._id, reg_num=result.reg_num ) }}" >Delete {{ result.reg_num }}</a>
-        </div>
-    </div>
-    </div>
 {% endfor %}
-    </div>  
-</div> 
+</div>
 
 {% elif car_model_search %} 
 

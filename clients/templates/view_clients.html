@@ -201,33 +201,48 @@
     </div>
     
 </div>
-       <!-- delete client Modal --> 
-<div class="modal" id="modal{{ clients._id }}" >
+   <!-- delete client Modal --> 
+       <!-- Modal Structure -->
+    <div class="modal" id="modal{{ clients._id }}" >
         <div class="modal-content">
-            <h4>Delete Record</h4>
-            <p>You are going to delete client name {{ clients.full_name }}.</p>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete Record</h5>
         </div>
-        <div class="modal-footer">  
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
-            <a class="modal-close teal white-text waves-effect waves-green btn-flat" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">Delete: {{ clients.full_name }}</a>
+        <div class="row">
+            <h6 style="padding:15px;">You are deleting client name {{ clients.full_name }}.</h6>
         </div>
-</div>
+            <div class="modal-footer">  
+            <a class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+            <a class="btn white-text waves-effect waves-green btn admin-custom-buttons" href="{{url_for('client_blueprint.delete_client', client_id=clients._id)}}">
+           <i class="fas fa-trash-alt red-text"></i> Delete: {{ clients.full_name }}</a>
+        </div>
+        </div>
+       
+    </div>
  
 <!-- Modal move client to dashboard -->
-  <!-- Modal Structure -->
-  <div id="movetosashboard{{ clients._id }}" class="modal">
+<div class="modal" id="movetosashboard{{ clients._id }}">
+
     <div class="modal-content">
-      <h4>Move client back to dashboard</h4>
-      <p>Are you sure you want to move client name {{ clients.full_name }} back to admin dashboard.</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close teal white-text waves-effect waves-green btn-flat">Not now</a>
-      <a href="{{url_for('client_blueprint.move_to_dashboard', client_id=clients._id)}}" class="modal-close teal white-text waves-effect waves-green btn-flat">Move {{ clients.full_name }} to admin dashboard</a>
+        <div class="row grey darken-4 white-text valign-wrapper">
+            <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-user-plus red-text"></i> Move Client to Admin Dashboard</h5>
+        </div> 
+        <div class="row">
+            <h6 style="padding:15px;">You are moving back client name {{ clients.full_name }} to dashboard.</h6>
+        </div>
+     
+       <!-- </button>-->
+      <div class="modal-footer">
+        <button type="button" class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</button>
+        <a href="{{url_for('client_blueprint.move_to_dashboard', client_id=clients._id)}}" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons">
+        <i class="fas fa-user-plus red-text"></i> Yes I am sure!</a>
+      </div>
     </div>
   </div>
 
 {% endfor %}
   
 {%endblock%}
+
 
 
