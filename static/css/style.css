@@ -21,6 +21,7 @@ font-family: 'Roboto', sans-serif;
   .web_theme-card{
       background-color: #b71c1c !important;
       color:#000;
+      margin-left: 15px;
   }
 
   .web_theme-card, span{

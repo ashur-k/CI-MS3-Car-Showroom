@@ -29,12 +29,22 @@
 {% endif %}
 <!--This message will only appear if car new car is added succesfully-->
 {% if car_add_successfully %}
-<div class="container">
-    <div class="row">
+<div class="container registration-process-container">
+    <div class="row row custom-row">
+        <div class="col s12 grey darken-4 valign-wrapper">
+            <h4 class="white-text"><i class="far fa-check-circle red-text"></i> Car Added succesfully </h4>
+        </div>
+    </div><hr class="container-bottom-hr-styling">
+    <div class="row" style="padding-top:30px;">
         <div class="col s12">
-            <h6>{{car_add_successfully}}</h6>
+            <p class="flow-text">{{car_add_successfully}}</p>
         </div>
     </div>
+      <div class="row">
+            <div class="col s12 custom-coloumn">
+                <a href="{{ url_for('admin.admin_homepage') }}" class="waves-effect waves-light btn admin-custom-buttons"><i class="material-icons right red-text">send</i></a>
+            </div>  
+        </div>
 </div>
 {% endif %}
 <!--Flashing server side messages in this block-->

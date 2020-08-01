@@ -9,7 +9,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
         <!-- CUSTOMIZED CSS FILES ARE HERE -->
         <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}">
-        <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
         <title>{% block head %}<!-- I am adding title on html content template -->{% endblock %}</title>  
     </head>
@@ -92,7 +91,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
         <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="{{ url_for('static', filename='js/script.js') }}"></script>  
     </body>
 </html>

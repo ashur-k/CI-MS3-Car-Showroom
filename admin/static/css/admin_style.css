@@ -151,3 +151,26 @@ padding-left: 12px;
     color: #212121;
     font-size: 22px;
 }
+.div-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.div-wrapper img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+ header {
+      padding-left: 120px;
+    }
+    main {
+      padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awsome -->
     <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
      <!--Import Google Icon Font-->
@@ -12,21 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
-    
-            
- 
-    {% block login_css %} {% endblock %}
     <title>{% block head %} {% endblock %}</title>
  <style>
-     header, main, footer {
-      padding-left: 200px;
-    }
-
-    @media only screen and (max-width : 992px) {
-      header, main, footer {
-        padding-left: 0;
-      }
-    }
+   
        
  </style>
     
@@ -35,58 +23,19 @@
 <header>
     <div class="navbar-fixed">
         <nav class="web_theme">
-        
-            <div class="nav-wrapper">
-
-                <a href="#" data-target="slide-out" class="sidenav-trigger  right"><i class="material-icons">menu</i></a>
-            <!--
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a class="dropdown-trigger" href="#!" data-target="add_new_car">Add new car<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="manage_cars">Manage Cars<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="manage_clients">Manage clients<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="admin">Admin Logged-In<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li style="margin-right:12px;">
-                        <form  action="{{ url_for('admin.search') }}" method="POST" class="form-inline my-2 my-lg-0" autocomplete="off">
-                            <input class="input-field white-text"  name="search" type="search" placeholder="Search" aria-label="Search" required>
-                        </form>
-                    </li>
-                    <li style="margin-right:12px;">
-                        <button form="search" class="waves-effect waves-light btn admin-secondary-custom-buttons" type="submit" data-tooltip="Search user make/model/registration">
-                        Search</button>
-                    </li>
-                </ul>
-            -->   
-            </div>
+            <div class="nav-wrapper valign-wrapper">
+                
+                <a href="{{url_for('admin.admin_homepage')}}" class="brand-logo hide-on-med-and-down center valign-wrapper">
+                    <i class="material-icons center white-text grey-text text-darken-4" style="font-size:72px; margin:0px;">supervisor_account</i>
+                    <span>
+                     CAR SALES SHOWRROM ADMIN SITE
+                    </span>
+                </a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger right" style="margin-rigth: 50px !important;"><i class="material-icons">menu</i></a>
+        </div>
         
         </nav>
-        <!--Navbar dropdowns-->
-                <!--
-                <ul id="manage_cars" class="dropdown-content red darken-4">
-                    <li><a class="dropdown-item white-text" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-item white-text" href="{{url_for('admin.update_car_info')}}">Edit existing Car Info</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-item white-text" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>
-                </ul>
-                <ul id="add_new_car" class="dropdown-content red darken-4">
-                    {% for results in small_screen_admin_cars_make %}
-                    <li><a class="dropdown-item white-text" href="{{url_for('admin.add_new_car', car_make=results.car_make)}}">{{results.car_make}}</a></li>
-                    <li class="divider"></li>
-                    {% endfor %}
-                </ul>
-                <ul id="manage_clients" class="dropdown-content red darken-4">
-                    <li><a class="dropdown-item white-text" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-item white-text" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
-                </ul>
-                    <ul id="admin" class="dropdown-content red darken-4">
-                    <li><a class="dropdown-item white-text" href="{{url_for('admin.admin_homepage')}}">Admin Home Page</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-item white-text" href="{{url_for('login.signout')}}">Signout</a></li>
-                    <li class="divider"></li>
-                    <li><a class="dropdown-item white-text" href="{{url_for('login.register')}}">Add new user</a></li>
-                </ul>
-            -->
+        
     </div>
 <!--SIDENAV STARTING HERE-->
    <ul id="slide-out" class="sidenav grey darken-4 sidenav-fixed" ><!--SIDENAV FIXED HERE MAKES NAV STAY ALIVE ALL THE TIME-->
@@ -217,6 +166,14 @@
 
  {% endblock %}
 </main>
+ <!--
+    ###############################################################################################################################################
+    ####                                                                                                                                       ####
+    ####                                                FOOTER SECTION IS HERE                                                                 #### 
+    ####                                                                                                                                       ####
+    ###############################################################################################################################################                
+    -->
+   
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- Compiled and minified JavaScript -->
@@ -255,7 +212,8 @@ $( document ).ready(function() {
    $('.tooltipped').tooltip();
   });
   M.updateTextFields();
-
+const mb = document.querySelectorAll('.materialboxed');
+  M.Materialbox.init(mb,{})
 });
 
     </script>

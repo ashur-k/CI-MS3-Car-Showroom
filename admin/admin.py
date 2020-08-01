@@ -45,7 +45,7 @@ def admin_with_login_package(car_add_successfully=None):
     # for reg in find_reg:
         # print(reg['reg_num'])
     if car_add_successfully:
-        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find(), car_add_successfully=car_add_successfully)
+        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), car_add_successfully=car_add_successfully)
     return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
 
 
@@ -96,7 +96,7 @@ def add_car():
         session.pop('reg_num', None)
         flash('Thanks, car added to registration number {}.'.format(
             request.form['reg_num']))
-        car_add_successfully = "Thanks, car registration number " + request.form['reg_num'] + " is added successfully to database" 
+        car_add_successfully = "Thanks, car registration number " + request.form['reg_num'] + " is successfully added to database." 
         return redirect(url_for('admin.admin_homepage', car_add_successfully=car_add_successfully ))
 
 

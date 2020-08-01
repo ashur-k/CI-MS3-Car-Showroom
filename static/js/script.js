@@ -1,5 +1,5 @@
 //Initialising side nav with materialize
-console.log('testing')
+
 
     const slide_menu= document.querySelector(".sidenav");
     M.Sidenav.init(slide_menu,{});
@@ -20,7 +20,7 @@ $('.dropdown-trigger').dropdown();
   M.Materialbox.init(mb,{})
 
    const ss = document.querySelectorAll('.scrollspy');
-  M.Scrollspy.init(ss,{})
+  M.ScrollSpy.init(ss,{})
 
 
 document.addEventListener('DOMContentLoaded', function() {
