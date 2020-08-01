@@ -22,33 +22,35 @@
  
 <header id="materialise-side-navbar" >
 <!-- navbar content here  --> 
-<div>
+<div class="navbar-fixed">
     <nav class="web_theme">
         <div class="contianer">     
             <div class="nav-wrappper">            
                 <a  class="brand-logo" href="{{url_for('index')}}">
                 <img class="logo_image"  src="{{url_for('static', filename='img/logo.svg')}}">
                 </a>
-                <a href="#" class="sidenav-trigger" data-target="slide_out">
-                    <i class="material-icons">menu</i>
+                <a href="#" class="sidenav-trigger right" data-target="slide_out">
+                    <i class="material-icons ">menu</i>
                 </a>
                 <ul class="hide-on-med-and-down right">
                     <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
                     <li><a href="{{url_for('index')}}">Home</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">About us</a></li>
-                    <li><a href="">Contact us</a></li>
+                    <li><a href="{{url_for('index')}}#services">Services</a></li>
+                    <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
+                    <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
+                    <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
     <ul class="sidenav" id="slide_out">
-        <li><a href="{{ url_for('login.admin_login') }}">Admin-Login<i class="fas fa-sign-in-alt"></i></a></li>
-        <li><a href="{{url_for('index')}}"><i class="material-icons">home</i>Home</a></li>
-        <li><a href=""><i class="material-icons">public</i>Services</a></li>
-        <li><a href=""><i class="material-icons">group</i>About us</a></li>
-        <li><a href=""><i class="material-icons">email</i>Contact us</a></li>
+        <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('index')}}#services">Services</a></li>
+        <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
+        <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
+        <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
     </ul>      
 </header>
 
@@ -73,7 +75,7 @@
   const slider = document.querySelector('.slider');
   M.Slider.init(slider, {
       indicators: false,
-      height: 650,
+      height: 500,
       transition: 500,
       interval: 6000
   });

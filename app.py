@@ -41,11 +41,12 @@ def index(car_make, car_model):
         if car_model:
             total_car_in_models = mongo.db.basic_car_information.find({'car_model': car_model})
             car_models = cars_model.find({'car_make': car_make})
-            return render_template('index.html', cars=mongo.db.car_make.find(), car_models=cars_model.find({'car_make': car_make}), total_car_in_models=total_car_in_models, car_model=car_model, random_collections=random_collections)
+            return render_template('index.html', cars=mongo.db.car_make.find(), car_models=cars_model.find({'car_make': car_make}), total_car_in_models=total_car_in_models, car_make=car_make, car_model=car_model, random_collections=random_collections)
 
         total_car_in_make = mongo.db.basic_car_information.find({'car_make': car_make})
         car_models = cars_model.find({'car_make': car_make})
-        return render_template('index.html', cars=mongo.db.car_make.find(), car_models=car_models, total_car_in_make=total_car_in_make, car_make=car_make, random_collections=random_collections)
+        
+        return render_template('index.html' ,cars=mongo.db.car_make.find(), car_models=car_models, total_car_in_make=total_car_in_make, car_make=car_make, random_collections=random_collections)
 
     all_cars = mongo.db.basic_car_information.find()
     return render_template('index.html', cars=mongo.db.car_make.find(), all_cars=all_cars, random_collections=random_collections)
