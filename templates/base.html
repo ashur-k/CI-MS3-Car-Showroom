@@ -1,97 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Font Awsome -->
-    <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
-     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
-    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/login_style.css')}}">-->
-    
-    <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}">
-    <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-  
-    <title>{% block head %} {% endblock %}</title>
- 
-    
-  </head>
-  <body id="home" class="scrollspy">
- 
-<header id="materialise-side-navbar" >
-<!-- navbar content here  --> 
-<div class="navbar-fixed">
-    <nav class="web_theme">
-        <div class="contianer">     
-            <div class="nav-wrappper">            
-                <a  class="brand-logo" href="{{url_for('index')}}">
-                <img class="logo_image"  src="{{url_for('static', filename='img/logo.svg')}}">
-                </a>
-                <a href="#" class="sidenav-trigger right" data-target="slide_out">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Font Awsome -->
+        <script src="https://kit.fontawesome.com/60ca92335a.js" crossorigin="anonymous"></script>
+        <!--Import Google Icon Font: Importing it to use maerialise-icons-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+        <!-- CUSTOMIZED CSS FILES ARE HERE -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}">
+        <link rel="stylesheet" href="{{url_for('admin.static', filename='css/admin_style.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+        <title>{% block head %}<!-- I am adding title on html content template -->{% endblock %}</title>  
+    </head>
+    <body id="home" class="scrollspy">
+    <header id="materialise-side-navbar" >
+    <!--
+    ###############################################################################################################################################
+    ####                                                                                                                                       ####
+    ####                                                TOP FIXED NAVBAR IS HERE                                                               #### 
+    ####                                                                                                                                       ####
+    ###############################################################################################################################################                
+    -->
+    <div class="navbar-fixed">
+        <nav class="web_theme">
+            <div class="contianer">     
+                <div class="nav-wrappper">            
+                    <a  class="brand-logo" href="{{url_for('index')}}">
+                        <img class="logo_image"  src="{{url_for('static', filename='img/logo.svg')}}">
+                    </a>
+                    <a href="#" class="sidenav-trigger right" data-target="slide_out">
                     <i class="material-icons ">menu</i>
-                </a>
-                <ul class="hide-on-med-and-down right">
-                    <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
-                    <li><a href="{{url_for('index')}}">Home</a></li>
-                    <li><a href="{{url_for('index')}}#services">Services</a></li>
-                    <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
-                    <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
-                    <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
-                </ul>
+                    </a>
+                    <ul class="hide-on-med-and-down right">
+                        <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
+                        <li><a href="{{url_for('index')}}">Home</a></li>
+                        <li><a href="{{url_for('index')}}#services">Services</a></li>
+                        <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
+                        <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
+                        <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</div>
-    <ul class="sidenav" id="slide_out">
-        <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
-        <li><a href="{{url_for('index')}}">Home</a></li>
-        <li><a href="{{url_for('index')}}#services">Services</a></li>
-        <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
-        <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
-        <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
-    </ul>      
-</header>
+        </nav>
+    </div>
+    <!--
+    ###############################################################################################################################################
+    ####                                                                                                                                       ####
+    ####                                                SMALL SCREEN SIDENAV IS HERE                                                           #### 
+    ####                                                                                                                                       ####
+    ###############################################################################################################################################                
+    -->
+        <ul class="sidenav" id="slide_out">
+            <li><a href="{{ url_for('login.admin_login') }}">Admin-Login</a></li>
+            <li><a href="{{url_for('index')}}">Home</a></li>
+            <li><a href="{{url_for('index')}}#services">Services</a></li>
+            <li><a href="{{url_for('index')}}#gallery">Gallery</a></li>
+            <li><a href="{{url_for('index')}}#find-me">Find me</a></li>
+            <li><a href="{{url_for('index')}}#contact">Contact me</a></li>
+        </ul>      
+    </header>
 
 {% block content %}
 
     
 
 {%endblock%}
-
-<!--footer section-->  
-<footer class="section web_theme white-text center">
-    <p class="flow-text">Car sales showroom &copy; 2020 </p>
-</footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
-    <script>
-    //Initialising side nav with materialize
-    const slide_menu= document.querySelector(".sidenav");
-    M.Sidenav.init(slide_menu,{});
-//Slider
-  const slider = document.querySelector('.slider');
-  M.Slider.init(slider, {
-      indicators: false,
-      height: 500,
-      transition: 500,
-      interval: 6000
-  });
- //material boxed
-  const mb = document.querySelectorAll('.materialboxed');
-  M.Materialbox.init(mb,{})
-
-   const ss = document.querySelectorAll('.scrollspy');
-  M.Scrollspy.init(ss,{})
-
-   document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.parallax');
-     var options = {  }
-    var instances = M.Parallax.init(elems, options);
-  });
-    </script>
-    
-  </body>
+   <!--
+    ###############################################################################################################################################
+    ####                                                                                                                                       ####
+    ####                                                FOOTER SECTION IS HERE                                                                 #### 
+    ####                                                                                                                                       ####
+    ###############################################################################################################################################                
+    -->
+    <footer class="section web_theme white-text center">
+    <div class="contianer">
+        <div class="row">
+            <div class="col s12">
+                <p class="flow-text">Car sales showroom &copy; 2020 </p>
+            </div>
+        </div>
+    </div>
+    </footer>
+    <!--
+    ###############################################################################################################################################
+    ####                                                                                                                                       ####
+    ####                                                SCRIPTS FILES ARE HERE                                                                 #### 
+    ####                                                                                                                                       ####
+    ###############################################################################################################################################                
+    -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+        <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>  
+    </body>
 </html>

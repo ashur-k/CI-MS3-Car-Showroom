@@ -43,15 +43,15 @@ font-family: 'Roboto', sans-serif;
 }
 /*This is for giving bg color to randomly gernrated car results*/
 .bg-text{
-    background-color: rgba(0, 0, 0, 0.1);
+    
     padding: 5px !important;
     margin: 0px 0px 5px !important;
    
 text-shadow:
-   -1px -1px 0 #fff,  
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff,
-     1px 1px 0 #fff;
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 /* --Dropbox sizing and apperance-- */
 .custom_btn {
