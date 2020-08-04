@@ -106,3 +106,31 @@ nav ul a{
     padding: 2px;
 
 }
+.container-bottom-hr-styling{
+    background-color: red !important; 
+    height: 2px !important; 
+    
+}
+.admin-dashboard-container div{
+    margin-top:22px; 
+    margin-bottom: 5px;
+    
+}
+.admin-dashboard-container h3{
+    margin:20px; 
+    font-weight:bolder;
+    text-transform: uppercase;
+}
+.custom-h3-view-clients{
+    margin: 10px;
+    padding-left: 5px;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+.admin-custom-buttons{
+    background-size: 200%;
+    background-color: #212121 !important;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 2px;
+}

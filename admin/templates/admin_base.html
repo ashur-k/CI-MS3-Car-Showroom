@@ -28,7 +28,7 @@
                 <a href="{{url_for('admin.admin_homepage')}}" class="brand-logo hide-on-med-and-down center valign-wrapper">
                     <i class="material-icons center white-text grey-text text-darken-4" style="font-size:72px; margin:0px;">supervisor_account</i>
                     <span>
-                     CAR SALES SHOWRROM ADMIN SITE
+                     CAR SALES SHOWRROM
                     </span>
                 </a>
                 <a href="#" data-target="slide-out" class="sidenav-trigger right" style="margin-rigth: 50px !important;"><i class="material-icons">menu</i></a>
@@ -73,8 +73,8 @@
                                 <label for="search" class="white-text">Search</label>
                             </div>
                             <div class="input-field col s12">
-                                <button class="waves-effect waves-light btn admin-secondary-custom-buttons" type="submit" data-tooltip="Search user make/model/registration">
-                                Search</button>
+                                <button class="waves-effect waves-light btn red-text text-darken-4 admin-secondary-custom-buttons" type="submit" data-tooltip="Search user make/model/registration">
+                                <i class="material-icons right black-text text-darken-4">search</i> Search  </button>
                             </div>
                         </div>
                     </form>
@@ -96,13 +96,13 @@
             <ul id="for_small_manage_cars" class="dropdown-content">
                 <li><a class="dropdown-item" href="{{url_for('admin.add_car_company')}}">Add Car Make/Model</a></li>
                 <li class="divider"></li>
-                <li><a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit existing Car Info</a></li>
+                <li><a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit Existing Car Info</a></li>
                 <li class="divider"></li>
-                <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold cars</a></li>  
+                <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold Cars</a></li>  
             </ul>
              <!--Small Screen Dropdown List Items For Manage Cars -->
             <ul id="for_small_manage_clients" class="dropdown-content">
-                <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Add new clients</a></li>
+                <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Book test drive</a></li>
                 <li class="divider"></li>
                 <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
             </ul>

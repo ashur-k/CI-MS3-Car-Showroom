@@ -4,7 +4,7 @@
 
 <div class="container admin-dashboard-container" style="">
     <div class="row grey darken-4 valign-wrapper">
-        <h3 class="white-text"><i class="fas fa-bookmark red-text"></i> Book cleint for test drive </h3>
+        <h3 class="white-text"><i class="fas fa-bookmark red-text"></i> Book test drive for cleint</h3>
     </div><hr class="container-bottom-hr-styling">
 </div>
 <div class="container">
@@ -36,10 +36,8 @@
 <!--If admin car is going to be in search result this section will come back-->
 {% if car_clients_intrest %}
 <div class="container">
-    <div class="row">
-        <div class="col s12">
-        <h3>Cleint registration form</h3>
-        </div>
+    <div class="row valign-wrapper grey lighten-5">
+        <h5 class="custom-h3-view-clients"><i class="fab fa-wpforms red-text"></i> Booking Test Drive</h5>
     </div>
 <!--Collapsible are here-->
     <div class="row">
@@ -47,8 +45,8 @@
             <ul class="collapsible ">
                 <li>
                 <div class="collapsible-header">
-                    <i class="material-icons right"> keyboard_arrow_down</i> 
-                    <i class="fas fa-car-side" style="margin-left:5px;"></i>
+                    <i class="material-icons right red-text"> keyboard_arrow_down</i> 
+                    <i class="fas fa-car-side red-text" style="margin-left:5px;"></i>
                     {{car_clients_intrest.car_make}} {{car_clients_intrest.car_model}}, Registration number {{car_clients_intrest.reg_num}}
                 </div>
                 <div class="collapsible-body center-align">
@@ -59,14 +57,14 @@
                 {% if other_appiontments.count() > 0 %}
                 <li>
                 <div class="collapsible-header">
-                <i class="material-icons right">keyboard_arrow_down</i><i class="material-icons">info</i>{{other_appiontments.count() }}
-                more appiontments on {{car_clients_intrest.reg_num}}
+                <i class="material-icons right red-text">keyboard_arrow_down</i><i class="material-icons red-text">info</i>{{ other_appiontments.count() }}
+                clients interested in car {{car_clients_intrest.reg_num}}
                 </div>
 
                 <div class="collapsible-body">
                      <div class="row valign-wrapper">
                         {% for appiontment in other_appiontments %}
-                        <div class="col teal s4 center-align" style="margin:2px">
+                        <div class="col s4 center-align" style="margin:2px">
                             <p>Client name: {{appiontment.full_name}} </p>
                             <p>Cleint phone: {{appiontment.phone}}  </p>
                             <p>Appiontment date: {{appiontment.appiontment_date}}</p>
@@ -90,37 +88,37 @@
         <input type="hidden" name="car_image_url" value="{{car_clients_intrest.car_image_url}}">
   
         <div class="input-field col s12">
-            <i class="material-icons prefix">account_circle</i>
+            <i class="material-icons prefix red-text">account_circle</i>
             <input type="text" class="form-control" id="full_name" name="full_name" placeholder="full name" required>
             <label for="exampleInputEmail1">Full name</label>
         </div>
         <div class="input-field col s12">
-            <i class="material-icons prefix">email</i>
+            <i class="material-icons prefix red-text">email</i>
             <input type="email" class="validate" id="email" name="email" placeholder="email" required>
             <label for="email">Email <address></address></label>
         </div>
         <div class="input-field col s12">
-            <i class="material-icons prefix">phone</i>
+            <i class="material-icons prefix red-text">phone</i>
             <input type="tel" class="validate" id="phone" name="phone" placeholder="phone number" required>
             <label  for="phone">Telephone number</label>
         </div>
         <div class="input-field col s12">
-            <i class="material-icons prefix">timer</i>
+            <i class="material-icons prefix red-text">timer</i>
             <input class="validate ml-5" type="time" name="appiontment_time" required>
             <label   for="best_time_to_contact">Appiontment time</label>
         </div>
         <div class="input-field col s12">
-            <i class="material-icons prefix">date_range</i>
+            <i class="material-icons prefix red-text">date_range</i>
             <input class="validate ml-5" type="date" id="start" name="appiontment_date" value="2018-07-22" min="2020-01-01" max="2022-12-31" required>
             <label class="ml-5" for="start">Appiontment date:</label>
         </div>
         <div class="input-field col s12">
-            <i class="material-icons prefix">mode_edit</i>
+            <i class="material-icons prefix red-text">mode_edit</i>
             <textarea id="textarea1" class="materialize-textarea" name="client_related_notes" rows="3"></textarea>
             <label for="textarea1">Textarea</label>
         </div>
         <div class="input-field col s12">
-            <button type="submit" class="btn btn-primary">Book appiontment</button>
+            <button type="submit" class="btn admin-custom-buttons"><i class="fas fa-calendar-check red-text"></i> Book test drive</button>
         </div>
     </form>
     </div>

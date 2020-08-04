@@ -15,7 +15,7 @@
         <img src="{{url_for('static', filename='img/slider_image_1.jpg')}}"> <!-- random image -->
         <div class="caption left-align">
             <h4 class="sec-slides-headings  hide-on-small-only green-text text-lighten-4"><span class="blue-text text-lighten-4">CAR SALES</span> SHOWROOM</h4>
-            <h5 class="slides-headingsgrey-text text-lighten-4">Buy your dream car!</h5>
+            <h5 class="slides-headings grey-text text-lighten-4">Buy your dream car!</h5>
         </div>
     </li>
     <li>
@@ -48,35 +48,61 @@
     <!--############################################ SELECT CAR MAKE DROP BOX BUTTON IS HERE ################################################-->
         <div class="col s12 m4 l4">
         <!-- Dropdown Trigger -->
-            <a class="dropdown-trigger btn custom_btn" href="#" data-target="car_make">
+            {% if not car_make %}
+                <a class="dropdown-trigger btn custom_btn tooltipped" href="#" data-target="car_make" data-position="top" data-tooltip="Please select car make, it enables you to view cars!">
                 {{cars.count()}} Car Makes<i class="material-icons right">arrow_drop_down</i>
-            </a>
+                 </a>
+            {% else %}
+                <a class="dropdown-trigger btn custom_btn tooltipped" href="#" data-target="car_make" data-position="top" data-tooltip="Click end button to view all {{car_make}} cars. Otherwise please select options in car model!">
+                {{car_make}} Cars<i class="material-icons right">arrow_drop_down</i>
+                 </a>
+            {% endif %}
                 <!-- Dropdown links -->
-            <ul id="car_make" class="dropdown-content">
+                <ul id="car_make" class="dropdown-content">
                 {% for car in cars %}
                 <li>
                     <a href="{{url_for('index', car_make=car.car_make)}}">{{ car.car_make }}</a>
                 </li>    
                 {% endfor %}
-                </ul> 
+                </ul>
+            
+           
         </div>
     <!--############################################ SELECT CAR MODEL DROP BOX BUTTON IS HERE ################################################-->
         <div class="col s12 m4 l4">
-            <a class="dropdown-trigger btn custom_btn" href="#" data-target="car_models">
+           
                 <!-- If serveside is providing car model data -->
             {% if car_models %}
                     <!-- If count is less than 2 print model (Singular-model) -->
                 {% if car_models.count() < 2 %}
-                    {{car_models.count()}} {{car_make}} Model<i class="material-icons right">arrow_drop_down</i>
-                    <!-- else (Plural-models) -->
+                    {% if not car_model %}
+                     <a class="dropdown-trigger btn custom_btn tooltipped" href="#" data-target="car_models" data-position="top" data-tooltip="Please select {{car_make}} to view cars.">
+                        {{car_models.count()}} {{car_make}} Model<i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                    {% else %}
+                        <a class="dropdown-trigger btn custom_btn tooltipped" href="#" data-target="car_models" data-position="top" data-tooltip="Click next button to view {{car_make}} {{car_model}} cars.">
+                        {{car_make}} {{ car_model }}<i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    {% endif %}
+                <!-- else (Plural-models) -->
                 {%else%}
-                    {{car_models.count()}} {{car_make}} Models<i class="material-icons right">arrow_drop_down</i>
+                        {% if not car_model %}
+                     <a class="dropdown-trigger btn custom_btn tooltipped" href="#" data-target="car_models" data-position="top" data-tooltip="Please select {{car_make}} to view cars.">
+                        {{car_models.count()}} {{car_make}} Models<i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                        {% else %}
+                        <a  class="dropdown-trigger btn custom_btn tooltipped" data-target="car_models" data-position="top" data-tooltip="Click end button to view {{car_make}} {{car_model}} cars.">
+                        {{car_make}} {{ car_model }}<i class="material-icons right">arrow_drop_down</i></a>
+                        {% endif %}
+                        
                 {%endif%}
                 <!-- else (if server side hasnt provided car model data) -->
             {%else%}
-                    Select make
+                    <a class="dropdown-trigger btn custom_btn" href="#" data-target="car_models" disabled>
+                        Select make
+                    </a>
             {% endif %}
-           </a>
+           
             <!-- Drop down selections-->
             <ul id="car_models" class="dropdown-content">
                 {% for models in car_models %} <!-- for loop to execute if server side providing car models data -->
@@ -96,13 +122,13 @@
                     <input type="hidden" name="car_make" value="{{ car_make }}" placeholder="{{ car_make }}"/>
                     <input type="hidden" name="car_model" value="" />
                     <button type="submit" name="carMakeForm" class="btn custom_btn ">
-                        {{total_car_in_make.count()}} {{ car_make }} Cars<i class="material-icons right">send</i>
+                        Find {{total_car_in_make.count()}} {{ car_make }} Cars<i class="material-icons right">send</i>
                     </button>
                 </form>
             {% else %}
                 <!-- else there are no cars cars to print data -->
                 <button type="submit" class="btn custom_btn p-2">
-                    {{total_car_in_make.count()}} {{ car_make }} Car
+                   Find {{total_car_in_make.count()}} {{ car_make }} Car
                 </button>
             {% endif %} 
         {% endif %} 
@@ -115,17 +141,17 @@
                 {% if total_car_in_models.count() == 1 %}
                     <!-- If count is one print singular of car on butoon, not plural cars -->
                     <button form="car_model_form" type="submit" class="btn purple custom_btn  p-2">
-                        {{ total_car_in_models.count() }} car {{car_make}} {{ car_model }} <i class="material-icons right">send</i>
+                       Find {{ total_car_in_models.count() }} car <span class="hide-on-med-and-down">{{car_make}}</span> {{ car_model }} <i class="material-icons right">send</i>
                     </button>
                 {% else %}<!--  plural cars -->
                     <button form="car_model_form" type="submit" class="btn purple custom_btn  p-2">
-                        {{ total_car_in_models.count() }} {{car_make}} {{ car_model }} cars<i class="material-icons right">send</i>
+                       Find {{ total_car_in_models.count() }} <span class="hide-on-med-and-down">{{car_make}}</span> {{ car_model }} cars<i class="material-icons right">send</i>
                     </button>
                 {% endif %}
             </form>
             {% else %} <!-- else there are no cars to print data -->
                 <button type="submit" class="btn purple custom_btn  p-2">
-                    {{ total_car_in_models.count() }} car {{car_make}} {{ car_model }} 
+                   Find {{ total_car_in_models.count() }} car <span class="hide-on-med-and-down">{{car_make}}</span> {{ car_model }} 
                 </button>
             {% endif %} 
         {% endif %} 
@@ -133,7 +159,7 @@
         <!-- At the moment I have no pagination implemented my applicaiton so I am not priniting all cars for user. 
             I think user will have to keep scrolling and it will be bad user expereience  -->
         {% if all_cars %}
-        <button type="submit" class="btn purple custom_btn p-2">
+        <button type="submit" class="btn purple custom_btn p-2" disabled>
             {{ all_cars.count() }} Cars availiable
         </button>
         {% endif %}

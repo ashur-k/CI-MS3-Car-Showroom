@@ -47,7 +47,9 @@
 <section class="slider">
  <ul class="slides">
       <li>
-        <img src="{{ car_info.car_image_url }}"> <!-- random image -->
+      <div class="div-wrapper">
+        <img class="materialboxed responsive-img" src="{{ car_info.car_image_url }}"> <!-- random image -->
+      </div>
         <div class="caption center-align">
         </div>
       </li>
@@ -70,37 +72,37 @@
                
         </div><hr>
         <div class="row red darken-4 white-text">
-    <div class="col s12 m2 l2 valign-wrapper" >
+    <div class="col s12 m6 l6 valign-wrapper" >
         <blockquote>
             <h6 class="center-align ">Seats: </h6>
             <h6 class="center-align ">{{car_info.seats}}</h6>
         </blockquote>
     </div>
-    <div class="col s12 m2 l2 valign-wrapper">
+    <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
             <h6 class="center-align">Registration Year: </h6>
             <h6 class="center-align" >{{ car_info.registration_year }}</h6>
         </blockquote>
     </div>
-    <div class="col s12 m2 l2 valign-wrapper">
+    <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
             <h6 class="center-align">Engine: </h6>
             <h6 class="center-align" >{{ car_info.engine }}</h6>
         </blockquote>
     </div>
-    <div class="col s12 m2 l2 valign-wrapper">
+    <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
             <h6 class="center-align">Transmission: </h6>
             <h6 class="center-align">{{car_info.transmisson}}</h6>
         </blockquote>
     </div>
-    <div class="col s12 m2 l2 valign-wrapper">
+    <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
             <h6 class="center-align">Fuel Type: </h6>
             <h6 class="center-align">{{car_info.fuel_type}}</h6>
           </blockquote>
     </div>
-    <div class="col s12 m2 l2 valign-wrapper">
+    <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
             <h6 class="center-align">Mileage: </h6>
             <h6 class="center-align"> {{car_info.mileage}}</h6>
