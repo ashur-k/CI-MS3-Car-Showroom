@@ -3,7 +3,7 @@
  {% block content %}
 <div class="container admin-dashboard-container">
     <div class="row grey darken-4 valign-wrapper">
-        <h3 class="white-text"><i class="fas fa-money-check red-text"></i> All sold cars are here</h3>
+        <h3 class="white-text"><i class="fas fa-money-check red-text"></i> View sold cars</h3>
     </div><hr class="container-bottom-hr-styling">
 
 
@@ -43,22 +43,28 @@
             <a class="btn waves-effect waves-red admin-secondary-custom-buttons modal-trigger" href="#modal{{ cars._id }}">
                 <i class="fas fa-trash-alt red-text"></i> Delete info
             </a>
+        
         </td>
     </tr>
-        <div class="modal" id="modal{{ cars._id }}">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modal{{ cars._id }}Label">Delete Record</h4>
-                     <p>Are you sure you wan't to delete client, once client is
-                      deleted from here we will no longer have any information about this client and car.</p>
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="modal-close teal white-text waves-effect waves-green btn-flat">Close</button>
-                <a class="btn btn-danger" href="{{url_for('client_blueprint.delete_sold_car', car_id=cars._id)}}">Delete: {{ cars.full_name }}</a>
+       
+    </tbody>
+      <div class="modal" id="modal{{ cars._id }}" >
+        <div class="modal-content">
+            <div class="row grey darken-4 white-text valign-wrapper">
+                 <h5 style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete Record</h5>
             </div>
+            <div class="row">
+                 <p>Are you sure you wan't to delete client, once client is
+                      deleted from here we will no longer have any information about this client and car.</p>
+            </div>
+            <div class="modal-footer">  
+                <a class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
+                <a class="btn white-text waves-effect waves-green btn admin-custom-buttons" href="{{url_for('client_blueprint.delete_sold_car', car_id=cars._id)}}">
+                <i class="fas fa-trash-alt red-text"></i> Delete: {{ cars.reg_num }}</a>
             </div>
         </div>
-    </tbody>
+        
+    </div>
   {% endfor %}   
 
      

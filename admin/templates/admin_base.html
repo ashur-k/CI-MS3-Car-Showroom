@@ -84,7 +84,7 @@
             <ul id="for_small_admin" class="dropdown-content">
                 <li><a class="dropdown-item" href="{{url_for('login.signout')}}">Signout</a></li>
                 <li class="divider"></li>
-                <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add new user</a></li>
+                <li><a class="dropdown-item" href="{{url_for('login.register')}}">Add New User</a></li>
             </ul>
             <!--Small Screen Dropdown List Items For Add Car -->
             <ul id="add_new_car" class="dropdown-content">
@@ -98,13 +98,16 @@
                 <li class="divider"></li>
                 <li><a class="dropdown-item" href="{{url_for('admin.update_car_info')}}">Edit Existing Car Info</a></li>
                 <li class="divider"></li>
-                <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">Sold Cars</a></li>  
+                 <li><a class="dropdown-item" href="{{url_for('admin.view_all_cars')}}">View All Cars</a></li>
+      
             </ul>
              <!--Small Screen Dropdown List Items For Manage Cars -->
             <ul id="for_small_manage_clients" class="dropdown-content">
-                <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Book test drive</a></li>
+                <li><a class="dropdown-item" href="{{url_for('client_blueprint.add_new_client')}}">Book Test Drive</a></li>
                 <li class="divider"></li>
-                <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View all clients</a></li>
+                <li><a class="dropdown-item" href="{{url_for('client_blueprint.view_all_clients')}}">View All Clients</a></li>
+                <li class="divider"></li>
+                <li><a class="dropdown-item" href="{{url_for('client_blueprint.sold_cars')}}">View Sold Cars</a></li>  
             </ul>
         </ul>
     </ul>
@@ -166,13 +169,7 @@
 
  {% endblock %}
 </main>
- <!--
-    ###############################################################################################################################################
-    ####                                                                                                                                       ####
-    ####                                                FOOTER SECTION IS HERE                                                                 #### 
-    ####                                                                                                                                       ####
-    ###############################################################################################################################################                
-    -->
+
    
 
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

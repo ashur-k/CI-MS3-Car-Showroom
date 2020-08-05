@@ -45,7 +45,7 @@ def admin_with_login_package(car_add_successfully=None):
     # for reg in find_reg:
         # print(reg['reg_num'])
     if car_add_successfully:
-        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), car_add_successfully=car_add_successfully)
+        return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), car_add_successfully=car_add_successfully, clients_info=mongo.db.client_info.find())
     return render_template('admin.html', admin_cars_make=mongo.db.car_make.find(), clients_info=mongo.db.client_info.find())
 
 
@@ -344,4 +344,19 @@ def delete_client_admin_url(client_id):
 
     flash(u'Client is successfully deleted from database.', 'appiontment')
     return redirect(url_for('admin.admin_homepage'))
+
+
+@admin.route('/view_all_cars')
+def view_all_cars():
+    all_cars = mongo.db.basic_car_information.find()
+    return render_template('view_all_cars.html', admin_cars_make=mongo.db.car_make.find(), all_cars=all_cars)
+
+
+@admin.route('/admin_delete_car/<car_id>/<reg_num>', methods=['POST', 'GET'])
+def admin_delete_car(car_id, reg_num):
+    mongo.db.basic_car_information.remove({'_id': ObjectId(car_id)})
+    #session.clear()
+    flash(u'Car registration numbered {} is successfully deleted from database.'.format(reg_num), 'delete_flash')
+    return redirect(url_for('admin.view_all_cars'))
+
 
