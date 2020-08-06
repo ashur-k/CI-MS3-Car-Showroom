@@ -3,44 +3,57 @@
 {% block head %} Registeration-Page {% endblock %} 
 {% block content %}
 
+<div class="section container admin-dashboard-container">
+<div class="row grey darken-4 valign-wrapper">
+<h3 class="white-text" ><i class="fas fa-users red-text"></i> Registration Page</h3>
+</div><hr class="container-bottom-hr-styling">
+</div>
 <div class="container">
-<h1>Registration Page</h1>
-<div class="row">
-<div class="col-md-12">
-    <form method="POST" action="">
-    <div class="form-group col-md-12">
-      <label for="Username">Username</label>
-      <input type="text" class="form-control" id="name" name="username" aria-describedby="emailHelp" required/>
-    </div>
-    <div class="form-group col-md-12">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" name="user_pwd" required/>
-    </div>
-     <div class="form-group col-md-12">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" name="user_email" required/>
-    </div>
-      <div class="form-group col-md-12">
-      <label for="user_role">User Role</label>
-     <select class="custom-select" id="user_role" name="user_role" required>
-           <option value="admin">Admin</option>
-           <option value="admin_asst">Admin Assistant</option>
-    </select>
-    </div>
-      
-      <button type="submit" class="form-group btn btn-dark btn-block">Make User</button>
-    </form><br>
-     {% with messages = get_flashed_messages() %} 
-        {% if messages %}    
-           {% for message in messages %}
-            <p>{{ message  }}</p>
+    <div class="row">
+        <form class="col s12" method="POST" action="{{url_for('login.register')}}">
+            <div class="input-field col s12">
+                <i class="material-icons red-text prefix">person_add</i>
+                <input type="text" class="validate" id="name" name="username" aria-describedby="emailHelp" required/>
+                <label for="Username">Username</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons red-text prefix">lock</i>
+                <input type="password" class="validate" id="password" name="user_pwd" required/>
+                <label for="password">Password</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons red-text prefix">email</i>
+                <input type="email" class="validate" id="email" name="user_email" required/>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons red-text prefix">person_add</i>
+                <select class="validate" id="user_role" name="user_role" required>
+                    <option value="admin">Admin</option>
+                    <option value="admin_asst">Admin Assistant</option>
+                </select>
+                <label for="user_role">User Role</label>
+            </div>
+             <div class="input-field col s12">
+                <button type="submit" class="waves-effect waves-light btn admin-custom-buttons"><i class="far fa-user red-text"></i> Make User</button>
+             </div>
+                 {% with messages = get_flashed_messages() %} 
+                {% if messages %}    
+                {% for message in messages %}
+                <div class="col s12">
+                  
+                     <p style="font-size:18px; font-weight:bolder;">{{ message }}</p>
+                   
+                </div>
+           
             {% endfor %}
         
         {% endif %} 
         {% endwith %}
-</div>
+        </form>
+    </div>
 </div>   
-</div>
+
 
 
 {% endblock %}

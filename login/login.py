@@ -35,17 +35,16 @@ def logging_in():
 @login.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        users = mongo.db.users
-        existing_user_email = users.find_one({'email': request.form['user_email']})
+       
+        existing_user = mongo.db.users.find_one({'name': request.form['username']})
 
-        if existing_user_email is None:
+        if existing_user is None:
             hash = pbkdf2_sha256.hash(request.form['user_pwd'])
-            users.insert({'name': request.form['username'], 'user_pwd': hash, 'user_email': request.form['user_email'], 'user_role': request.form['user_role']})
-
-            flash('User has been created')
+            mongo.db.users.insert({'name': request.form['username'], 'user_pwd': hash, 'user_email': request.form['user_email'], 'user_role': request.form['user_role']})
+            flash('User name {} has been created.'.format(request.form['username']))
             return redirect(url_for('login.register'))
 
-        flash('User name already exist')
+        flash('User name {} already exists in database.'.format(request.form['username']))
     return render_template('register_user.html', admin_cars_make=mongo.db.car_make.find())
 
 
