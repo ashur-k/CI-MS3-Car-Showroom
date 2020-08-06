@@ -1,7 +1,11 @@
 # CAR SALES SHOWROOM:
-    Car sales showroom is designed for two different types of users. Client user who wants to buy a car and an admin user who is dealing with client’s requests. User interface for both users is different from each other. Client user can be any number of users who are visiting car sales showroom website. They are allowed to view website, cars and book a test drive for any available car. Admin user is required ID and password to access the application. 
-    Admin side of car sales showroom is designed to work like a web software. Admin is required to learn it in order to use it. Learning it is simple and easy, user interface for admin is self-explanatory simple to understand and follow along. It keeps you on the track and provides all useful information that you need on the same page where you are a performing task.
-    At the moment I have left Admin login button present on client site just for evaluation purposes in actual requirement client user is not intended to see admin login button.  
+    Car sales showroom is designed for two different types of users. Client user who wants to buy a car and an admin user who is dealing with client’s requests. 
+    User interface for both users is different from each other. Client user can be any number of users who are visiting car sales showroom website.
+     They are allowed to view website, cars and book a test drive for any available car. Admin user is required ID and password to access the application. 
+    Admin side of car sales showroom is designed to work like a web software. Admin is required to learn it in order to use it. Learning it is simple and easy, user 
+    interface for admin is self-explanatory simple to understand and follow along. It keeps you on the track and provides all useful information that you
+     need on the same page where you are a performing task. At the moment I have left Admin login button present on client site just for evaluation purposes in 
+     actual requirement client user is not intended to see admin login button.  
 
 ## Client services:
 ###### •	Slide showing hero section.
@@ -22,13 +26,15 @@
 ###### •	Client management service where admin can book test drive appointments and search clients.
 
 ## Client user UX:
-    Car sales showroom is simple and easy to use. It is designed and developed to satisfy following user needs. 
+    Car sales showroom is simple and easy to use. It is designed and
+    developed to satisfy following user needs. 
 ###### •	Person who is interested in a particular brand and wants to see only those cars.
 ###### •	Person with a budget to buy a car and wants to know running cost of a car.
 ###### •	Person who wants to see all car features before he buys it.
 
 ## Admin user UX:
-    Admin site UX is designed to be user friendly, easy to learn, interactive and dynamic. To keep admin on top of his daily jobs with client and car management.
+    Admin site UX is designed to be user friendly, easy to learn, interactive and dynamic. 
+    To keep admin on top of his daily jobs with client and car management.
 ###### •	Admin can have secure login system to keep admin side separated and only accessible to amin user.
 ###### •	Admin can view client requests, and book car test drive appointments.
 ###### •	Admin can create, read, update and delete cars data that clients can view on their end.
@@ -108,3 +114,34 @@
 ###### •	If there is no error then admin is required to add car specifications, including car image URL. There is no facility provided of adding these details automatically. In an upgrade version of car sales showroom, I am planning to add feature that admin is able to fetch all that information from an external API.
 ###### •	In end of process when admin submits all car specifications to database, admin will be redirected to admin dashboard with message that all information is added successfully.  
 ###### •	If for some reason admins stop that process in middle, then admin will be requested to finish or end that session. 
+
+### Manage Cars:
+###### •	In first option “Add Car Make / Model” admin can add car make or car model to database. Admin is not allowed to duplicate these entries. There are collections in database of each car makes and car models. Purpose of these collections is to fill in dropdown and selection menu. There uniqueness is required to make dropdown and selection boxes working properly. At the moment Admin cannot delete or update car make/model. This feature will be added in next version of car sales showroom. 
+###### •	Second option, edit existing car info gives admin ability to update car information if there is any mistake made while adding car information. Admin is able to change car registration number and If admin changes car registration number then it will first check for its uniqueness. Second it will check if there are any clients interested in the car for which admin is updating registration number. If there are then correspondingly registration number will be change in client database collections. 
+###### •	Third option, view all cars admin can see all cars in database on this template. Information is displayed in alphabetical order of car make name. Admin can delete the car record and view full information about car. In update version I am going to plan how an effective pagination option can be implemented on this page. Idea of seeing all cars in order to find one specific car is not considered user friendly. Admin is provided with feature of car search that is explained under search input box heading.
+
+### Manage Cleints:
+###### •	Admin can book car test drive from his end. Admin is required to give car registration number. After this admin is going to be provided back with car image, information about other test drive appointments for the car, if there are any, and car test drive booking form to add test drive booking in database.
+###### •	Admin can View all clients it works similar to admin dashboard but here admin can search clients with their name, phone number or email address. And information on client administration page is provided in alphabetic order using clients name.
+###### •	Third option, sold cars admin can see information about sold car and its buyer. Admin can also delete the record of sold cars. At the moment admin cannot update sold cars record. I am implementing this feature in update version of cars sale showroom. 
+
+### Search input box: 
+###### •	If there are 100s of car then looking for a one particular difficult job to do. Admin can search car registration number; car make or car model with help of search input provided in side navigation. If result is searched, admin will see a web page with all numbers of result. Each result will have car image its summary and four operation buttons. Update, view, sell and delete car to perform that particular operation with car registration number. All of these buttons are functional.
+###### •	If admin is entering registration number of sold car in search input, then returning page is going to be all information about that sold car..  
+###### •	At the moment search is required to follow same pattern of small and capital letters as values are saved in database. In update version of cars sales showroom, admin won’t be required follow this rule.
+###### •	Client is not given feature for updating and setting special up car offers for client site home page. It is left to implement for later application version. Temporarily three cars are randomly selected to display on client site special car offers section.
+
+## Testing:
+    I have performed wide measures of testing on application before and after hosting to 
+    make sure that user data is not breaking. I did find errors and I have corrected them. 
+    Following are the errors that I would like to mention:
+
+###### •	Car updating and add car was using same name for session variable reg_num. This was crashing application if adding car is in process and the same time admin chooses to update a car from navigations.
+###### •	In the process of updating registration number my session variables were conflicting with each other. Both session variables were named ‘reg_num’ resulting the application to crash. In order to prevent this issue, update function session variable was named differently. This fix caused a corresponding error where updating form fields in car update-delete page were not filling up with data. This was due to not updating all entries of ‘reg_num’, although once all entries were updated, application started to work properly without any further crashes. 
+###### •	To make car sales showroom behaves interactive and dynamic, multiple URLS routes are used which serves different values to their URL function. These URLS hold variables and the values of these variables comes from different HTML templates or are redirected from other associated routing functions. Thorough testing is performed, during and after the implementation of the logic. To check functions and operations of application are not breaking or crashing, web templates are served with correct data values and links or buttons in application are directing correctly.
+###### •	In testing, an unexpected logical error was caught at admin end of application. If admin deletes any sold car data, and there is another client who is interested in that same car, then admin won’t be able to view car information that the other client is interested in. The reason for this problem is car registration number which is present in client database collections but deleted from admin car collections. Consequently, if admin wants to view information about that car registration number server will generate empty HTML template. To resolve this issue car sales showroom was implemented with logic that in that particular case admin get reminded with the help of flash message about the deletion he performed earlier. “Admin has removed car information from all client and car databases.” 
+###### •	Car sales showroom is tested on different browsers and on different screen size to make sure if user readability or designed stability is not compromised.
+###### •	In testing phase, it was discovered that navigation bar on client side is going out of its position. This problem was coming from admin css file. The link of admin.style.css file was provided in head tag of client side to provide styling to admin login file. To fix this problem classes in styling of admin login file were included to css styling of client side css file. Link of admin_style.css file was removed from client-side head tag.
+###### •	After implementing fully functional side navigation some of flash messages were disappearing behind the side navigation. To fix problem these flash messages were give new html tags and css styling.
+###### •	There are minor form validation issues which at the moment are left to deal with in upgrade version. Although materializecss validations classes are applied to form fields and they are working.
+###### •	Feature of view all car is a last-minute update to car sales showroom. In testing phase, it occurred that admin need to view all cars. In case if admin is trying to find a car and he has no way to recall it then there is one option left for admin to view all cars.
