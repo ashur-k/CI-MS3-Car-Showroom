@@ -4,11 +4,11 @@ Admin side of car sales showroom is designed to work like a web software. Admin 
 At the moment I have left Admin login button present on client site just for evaluation purposes in actual requirement client user is not intended to see admin login button.  
 
 # Client services:
-•	Slide showing hero section.
-•	Dynamic buttons to select car, provided with tooltips.
-•	Special car offers.
-•	User friendly photo gallery.
-•	Responsive web which user can view on different types of modern smart device.
-•	Responsive navigation bar that stays fixed on large screen sizes and becomes side navigation menu on small and medium screen size devices. That user can open and close with menu button provided at top.
-•	Procedure of booking test drive.
-•	User can view full car specifications.
+###### •	Slide showing hero section.
+###### •	Dynamic buttons to select car, provided with tooltips.
+###### •	Special car offers.
+###### •	User friendly photo gallery.
+###### •	Responsive web which user can view on different types of modern smart device.
+###### •	Responsive navigation bar that stays fixed on large screen sizes and becomes side navigation menu on small and medium screen size devices. That user can open and close with menu button provided at top.
+###### •	Procedure of booking test drive.
+###### •	User can view full car specifications.
