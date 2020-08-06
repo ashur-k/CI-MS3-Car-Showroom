@@ -13,8 +13,7 @@ app.register_blueprint(login, url_prefix="/login")
 app.register_blueprint(admin, url_prefix="/admin")
 app.register_blueprint(client_blueprint, url_prefix="/client_blueprint")
 
-
-app.config['SECRET_KEY'] = 'mySecret'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 app.config["MONGO_DBNAME"] = 'Cars_Sales_Showroom'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI", 'mongodb://localhost')
