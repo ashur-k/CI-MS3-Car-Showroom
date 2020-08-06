@@ -3,22 +3,22 @@
 {% block content %}
 <div class="container admin-dashboard-container">
     <div class="row row grey darken-4 valign-wrapper">
-        <h3 class="white-text"><i class="fas fa-folder-plus red-text"></i> Add new car company - model</h3>
+        <h3 class="white-text"><i class="fas fa-folder-plus red-text"></i> Add new car Make - model</h3>
     </div>
     <hr class="container-bottom-hr-styling">
 </div>
 
 <div class="container" style="padding-top:10px;">
-<h4>Add new car compnay</h4>
+<h4>Add new car make</h4>
 <form action="{{ url_for('admin.add_company') }}" name="add_company" id="add_company" method="POST">
     <div class="row">
         <div class="input-field col s6">
             <input class="validate" type="text" id="car_make" name="car_make" placeholder="car make" required>
-            <label for="car_make"><i class="far fa-file"></i> New company name</label>
+            <label for="car_make"><i class="far fa-file"></i> New Make name</label>
         </div>
     <div class="col s12">
         <button class="btn waves-effect waves-red admin-custom-buttons" type="submit" form="add_company">
-           <i class="fas fa-plus red-text"></i> Add New Car Company
+           <i class="fas fa-plus red-text"></i> Add New Car Make
         </button>
     </div>
 
