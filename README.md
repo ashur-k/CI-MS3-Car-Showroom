@@ -145,3 +145,42 @@
 ###### •	After implementing fully functional side navigation some of flash messages were disappearing behind the side navigation. To fix problem these flash messages were give new html tags and css styling.
 ###### •	There are minor form validation issues which at the moment are left to deal with in upgrade version. Although materializecss validations classes are applied to form fields and they are working.
 ###### •	Feature of view all car is a last-minute update to car sales showroom. In testing phase, it occurred that admin need to view all cars. In case if admin is trying to find a car and he has no way to recall it then there is one option left for admin to view all cars.
+
+## Technologies Used:
+###### •	HTMI5 to implement website project.
+###### •	CSS3 to implement website project.
+###### •	JavaScript codes provided by materializecss.
+###### •	Python3, flask framework and its libraries.
+###### •	Mongodb database  
+###### •	GIT POD online web workspace for HTML & CSS coding.
+###### •	Git Hub hosting services and data storage services.
+###### •	Heroku to host project online
+###### •	Google Chrome to run GIT POD workspace for development process.
+###### •	Google chrome Git extension button to log into Git Pod workspace.
+###### •	Google Chrome Developer tools.
+###### •	Firefox browser latest version for testing purposes.
+###### •	Opera latest version for testing purposes.
+###### •	Safari unknown version for testing.
+###### •	EDGE latest version for testing purposes.
+###### •	Internet explorer latest version for testing purposes.
+###### •	Materializecss to implement website.
+###### •	Font awesome free version.
+###### •	Google icons.
+###### •	Balsamiq Mock-ups 3 for designing wireframes
+## Credits
+## Content:
+    Content on client application is taken from Cazoo website (https://www.cazoo.co.uk/). The content about car specifications is only a representation of information to explain functioning of application. I am advised by friends not update actual data on hosted project in case if I am not sure about legal obligations.   
+    Although in a future update version of car sales showroom car specifications are going to be directly taken from an API and once I have permission to use that API then my legal obligation barriers are going to be taken away by API providers.
+    Media:
+###### •	Pictures are downloaded from Unsplash.com and then they are saved on my flicker account and from there I was adding images URL address to database which then I have displayed on my templates. There are few images that were taken from google searched websites.
+###### •	Logo and some other images are used taken from undraw (https://undraw.co/search).
+## Acknowledgements:
+    I want to say thanks to following youtubers how have shared and explained using flask and mongodb in development.
+###### •	Hitesh Choudhary for explaining Mongodb and flask concepts.
+###### •	Anthony from pretty printed who explains concepts of flask and particularly how to implement blue prints.
+###### •	Tech with Tim for blue prints in flask.
+###### •	Luke Peters for building login system particular hashing password.
+###### •	Travesy Media for materializecss.
+###### •	Special thanks to code institute tutors for helping troubleshooting problems.
+###### •	My mentor Dick Vlaanderen who particularly has advised me and emotionally encouraged me.
+###### •	Very special thanks to code institute tutor Tim, who not helped me to crack errors but also encourage me to deal with emotional stress that I was having due to working for nonstop hours for weeks. Tim shared his experience and advised how to keep balance of time during development process. Tim also shared his newly made videos about flask and project deployment on heroku which were very helpful. 
