@@ -4,14 +4,17 @@
 
 {% with errors = get_flashed_messages(category_filter=["client_deleted"]) %}
 {% if errors %}
-<div class="container">
-<div class="row">
-<div class="col s12">
-    {%- for msg in errors %}
-    <p class="lead" style="color: green; font-weight:normal; text-decoration: underline;">{{ msg }}</p>
-    {% endfor -%}
-</div>
-</div>
+<div class="container registration-process-container">
+    <div class="row row custom-row">
+        <div class="col s12 grey darken-4">
+            <a class="close white-text" href="{{url_for('client_blueprint.view_all_clients')}}"><i class="fas fa-window-close red-text"></i> <strong style="font-weight: 900;">Close</strong></a>
+        </div>
+        <div class="col s12 grey lighten-1 valign-wrapper">
+            {%- for msg in errors %}
+            <p class="flow-text black-text"><i class="fas fa-bug red-text"></i> {{ msg }}</p>
+            {% endfor -%}
+        </div> 
+    </div>
 </div>
 {% endif %}
 {% endwith %}
@@ -184,7 +187,7 @@
                 <div class="card-action">
                 <a type="button" class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#modal{{ clients._id }}">
                 <i class="fas fa-trash-alt red-text"></i> Delete client</a>
-                </a>
+               
 
                  {% if clients.dashboard_status == 'false' %}
                <a class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#movetosashboard{{ clients._id }}">

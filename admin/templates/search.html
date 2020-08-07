@@ -53,7 +53,7 @@
                     <div class="card-action">
                         <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
-                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                            <form action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST" id="make_search_form" name="make_search_form">
                                 <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
                                 <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
                                 <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">

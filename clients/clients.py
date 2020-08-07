@@ -166,8 +166,12 @@ def view(reg_num):
     if 'username' not in session:
         return redirect(url_for('login.admin_login'))
     car_info = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
-    admin_cars_make = mongo.db.car_make.find()
-    return render_template('view_car.html', admin_cars_make=admin_cars_make, car_info=car_info)
+    if car_info:
+        return render_template('view_car.html', admin_cars_make=mongo.db.car_make.find(), car_info=car_info)
+    
+    flash(u'Admin has removed car information from cars database.', 'appiontment')   
+    return redirect(url_for('admin.admin_homepage'))
+
 
 
 @client_blueprint.route('/sold_cars/')
@@ -184,7 +188,6 @@ def sold_car_info(reg_num):
     if 'username' not in session:
         return redirect(url_for('login.admin_login'))
 
-    
     car_info = mongo.db.sold_cars.find_one({'reg_num': reg_num})
     if car_info:
         admin_cars_make = mongo.db.car_make.find()

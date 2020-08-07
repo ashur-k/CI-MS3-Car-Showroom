@@ -288,12 +288,19 @@ def car_update_page():
     session['old_reg_num'] = old_reg_num
     session['new_reg_num'] = new_reg_num
 
+    # To check if update registraion number is not getting duplicated.
     if new_reg_num != old_reg_num:
         existing_registration = mongo.db.basic_car_information.find_one({'reg_num': request.form['reg_num']})
         if existing_registration:
             flash('{} registraion number is already in database.'.format(new_reg_num))
             return redirect(url_for('admin.update_options'))
+    # To check if models are available to add car.
+    car_models = mongo.db.car_model.find({'car_make': request.form['car_make']})
+    if car_models.count() < 1:
+        flash(u'There are no models added to car make {}. To add model please navigate to add car make/model in manage car options.'.format(request.form['car_make']))
+        return redirect(url_for('admin.update_options'))
 
+    # Rendering update car form with all feilds
     car_make = request.form['car_make']
     coll_Id = request.form['hiddenCarId']
     car_make_results = mongo.db.car_make.find_one({'car_make': car_make})
@@ -308,14 +315,6 @@ def car_update_page():
 
 @admin.route('/update_info_db/<car_id>', methods=['POST', 'GET'])
 def update_info_db(car_id):
-    #if session['old_reg_num'] != session['new_reg_num']:
-        #clients_who_requested_same_this_car = mongo.db.client_info.find({'reg_num': session['old_reg_num']})
-    #mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] }, {'$set': {'car_make':request.form['car_make']}})
-    #mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] }, {'$set': {'car_model':request.form['car_model']}})
-    #mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] }, {'$set': {'registration_year':request.form['registration_year']}})
-    #mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] }, {'$set': {'car_image_url':request.form['car_image_url']}})
-    #mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] }, {'$set': {'reg_num':session['new_reg_num']}})
-
     mongo.db.client_info.update_many({"reg_num": session['old_reg_num'] },
     {'$set':
 

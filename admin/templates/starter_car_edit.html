@@ -48,10 +48,10 @@
             </div>
             <div class="input-field col s6">
                 {% if new_reg_num %}
-                    <input class="form-control" id="new_reg_num" name="reg_num" value="{{ new_reg_num }}" type="text" required>
+                    <input class="validate" id="new_reg_num" name="reg_num" value="{{ new_reg_num }}" type="text" required>
                     <label for="reg_no">Fill-in new registration number if you want to update</label>  
                 {% else %}
-                    <input class="form-control" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required>
+                    <input class="validate" name="reg_num" value="{{ car_coll.reg_num }}" type="text" required>
                     <label for="reg_no">Fill-in new registration number if you want to update</label>
                 {% endif %}
             </div>
@@ -66,9 +66,9 @@
   {% if messages %}
     
     {% for message in messages %}
-      <p>{{ message }}</p>
+      <p class="flow-text red-text">{{ message }}</p>
     {% endfor %}
-   
+
   {% endif %}
 {% endwith %}
 </div>
