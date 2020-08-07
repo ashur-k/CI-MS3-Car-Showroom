@@ -175,3 +175,16 @@ padding-left: 12px;
         padding-left: 0;
       }
     }
+
+    @media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+     .ipad-pro-size
+     { 
+         
+         width: 100% !important;
+         margin: 0px !important;
+        
+    }
+  }
