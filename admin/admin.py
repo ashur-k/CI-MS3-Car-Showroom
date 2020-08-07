@@ -380,7 +380,14 @@ def finish_car_registration():
 @admin.route('/add_new_client/<reg_num>', defaults={'client_id': None})
 @admin.route('/car_sold_form/<reg_num>/<client_id>', methods=['POST', 'GET'])
 def car_sold_form(reg_num, client_id):
+    if 'username' not in session:
+        return redirect(url_for('login.admin_login'))
+    
     sold_car = mongo.db.basic_car_information.find_one({'reg_num': reg_num})
+    if not sold_car:
+        flash(u'Admin has removed client and car information from database.', 'appiontment')
+        return redirect(url_for('admin.admin_homepage'))
+    
     client_info = mongo.db.client_info.find_one({'_id': ObjectId(client_id)})
     return render_template('car_sold_form.html',
                             admin_cars_make=mongo.db.car_make.find(),

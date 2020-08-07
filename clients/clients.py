@@ -193,7 +193,7 @@ def sold_car_info(reg_num):
         admin_cars_make = mongo.db.car_make.find()
         return render_template('sold_car_info.html', admin_cars_make=admin_cars_make, car_info=car_info)
 
-    flash(u'Admin has removed car information from all client and car databases.', 'appiontment')   
+    flash(u'Admin has removed client and car information from database.', 'appiontment')
     return redirect(url_for('admin.admin_homepage'))
 
 @client_blueprint.route('/delete_sold_car/<car_id>', methods=['POST', 'GET'])
