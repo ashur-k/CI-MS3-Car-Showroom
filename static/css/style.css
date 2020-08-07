@@ -134,3 +134,9 @@ nav ul a{
     font-size: 14px;
     margin: 2px;
 }
+.input-area{
+        border-bottom: 1px solid #ffffff !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        background-color: transparent !important;
+}

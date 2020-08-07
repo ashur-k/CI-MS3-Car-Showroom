@@ -98,6 +98,7 @@ font-size:22px;
         border-bottom: 1px solid #ffffff !important;
         -webkit-box-shadow: none !important;
         box-shadow: none !important;
+        background-color: transparent !important;
         
 }
 /*sold_cars.html tables*/
