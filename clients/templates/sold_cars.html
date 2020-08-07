@@ -69,12 +69,16 @@
 
      
 </table>
-<div class="row">
-    <div class="col s12">
-        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
-        <i class="fas fa-hand-point-left red-text"></i> Go back to Admin dashboard</a>
+</div>
+<div class="container" style="margin-top: 32px; ">
+  <div class="row">
+        <div class="col s12">
+            <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
+            <i class="fas fa-hand-point-left red-text"></i> Admin dashboard</a>
+              <a href="{{url_for('client_blueprint.view_all_clients')}}" class="waves-effect waves-light btn admin-custom-buttons">
+            <i class="fas fa-hand-point-left red-text"></i> View all clients</a>
+        </div>
     </div>
 </div>
-
 
  {% endblock %}

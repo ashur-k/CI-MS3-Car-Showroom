@@ -263,6 +263,7 @@ def update_options(registration_number):
                                admin_cars_make=mongo.db.car_make.find())
 
     reg_num = request.form['reg_num']
+    print (reg_num)
 
     car_coll = \
         mongo.db.basic_car_information.find_one({'reg_num': reg_num})

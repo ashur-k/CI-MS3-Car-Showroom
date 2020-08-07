@@ -15,20 +15,20 @@
     <div class="row">
         <form class="col s12" action="{{ url_for('admin.reg_verification', car_make=car_make) }}" name="add_car_details" method="POST">
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s12 m6 l6">
           <i class="material-icons red-text prefix">create_new_folder</i>
           <input id="icon_prefix" name="reg_num" type="text" class="validate" required>
           <label for="icon_prefix">Car registraion number</label>
           
                 </div>
-                <div class="input-field col s6">
-          <i class="material-icons red-text prefix">create_new_folder</i>
-          <select name="car_model" required class="validate">
-            <option value="" disabled selected>Select car model</option>
-            {% for results in car_models %}
-            <option value="{{ results.car_model }}">{{ results.car_model }}</option>
-              {% endfor %}
-            </select>
+                <div class="input-field col s12 m6 l6">
+                    <i class="material-icons red-text prefix">create_new_folder</i>
+                    <select name="car_model" class="validate" required>
+                        <option value="" disabled selected>Select car model</option>
+                        {% for results in car_models %}
+                        <option value="{{ results.car_model }}">{{ results.car_model }}</option>
+                        {% endfor %}
+                        </select>
             <label>Materialize Select</label>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 {% if errors %}
 <div class="alert-message block-message error">
      {%- for msg in errors %}
-    <p>{{ msg }}</p>
+    <p class="flow-text">{{ msg }}</p>
     {% endfor -%}
 
 </div>
@@ -63,6 +63,7 @@
 </div>
 <script>
 //document.getElementById("car_model").setCustomValidity("No models aviliable, please go to manage car and add model");
+
 
 </script>
 {%endblock%}

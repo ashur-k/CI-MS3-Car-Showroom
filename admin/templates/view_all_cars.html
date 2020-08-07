@@ -43,15 +43,15 @@
             </a>
               <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
-                            <form action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST" id="make_search_form" name="make_search_form">
+                            <form action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST" id="make_search_form{{cars._id}}" name="make_search_form{{cars._id}}">
                                 <input type="hidden" id="car_make" name="car_make" value="{{cars.car_make}}">
                                 <input type="hidden" id="car_model" name="car_model" value="{{cars.car_model}}">
                                 <input type="hidden" id="reg_num" name="reg_num" value="{{cars.reg_num}}">
                             </form> 
                         </div>
                         <!--Car's CRUD operations buttons-->
-                        <button form="make_search_form" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
-                          <i class="fas fa-edit red-text"></i> Update
+                        <button form="make_search_form{{cars._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
+                          <i class="fas fa-edit red-text"></i> Update car
                         </button>
             <a class="btn waves-effect waves-red admin-secondary-custom-buttons modal-trigger btn-small" href="#modal{{ cars._id }}">
                 <i class="fas fa-trash-alt red-text"></i> Delete car
@@ -79,10 +79,16 @@
 
      
 </table>
-<div class="row">
-    <div class="col s12">
-        <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
-        <i class="fas fa-hand-point-left red-text"></i> Go back to Admin dashboard</a>
+</div>
+
+<div class="container" style="margin-top: 32px; ">
+  <div class="row">
+        <div class="col s12">
+            <a href="{{url_for('admin.admin_homepage')}}" class="waves-effect waves-light btn admin-custom-buttons">
+            <i class="fas fa-hand-point-left red-text"></i> Admin dashboard</a>
+              <a href="{{url_for('client_blueprint.view_all_clients')}}" class="waves-effect waves-light btn admin-custom-buttons">
+            <i class="fas fa-hand-point-left red-text"></i> View all clients</a>
+        </div>
     </div>
 </div>
 

@@ -53,14 +53,14 @@
                     <div class="card-action">
                         <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
-                            <form action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST" id="make_search_form" name="make_search_form">
+                            <form action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST" id="make_search_form{{result._id}}" name="make_search_form{{result._id}}">
                                 <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
                                 <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
                                 <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
                             </form> 
                         </div>
                         <!--Car's CRUD operations buttons-->
-                        <button form="make_search_form" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
+                        <button form="make_search_form{{result._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
                           <i class="fas fa-edit red-text"></i> Update
                         </button>
                         <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
@@ -159,14 +159,14 @@
                     <div class="card-action">
                         <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
-                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form{reg_results._id}}" name="make_search_form{reg_results._id}}">
                                 <input type="hidden" id="car_make" name="car_make" value="{{reg_results.car_make}}">
                                 <input type="hidden" id="car_model" name="car_model" value="{{reg_results.car_model}}">
                                 <input type="hidden" id="reg_num" name="reg_num" value="{{reg_results.reg_num}}">
                             </form> 
                         </div>
                         <!--Car's CRUD operations buttons-->
-                        <button form="make_search_form" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
+                        <button form="make_search_form{reg_results._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
                           <i class="fas fa-edit red-text"></i> Update
                         </button>
                         <a href="{{url_for('admin.view', car_id=reg_results._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
@@ -256,14 +256,14 @@
                     <div class="card-action">
                         <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
-                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form" name="make_search_form">
+                            <form action="{{url_for('admin.update_options')}}" method="POST" id="make_search_form{{result._id}}" name="make_search_form{{result._id}}">
                                 <input type="hidden" id="car_make" name="car_make" value="{{result.car_make}}">
                                 <input type="hidden" id="car_model" name="car_model" value="{{result.car_model}}">
                                 <input type="hidden" id="reg_num" name="reg_num" value="{{result.reg_num}}">
                             </form> 
                         </div>
                          <!--Car's CRUD operations buttons-->
-                        <button form="make_search_form" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
+                        <button form="make_search_form{{result._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
                           <i class="fas fa-edit red-text"></i> Update
                         </button>
                         <a href="{{url_for('admin.view', car_id=result._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
