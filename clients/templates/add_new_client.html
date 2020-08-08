@@ -49,8 +49,13 @@
                     <i class="fas fa-car-side red-text" style="margin-left:5px;"></i>
                     {{car_clients_intrest.car_make}} {{car_clients_intrest.car_model}}, Registration number {{car_clients_intrest.reg_num}}
                 </div>
-                <div class="collapsible-body center-align">
-                <span><img class="activator" src="{{ car_clients_intrest.car_image_url }}"></span>
+                <div class="collapsible-body grey darken-4">
+                    <div class="row">
+                        <div class="col s12">
+                        <img class="materialboxed responsive-img" src="{{ car_clients_intrest.car_image_url }}">
+                    </div>
+                </div>
+                
                 </div>
                 </li>
                 <!--If there are any other appiontments on car-->
@@ -61,15 +66,17 @@
                 clients interested in car {{car_clients_intrest.reg_num}}
                 </div>
 
-                <div class="collapsible-body">
+                <div class="collapsible-body grey darken-4">
                      <div class="row valign-wrapper">
                         {% for appiontment in other_appiontments %}
-                        <div class="col s4 center-align" style="margin:2px">
-                            <p>Client name: {{appiontment.full_name}} </p>
-                            <p>Cleint phone: {{appiontment.phone}}  </p>
-                            <p>Appiontment date: {{appiontment.appiontment_date}}</p>
-                            <p>Appiontment time: {{appiontment.appiontment_time}} </p>
+                        
+                        <div class="col s12 m6 l4 center-align" style="margin:2px">
+                            <p class="white-text">Client name: {{appiontment.full_name}} </p>
+                            <p class="white-text">Cleint phone: {{appiontment.phone}}  </p>
+                            <p class="white-text">Appiontment date: {{appiontment.appiontment_date}}</p>
+                            <p class="white-text">Appiontment time: {{appiontment.appiontment_time}} </p>
                         </div>
+                      
                         {% endfor %}
                      </div>
                 </div>
