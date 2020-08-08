@@ -31,13 +31,13 @@
 <!-------------Updating basicinfomration here----------------->
 <h4 class="mt-3">Basic car informaiton</h4><hr>
     <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col s4 m4 l4">
             <select class="validate" id="car_make" name="car_make" required>
                 <option value="{{ car_make.car_make }}">{{ car_make.car_make }}</option>
             </select>
             <label for="reg_no">Car Make</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s4 m4 l4">
             <select class="validate" id="car_model" name="car_model" required>
                 {% for results in car_model_results %}
                 <option value="{{ results.car_model }}">{{ results.car_model }}</option>
@@ -45,7 +45,7 @@
             </select>
             <label for="car_model">Car Model</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s4 m4 l4">
             <select class="validate" id="reg_num" name="reg_num" required>
                 <option value="{{ new_reg_num }}">{{ new_reg_num }}</option>
             </select>
@@ -54,22 +54,22 @@
     </div>
 
     <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input type="text" id="body_type" name="body_type" class="validate" value="{{ car_coll.body_type }}" required>
             <label for="body_type">Body type</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
            <input type="text" id="exterior_colour" name="exterior_colour" class="validate" value="{{ car_coll.exterior_colour }}" required>
             <label for="exterior_colour">Exterior colour</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input type="text" id="gear_box" name="gear_box" class="validate" value="{{ car_coll.gear_box }}" required>
             <label for="gear_box">Gear box</label>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col s6 m4 l4">
             <select class="validate" id="fuel_type" name="fuel_type" required>
                 <option class="form-control-lg" selected value="{{ car_coll.fuel_type }}">{{ car_coll.fuel_type }}</option>
                 <option value="petrol">Petrol</option>
@@ -80,7 +80,7 @@
             </select>
             <label for="fuel_type">Fuel type</label>
         </div>
-           <div class="input-field col s4">
+           <div class="input-field col s6 m4 l4">
             <select class="validate" id="transmisson" name="transmisson" required>
                 <option selected value="{{ car_coll.fuel_type }}">{{ car_coll.transmisson }}</option>
                 <option value="manual">manual</option>
@@ -88,22 +88,22 @@
             </select>
             <label for="transmisson">Transmission</label><br>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input class="validate" type="date" id="warranty_expire_date" name="warranty_expire_date" value="{{ car_coll.warranty_expire_date }}" required>
             <label for="warranty_expire_date">Warranty expires</label>
             </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col s6 m4 l4">
             <input type="text" id="registration_year" name="registration_year" class="validate" value="{{ car_coll.registration_year }}" required>
             <label for="registration_year">Registration year</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s6 m4 l4">
             <input type="text" id="mileage" name="mileage" class="validate" value="{{ car_coll.mileage }}" required>
             <label for="mileage">Mileage</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
              <div class="switch">
                 <label>
                 {% if car_coll.is_ULEZ_compliant == "on" %} 
@@ -120,15 +120,15 @@
 
 
     <div class="row">
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input type="text" id="seats" name="seats" class="validate" value="{{ car_coll.seats }}" required>
             <label for="seats">Seats</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input type="text" id="drive_type" name="drive_type" class="validate" value="{{ car_coll.drive_type }}" required>
             <label for="drive_type">Drive Type</label>
         </div>
-        <div class="input-field col s4">
+        <div class="input-field col s12 m4 l4">
             <input type="text" id="engine" name="engine" class="validate" value="{{ car_coll.engine }}" required>
             <label for="drive_type">Engine</label>
         </div>

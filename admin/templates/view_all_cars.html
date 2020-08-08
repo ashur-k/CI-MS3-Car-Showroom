@@ -34,12 +34,17 @@
 {% for cars in all_cars |sort (reverse=false, attribute="car_make")%}
     <tbody>  
     <tr>
+    
         <td>{{cars.car_make}}</td>
         <td>{{cars.car_model}}</td>
         <td>{{cars.reg_num}}</td>
+        
         <td>
-            <a class="btn waves-effect waves-red admin-secondary-custom-buttons btn-small" href="{{url_for('client_blueprint.view', reg_num=cars.reg_num)}}">
-                <i class="fas fa-info-circle red-text"></i> Car details
+        <div class="row">
+            <div class="col s12">
+        <!-- CAR CRUD OPERATIONS BUTTON -->
+            <a class="btn waves-effect waves-red admin-secondary-custom-buttons btn-small tooltipped" data-position="bottom" data-tooltip="Show car details." href="{{url_for('client_blueprint.view', reg_num=cars.reg_num)}}">
+                <i class="fas fa-info-circle red-text"></i> <span class="hide-on-med-and-down">Car details</span>
             </a>
               <!--Hiiden form for updating car-->
                         <div class="row" style="display:none;">
@@ -50,13 +55,14 @@
                             </form> 
                         </div>
                         <!--Car's CRUD operations buttons-->
-                        <button form="make_search_form{{cars._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons" type="submit">
-                          <i class="fas fa-edit red-text"></i> Update car
+                        <button form="make_search_form{{cars._id}}" class="btn waves-effect waves-red admin-secondary-custom-buttons tooltipped" data-position="bottom" data-tooltip="Update car details." type="submit">
+                          <i class="fas fa-edit red-text"></i> <span class="hide-on-med-and-down"> Update car</span>
                         </button>
-            <a class="btn waves-effect waves-red admin-secondary-custom-buttons modal-trigger btn-small" href="#modal{{ cars._id }}">
-                <i class="fas fa-trash-alt red-text"></i> Delete car
+            <a class="btn waves-effect waves-red admin-secondary-custom-buttons modal-trigger btn-small tooltipped" data-position="bottom" data-tooltip="Delete car details." href="#modal{{ cars._id }}">
+                <i class="fas fa-trash-alt red-text"></i> <span class="hide-on-med-and-down">Delete car</span>
             </a>
-              
+            </div>
+        </div>    
         </td>
     </tr>        
         </tbody>

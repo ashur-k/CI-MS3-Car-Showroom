@@ -12,9 +12,12 @@
 <h4>Add new car make</h4>
 <form action="{{ url_for('admin.add_company') }}" name="add_company" id="add_company" method="POST">
     <div class="row">
-        <div class="input-field col s6">
+        <div class="row">
+        <p class="flow-text">Please enter name of new car make you want to add.</p>
+        </div>
+        <div class="input-field col s12 m12 l6">
             <input class="validate" type="text" id="car_make" name="car_make" placeholder="car make" required>
-            <label for="car_make"><i class="far fa-file"></i> New Make name</label>
+            <label for="car_make"><i class="far fa-file far fa-file red-text"></i> New Make name</label>
         </div>
     <div class="col s12">
         <button class="btn waves-effect waves-red admin-custom-buttons" type="submit" form="add_company">
@@ -40,7 +43,10 @@
 <h4>Add new car models</h4>
     <form action="{{ url_for('admin.add_model') }}" name="add_model" id="add_model" method="POST">
         <div class="row">
-            <div class="input-field col s6">
+         <div class="row">
+        <p class="flow-text">Please first select car make and then enter the name of car model you want to ad to that make.</p>
+        </div>
+            <div class="input-field prefix col s12 m6 l6">
                 <select class="custom-select" id="car_make_for_adding_model" name="car_make" required>
                     <option selected disabled value="">Car make</option>
                     {% for makers in car_makers %}
@@ -49,11 +55,11 @@
                 </select>
                 <label for="car-make">Car make</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6 l6">
                 <input type="text" id="car_model" name="car_model" class="validate" placeholder="car model" required>
-                <label for="car-model"><i class="far fa-file"></i> New car model name</label>
+                <label for="car-model"><i class="far fa-file red-text "></i> New car model name</label>
             </div>
-            <div class="col s8 m-2">
+            <div class="col s8">
                 <button class="btn waves-effect waves-red admin-custom-buttons" type="submit" form="add_model">
                    <i class="fas fa-plus red-text"></i> Add New Car Model
                 </button>
