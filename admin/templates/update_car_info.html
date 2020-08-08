@@ -9,7 +9,7 @@
 
 <div class="row">
 <h5>Please enter car registration number you want to update.</h5>
-                                                                  <!--I am sending this reg_num in url to ditinguish this template request from server side url generate to continue update process with reg_num session -->  
+    <!--I am sending this reg_num in url to ditinguish this template request from server side url generate to continue update process with reg_num session -->  
     <form class="form" action="{{url_for('admin.update_options', registration_number='reg_num')}}" method="POST">
         <div class="input-field col s12">
             <input type="search" class="validate" id="reg_num" name="reg_num"  placeholder="Registration number" required>

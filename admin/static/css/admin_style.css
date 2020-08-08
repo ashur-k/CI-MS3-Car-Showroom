@@ -1,206 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
-
-:root {
---main-font-family:'Roboto sans-serif';
---secondary-font-family:'-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif';
-  }
-
-*{
-    padding: 0;
-    margin: 0;
- 
+* {
+  padding: 0;
+  margin: 0;
 }
 /* admin.html registration-process-container-message */
 .registration-process-container {
-    margin-top: 15px;
+  margin-top: 15px;
 }
-.admin-dashboard-container div{
-    margin-top:22px; 
-    margin-bottom: 5px;
-    
+.admin-dashboard-container div {
+  margin-top: 22px;
+  margin-bottom: 5px;
 }
-.admin-dashboard-container h3{
-    margin:20px; 
-    font-weight:bolder;
-    text-transform: uppercase;
+.admin-dashboard-container h3 {
+  margin: 20px;
+  font-weight: bolder;
+  text-transform: uppercase;
 }
-.registration-process-container div h4{
-    font-family: var(--main-font-family) !important;
-    text-transform: uppercase;
-    padding: 10px;
-    margin: 0px !important;
+.registration-process-container div h4 {
+  font-family: var(--main-font-family) !important;
+  text-transform: uppercase;
+  padding: 10px;
+  margin: 0px !important;
 }
-.registration-process-container .custom-row{
-    margin-bottom: 5px !important;
+.registration-process-container .custom-row {
+  margin-bottom: 5px !important;
 }
-.registration-process-container .custom-coloumn{
-    margin-top:22px;
+.registration-process-container .custom-coloumn {
+  margin-top: 22px;
 }
 /*Horizontal lines*/
-.container-bottom-hr-styling{
-    background-color: red !important; 
-    height: 2px !important; 
-    
+.container-bottom-hr-styling {
+  background-color: red !important;
+  height: 2px !important;
 }
 /*buttons*/
-.admin-custom-buttons{
-    background-size: 200%;
-    background-color: #212121 !important;
-    font-weight: bold;
-    font-size: 14px;
-    margin: 2px;
+.admin-custom-buttons {
+  background-size: 200%;
+  background-color: #212121 !important;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 2px;
 }
-.admin-secondary-custom-buttons{
-    background-size: 200%;
-    background-color: #fafafa !important;
-    color: black;
-    font-weight: bold!important;
-    font-size: 14px;
-    margin: 2px;
-   
+.admin-secondary-custom-buttons {
+  background-size: 200%;
+  background-color: #fafafa !important;
+  color: black;
+  font-weight: bold !important;
+  font-size: 14px;
+  margin: 2px;
 }
 /*List Items*/
 
-.admin-custom-li{
-    font-size: 16px;
-    font-weight: bolder;
+.admin-custom-li {
+  font-size: 16px;
+  font-weight: bolder;
 }
+/*css for card stylings*/
 /*card titles*/
-.admin-custom-card-title{
-    margin: 5px;
-   font-size: 22px;
-   font-weight: normal;
-   color: #fff;
-   text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000000,
-     1px 1px 0 #000;
+.admin-custom-card-title {
+  margin: 5px;
+  font-size: 22px;
+  font-weight: normal;
+  color: #fff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000000,
+    1px 1px 0 #000;
 }
-.card-image-padding{
-  padding:24px;  
+.card-image-padding {
+  padding: 24px;
 }
-/*Car sold paragraph*/   
-.car-sold-para{
-color:red; 
-font-weight:bolder; 
-font-size:22px;
 
+.view_all_client_container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  box-sizing: border-box;
+  position: sticky;
 }
-.view_all_client_container{
-    margin-bottom: 20px;
-    margin-top: 20px;
-   
-    box-sizing: border-box;
-    position: sticky;
-}
-.input-area{
-        border-bottom: 1px solid #ffffff !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        background-color: transparent !important;
-        
+/* Input box styling */
+.input-area {
+  border-bottom: 1px solid #ffffff !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
 }
 /*sold_cars.html tables*/
-#sold-cars{
-    margin-top: 5px; 
+#sold-cars {
+  margin-top: 5px;
 }
-#sold-cars thead tr{
-    font-size: 18px;
-    font-weight: bolder;
-    background-color: #fafafa !important;
-    
+#sold-cars thead tr {
+  font-size: 18px;
+  font-weight: bolder;
+  background-color: #fafafa !important;
 }
-#sold-cars tbody tr td{
-    font-size: 16px;
-    font-weight: bold;
+#sold-cars tbody tr td {
+  font-size: 16px;
+  font-weight: bold;
 }
 /*sold_car_info.html tables*/
-blockquote{
-    border-left: 3px solid #fff;
-   
+blockquote {
+  border-left: 3px solid #fff;
 }
-blockquote h6{
-    font-weight: bolder !important;
-    margin-bottom: 10px;
-    color: #fff;
-    font-size: 18px;
-   
+blockquote h6 {
+  font-weight: bolder !important;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
 }
 
-.info_title_row{
-    font-size: 22px;
-    font-weight: bolder;
-    background-color:#212121 !important;
-    color: #ffffff;
-    margin-top:12px; 
-    
+.info_title_row {
+  font-size: 22px;
+  font-weight: bolder;
+  background-color: #212121 !important;
+  color: #ffffff;
+  margin-top: 12px;
 }
 /*soldcar.html*/
-.car-sold-row{
-margin-bottom: 0px;
-padding-left: 12px;
+.car-sold-row {
+  margin-bottom: 0px;
+  padding-left: 12px;
 }
-.custom-h3-view-clients{
-    margin: 10px;
-    padding-left: 5px;
-    text-transform: uppercase;
-    font-weight: bolder;
+.custom-h3-view-clients {
+  margin: 10px;
+  padding-left: 5px;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 
-.login-input-label{
-    color: #212121;
-    font-size: 22px;
+.login-input-label {
+  color: #212121;
+  font-size: 22px;
 }
 .div-wrapper {
-    position: relative;
-    height: 100%;
-    width: 100%;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .div-wrapper img {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
- header {
-      padding-left: 120px;
-    }
-    main {
-      padding-left: 300px;
-    }
-    
-    select[required]:focus{
-    outline: none !important;
+header {
+  padding-left: 120px;
+}
+main {
+  padding-left: 300px;
 }
 
-select[required]{
-    display: block;
-    padding: 0;
-    position: absolute;
-    background: transparent;
-    color: transparent;
-    border: none;
-    top: 0;
-    
-
+/* Select box validations css */
+select[required]:focus {
+  outline: none !important;
 }
 
-    @media only screen and (max-width : 992px) {
-      header, main, footer {
-        padding-left: 0;
-      }
-    }
-
-    @media only screen 
-  and (min-device-width: 1024px) 
-  and (max-device-width: 1366px)
-  and (-webkit-min-device-pixel-ratio: 2) {
-     .ipad-pro-size
-     { 
-         
-         width: 100% !important;
-         margin: 0px !important;
-        
-    }
+select[required] {
+  display: block;
+  padding: 0;
+  position: absolute;
+  background: transparent;
+  color: transparent;
+  border: none;
+  top: 0;
+}
+/* media queries */
+/*Padding of page when page is hidden*/
+@media only screen and (max-width: 992px) {
+  header,
+  main,
+  footer {
+    padding-left: 0;
   }
+}
+/*car settings for pages on small screens*/
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .ipad-pro-size {
+    width: 100% !important;
+    margin: 0px !important;
+  }
+}

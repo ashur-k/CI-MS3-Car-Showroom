@@ -1,142 +1,140 @@
-  @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto:ital,wght@0,300;1,300&display=swap');
-  
-  * {
-      padding: 0;
-      margin: 0;
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto:ital,wght@0,300;1,300&display=swap");
 
-      
-  }
-  body{
-     
-font-family: 'Roboto', sans-serif;
-  }
-  /* base.html navbar styling */
-   /* Making materialise nave fixed and and applying colouring */
-  .web_theme{
-      background-color: #b71c1c !important;
-      color:#fff;
-  }
-  
-  .web_theme-card{
-      background-color: #b71c1c !important;
-      color:#000;
-      margin-left: 15px;
-  }
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+/* base.html navbar styling */
+/* Making materialise nave fixed and and applying colouring */
+.web_theme {
+  background-color: #b71c1c !important;
+  color: #fff;
+}
 
-  .web_theme-card, span{
-        font-weight: bolder;
-        
-     
-     
-  }
-  
-   /* Car logo image */
-  .logo_image{
-      height: 40px;
-      padding-left: 20px;
-      padding-top: 5px;
-      
-      }
+.web_theme-card {
+  background-color: #b71c1c !important;
+  color: #000;
+  margin-left: 15px;
+}
 
-.section-follow .fa-4x{
-    margin: 5px 10px;
+.web_theme-card,
+span {
+  font-weight: bolder;
+}
+
+/* Car logo image */
+.logo_image {
+  height: 40px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+
+.section-follow .fa-4x {
+  margin: 5px 10px;
 }
 /*This is for giving bg color to randomly gernrated car results*/
-.bg-text{
-    
-    padding: 5px !important;
-    margin: 0px 0px 5px !important;
-   
-text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+.bg-text {
+  padding: 5px !important;
+  margin: 0px 0px 5px !important;
+
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 /* --Dropbox sizing and apperance-- */
 .custom_btn {
-   
-    background-color: #b71c1c !important;
-    background-size: 200%;
-    font-size: 18px;
-    color: #fff;
-    margin: 2px;
-    font-family: 'Lato', sans-serif!important;
+  background-color: #b71c1c !important;
+  background-size: 200%;
+  font-size: 18px;
+  color: #fff;
+  margin: 2px;
+  font-family: "Lato", sans-serif !important;
 
-  
-    border-radius: 5px;
+  border-radius: 5px;
 }
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
- 
+
   padding: 10px;
 }
 .grid-item {
-  
   padding: 5px;
-   
+
   text-align: center;
 }
-nav ul a{
-    font-size: 18px !important;
-    font-family: 'Lato', sans-serif!important;
+nav ul a {
+  font-size: 18px !important;
+  font-family: "Lato", sans-serif !important;
 }
-.slides-headings{
-    color: #fff;
-    font-weight: 900;
-     text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000000,
-     1px 1px 0 #000;
+.slides-headings {
+  color: #fff;
+  font-weight: 900;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000000,
+    1px 1px 0 #000;
 }
-.sec-slides-headings{
-    color: #b71c1c;
-    font-weight: 900;
-     text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+.sec-slides-headings {
+  color: #b71c1c;
+  font-weight: 900;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 .image-gallery .col {
-   
-    padding: 2px;
+  padding: 2px;
+}
+/* Styling  form admin.css for admin login page */
+.container-bottom-hr-styling {
+  background-color: red !important;
+  height: 2px !important;
+}
+.admin-dashboard-container div {
+  margin-top: 22px;
+  margin-bottom: 5px;
+}
+.admin-dashboard-container h3 {
+  margin: 20px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.custom-h3-view-clients {
+  margin: 10px;
+  padding-left: 5px;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+.admin-custom-buttons {
+  background-size: 200%;
+  background-color: #212121 !important;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 2px;
+}
+.input-area {
+  border-bottom: 1px solid #ffffff !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+blockquote {
+  border-left: 3px solid #fff;
+}
+blockquote h6 {
+  font-weight: bolder !important;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
+}
+.div-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
 
-}
-.container-bottom-hr-styling{
-    background-color: red !important; 
-    height: 2px !important; 
-    
-}
-.admin-dashboard-container div{
-    margin-top:22px; 
-    margin-bottom: 5px;
-    
-}
-.admin-dashboard-container h3{
-    margin:20px; 
-    font-weight:bolder;
-    text-transform: uppercase;
-}
-.custom-h3-view-clients{
-    margin: 10px;
-    padding-left: 5px;
-    text-transform: uppercase;
-    font-weight: bolder;
-}
-.admin-custom-buttons{
-    background-size: 200%;
-    background-color: #212121 !important;
-    font-weight: bold;
-    font-size: 14px;
-    margin: 2px;
-}
-.input-area{
-        border-bottom: 1px solid #ffffff !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        background-color: transparent !important;
+.div-wrapper img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
