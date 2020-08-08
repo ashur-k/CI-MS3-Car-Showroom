@@ -15,7 +15,7 @@
             <span><i class="material-icons red-text">expand_more</i></span><span><i class="material-icons red-text right">account_circle</i>Buyer Information</span>
         </div>
         <div class="collapsible-body">
-        <table>
+        <table class="responsive-table">
         <thead>
           <tr>
               <th>Buyer name</th>
@@ -34,10 +34,8 @@
             <td>{{car_info.address}}</td>
             <td>{{car_info.sold_amount}}</td>
           </tr>
-        
-        
         </tbody>
-      </table>
+        </table>
         </div>
     </li>
 </ul>
@@ -58,7 +56,7 @@
 </div>
 <!--information container AKA most useful information-->
 
-<!--information container AKA BAsic car information-->
+<!--information container AKA Basic car information-->
 <div class="container" style="margin-bottom:20px">
  <div class="row car-sold-row grey darken-4 valign-wrapper">
             <h4 class="white-text">{{ car_info.car_make }} {{ car_info.car_model }}</h4>
@@ -74,38 +72,38 @@
         <div class="row red darken-4 white-text">
     <div class="col s12 m6 l6 valign-wrapper" >
         <blockquote>
-            <h6 class="center-align ">Seats: </h6>
-            <h6 class="center-align ">{{car_info.seats}}</h6>
+            <h6 class="">Seats: </h6>
+            <h6 class="">{{car_info.seats}}</h6>
         </blockquote>
     </div>
     <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
-            <h6 class="center-align">Registration Year: </h6>
-            <h6 class="center-align" >{{ car_info.registration_year }}</h6>
+            <h6 class="">Registration Year: </h6>
+            <h6 class="" >{{ car_info.registration_year }}</h6>
         </blockquote>
     </div>
     <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
-            <h6 class="center-align">Engine: </h6>
-            <h6 class="center-align" >{{ car_info.engine }}</h6>
+            <h6 class="">Engine: </h6>
+            <h6 class="" >{{ car_info.engine }}</h6>
         </blockquote>
     </div>
     <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
-            <h6 class="center-align">Transmission: </h6>
-            <h6 class="center-align">{{car_info.transmisson}}</h6>
+            <h6 class="">Transmission: </h6>
+            <h6 class="">{{car_info.transmisson}}</h6>
         </blockquote>
     </div>
     <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
-            <h6 class="center-align">Fuel Type: </h6>
-            <h6 class="center-align">{{car_info.fuel_type}}</h6>
+            <h6 class="">Fuel Type: </h6>
+            <h6 class="">{{car_info.fuel_type}}</h6>
           </blockquote>
     </div>
     <div class="col s12 m6 l6 valign-wrapper">
         <blockquote>
-            <h6 class="center-align">Mileage: </h6>
-            <h6 class="center-align"> {{car_info.mileage}}</h6>
+            <h6 class="">Mileage: </h6>
+            <h6 class=""> {{car_info.mileage}}</h6>
         </blockquote>
     </div>
 

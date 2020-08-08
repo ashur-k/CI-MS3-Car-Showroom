@@ -6,7 +6,7 @@
     <div class="row grey darken-4 valign-wrapper">
         <h3 class="white-text"><i class="fas fa-hand-point-down red-text"></i> View All CArs</h3>
     </div><hr class="container-bottom-hr-styling">
-
+</div>
 
 {% with errors = get_flashed_messages(category_filter=["delete_flash"]) %}
 {% if errors %}
@@ -20,8 +20,9 @@
  </div><hr>
 {% endif %}
 {% endwith %}
-<table id="sold-cars">
-        <thead>
+<div class="container">
+<table class="">
+        <thead class="highlight ">
           <tr>
               <th>Car Make</th>
               <th>Car Model</th>
@@ -65,8 +66,8 @@
         </div>    
         </td>
     </tr>        
-        </tbody>
-        <div class="modal" id="modal{{ cars._id }}" >
+    </tbody>
+    <div class="modal" id="modal{{ cars._id }}" >
     <div class="modal-content">
         <div class="row grey darken-4 white-text valign-wrapper">
             <h5 style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete Record</h5>
@@ -80,7 +81,7 @@
             <i class="fas fa-trash-alt red-text"></i> Delete: {{ cars.reg_num }}</a>
         </div>
      </div> 
-</div>
+    </div>
   {% endfor %}   
 
      
