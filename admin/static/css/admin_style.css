@@ -169,6 +169,7 @@ padding-left: 12px;
     main {
       padding-left: 300px;
     }
+    
     select[required]:focus{
     outline: none !important;
 }
