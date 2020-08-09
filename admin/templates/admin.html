@@ -1,271 +1,500 @@
-{% extends 'admin_base.html' %}
-{% block head %}Admin home page{% endblock %}
-  {% block content %}
+{% extends 'admin_base.html' %} {% block head %}Admin home page{% endblock %} {%
+block content %}
+<!--
+###############################################################################################################################################
+####                                                                                                                                       ####
+####                                                Rrgistration Process Message                                                           #### 
+####                     This block of code will only execute when new car registration is in process and stopped                          ####                                                                                              ####
+###############################################################################################################################################                
+-->
 
-  <!--This block of code will only execute when new car registration is in process and stopped-->
 {% if car_make and car_model and reg_num %}
 <div class="container registration-process-container">
-    <div class="row custom-row">
-        <div class="col s12 grey darken-4 valign-wrapper">
-            <h4 class="white-text"><i class="fas fa-exclamation red-text"></i> Car registeration is in process.</h4>
-        </div>
+  <div class="row custom-row">
+    <div class="col s12 grey darken-4 valign-wrapper">
+      <h4 class="white-text">
+        <i class="fas fa-exclamation red-text"></i> Car registeration is in
+        process.
+      </h4>
     </div>
-    <hr class="container-bottom-hr-styling">
+  </div>
+  <hr class="container-bottom-hr-styling" />
+  <div class="row">
+    <div class="col s12 custom-coloumn">
+      <p class="flow-text">Car make: <strong>{{ car_make }}</strong></p>
+      <p class="flow-text">Car model: <strong>{{ car_model }}</strong></p>
+      <p class="flow-text">
+        Car registraion number: <strong>{{ reg_num }}</strong>
+      </p>
+    </div>
     <div class="row">
-        <div class="col s12 custom-coloumn">
-            <p class="flow-text">Car make: <strong>{{ car_make }}</strong></p>     
-            <p class="flow-text">Car model: <strong>{{ car_model }}</strong></p>      
-            <p class="flow-text">Car registraion number: <strong>{{ reg_num }}</strong> </p>
-        </div>
-        <div class="row">
-            <div class="col s12 custom-coloumn">
-                <a href="{{ url_for('admin.finish_car_registration') }}" class="waves-effect waves-light btn admin-custom-buttons">Finish adding information<i class="material-icons right red-text">send</i></a>
-                <a href="{{ url_for('admin.end_car_reg_session') }}" class="waves-effect waves-light btn admin-custom-buttons">End that session<i class="material-icons right red-text">send</i></a>
-            </div>  
-        </div>
-    </div>
-</div>
-
-{% endif %}
-<!--This message will only appear if car new car is added succesfully-->
-{% if car_add_successfully %}
-<div class="container registration-process-container">
-    <div class="row row custom-row">
-        <div class="col s12 grey darken-4 valign-wrapper">
-            <h4 class="white-text"><i class="far fa-check-circle red-text"></i> Car Added succesfully </h4>
-        </div>
-    </div><hr class="container-bottom-hr-styling">
-    <div class="row" style="padding-top:30px;">
-        <div class="col s12">
-            <p class="flow-text">{{car_add_successfully}}</p>
-        </div>
-    </div>
-      <div class="row">
-            <div class="col s12 custom-coloumn">
-                <a href="{{ url_for('admin.admin_homepage') }}" class="waves-effect waves-light btn admin-custom-buttons"><i class="material-icons right red-text">send</i>OK</a>
-            </div>  
-        </div>
-</div>
-{% endif %}
-<!--Flashing server side messages in this block-->
-{% with errors = get_flashed_messages(category_filter=["appiontment"]) %}
-{% if errors %}
-<div class="container registration-process-container">
-    <div class="row row custom-row">
-        <div class="col s12 grey darken-4">
-            <a class="close white-text" href="{{ url_for('admin.admin_homepage') }}"><i class="fas fa-window-close red-text"></i> <strong style="font-weight: 900;">Close</strong></a>
-        </div>
-        <div class="col s12 grey lighten-1 valign-wrapper">
-            {%- for msg in errors %}
-            <p class="flow-text black-text"><i class="fas fa-bug red-text"></i> {{ msg }}</p>
-            {% endfor -%}
-        </div> 
-    </div>
-</div>
-{% endif %}
-{% endwith %}
-
-<!--Admin Dahsboard codes-->
-{% if clients_info %}
-
-
-<div class="section container admin-dashboard-container">
-<!--Add heading in a tag to use tooltip-->
-<div class="row grey darken-4 valign-wrapper">
-   <h3 class="white-text" ><i class="fas fa-users-cog red-text"></i> ADMIN DASHBOARD</h3>
-</div><hr class="container-bottom-hr-styling">
-
-</div>
-{% for clients in clients_info %}
-{% if clients.dashboard_status == 'true' %}
-
-<div class="section container"> 
-    <div class="row">
-        <!--Car cliet is interested in infomation column-->
-        <div class="col s12 m12 l5 ipad-pro-size">
-            <div class="row valign-wrapper">
-                <h5 style="margin-left:20px;"><span><i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTED IN</span><hr></h5>
-            </div>
-                {% if clients.car_status == 'car_is_sold' %}
-                <p class="flow-text text-center red-text" style="font-weight:bolder">This car is sold.</p>
-                {% endif %}
-                <div class="card grey darken-4 hoverable">
-                    <div class="card-image card-image-padding">
-                        <img class="materialboxed responsive-img" src="{{ clients.car_image_url }}">
-                        <span class="card-title">
-                            <span class="admin-custom-card-title">
-                            Car make: {{ clients.car_make }}
-                            </span>
-                        </span>
-                    </div>
-                    <div class="card-content">
-                        <ul class="collection">
-                            <li class="collection-item admin-custom-li">Car model: {{ clients.car_model }}</li>
-                            <li class="collection-item admin-custom-li">Car reg num: {{ clients.reg_num }}</li>
-                            <li class="collection-item admin-custom-li">Registration Year: {{ clients.registration_year }}</li>
-                        </ul>
-                    </div>
-                    <div class="card-action">
-                        {% if clients.car_status == 'car_is_sold' %}
-                        <a href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                            <i class="fas fa-info-circle red-text"></i> See full car info
-                        </a>
-                        <a href="{{url_for('client_blueprint.add_new_client')}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                            <i class="fas fa-exchange-alt red-text"></i> Book different car for client
-                        </a>
-                        {% else %}
-                        <a href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                            <i class="fas fa-info-circle red-text"></i> See full car info
-                        </a>
-                        <a href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}" class="btn waves-effect waves-red admin-secondary-custom-buttons">
-                            <i class="fas fa-money-check red-text"></i> Sell car
-                        </a>
-                {%endif%}
-                    </div>
-               </div>     
-        </div>
-        <!--Cliet infomation column-->
-        <div class="col s12 m12 l5 offset-l2 ipad-pro-size">
-        <div class="row valign-wrapper">
-            <h5 style="margin-left:20px;"><span><i class="fas fa-info-circle red-text"></i> CLIENT'S INFORMATION</span><hr></h5>
-        </div>
-        
-            <div class="card web_theme-card hoverable">
-
-                <div class="card-content white-text">
-                <span class="card-title">Client Name: {{ clients.full_name }}</span> 
-                <p>Client Instructions: {{clients.client_related_notes}}</p>
-                </div>
-                    <ul class="collapsible popout">
-                        <li>
-                        <div class="collapsible-header"><i class="fas fa-calendar-check red-text"></i> Book an appiontment<i class="material-icons red-text right">keyboard_arrow_down</i></div>
-                        <div class="collapsible-body">
-                        
-                        <form class="" action="{{url_for('client_blueprint.add_appiontments_records')}}" id="appiontment_form{{ clients._id }}"  method="POST">
-                        <input type="hidden" name="dashboard_status" value="true">
-                        <input type="hidden" name="client_id" value="{{clients._id}}">
-                        <input type="hidden" name="car_make" value="{{clients.car_make}}">
-                        <input type="hidden" name="car_model" value="{{clients.car_model}}">
-                        <input type="hidden" name="registration_year" value="{{clients.registration_year}}">
-                        <input type="hidden" name="car_image_url" value="{{clients.car_image_url}}">
-                        <input type="hidden" class="form-control" id="reg_num" name="reg_num" value="{{clients.reg_num}}" required>
-                        <input type="hidden" class="form-control" id="best_time_to_contact" name="best_time_to_contact" value="{{clients.best_time_to_contact}}" required> 
-                        <input type="hidden" class="form-control" id="best_date_to_contact" name="best_date_to_contact" value="{{clients.best_date_to_contact}}" required> 
-                        
-                        <div class="input-field">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input type="text" class="validate white-text" id="full_name" name="full_name" value="{{clients.full_name}}" required>
-                            <label for="full_name">Full name</label>
-                        </div>
-
-                        <div class="input-field">
-                        <i class="material-icons prefix">email</i>
-                            <input type="email" class="validate white-text" id="email" name="email" value="{{clients.email}}" required>
-                            <label for="email">Email</label>
-                        </div>
-
-                        <div class="input-field">
-                        <i class="material-icons prefix">phone</i>
-                        <input type="tel" class="validate white-text" id="phone" name="phone" value="{{clients.phone}}" required> 
-                        <label  for="phone">Telephone number</label>
-                        </div>
-
-                        <div class="input-field">
-                        <i class="material-icons prefix">timer</i>
-                        <input class="ml-5 white-text" type="time" id="appiontment_time" name="appiontment_time" value="{{clients.appiontment_time}}">
-                        <label   for="best_time_to_contact">Appiontment time</label>
-                        </div>
-                        <div class="input-field">
-                        <i class="material-icons prefix">date_range</i>
-                        <input class="ml-2 white-text" type="date" id="start" name="appiontment_date" value="{{clients.appiontment_date}}" min="2020-08-07" max="2021-12-31" required>
-                        <label class="ml-2" for="start">Appiontment date:</label>
-                        </div>
-
-                        <div class="input-field">
-                        <i class="material-icons prefix">mode_edit</i>
-                        <label for="exampleFormControlTextarea1">Client related notes</label>
-                        <textarea class="materialize-textarea white-text" id="exampleFormControlTextarea1" name="client_related_notes" rows="3">{{clients.client_related_notes}}</textarea>
-                        </div>  
-
-                        <button class="waves-effect waves-light btn admin-secondary-custom-buttons" type="submit" form="appiontment_form{{ clients._id }}">
-                        <i class="fas fa-bookmark red-text"></i> Book appiontment: {{ clients.full_name }}
-                        </button>
-                        </form>
-                        
-                        </div>
-                        </li>
-                       
-
-                    </ul>
-                  <div class="card-content">
-                    <ul class="collection">
-                    <li class="collection-item">Client Email: {{ clients.email }}</li>
-                    <li class="collection-item">Client phone: {{ clients.phone}}</li>
-                    <li class="collection-item">Best time to contact: {{ clients.best_time_to_contact }}</li>
-                    <li class="collection-item">Best date to contact: {{ clients.best_date_to_contact}}</li>
-                        {% if clients.appiontment_time %}
-                    <li class="collection-item">Appiontment time:{{clients.appiontment_time}}</li>
-                    <li class="collection-item">Appiontment date: {{clients.appiontment_date}}</li>
-                        {% else %}
-                    <li class="collection-item pulse">
-                    <a class="waves-effect waves-light btn red darken-4 pulse">Appiontment time: Client has not been contacted yet</a></li>
-                        {%endif%}
-                </ul>
-                </div>
-                <div class="card-action">
-                <a type="button" class="waves-effect waves-red  btn modal-trigger admin-secondary-custom-buttons" href="#modal{{ clients._id }}">
-                   <i class="fas fa-trash-alt red-text"></i> Delete client</a>
-                 <a type="button" class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons" href="#removeFromDashboard{{ clients._id }}">
-                 <i class="fas fa-user-times red-text"></i> Remove client from dashboard</a>
-                </div>
-                </div>
-    
-        </div>
-    </div>
-    
-</div>
-       <!-- delete client Modal --> 
-       <!-- Modal Structure -->
-    <div class="modal" id="modal{{ clients._id }}" >
-        <div class="modal-content">
-        <div class="row grey darken-4 white-text valign-wrapper">
-            <h5 style=" margin:5px 18px;"><i class="fas fa-trash-alt red-text"></i> Delete Record</h5>
-        </div>
-        <div class="row">
-            <p>You are deleting client name {{ clients.full_name }}.</p>
-        </div>
-            <div class="modal-footer">  
-            <a class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</a>
-            <a class="btn white-text waves-effect waves-green btn admin-custom-buttons" href="{{url_for('admin.delete_client_admin_url', client_id=clients._id)}}">
-           <i class="fas fa-trash-alt red-text"></i> Delete: {{ clients.full_name }}</a>
-        </div>
-        </div>
-       
-    </div>
- 
-<!-- Modal Remove client from dashboard -->
-<div class="modal" id="removeFromDashboard{{ clients._id }}">
-
-    <div class="modal-content">
-        <div class="row grey darken-4 white-text valign-wrapper">
-            <h5 class="modal-title" style=" margin:5px 18px;"><i class="fas fa-user-times red-text"></i> Remove Client from Dashboard</h5>
-        </div> 
-        <div class="row">
-            <h6 style="padding:15px;">You are removing client name {{ clients.full_name }} from dashboard. You can find {{ clients.full_name }} in manage client, view all clients.</h6>
-        </div>
-       
-       <!-- </button>-->
-      <div class="modal-footer">
-        <button type="button" class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"><i class="fas fa-times-circle red-text"></i> Not now</button>
-        <a href="{{url_for('client_blueprint.remove_from_dashboard', client_id=clients._id)}}" class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons">
-        <i class="fas fa-user-times red-text"></i> Yes I am sure!</a>
+      <div class="col s12 custom-coloumn">
+        <a
+          href="{{ url_for('admin.finish_car_registration') }}"
+          class="waves-effect waves-light btn admin-custom-buttons"
+          >Finish adding information<i class="material-icons right red-text"
+            >send</i
+          ></a
+        >
+        <a
+          href="{{ url_for('admin.end_car_reg_session') }}"
+          class="waves-effect waves-light btn admin-custom-buttons"
+          >End that session<i class="material-icons right red-text">send</i></a
+        >
       </div>
     </div>
   </div>
-{% endif %}
+</div>
 
-{% endfor %}
 {% endif %}
-{%endblock%}
-    
-    
+<!--
+###############################################################################################################################################
+####                                                                                                                                       ####
+####                                                CAr added eyccessfully message                                                         #### 
+####                                This message will only appear if car new car is added succesfully                                      ####                                                                                              ####
+###############################################################################################################################################                
+-->
+
+{% if car_add_successfully %}
+<div class="container registration-process-container">
+  <div class="row row custom-row">
+    <div class="col s12 grey darken-4 valign-wrapper">
+      <h4 class="white-text">
+        <i class="far fa-check-circle red-text"></i> Car Added succesfully
+      </h4>
+    </div>
+  </div>
+  <hr class="container-bottom-hr-styling" />
+  <div class="row" style="padding-top: 30px;">
+    <div class="col s12">
+      <p class="flow-text">{{car_add_successfully}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 custom-coloumn">
+      <a
+        href="{{ url_for('admin.admin_homepage') }}"
+        class="waves-effect waves-light btn admin-custom-buttons"
+        ><i class="material-icons right red-text">send</i>OK</a
+      >
+    </div>
+  </div>
+</div>
+{% endif %}
+<!--
+###############################################################################################################################################
+####                                                                                                                                       ####
+####                                                Flash Messages                                                                         #### 
+####                                       Flashing server side messages for errors                                                        ####                                                                                              ####
+###############################################################################################################################################                
+-->
+
+{% with errors = get_flashed_messages(category_filter=["appiontment"]) %} {% if
+errors %}
+<div class="container registration-process-container">
+  <div class="row row custom-row">
+    <div class="col s12 grey darken-4">
+      <a class="close white-text" href="{{ url_for('admin.admin_homepage') }}"
+        ><i class="fas fa-window-close red-text"></i>
+        <strong style="font-weight: 900;">Close</strong></a
+      >
+    </div>
+    <div class="col s12 grey lighten-1 valign-wrapper">
+      {%- for msg in errors %}
+      <p class="flow-text black-text">
+        <i class="fas fa-bug red-text"></i> {{ msg }}
+      </p>
+      {% endfor -%}
+    </div>
+  </div>
+</div>
+{% endif %} {% endwith %}
+<!--
+##############################################################################################################################################
+####                                                                                                                                      ####
+####                                                Admin Dash Board                                                                      #### 
+####                                       Admin Dahsboard codes                                                                          ####                                                                                              ####
+##############################################################################################################################################               
+-->
+
+{% if clients_info %}
+
+<div class="section container admin-dashboard-container">
+  <div class="row grey darken-4 valign-wrapper">
+    <h3 class="white-text">
+      <i class="fas fa-users-cog red-text"></i> ADMIN DASHBOARD
+    </h3>
+  </div>
+  <hr class="container-bottom-hr-styling" />
+</div>
+{% for clients in clients_info %}
+<!--If print on dashboard status true than print recoreds--> 
+{% if clients.dashboard_status == 'true' %}
+
+<div class="section container">
+  <div class="row">
+    <!--Car cliet is interested in infomation column-->
+    <div class="col s12 m12 l5 ipad-pro-size">
+      <div class="row valign-wrapper">
+        <h5 style="margin-left: 20px;">
+            <span>
+                <i class="fas fa-car red-text"></i> CAR CLIENT IS INTERESTEDIN
+            </span>
+          <hr/>
+        </h5>
+      </div>
+      <!--If car is sold print below message-->
+      {% if clients.car_status == 'car_is_sold' %}
+      <p class="flow-text text-center red-text" style="font-weight: bolder;">
+        This car is sold.
+      </p>
+      {% endif %}
+      <div class="card grey darken-4 hoverable">
+        <div class="card-image card-image-padding">
+          <img
+            class="materialboxed responsive-img"
+            src="{{ clients.car_image_url }}"
+          />
+          <span class="card-title">
+            <span class="admin-custom-card-title">
+              Car make: {{ clients.car_make }}
+            </span>
+          </span>
+        </div>
+        <div class="card-content">
+          <ul class="collection">
+            <li class="collection-item admin-custom-li">
+              Car model: {{ clients.car_model }}
+            </li>
+            <li class="collection-item admin-custom-li">
+              Car reg num: {{ clients.reg_num }}
+            </li>
+            <li class="collection-item admin-custom-li">
+              Registration Year: {{ clients.registration_year }}
+            </li>
+          </ul>
+        </div>
+        <div class="card-action">
+        <!--If car is sold print these buttons else print button give after else block-->
+          {% if clients.car_status == 'car_is_sold' %}
+          <a
+            href="{{url_for('client_blueprint.sold_car_info', reg_num=clients.reg_num)}}"
+            class="btn waves-effect waves-red admin-secondary-custom-buttons"
+          >
+            <i class="fas fa-info-circle red-text"></i> See full car info
+          </a>
+          <a 
+            href="{{url_for('client_blueprint.add_new_client')}}"
+            class="btn waves-effect waves-red admin-secondary-custom-buttons"
+          >
+            <i class="fas fa-exchange-alt red-text"></i> Book different car for
+            client
+          </a>
+          {% else %}
+          <a
+            href="{{url_for('client_blueprint.view', reg_num=clients.reg_num)}}"
+            class="btn waves-effect waves-red admin-secondary-custom-buttons"
+          >
+            <i class="fas fa-info-circle red-text"></i> See full car info
+          </a>
+          <a
+            href="{{url_for('admin.car_sold_form', reg_num=clients.reg_num, client_id=clients._id)}}"
+            class="btn waves-effect waves-red admin-secondary-custom-buttons"
+          >
+            <i class="fas fa-money-check red-text"></i> Sell car
+          </a>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+    <!--Cliet infomation column-->
+    <div class="col s12 m12 l5 offset-l2 ipad-pro-size">
+      <div class="row valign-wrapper">
+        <h5 style="margin-left: 20px;">
+          <span
+            ><i class="fas fa-info-circle red-text"></i> CLIENT'S
+            INFORMATION</span
+          >
+          <hr />
+        </h5>
+      </div>
+
+      <div class="card web_theme-card hoverable">
+        <div class="card-content white-text">
+          <span class="card-title">Client Name: {{ clients.full_name }}</span>
+          <p>Client Instructions: {{clients.client_related_notes}}</p>
+        </div>
+         <!--Appiontment form inside collapsible-->
+        <ul class="collapsible popout">
+          <li>
+            <div class="collapsible-header">
+              <i class="fas fa-calendar-check red-text"></i> Book an
+              appiontment<i class="material-icons red-text right"
+                >keyboard_arrow_down</i
+              >
+            </div>
+            <div class="collapsible-body">
+              <form
+                class=""
+                action="{{url_for('client_blueprint.add_appiontments_records')}}"
+                id="appiontment_form{{ clients._id }}"
+                method="POST"
+              >
+                <input type="hidden" name="dashboard_status" value="true" />
+                <input type="hidden" name="client_id" value="{{clients._id}}" />
+                <input
+                  type="hidden"
+                  name="car_make"
+                  value="{{clients.car_make}}"
+                />
+                <input
+                  type="hidden"
+                  name="car_model"
+                  value="{{clients.car_model}}"
+                />
+                <input
+                  type="hidden"
+                  name="registration_year"
+                  value="{{clients.registration_year}}"
+                />
+                <input
+                  type="hidden"
+                  name="car_image_url"
+                  value="{{clients.car_image_url}}"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="reg_num"
+                  name="reg_num"
+                  value="{{clients.reg_num}}"
+                  required
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="best_time_to_contact"
+                  name="best_time_to_contact"
+                  value="{{clients.best_time_to_contact}}"
+                  required
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="best_date_to_contact"
+                  name="best_date_to_contact"
+                  value="{{clients.best_date_to_contact}}"
+                  required
+                />
+
+                <div class="input-field">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input
+                    type="text"
+                    class="validate white-text"
+                    id="full_name"
+                    name="full_name"
+                    value="{{clients.full_name}}"
+                    required
+                  />
+                  <label for="full_name">Full name</label>
+                </div>
+
+                <div class="input-field">
+                  <i class="material-icons prefix">email</i>
+                  <input
+                    type="email"
+                    class="validate white-text"
+                    id="email"
+                    name="email"
+                    value="{{clients.email}}"
+                    required
+                  />
+                  <label for="email">Email</label>
+                </div>
+
+                <div class="input-field">
+                  <i class="material-icons prefix">phone</i>
+                  <input
+                    type="tel"
+                    class="validate white-text"
+                    id="phone"
+                    name="phone"
+                    value="{{clients.phone}}"
+                    required
+                  />
+                  <label for="phone">Telephone number</label>
+                </div>
+
+                <div class="input-field">
+                  <i class="material-icons prefix">timer</i>
+                  <input
+                    class="ml-5 white-text"
+                    type="time"
+                    id="appiontment_time"
+                    name="appiontment_time"
+                    value="{{clients.appiontment_time}}"
+                  />
+                  <label for="best_time_to_contact">Appiontment time</label>
+                </div>
+                <div class="input-field">
+                  <i class="material-icons prefix">date_range</i>
+                  <input
+                    class="ml-2 white-text"
+                    type="date"
+                    id="start"
+                    name="appiontment_date"
+                    value="{{clients.appiontment_date}}"
+                    min="2020-08-07"
+                    max="2021-12-31"
+                    required
+                  />
+                  <label class="ml-2" for="start">Appiontment date:</label>
+                </div>
+
+                <div class="input-field">
+                  <i class="material-icons prefix">mode_edit</i>
+                  <label for="exampleFormControlTextarea1"
+                    >Client related notes</label
+                  >
+                  <textarea
+                    class="materialize-textarea white-text"
+                    id="exampleFormControlTextarea1"
+                    name="client_related_notes"
+                    rows="3"
+                  >
+{{clients.client_related_notes}}</textarea
+                  >
+                </div>
+
+                <button
+                  class="waves-effect waves-light btn admin-secondary-custom-buttons"
+                  type="submit"
+                  form="appiontment_form{{ clients._id }}"
+                >
+                  <i class="fas fa-bookmark red-text"></i> Book appiontment: {{
+                  clients.full_name }}
+                </button>
+              </form>
+            </div>
+          </li>
+        </ul>
+        <div class="card-content">
+          <ul class="collection">
+            <li class="collection-item">Client Email: {{ clients.email }}</li>
+            <li class="collection-item">Client phone: {{ clients.phone}}</li>
+            <li class="collection-item">
+              Best time to contact: {{ clients.best_time_to_contact }}
+            </li>
+            <li class="collection-item">
+              Best date to contact: {{ clients.best_date_to_contact}}
+            </li>
+            {% if clients.appiontment_time %}
+            <li class="collection-item">
+              Appiontment time:{{clients.appiontment_time}}
+            </li>
+            <li class="collection-item">
+              Appiontment date: {{clients.appiontment_date}}
+            </li>
+            {% else %}
+            <li class="collection-item pulse">
+              <a class="waves-effect waves-light btn red darken-4 pulse hide-on-small-only"
+                >Appiontment: Client is not contacted</a
+              >
+              <a class="waves-effect waves-light btn red darken-4 pulse hide-on-large-only font-on-small"
+                >Client is not contacted</a
+              >
+            </li>
+            {%endif%}
+          </ul>
+        </div>
+        <div class="card-action">
+          <a
+            type="button"
+            class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons"
+            href="#modal{{ clients._id }}"
+          >
+            <i class="fas fa-trash-alt red-text"></i> Delete client</a
+          >
+          <a
+            type="button"
+            class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons hide-on-small-only"
+            href="#removeFromDashboard{{ clients._id }}"
+          >
+            <i class="fas fa-user-times red-text"></i> Remove client from
+            dashboard</a
+          >
+          <a
+            type="button"
+            class="waves-effect waves-red btn modal-trigger admin-secondary-custom-buttons hide-on-large-only"
+            href="#removeFromDashboard{{ clients._id }}"
+          >
+            <i class="fas fa-user-times red-text"></i> Remove from
+            dashboard</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete client Modal -->
+<!-- Modal Structure -->
+<div class="modal" id="modal{{ clients._id }}">
+  <div class="modal-content">
+    <div class="row grey darken-4 white-text valign-wrapper">
+      <h5 style="margin: 5px 18px;">
+        <i class="fas fa-trash-alt red-text"></i> Delete Record
+      </h5>
+    </div>
+    <div class="row">
+      <p>You are deleting client name {{ clients.full_name }}.</p>
+    </div>
+    <div class="modal-footer">
+      <a
+        class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"
+        ><i class="fas fa-times-circle red-text"></i> Not now</a
+      >
+      <a
+        class="btn white-text waves-effect waves-green btn admin-custom-buttons"
+        href="{{url_for('admin.delete_client_admin_url', client_id=clients._id)}}"
+      >
+        <i class="fas fa-trash-alt red-text"></i> Delete: {{ clients.full_name
+        }}</a
+      >
+    </div>
+  </div>
+</div>
+
+<!-- Modal Remove client from dashboard -->
+<div class="modal" id="removeFromDashboard{{ clients._id }}">
+  <div class="modal-content">
+    <div class="row grey darken-4 white-text valign-wrapper">
+      <h5 class="modal-title" style="margin: 5px 18px;">
+        <i class="fas fa-user-times red-text"></i> Remove Client from Dashboard
+      </h5>
+    </div>
+    <div class="row">
+      <h6 style="padding: 15px;">
+        You are removing client name {{ clients.full_name }} from dashboard. You
+        can find {{ clients.full_name }} in manage client, view all clients.
+      </h6>
+    </div>
+
+    <!-- </button>-->
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="modal-close white-text waves-effect waves-green btn admin-custom-buttons"
+      >
+        <i class="fas fa-times-circle red-text"></i> Not now
+      </button>
+      <a
+        href="{{url_for('client_blueprint.remove_from_dashboard', client_id=clients._id)}}"
+        class="modal-close teal white-text waves-effect waves-green btn admin-custom-buttons"
+      >
+        <i class="fas fa-user-times red-text"></i> Yes I am sure!</a
+      >
+    </div>
+  </div>
+</div>
+{% endif %} {% endfor %} {% endif %} {%endblock%}

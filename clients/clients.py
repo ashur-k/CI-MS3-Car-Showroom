@@ -21,7 +21,7 @@ def add_appiontments_records():
     if 'username' not in session:
         return redirect(url_for('login.admin_login'))
     other_car_appiontments = mongo.db.client_info.find({'reg_num': request.form['reg_num']})
-    #print(other_car_appiontments.count())
+    
 
     if other_car_appiontments.count() > 0:
         for apt in other_car_appiontments:
@@ -30,11 +30,7 @@ def add_appiontments_records():
                 flash(u'There is already an appiontment booked on car with same date and time.', 'appiontment')
                 print(apt)
                 return redirect(url_for('admin.admin_homepage'))
-            #if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
-                #mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
-                #flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'appiontment')
-                #return redirect(url_for('admin.admin_homepage'))
-            #else:
+            
         mongo.db.client_info.update({'_id': ObjectId(request.form['client_id'])}, request.form.to_dict())
         flash(u'Client appiontment has been made successfully.{} appiontments on the same car.'.format(other_car_appiontments.count()), 'appiontment')
         return redirect(url_for('admin.admin_homepage'))
@@ -59,8 +55,7 @@ def delete_client(client_id):
 def remove_from_dashboard(client_id):
     if 'username' not in session:
         return redirect(url_for('login.admin_login'))
-    #mongo.db.x_clients_records.insert_one(request.form.to_dict())
-    #mongo.db.client_info.remove({'_id': ObjectId(client_id)})
+    
     
     mongo.db.client_info.update({"_id": ObjectId(client_id)}, {'$set': {'dashboard_status':'false'}})
     return redirect (url_for('admin.admin_homepage'))
@@ -96,16 +91,11 @@ def admin_make_appiontment():
     other_car_appiontments = mongo.db.client_info.find({'reg_num': request.form['reg_num']})
     appiontment_time = request.form['appiontment_time']
     appiontment_date = request.form['appiontment_date']
-    #print(appiontment_time)
+    
     
 
     if other_car_appiontments.count() > 0:
         for apt in other_car_appiontments:
-            #if (apt['appiontment_time']) == "" and (apt['appiontment_date']) == "":
-                
-                #mongo.db.client_info.insert_one(request.form.to_dict())
-                #flash(u'Client appiontment has been made successfully.There are {} appiontments on the car.'.format(other_car_appiontments.count()), 'client_appiontment_message')
-                #return redirect(url_for('client_blueprint.add_new_client'))
 
             if apt['appiontment_time'] == appiontment_time and apt['appiontment_date'] == appiontment_date:
                 flash(u'there is already appiontment book on car with same date and time.', 'client_appiontment_message')

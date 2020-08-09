@@ -39,6 +39,7 @@
   font-weight: bold;
   font-size: 14px;
   margin: 2px;
+  text-align: left !important;
 }
 .admin-secondary-custom-buttons {
   background-size: 200%;
@@ -47,6 +48,7 @@
   font-weight: bold !important;
   font-size: 14px;
   margin: 2px;
+  text-align: left !important;
 }
 /*List Items*/
 
@@ -157,6 +159,16 @@ select[required] {
   footer {
     padding-left: 0;
   }
+  /*buttons*/
+.admin-custom-buttons {
+  font-size: 12px !important;
+}
+.admin-secondary-custom-buttons {
+ font-size: 12px !important;
+}
+.font-on-small{
+    font-size: 13px !important;
+}
 }
 /*car settings for pages on small screens*/
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -164,4 +176,5 @@ select[required] {
     width: 100% !important;
     margin: 0px !important;
   }
+ 
 }

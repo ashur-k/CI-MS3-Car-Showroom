@@ -146,9 +146,25 @@
 ###### •	There are minor form validation issues which at the moment are left to deal with in upgrade version. Although materializecss validations classes are applied to form fields and they are working.
 ###### •	Feature of view all car is a last-minute update to car sales showroom. In testing phase, it occurred that admin need to view all cars. In case if admin is trying to find a car and he has no way to recall it then there is one option left for admin to view all cars.
 ###### •	In testing it occurred that if admin is updating car make, application will not detect if there is no model available in car make that admin is trying to update. This will lead to add car details without car model. This can cause faults in functioning and behaviour of application especially client side. This error is removed, now If admin selects car make which has no model admin is going to displayed with error message and instructions to follow to first add car model to make admin is selecting.
-###### •	Admin car updating was only updating client car registration number not other details, this error is also corrected.
-###### •	There were spellings and grid errors which are corrected.
-###### •	Testing
+###### •	Admin car updating was only performing updating registration number of car client is requesting. Details about car image, make, model etc if were updated there were not update on client collections. This error is corrected now if admin made any update on car collections then same updating will be performed on client data.
+###### •	There were spellings errors which are corrected and on some web pages there was no application of materialize css grid classes. For this reason, design of those pages was losing its structure on small and medium screen sizes. Errors are corrected.
+###### •	At the moment if car is deleted admin can still make or update appointment for the car only from admin dashboard. This is going to stay like this for now but in future release of car sales showroom if car that client has requested is deleted, then, admin will be required to add new car details for client before booking an appointment.  For now, admin is given clear indications that data for the car, that admin is dealing with is deleted. If admin clicks sell car button or car information button, admin will be given error message, this is explained above in detail.    
+
+## Deployment:
+All requirements to run and execute project are included in requirements.txt. Database name, password, PORT address, IP address and secret key for sessions are hidden in env.py and added to config vars in heroku settings. These details are not provided for public view.
+To view implemented and running version of site please visit, http://car-sales-showroom.herokuapp.com/index. User name and password for admin login are not provided for GitHub public view though they can be provided on request.
+Site is hosted using Heroku platform services. GitHub repository is linked to Heroku app any commit to GitHub is automatically committed to deployed site on heroku.
+All codes are written using gitpod using gitpod template provided by code institute. Python3 web hosting service was used for testing site during development process. During the process most of the time site is tested on google chrome browser and occasionally on Firefox, opera and edge browser.   After deployment application is tested on different browsers including all major browsers. Site is also tested on apple phones, laptop screen size 17’’, desktop monitors, 32’’, 27’’ Samsung tablet. On iPhone it is recommended not to use phone’s default browser.   
+Database is created using mongodb ATLAS service. Mongodb is document based database which use collections instead of tables. Mongodb provides unique ids, for its collection. In comparison to sequel databases mongodb works faster. Though it’s always recommended choose database which serves development requirements in best way. Car registration numbers are used as unique ids to perform CRUD operations on cars data. Logic to keep uniqueness of registration number is developed using python flask server-side codes. 
+Deploying app on Heroku:
+###### •	Create a Heroku app, go on Heroku.com. Give app name which should be unique and choose a region which should be closest one to you for quicker delivery.
+###### •	Run following commands before deployment:
+###### •	pip3 freeze –local > requirements.txt, this command will create requirements file, this file is required by heroku before hosting project. 
+###### •	echo web: python app.py > Procfile this file will create Procfile on workspace. Procfile is re-quired by Heroku to know what is entry point of your project.
+###### •	Commit workspace to git hub repository. 
+###### •	From heroku login page find and then navigate to deploy. In deployment provide repository and GitHub account details and permissions and then proceed with automatic deployment op-tions.  
+###### •	Go on settings on Heroku page and click Reveal Config Vars, and add variable names and values for database name & password, PORT address & IP address and secret key for sessions variables. 
+
 
 ## Technologies Used:
 ###### •	HTMI5 to implement website project.
@@ -164,7 +180,6 @@
 ###### •	Google Chrome Developer tools.
 ###### •	Firefox browser latest version for testing purposes.
 ###### •	Opera latest version for testing purposes.
-###### •	Safari unknown version for testing.
 ###### •	EDGE latest version for testing purposes.
 ###### •	Internet explorer latest version for testing purposes.
 ###### •	Materializecss to implement website.
@@ -187,4 +202,4 @@
 ###### •	Travesy Media for materializecss.
 ###### •	Special thanks to code institute tutors for helping troubleshooting problems.
 ###### •	My mentor Dick Vlaanderen who particularly has advised me and emotionally encouraged me.
-###### •	Very special thanks to code institute tutor Tim, who not helped me to crack errors but also encourage me to deal with emotional stress that I was having due to working for nonstop hours for weeks. Tim shared his experience and advised how to keep balance of time during development process. Tim also shared his newly made videos about flask and project deployment on heroku which were very helpful. 
+###### •	Special thanks to code institute tutor Tim, helped me to crack errors and provided me with his vidoe toutorials for project deployments. 
