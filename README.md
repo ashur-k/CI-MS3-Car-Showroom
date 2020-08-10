@@ -151,20 +151,34 @@
 ###### •	At the moment if car is deleted admin can still make or update appointment for the car only from admin dashboard. This is going to stay like this for now but in future release of car sales showroom if car that client has requested is deleted, then, admin will be required to add new car details for client before booking an appointment.  For now, admin is given clear indications that data for the car, that admin is dealing with is deleted. If admin clicks sell car button or car information button, admin will be given error message, this is explained above in detail.    
 
 ## Deployment:
-All requirements to run and execute project are included in requirements.txt. Database name, password, PORT address, IP address and secret key for sessions are hidden in env.py and added to config vars in heroku settings. These details are not provided for public view.
-To view implemented and running version of site please visit, http://car-sales-showroom.herokuapp.com/index. User name and password for admin login are not provided for GitHub public view though they can be provided on request.
-Site is hosted using Heroku platform services. GitHub repository is linked to Heroku app any commit to GitHub is automatically committed to deployed site on heroku.
-All codes are written using gitpod using gitpod template provided by code institute. Python3 web hosting service was used for testing site during development process. During the process most of the time site is tested on google chrome browser and occasionally on Firefox, opera and edge browser.   After deployment application is tested on different browsers including all major browsers. Site is also tested on apple phones, laptop screen size 17’’, desktop monitors, 32’’, 27’’ Samsung tablet. On iPhone it is recommended not to use phone’s default browser.   
+All requirements to run and execute project are included in requirements.txt. Following command is required to install all requirements to workspace:
+###### • - pip3 install -r requirements.tx.t 
+Database name, password, PORT address, IP address and secret key for sessions are hidden in env.py and added to config vars in heroku settings. These details are not provided for public view.
+To view implemented and running version of site please visit, http://car-sales-showroom.herokuapp.com/index. User name and password for admin login are not provided for GitHub public view though they can be provided on request. For assesment these details are provided to code institute student care team.
+Site is hosted using Heroku platform services. GitHub repository is linked to Heroku app, commits to GitHub are automatically committed to deployed site on heroku platform. Following steps were taken to deploy application and link both platforms:
+###### 1.	Create a Heroku app, go on Heroku.com. Give app name which should be unique and choose a region which should be closest one to you for quicker delivery.
+###### 2.	Run following commands before deployment:
+###### a.	pip3 freeze –local > requirements.txt, this command will create requirements file, this file is required by heroku to install requirements before deploying project. 
+###### b.	echo web: python app.py > Procfile this file will create Procfile on workspace. Procfile is required by Heroku to know entry point for project.
+###### c.	Commit workspace to git hub repository. Following commands are required to make a commit to git hub:
+###### i.	Git add .
+###### ii.	Git commit -m “final commit”
+###### iii.	Git push.
+###### 3.	Automatic deployment method was used to deploy project on heroku and following steps were taken for deployment.
+###### a.	From deploy tab on heroku web page, in deployment method section, option GitHub connect to GitHub was selected.
+###### b.	Then search repository to connect to details were provided which includes ac-count details and repository name.
+###### c.	When repo was fount button below connect to this app was clicked.
+###### d.	Next from settings following config vars and their values were provided to heroku
+###### i.	Database name, password, 
+###### ii.	PORT address, 
+###### iii.	IP address 
+###### iv.	secret key for sessions
+###### 4.	In last on GitHub deploy page in automatic deploys click enable automatic deploys from master was selected.
+###### 5.	At deployment time everything was successful in first attempt there was no error. Video provided by Tim, tutor at code institute was used to follow these steps.
+### Deployments during development for testing:
+#### To test site during developmentdebug setting were set to true, to debug errors during development.
+All codes are written using gitpod, workspace were included template provided by code institute. Python3 web hosting service was used for testing site during development process. During the process most of the time site is tested on google chrome browser and occasionally on Firefox, opera and edge browser. After deployment application is tested on different browsers including all major browsers. On mobile site is tested on Samsung internet browser.  Site is also tested on apple phones, laptop screen size 17’’, desktop monitors, 32’’, 27’’ Samsung tablet. On iPhone it is recommended not to use phone’s default browser.   
 Database is created using mongodb ATLAS service. Mongodb is document based database which use collections instead of tables. Mongodb provides unique ids, for its collection. In comparison to sequel databases mongodb works faster. Though it’s always recommended choose database which serves development requirements in best way. Car registration numbers are used as unique ids to perform CRUD operations on cars data. Logic to keep uniqueness of registration number is developed using python flask server-side codes. 
-Deploying app on Heroku:
-###### •	Create a Heroku app, go on Heroku.com. Give app name which should be unique and choose a region which should be closest one to you for quicker delivery.
-###### •	Run following commands before deployment:
-###### •	pip3 freeze –local > requirements.txt, this command will create requirements file, this file is required by heroku before hosting project. 
-###### •	echo web: python app.py > Procfile this file will create Procfile on workspace. Procfile is re-quired by Heroku to know what is entry point of your project.
-###### •	Commit workspace to git hub repository. 
-###### •	From heroku login page find and then navigate to deploy. In deployment provide repository and GitHub account details and permissions and then proceed with automatic deployment op-tions.  
-###### •	Go on settings on Heroku page and click Reveal Config Vars, and add variable names and values for database name & password, PORT address & IP address and secret key for sessions variables. 
-
 
 ## Technologies Used:
 ###### •	HTMI5 to implement website project.
